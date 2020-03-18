@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Formulario } from '../../../../shared/models/datos.models';
-import { Store, select } from '@ngrx/store';
 import { getObraSociales } from '../../../../core/store/actions/form.actions';
+import { Formulario, ObraSocial } from '../../../../shared/models/datos.models';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,12 +11,12 @@ import { getObraSociales } from '../../../../core/store/actions/form.actions';
 })
 export class DashboardComponent implements OnInit {
 
-  form$: Observable<Formulario>;
+  obrasSociales$: Observable<ObraSocial[]>;
 
   constructor(
     private store: Store<{ formulario: Formulario }>
   ) {
-    this.form$ = store.pipe(select('formulario'));
+    this.obrasSociales$ = store.pipe(select('formulario', 'obrasSociales'));
   }
 
   ngOnInit() {
