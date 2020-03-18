@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ObraSocial } from '../../shared/models/datos.models';
 import { obraSocialMock } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
+import { getWsFromMock } from './../utils/observable.utils';
 
 @Injectable()
 export class ServiceService {
@@ -15,7 +16,9 @@ export class ServiceService {
   ) { }
 
   getObraSociales(): Observable<ObraSocial[]> {
-    if (this.useMockups) {return of([obraSocialMock, obraSocialMock]); }
+    if (this.useMockups) {
+      return getWsFromMock([obraSocialMock, obraSocialMock]);
+    }
   }
 
 }
