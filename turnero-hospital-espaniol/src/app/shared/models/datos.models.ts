@@ -10,8 +10,19 @@ export class ObraSocial extends CodigoNombre {
 export class Plan extends CodigoNombre {
 }
 
+export class Especialidad extends CodigoNombre {
+}
+
+export class CentroAtencion extends CodigoNombre {
+}
+
 export class Formulario {
     obrasSociales: ObraSocial[];
+    especialidades: Especialidad[];
+    centrosDeAtencion: CentroAtencion[];
+    fechaNacimiento: Date;
     obraSocialSelected: ObraSocial;
     planSelected: Plan;
+    especialidadSelected: Especialidad;
+    centroDeAtencionSelected: CentroAtencion;
 }

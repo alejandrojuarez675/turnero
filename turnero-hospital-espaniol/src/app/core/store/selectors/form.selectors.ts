@@ -8,6 +8,16 @@ export const selectAllObrasSociales = createSelector(
     (formulario: Formulario) => formulario.obrasSociales
 );
 
+export const selectAllEspecialidades = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.especialidades
+);
+
+export const selectAllCentrosDeAtencion = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.centrosDeAtencion
+);
+
 export const selectObraSocialSelected = createSelector(
     selectFormulario,
     (formulario: Formulario) => formulario.obraSocialSelected
@@ -25,4 +35,9 @@ export const selectPlanes = createSelector(
 export const selectPlanSelected = createSelector(
     selectFormulario,
     (formulario: Formulario) => formulario.planSelected
+);
+
+export const selectFechaNacimiento = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.fechaNacimiento
 );

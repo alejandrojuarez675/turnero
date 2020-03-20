@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ObraSocial } from '../../shared/models/datos.models';
-import { obraSocialMock } from '../mocks/mocks';
+import { ObraSocial, Especialidad, CentroAtencion } from '../../shared/models/datos.models';
+import { obrasSocialesMocks, centroAtencionesMocks, especialidadesMocks } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
 import { getWsFromMock } from './../utils/observable.utils';
 
@@ -17,8 +17,21 @@ export class ServiceService {
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
-      return getWsFromMock([obraSocialMock, obraSocialMock]);
+      return getWsFromMock(obrasSocialesMocks);
     }
   }
+
+  getEspecialidades(): Observable<Especialidad[]> {
+    if (this.useMockups) {
+      return getWsFromMock(especialidadesMocks);
+    }
+  }
+
+  getCentrosDeAtencion(): Observable<CentroAtencion[]> {
+    if (this.useMockups) {
+      return getWsFromMock(centroAtencionesMocks);
+    }
+  }
+
 
 }

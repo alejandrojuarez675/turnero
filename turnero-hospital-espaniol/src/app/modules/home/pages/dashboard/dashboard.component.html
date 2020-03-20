@@ -1,12 +1,49 @@
-<div>
-    <p>OBRAS SOCIALES</p>
-    <p *ngFor="let os of obrasSociales$ | async">
-        {{os.codigo}}
-    </p>
-</div>
-<div>
-    <p>PLANES</p>
-    <p *ngFor="let p of planes$ | async">
-        {{p.codigo}}
-    </p>
-</div>
+<!-- <mat-form-field> -->
+    
+    <div>
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </div>
+
+    <div>
+        <mat-label>Seleccione su obra social</mat-label>
+        <mat-select (selectionChange)="cambioObraSocial($event)">
+            <mat-option [value]="undefined">-</mat-option>
+            <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
+                {{os.nombre}}
+            </mat-option>
+        </mat-select>
+    </div>
+
+    <div>
+        <mat-label>Seleccione su plan</mat-label>
+        <mat-select (selectionChange)="cambioPlan($event)">
+            <mat-option [value]="undefined">-</mat-option>
+            <mat-option *ngFor="let p of planes$ | async" [value]="p">
+                {{p.nombre}}
+            </mat-option>
+        </mat-select>
+    </div>
+
+    <div>
+        <mat-label>Seleccione la especialidad</mat-label>
+        <mat-select (selectionChange)="cambioEspecialidad($event)">
+            <mat-option [value]="undefined">-</mat-option>
+            <mat-option *ngFor="let e of especialidades$ | async" [value]="e">
+                {{e.nombre}}
+            </mat-option>
+        </mat-select>
+    </div>
+
+    <div>
+        <mat-label>Seleccione el Centro de Atencion</mat-label>
+        <mat-select (selectionChange)="cambioCentroDeAtencion($event)">
+            <mat-option [value]="undefined">-</mat-option>
+            <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
+                {{ca.nombre}}
+            </mat-option>
+        </mat-select>
+    </div>
+<!-- </mat-form-field> -->
