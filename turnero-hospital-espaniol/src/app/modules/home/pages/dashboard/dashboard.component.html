@@ -1,5 +1,12 @@
 <div>
+    <p>OBRAS SOCIALES</p>
     <p *ngFor="let os of obrasSociales$ | async">
         {{os.codigo}}
+    </p>
+</div>
+<div>
+    <p>PLANES</p>
+    <p *ngFor="let p of planes$ | async">
+        {{p.codigo}}
     </p>
 </div>

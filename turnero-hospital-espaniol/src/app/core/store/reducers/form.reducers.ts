@@ -5,6 +5,7 @@ import { getObraSociales, setObraSociales } from '../actions/form.actions';
 
 export const initialState: Formulario = {
     obrasSociales: [],
+    obraSocialSelected: undefined,
 };
 
 const setObrasSociales = (state: Formulario, obraSociales: ObraSocial[]): Formulario => {

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getObraSociales } from '../../../../core/store/actions/form.actions';
-import { Formulario, ObraSocial } from '../../../../shared/models/datos.models';
+import { Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import { selectAllObrasSociales, selectPlanes } from '../../../../core/store/selectors/form.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +13,13 @@ import { Formulario, ObraSocial } from '../../../../shared/models/datos.models';
 export class DashboardComponent implements OnInit {
 
   obrasSociales$: Observable<ObraSocial[]>;
+  planes$: Observable<Plan[]>;
 
   constructor(
     private store: Store<{ formulario: Formulario }>
   ) {
-    this.obrasSociales$ = store.pipe(select('formulario', 'obrasSociales'));
+    this.obrasSociales$ = store.select(selectAllObrasSociales);
+    this.planes$ = store.select(selectPlanes);
   }
 
   ngOnInit() {
