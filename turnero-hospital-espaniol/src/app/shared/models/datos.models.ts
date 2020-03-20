@@ -13,4 +13,5 @@ export class Plan extends CodigoNombre {
 export class Formulario {
     obrasSociales: ObraSocial[];
     obraSocialSelected: ObraSocial;
+    planSelected: Plan;
 }

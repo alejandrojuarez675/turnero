@@ -21,3 +21,8 @@ export const selectPlanes = createSelector(
         }
     }
 );
+
+export const selectPlanSelected = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.planSelected
+);
