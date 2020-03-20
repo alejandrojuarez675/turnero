@@ -15,11 +15,16 @@ export const planMock3: Plan = {
     nombre: '410 - Básico'
 };
 
+export const planMock4: Plan = {
+    codigo: '510',
+    nombre: '510 - Básico'
+};
+
 export const obraSocialMock1: ObraSocial = {
     codigo: 'OSDE',
     nombre: 'OSDE',
     plan: [
-        planMock1, planMock2, planMock3
+        planMock1, planMock2
     ]
 };
 
@@ -27,7 +32,7 @@ export const obraSocialMock2: ObraSocial = {
     codigo: 'ACA Salud',
     nombre: 'ACA Salud',
     plan: [
-        planMock1, planMock2, planMock3
+        planMock3, planMock4
     ]
 };
 
