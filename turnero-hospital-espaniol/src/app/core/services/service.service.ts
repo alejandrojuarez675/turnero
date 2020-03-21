@@ -18,25 +18,28 @@ export class ServiceService {
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
+      console.log('getObraSociales()');
       return getWsFromMock(obrasSocialesMocks);
     }
   }
 
   getEspecialidades(): Observable<Especialidad[]> {
     if (this.useMockups) {
+      console.log('getEspecialidades()');
       return getWsFromMock(especialidadesMocks);
     }
   }
 
   getCentrosDeAtencion(): Observable<CentroAtencion[]> {
     if (this.useMockups) {
+      console.log('getCentrosDeAtencion()');
       return getWsFromMock(centroAtencionesMocks);
     }
   }
 
   getBusquedaProfesionales(filter: BusquedaDiasDisponiblesRequest): Observable<any> {
     if (this.useMockups) {
-      console.log('getBusquedaProfesionales() - filter: '+ JSON.stringify(filter));
+      console.log('getBusquedaProfesionales() - filter: ' + JSON.stringify(filter));
       return getWsFromMock(profesionalesMocks);
     }
   }
