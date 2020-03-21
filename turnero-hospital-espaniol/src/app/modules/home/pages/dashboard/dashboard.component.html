@@ -1,49 +1,60 @@
-<!-- <mat-form-field> -->
-    
-    <div>
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </div>
+<div class="content my-col-60">
 
-    <div>
-        <mat-label>Seleccione su obra social</mat-label>
-        <mat-select (selectionChange)="cambioObraSocial($event)">
-            <mat-option [value]="undefined">-</mat-option>
-            <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
-                {{os.nombre}}
-            </mat-option>
-        </mat-select>
-    </div>
+    <div class="cuadro-formulario">
+        <div class="row clearfix">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
-    <div>
-        <mat-label>Seleccione su plan</mat-label>
-        <mat-select (selectionChange)="cambioPlan($event)">
-            <mat-option [value]="undefined">-</mat-option>
-            <mat-option *ngFor="let p of planes$ | async" [value]="p">
-                {{p.nombre}}
-            </mat-option>
-        </mat-select>
-    </div>
+        <div class="row clearfix">
+            <mat-form-field style="width: 55%; padding-right: 10%;">
+                <mat-label>Obra Social</mat-label>
+                <mat-select (selectionChange)="cambioObraSocial($event)">
+                    <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
+                        {{os.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width: 45%;">
+                <mat-label>Plan</mat-label>
+                <mat-select (selectionChange)="cambioPlan($event)">
+                    <mat-option *ngFor="let p of planes$ | async" [value]="p">
+                        {{p.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-    <div>
-        <mat-label>Seleccione la especialidad</mat-label>
-        <mat-select (selectionChange)="cambioEspecialidad($event)">
-            <mat-option [value]="undefined">-</mat-option>
-            <mat-option *ngFor="let e of especialidades$ | async" [value]="e">
-                {{e.nombre}}
-            </mat-option>
-        </mat-select>
-    </div>
+        <div class="row clearfix">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Especialidad</mat-label>
+                <mat-select (selectionChange)="cambioEspecialidad($event)">
+                    <mat-option *ngFor="let e of especialidades$ | async" [value]="e">
+                        {{e.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-    <div>
-        <mat-label>Seleccione el Centro de Atencion</mat-label>
-        <mat-select (selectionChange)="cambioCentroDeAtencion($event)">
-            <mat-option [value]="undefined">-</mat-option>
-            <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
-                {{ca.nombre}}
-            </mat-option>
-        </mat-select>
+        <div class="row clearfix">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Centro de Atencion</mat-label>
+                <mat-select (selectionChange)="cambioCentroDeAtencion($event)">
+                    <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
+                        {{ca.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row clearfix">
+            <button style="width: 100%;" class="button" mat-flat-button>BUSCAR</button>
+        </div>
+
+
     </div>
-<!-- </mat-form-field> -->
+</div>

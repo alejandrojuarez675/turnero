@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(FormActions.getCentrosDeAtencion());
   }
 
-  cambioFechaNacimiento(event) {
+  cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 
