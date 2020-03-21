@@ -4,6 +4,7 @@ import { ObraSocial, Especialidad, CentroAtencion } from '../../shared/models/da
 import { obrasSocialesMocks, centroAtencionesMocks, especialidadesMocks, profesionalesMocks } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
 import { getWsFromMock } from './../utils/observable.utils';
+import { BusquedaDiasDisponiblesRequest } from '../../shared/models/request.models';
 
 @Injectable()
 export class ServiceService {
@@ -33,8 +34,9 @@ export class ServiceService {
     }
   }
 
-  getBusquedaProfesionales(): Observable<any> {
+  getBusquedaProfesionales(filter: BusquedaDiasDisponiblesRequest): Observable<any> {
     if (this.useMockups) {
+      console.log('getBusquedaProfesionales() - filter: '+ JSON.stringify(filter));
       return getWsFromMock(profesionalesMocks);
     }
   }
