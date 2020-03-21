@@ -4,55 +4,63 @@
         <div class="row clearfix">
             <mat-form-field style="width: 100%;">
                 <mat-label>Fecha de Nacimiento</mat-label>
-                <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)">
+                <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)"
+                    [formControl]="fechaNacimiento">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="fechaNacimiento.invalid">Ingrese su Fecha de Nacimiento</mat-error>
             </mat-form-field>
         </div>
 
         <div class="row clearfix">
             <mat-form-field style="width: 55%; padding-right: 10%;">
                 <mat-label>Obra Social</mat-label>
-                <mat-select (selectionChange)="cambioObraSocial($event)">
+                <mat-select (selectionChange)="cambioObraSocial($event)" [formControl]="obrasSocial">
                     <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
                         {{os.nombre}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="obrasSocial.invalid">Ingrese su Obra Social</mat-error>
             </mat-form-field>
             <mat-form-field style="width: 45%;">
                 <mat-label>Plan</mat-label>
-                <mat-select (selectionChange)="cambioPlan($event)">
+                <mat-select (selectionChange)="cambioPlan($event)" [formControl]="plan">
                     <mat-option *ngFor="let p of planes$ | async" [value]="p">
                         {{p.nombre}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="plan.invalid">Ingrese su Plan</mat-error>
             </mat-form-field>
         </div>
 
         <div class="row clearfix">
             <mat-form-field style="width: 100%;">
                 <mat-label>Especialidad</mat-label>
-                <mat-select (selectionChange)="cambioEspecialidad($event)">
+                <mat-select (selectionChange)="cambioEspecialidad($event)" [formControl]="especialidad">
                     <mat-option *ngFor="let e of especialidades$ | async" [value]="e">
                         {{e.nombre}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="especialidad.invalid">Ingrese su Especialidad</mat-error>
             </mat-form-field>
         </div>
 
         <div class="row clearfix">
             <mat-form-field style="width: 100%;">
                 <mat-label>Centro de Atencion</mat-label>
-                <mat-select (selectionChange)="cambioCentroDeAtencion($event)">
+                <mat-select (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
                     <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
                         {{ca.nombre}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="centroAtencion.invalid">Ingrese el Centro de Atención</mat-error>
             </mat-form-field>
         </div>
 
         <div class="row clearfix">
-            <button style="width: 100%;" class="button" mat-flat-button>BUSCAR</button>
+            <button style="width: 100%;" class="button" mat-flat-button [disabled]="!isValid()" (click)="onSubmit()">
+                BUSCAR
+            </button>
         </div>
 
 

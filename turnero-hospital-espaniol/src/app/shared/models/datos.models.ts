@@ -16,6 +16,9 @@ export class Especialidad extends CodigoNombre {
 export class CentroAtencion extends CodigoNombre {
 }
 
+export class Profesional {
+}
+
 export class Formulario {
     obrasSociales: ObraSocial[];
     especialidades: Especialidad[];
@@ -25,4 +28,9 @@ export class Formulario {
     planSelected: Plan;
     especialidadSelected: Especialidad;
     centroDeAtencionSelected: CentroAtencion;
+}
+
+
+export class Calendario {
+    profesionalesDisponibles: Profesional[];
 }

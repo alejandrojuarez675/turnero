@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ObraSocial, Especialidad, CentroAtencion } from '../../shared/models/datos.models';
-import { obrasSocialesMocks, centroAtencionesMocks, especialidadesMocks } from '../mocks/mocks';
+import { obrasSocialesMocks, centroAtencionesMocks, especialidadesMocks, profesionalesMocks } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
 import { getWsFromMock } from './../utils/observable.utils';
 
@@ -33,5 +33,10 @@ export class ServiceService {
     }
   }
 
+  getBusquedaProfesionales(): Observable<any> {
+    if (this.useMockups) {
+      return getWsFromMock(profesionalesMocks);
+    }
+  }
 
 }

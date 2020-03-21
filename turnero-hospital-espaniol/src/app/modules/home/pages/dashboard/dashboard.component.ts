@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
 
 
 @Component({
@@ -18,6 +20,12 @@ export class DashboardComponent implements OnInit {
   planes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
+
+  fechaNacimiento = new FormControl('', [Validators.required]);
+  obrasSocial = new FormControl('', [Validators.required]);
+  plan = new FormControl('', [Validators.required]);
+  especialidad = new FormControl('', [Validators.required]);
+  centroAtencion = new FormControl('', [Validators.required]);
 
   constructor(
     private store: Store<{ formulario: Formulario }>
@@ -52,6 +60,25 @@ export class DashboardComponent implements OnInit {
 
   cambioCentroDeAtencion(event) {
     this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
+  }
+
+  isValid() {
+    let result = false;
+    if (
+      this.fechaNacimiento.valid && this.obrasSocial.valid && this.plan.valid
+      && this.especialidad.valid && this.centroAtencion.valid
+      ) {
+      result = true;
+    }
+    return result;
+  }
+
+  onSubmit() {
+    this.store.select(FormSelectors.selectBusquedaProfesionales).subscribe(
+      (filter: BusquedaProfesionalesRequest) => {
+        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+      }, err => console.error(JSON.stringify(err))
+    );
   }
 
 }

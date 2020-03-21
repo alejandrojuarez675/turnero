@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { GET_OBRA_SOCIALES, SET_OBRA_SOCIALES, GET_ESPECIALIDADES, SET_ESPECIALIDADES, GET_CENTROS_DE_ATENCION, SET_CENTROS_DE_ATENCION } from '../actions/form.actions';
+import * as FormActions from '../actions/form.actions';
+import * as CalendarActions from '../actions/calendar.actions';
 import { ServiceService } from './../../services/service.service';
 
 
@@ -12,9 +13,9 @@ export class FormEffects {
 
     getObraSociales$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(GET_OBRA_SOCIALES),
+            ofType(FormActions.GET_OBRA_SOCIALES),
             mergeMap(() => this.formService.getObraSociales().pipe(
-                map(obrasSociales => ({ type: SET_OBRA_SOCIALES, obrasSociales })),
+                map(obrasSociales => ({ type: FormActions.SET_OBRA_SOCIALES, obrasSociales })),
                 catchError(() => EMPTY)
             ))
         )
@@ -22,9 +23,9 @@ export class FormEffects {
 
     getEspecialidades$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(GET_ESPECIALIDADES),
+            ofType(FormActions.GET_ESPECIALIDADES),
             mergeMap(() => this.formService.getEspecialidades().pipe(
-                map(especialidades => ({ type: SET_ESPECIALIDADES, especialidades })),
+                map(especialidades => ({ type: FormActions.SET_ESPECIALIDADES, especialidades })),
                 catchError(() => EMPTY)
             ))
         )
@@ -32,9 +33,20 @@ export class FormEffects {
 
     getCentrosDeAtencion$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(GET_CENTROS_DE_ATENCION),
+            ofType(FormActions.GET_CENTROS_DE_ATENCION),
             mergeMap(() => this.formService.getCentrosDeAtencion().pipe(
-                map(centrosDeAtencion => ({ type: SET_CENTROS_DE_ATENCION, centrosDeAtencion })),
+                map(centrosDeAtencion => ({ type: FormActions.SET_CENTROS_DE_ATENCION, centrosDeAtencion })),
+                catchError(() => EMPTY)
+            ))
+        )
+    );
+
+    getBusquedaProfesionales$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FormActions.GET_BUSQUEDA_PROFESIONALES),
+            mergeMap(() => this.formService.getBusquedaProfesionales().pipe(
+                map(profesionalesDisponibles =>
+                    ({ type: CalendarActions.SET_PROFESIONALES_DISPONIBLES, profesionalesDisponibles })),
                 catchError(() => EMPTY)
             ))
         )

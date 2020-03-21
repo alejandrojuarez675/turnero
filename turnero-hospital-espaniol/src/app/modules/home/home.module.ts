@@ -8,6 +8,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule, MatButtonModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -16,6 +17,7 @@ import { MatInputModule, MatButtonModule } from '@angular/material';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    ReactiveFormsModule,
   ]
 })
 export class MaterialModule {}

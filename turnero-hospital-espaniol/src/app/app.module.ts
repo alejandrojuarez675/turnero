@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { calendarReducer } from './core/store/reducers/calendar.reducers';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoreModule.forRoot({
       // router: routerReducer,
       formulario: formReducer,
+      calendario: calendarReducer,
     }),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({

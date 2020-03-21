@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { ObraSocial, Plan, Especialidad, CentroAtencion } from '../../../shared/models/datos.models';
+import { ObraSocial, Plan, Especialidad, CentroAtencion, Profesional } from '../../../shared/models/datos.models';
+import { BusquedaProfesionalesRequest } from '../../../shared/models/request.models';
 
 export const GET_OBRA_SOCIALES = '[Form] - getObraSociales';
 export const GET_ESPECIALIDADES = '[Form] - getEspecialidades';
@@ -15,6 +16,7 @@ export const SET_PLAN_SELECTED = '[Form] - setPlanSelected ';
 export const SET_ESPECIALIDAD_SELECTED = '[Form] - setEspecialidadSelected ';
 export const SET_CENTRO_DE_ATENCION_SELECTED = '[Form] - setCentroDeAtencionSelected ';
 
+export const GET_BUSQUEDA_PROFESIONALES = '[Form] - getBusquedaProfesionales ';
 
 
 export const getObraSociales = createAction(GET_OBRA_SOCIALES);
@@ -59,4 +61,9 @@ export const setEspecialidadSelected = createAction(
 export const setCentroDeAtencionSelected = createAction(
     SET_CENTRO_DE_ATENCION_SELECTED,
     props<{centroDeAtencionSelected: CentroAtencion}>()
+);
+
+export const getBusquedaProfesionales = createAction(
+    GET_BUSQUEDA_PROFESIONALES,
+    props<{filter: BusquedaProfesionalesRequest}>()
 );

@@ -1,4 +1,4 @@
-import { ObraSocial, Plan, CentroAtencion, Especialidad } from '../../shared/models/datos.models';
+import { ObraSocial, Plan, CentroAtencion, Especialidad, Profesional } from '../../shared/models/datos.models';
 
 export const planMock1: Plan = {
     codigo: '210',
@@ -57,3 +57,5 @@ export const centroAtencionMock: CentroAtencion = {
 
 export const centroAtencionesMocks: CentroAtencion[] = [centroAtencionMock];
 
+
+export const profesionalesMocks: Profesional[] = [];
