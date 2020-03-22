@@ -20,9 +20,9 @@ body {
 .cuadro-formulario {
     background-color: white;
     border: 1px solid transparent;
-    padding: 3%;
+    padding: 1vw;
     border-color: var(--bordes);
-    margin-top: 3%;
+    margin-top: 1vw;
 }
 
 .header {
@@ -47,22 +47,29 @@ body {
 
 .my-col-20 {
     width: 20%;
-    padding-right: 2%;
-    padding-bottom: 2%;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
     float: left;
 }
 
 .my-col-30 {
     width: 30%;
-    padding-right: 2%;
-    padding-bottom: 2%;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
     float: left;
 }
 
 .my-col-40 {
     width: 40%;
-    padding-right: 2%;
-    padding-bottom: 2%;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
+    float: left;
+}
+
+.my-col-50 {
+    width: 50%;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
     float: left;
 }
 
@@ -79,16 +86,13 @@ body {
         width: 40%;
     }
     .my-col-40 {
-        width: 40%;
+        width: 100%;
+    }
+    .my-col-50 {
+        width: 100%;
     }
     .my-col-60 {
         width: 100%;
-    }
-}
-
-@media(min-width: 1600px) {
-    .my-col-20-consideraciones {
-        padding-left: 10%;
     }
 }
 

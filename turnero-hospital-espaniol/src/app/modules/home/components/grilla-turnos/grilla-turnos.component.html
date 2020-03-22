@@ -1,0 +1,18 @@
+<table style="width: 100%;">
+  <tr>
+    <th>Profesional</th>
+    <th>Próximo turno Mañana</th>
+    <th>Próximo turno Tarde</th>
+  </tr>
+  <ng-container *ngFor="let prof of profesionalesDisponibles$ | async">
+    <tr>
+      <th>{{prof.profesional.nombreApellido}}</th>
+      <th *ngIf="prof.turnoManiana">
+        {{prof.turnoManiana.fecha}} {{prof.turnoManiana.hora}}
+      </th>
+      <th *ngIf="prof.turnoTarde">
+        {{prof.turnoTarde.fecha}} {{prof.turnoTarde.hora}}
+      </th>
+    </tr>
+  </ng-container>
+</table>

@@ -1,4 +1,4 @@
-import { ObraSocial, Plan, CentroAtencion, Especialidad, Profesional } from '../../shared/models/datos.models';
+import { ObraSocial, Plan, CentroAtencion, Especialidad, Profesional, Disponibilidad } from '../../shared/models/datos.models';
 
 export const planMock1: Plan = {
     codigo: '210',
@@ -57,5 +57,34 @@ export const centroAtencionMock: CentroAtencion = {
 
 export const centroAtencionesMocks: CentroAtencion[] = [centroAtencionMock];
 
+const profesional1: Profesional = {
+    codigo: 'PeJu',
+    nombreApellido: 'Perez, Juan',
+    observaciones: '',
+};
 
-export const profesionalesMocks: Profesional[] = [];
+const disponibilidad: Disponibilidad = {
+    profesional: profesional1,
+    turnoManiana: {
+        profesional: profesional1,
+        especialidad: especialidadesMocks[0],
+        codigo: '148',
+        centroAtencion: centroAtencionMock,
+        fecha: '15/03/2020',
+        hora: '10:00',
+        observaciones: ''
+    },
+    turnoTarde: {
+        profesional: profesional1,
+        especialidad: especialidadesMocks[0],
+        codigo: '348',
+        centroAtencion: centroAtencionMock,
+        fecha: '25/03/2020',
+        hora: '20:15',
+        observaciones: ''
+    }
+};
+
+export const profesionalesMocks: Disponibilidad[] = [
+    disponibilidad, disponibilidad
+];

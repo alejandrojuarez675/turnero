@@ -9,7 +9,7 @@ const initialState: Calendario = {
 
 const _setProfesionalesDisponibles = (state, profesionalesDisponibles) => {
     const stateNew = {...state};
-    stateNew.profesionalesDisponibles = profesionalesDisponibles;
+    stateNew.profesionalesDisponibles = [...profesionalesDisponibles];
     return stateNew;
 };
 
