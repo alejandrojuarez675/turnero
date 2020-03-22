@@ -9,6 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule, MatButtonModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormularioComponent } from './components/formulario/formulario.component';
 
 @NgModule({
   exports: [
@@ -18,12 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatButtonModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
 export class MaterialModule {}
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent,
+    FormularioComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
