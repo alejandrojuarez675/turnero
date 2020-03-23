@@ -1,4 +1,5 @@
 # Angular
+Angular 7
  Para más información: [Link](https://angular.io/)
  
 # Estructura de carpetas
@@ -8,3 +9,7 @@ Para más información: [Link](https://itnext.io/choosing-a-highly-scalable-fold
 # Store de NgRx
  ![Description](https://github.com/alejandrojuarez675/turnero/blob/master/documentation/ngrx-state-management-lifecycle.png)
  Para más información: [Link](https://ngrx.io/)
+
+# Material para Angular
+Material 7.3.7
+Para más información: [Link](https://material.angular.io/)
