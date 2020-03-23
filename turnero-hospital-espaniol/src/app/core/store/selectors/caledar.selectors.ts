@@ -8,3 +8,8 @@ export const getProfesionalesDisponibles = createSelector(
     selectFromStore,
     (calendario: Calendario) => calendario.profesionalesDisponibles
 );
+
+export const getProfesionalesDisponiblesLength = createSelector(
+    selectFromStore,
+    (calendario: Calendario) => calendario.profesionalesDisponibles.length
+);

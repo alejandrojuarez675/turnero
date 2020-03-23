@@ -1,9 +1,9 @@
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatPaginatorModule, MatTableModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { NgModule } from '@angular/core';
 
 @NgModule({
     exports: [
@@ -12,6 +12,8 @@ import { NgModule } from '@angular/core';
         MatDatepickerModule,
         MatNativeDateModule,
         MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
         ReactiveFormsModule,
     ],
     declarations: [],
