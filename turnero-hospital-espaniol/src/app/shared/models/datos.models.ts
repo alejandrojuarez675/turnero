@@ -1,9 +1,24 @@
 export class CodigoNombre {
-    codigo: string;
+    codigo: number;
     nombre: string;
 }
 
-export class ObraSocial extends CodigoNombre {
+export class RespuestaDTO {
+    codigo: number;
+    mensaje: string;
+}
+
+
+export class Respuesta {
+    respuesta: RespuestaDTO;
+}
+
+export class ObraSocialRespuesta extends Respuesta{
+    obraSocial: ObraSocial[];
+}
+
+
+export class ObraSocial extends CodigoNombre{
     plan: Plan[];
 }
 
@@ -13,7 +28,17 @@ export class Plan extends CodigoNombre {
 export class Especialidad extends CodigoNombre {
 }
 
-export class CentroAtencion extends CodigoNombre {
+export class EspecialidadRespuesta extends Respuesta{
+    especialidad: Especialidad[];
+}
+
+export class CentroAtencion {
+    codigo: string;
+    nombre: string;
+}
+
+export class CentroAtencionRespuesta extends Respuesta{
+    centroAtencion: CentroAtencion[];
 }
 
 export class Profesional {
@@ -28,10 +53,14 @@ export class Disponibilidad {
     turnoTarde: Turno;
 }
 
+export class DisponibilidadRespuesta extends Respuesta{
+    disponibilidad: Disponibilidad[];
+}
+
 export class Turno {
     codigo: string;
     centroAtencion: CentroAtencion;
-    fecha: string;
+    fecha: Date;
     hora: string;
     observaciones: string;
     profesional: Profesional;

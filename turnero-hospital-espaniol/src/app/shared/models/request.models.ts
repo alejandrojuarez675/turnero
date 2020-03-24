@@ -1,8 +1,8 @@
 export class BusquedaProfesionalesRequest {
     fechaNacimiento: Date;
-    codigoObraSocial: string;
-    codigoPlan: string;
-    codigoEspecialidad: string;
+    codigoObraSocial: number;
+    codigoPlan: number;
+    codigoEspecialidad: number;
     codigoCentroAtencion: string;
 }
 

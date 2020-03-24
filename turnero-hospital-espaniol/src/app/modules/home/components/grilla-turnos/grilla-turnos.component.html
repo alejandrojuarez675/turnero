@@ -10,12 +10,12 @@
 
         <ng-container matColumnDef="turnoManiana.fecha">
           <th mat-header-cell *matHeaderCellDef>Próx. Turno M</th>
-          <td mat-cell *matCellDef="let row">{{row.turnoManiana.fecha}} {{row.turnoManiana.hora}}</td>
+          <td mat-cell *matCellDef="let row">{{row.turnoManiana.fecha | date: 'dd/MM/yyyy'}} {{row.turnoManiana.hora}}</td>
         </ng-container>
 
         <ng-container matColumnDef="turnoTarde.fecha">
           <th mat-header-cell *matHeaderCellDef>Próx. Turno T</th>
-          <td mat-cell *matCellDef="let row">{{row.turnoTarde.fecha}} {{row.turnoTarde.hora}} </td>
+          <td mat-cell *matCellDef="let row">{{row.turnoTarde.fecha | date: 'dd/MM/yyyy' }} {{row.turnoTarde.hora}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

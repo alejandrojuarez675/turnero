@@ -44,7 +44,7 @@ export class FormEffects {
     getBusquedaProfesionales$ = createEffect(() =>
         this.actions$.pipe(
             ofType(FormActions.GET_BUSQUEDA_PROFESIONALES),
-            mergeMap((payload: any) => this.formService.getBusquedaProfesionales(payload.filter).pipe(
+            mergeMap((payload: any) => this.formService.busquedaProfesionales(payload.filter).pipe(
                 map(profesionalesDisponibles =>
                     ({ type: CalendarActions.SET_PROFESIONALES_DISPONIBLES, profesionalesDisponibles })),
                 catchError(() => EMPTY)
