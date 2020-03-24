@@ -65,9 +65,8 @@ const profesional1: Profesional = {
 
 const disponibilidad: Disponibilidad = {
     profesional: profesional1,
+    especialidad: especialidadesMocks[0],
     turnoManiana: {
-        profesional: profesional1,
-        especialidad: especialidadesMocks[0],
         codigo: '148',
         centroAtencion: centroAtencionMock,
         fecha: new Date("2020/03/28"),
@@ -75,8 +74,6 @@ const disponibilidad: Disponibilidad = {
         observaciones: ''
     },
     turnoTarde: {
-        profesional: profesional1,
-        especialidad: especialidadesMocks[0],
         codigo: '348',
         centroAtencion: centroAtencionMock,
         fecha: new Date("2020/03/30"),

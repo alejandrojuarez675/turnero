@@ -49,6 +49,7 @@ export class Profesional {
 
 export class Disponibilidad {
     profesional: Profesional;
+    especialidad: Especialidad;
     turnoManiana: Turno;
     turnoTarde: Turno;
 }
@@ -63,8 +64,8 @@ export class Turno {
     fecha: Date;
     hora: string;
     observaciones: string;
-    profesional: Profesional;
-    especialidad: Especialidad;
+    profesional?: Profesional;
+    especialidad?: Especialidad;
 }
 
 export class DisponibilidadDias {
