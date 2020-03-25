@@ -20,7 +20,7 @@ export class GrillaTurnosComponent implements OnInit {
   ];
 
   constructor(
-    private store: Store<{ calendario: Calendario }>,
+    store: Store<{ calendario: Calendario }>,
   ) {
 
     this.profesionalesDisponibles$ = store.select(
