@@ -1,25 +1,40 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Calendario } from '../../../shared/models/datos.models';
+import { Calendario, Formulario } from '../../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest } from '../../../shared/models/request.models';
 
 
-export const selectFromStore = createFeatureSelector<Calendario>('calendario');
+export const selectCalendario = createFeatureSelector<Calendario>('calendario');
+export const selectFormulario = createFeatureSelector<Formulario>('formulario');
 
 export const getProfesionalesDisponibles = createSelector(
-    selectFromStore,
+    selectCalendario,
     (calendario: Calendario) => calendario.profesionalesDisponibles
 );
 
 export const getProfesionalesDisponiblesLength = createSelector(
-    selectFromStore,
+    selectCalendario,
     (calendario: Calendario) => calendario.profesionalesDisponibles.length
 );
 
 export const getDiasDisponibles = createSelector(
-    selectFromStore,
+    selectCalendario,
     (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad)
 );
 
 export const getDiasDisponiblesLength = createSelector(
-    selectFromStore,
+    selectCalendario,
     (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
+);
+
+export const getBusquedaDiasDisponiblesRequest = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => {
+        const request = new BusquedaDiasDisponiblesRequest();
+        request.fechaNacimiento = formulario.fechaNacimiento;
+        request.codigoObraSocial = formulario.obraSocialSelected.codigo;
+        request.codigoPlan = formulario.planSelected.codigo;
+        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
+        return request;
+    }
 );

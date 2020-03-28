@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta, CentroAtencionRespuesta, DisponibilidadRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta } from '../../shared/models/datos.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta } from '../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaProfesionalesRequest } from '../../shared/models/request.models';
-import { centroAtencionesMocks, especialidadesMocks, obrasSocialesMocks, profesionalesMocks, diasDisponibles } from '../mocks/mocks';
+import { centroAtencionesMocks, diasDisponiblesMock, especialidadesMocks, obrasSocialesMocks, profesionalesMocks } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
 import { getWsFromMock } from './../utils/observable.utils';
 
@@ -99,9 +99,9 @@ export class ServiceService {
 
   busquedaDiasDisponibles(filter: BusquedaDiasDisponiblesRequest): Observable<DisponibilidadDias[]> {
     if (this.useMockups) {
-      console.log('Run mock for: busquedaProfesionales() - filter: '
+      console.log('Run mock for: busquedaDiasDisponibles() - filter: '
         + JSON.stringify(filter));
-      return getWsFromMock(diasDisponibles);
+      return getWsFromMock(diasDisponiblesMock);
     } else {
       console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
       const respuesta = this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)

@@ -89,9 +89,9 @@ export const profesionalesMocks: Disponibilidad[] = [
 ];
 
 
-export const diasDisponibles = () => {
+const diasDisponibles = () => {
     const response: DisponibilidadDias[] = [];
-    DateUtils.getDaysArray(new Date(), 30).forEach(
+    DateUtils.getDaysArray(new Date(), 15).forEach(
         (day: Date, index: number) => {
             response.push({
                 fecha: DateUtils.getFormatDate(day),
@@ -101,3 +101,5 @@ export const diasDisponibles = () => {
     );
     return response;
 };
+
+export const diasDisponiblesMock = diasDisponibles();

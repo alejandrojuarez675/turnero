@@ -5,7 +5,10 @@
 
         <ng-container matColumnDef="profesional.nombreApellido">
           <th mat-header-cell *matHeaderCellDef style="width: 40%;">Profesional</th>
-          <td mat-cell *matCellDef="let row" style="width: 40%;">{{row.profesional.nombreApellido}}</td>
+          <td mat-cell *matCellDef="let row" style="width: 40%; cursor: pointer;" 
+            (click)="onClickProf(row.profesional)">
+            {{row.profesional.nombreApellido}}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="turnoManiana.fecha">

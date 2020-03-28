@@ -81,6 +81,11 @@ export class DisponibilidadDiasRespuesta extends Respuesta {
     dia: DisponibilidadDias[];
 }
 
+export class DisponibilidadDiasStore {
+    fecha: Date;
+    conDisponibilidad: boolean;
+}
+
 export class Reserva {
     codigoReserva: string;
     vencimientoReserva: string;
@@ -103,5 +108,5 @@ export class Calendario {
     profesionalesDisponibles: Disponibilidad[];
     profesionalSelected: Profesional;
     turnoSelected: TurnoLight;
-    diasDisponibles: DisponibilidadDias[];
+    diasDisponibles: DisponibilidadDiasStore[];
 }

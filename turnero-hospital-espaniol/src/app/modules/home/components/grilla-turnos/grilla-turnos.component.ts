@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario, Disponibilidad } from '../../../../shared/models/datos.models';
-import { map } from 'rxjs/operators';
+import { Calendario, Disponibilidad, Profesional } from '../../../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
 
 @Component({
   selector: 'app-grilla-turnos',
@@ -20,7 +21,7 @@ export class GrillaTurnosComponent implements OnInit {
   ];
 
   constructor(
-    store: Store<{ calendario: Calendario }>,
+    private store: Store<{ calendario: Calendario }>,
   ) {
 
     this.profesionalesDisponibles$ = store.select(
@@ -35,4 +36,13 @@ export class GrillaTurnosComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClickProf(profesional: Profesional) {
+    this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
+      (request: BusquedaDiasDisponiblesRequest) => {
+        const filter = {...request};
+        filter.codigoProfesional = profesional.codigo;
+        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter }));
+      }
+    );
+  }
 }

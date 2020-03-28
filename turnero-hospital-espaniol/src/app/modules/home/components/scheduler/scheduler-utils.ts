@@ -1,5 +1,4 @@
-import { DisponibilidadDias } from '../../../../shared/models/datos.models';
-import { DateUtils } from '../../../../core/utils/date.utils';
+import { DisponibilidadDiasStore } from '../../../../shared/models/datos.models';
 
 const colors: any = {
     blue: {
@@ -8,9 +7,9 @@ const colors: any = {
     },
 };
 
-export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDias) => {
+export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDiasStore) => {
     return {
-        start: DateUtils.getDate(dia.fecha),
+        start: dia.fecha,
         title: '',
         color: colors.blue,
     };

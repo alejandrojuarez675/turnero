@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { FormEffects } from './../app/core/store/effects/form.effects';
+import { CalendarEffects } from '../app/core/store/effects/calendar.effects';
 import { formReducer } from './core/store/reducers/form.reducers';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { calendarReducer } from './core/store/reducers/calendar.reducers';
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
     EffectsModule.forRoot([
-      FormEffects
+      FormEffects,
+      CalendarEffects
     ]),
     BrowserAnimationsModule,
   ],

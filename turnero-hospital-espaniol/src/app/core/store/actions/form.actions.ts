@@ -6,9 +6,9 @@ export const GET_OBRA_SOCIALES = '[Form] - getObraSociales';
 export const GET_ESPECIALIDADES = '[Form] - getEspecialidades';
 export const GET_CENTROS_DE_ATENCION = '[Form] - getCentrosDeAtencion';
 
-export const SET_OBRA_SOCIALES = '[Form API] - setObraSociales ';
-export const SET_ESPECIALIDADES = '[Form API] - setEspecialidades';
-export const SET_CENTROS_DE_ATENCION = '[Form API] - setCentrosDeAtencion';
+export const SET_OBRA_SOCIALES = '[API] - setObraSociales ';
+export const SET_ESPECIALIDADES = '[API] - setEspecialidades';
+export const SET_CENTROS_DE_ATENCION = '[API] - setCentrosDeAtencion';
 
 export const SET_FECHA_NACIMIENTO = '[Form] - setFechaNacimiento ';
 export const SET_OBRA_SOCIAL_SELECTED = '[Form] - setObraSocialSelected ';

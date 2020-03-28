@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as FormActions from '../actions/form.actions';
 import * as CalendarActions from '../actions/calendar.actions';
+import * as FormActions from '../actions/form.actions';
 import { ServiceService } from './../../services/service.service';
 
 
