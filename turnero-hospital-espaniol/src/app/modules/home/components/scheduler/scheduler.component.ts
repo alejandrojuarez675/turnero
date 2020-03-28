@@ -1,16 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
-import { Subject, Scheduler, from } from 'rxjs';
-import { toMonthString } from './scheduler-utils';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
+import { Calendario } from '../../../../shared/models/datos.models';
+import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
-
-const colors: any = {
-  blue: {
-    primary: '#1061a7',
-    secondary: '#1061a7'
-  },
-};
 
 @Component({
   selector: 'app-scheduler',
@@ -20,22 +16,27 @@ const colors: any = {
 })
 export class SchedulerComponent {
 
+  events$: Observable<CalendarEvent[]>;
+  eventsLength$: Observable<number>;
+
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   activeDayIsOpen: boolean;
   view: CalendarView = CalendarView.Month;
-
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: endOfDay(new Date('2020-04-01')),
-      title: 'Evento Ejemplo',
-      color: colors.blue,
-    },
-  ];
 
-  constructor() {}
+  constructor(
+    store: Store<{ calendario: Calendario }>,
+  ) {
+
+    this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
+      map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
+    );
+
+    this.eventsLength$ = store.select(CalendarSelectors.getDiasDisponiblesLength);
+
+  }
 
   dayClicked({ date }: { date: Date }): void {
     alert('click en ' + date);

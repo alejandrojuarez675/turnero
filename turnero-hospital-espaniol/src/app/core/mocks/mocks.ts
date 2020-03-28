@@ -1,4 +1,6 @@
-import { ObraSocial, Plan, CentroAtencion, Especialidad, Profesional, Disponibilidad, RespuestaDTO, ObraSocialRespuesta } from '../../shared/models/datos.models';
+// tslint:disable-next-line: max-line-length
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional } from '../../shared/models/datos.models';
+import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
     codigo: 1,
@@ -69,14 +71,14 @@ const disponibilidad: Disponibilidad = {
     turnoManiana: {
         codigo: '148',
         centroAtencion: centroAtencionMock,
-        fecha: new Date("2020/03/28"),
+        fecha: new Date('2020/03/28'),
         hora: '10:00',
         observaciones: ''
     },
     turnoTarde: {
         codigo: '348',
         centroAtencion: centroAtencionMock,
-        fecha: new Date("2020/03/30"),
+        fecha: new Date('2020/03/30'),
         hora: '20:15',
         observaciones: ''
     }
@@ -85,3 +87,17 @@ const disponibilidad: Disponibilidad = {
 export const profesionalesMocks: Disponibilidad[] = [
     disponibilidad, disponibilidad
 ];
+
+
+export const diasDisponibles = () => {
+    const response: DisponibilidadDias[] = [];
+    DateUtils.getDaysArray(new Date(), 30).forEach(
+        (day: Date, index: number) => {
+            response.push({
+                fecha: DateUtils.getFormatDate(day),
+                conDisponibilidad: index % 2 === 0
+            });
+        }
+    );
+    return response;
+};

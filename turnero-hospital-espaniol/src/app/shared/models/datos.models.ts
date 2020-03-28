@@ -50,22 +50,26 @@ export class Profesional {
 export class Disponibilidad {
     profesional: Profesional;
     especialidad: Especialidad;
-    turnoManiana: Turno;
-    turnoTarde: Turno;
+    turnoManiana: TurnoLight;
+    turnoTarde: TurnoLight;
 }
 
-export class DisponibilidadRespuesta extends Respuesta{
-    disponibilidad: Disponibilidad[];
-}
-
-export class Turno {
+export class TurnoLight {
     codigo: string;
     centroAtencion: CentroAtencion;
     fecha: Date;
     hora: string;
     observaciones: string;
-    profesional?: Profesional;
-    especialidad?: Especialidad;
+}
+
+
+export class DisponibilidadRespuesta extends Respuesta{
+    disponibilidad: Disponibilidad[];
+}
+
+export class Turno extends TurnoLight {
+    profesional: Profesional;
+    especialidad: Especialidad;
 }
 
 export class DisponibilidadDias {
@@ -73,10 +77,16 @@ export class DisponibilidadDias {
     conDisponibilidad: boolean;
 }
 
+export class DisponibilidadDiasRespuesta extends Respuesta {
+    dia: DisponibilidadDias[];
+}
+
 export class Reserva {
     codigoReserva: string;
     vencimientoReserva: string;
 }
+
+
 
 export class Formulario {
     obrasSociales: ObraSocial[];
@@ -91,4 +101,7 @@ export class Formulario {
 
 export class Calendario {
     profesionalesDisponibles: Disponibilidad[];
+    profesionalSelected: Profesional;
+    turnoSelected: TurnoLight;
+    diasDisponibles: DisponibilidadDias[];
 }

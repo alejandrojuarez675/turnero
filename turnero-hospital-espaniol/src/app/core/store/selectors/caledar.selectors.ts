@@ -13,3 +13,13 @@ export const getProfesionalesDisponiblesLength = createSelector(
     selectFromStore,
     (calendario: Calendario) => calendario.profesionalesDisponibles.length
 );
+
+export const getDiasDisponibles = createSelector(
+    selectFromStore,
+    (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad)
+);
+
+export const getDiasDisponiblesLength = createSelector(
+    selectFromStore,
+    (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
+);

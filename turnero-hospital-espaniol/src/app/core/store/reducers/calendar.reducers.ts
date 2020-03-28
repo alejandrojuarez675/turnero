@@ -3,7 +3,10 @@ import { Calendario } from '../../../shared/models/datos.models';
 import * as CalendarActions from '../actions/calendar.actions';
 
 const initialState: Calendario = {
-    profesionalesDisponibles: []
+    profesionalesDisponibles: [],
+    profesionalSelected: undefined,
+    turnoSelected: undefined,
+    diasDisponibles: [],
 };
 
 

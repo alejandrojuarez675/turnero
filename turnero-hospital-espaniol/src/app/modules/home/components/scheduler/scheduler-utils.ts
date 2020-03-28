@@ -1,3 +1,21 @@
+import { DisponibilidadDias } from '../../../../shared/models/datos.models';
+import { DateUtils } from '../../../../core/utils/date.utils';
+
+const colors: any = {
+    blue: {
+        primary: '#1061a7',
+        secondary: '#1061a7'
+    },
+};
+
+export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDias) => {
+    return {
+        start: DateUtils.getDate(dia.fecha),
+        title: '',
+        color: colors.blue,
+    };
+};
+
 export const toMonthString = (month: number) => {
     let result = '';
 
