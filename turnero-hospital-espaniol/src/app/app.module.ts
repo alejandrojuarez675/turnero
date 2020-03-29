@@ -14,6 +14,8 @@ import { CoreModule } from './core/core.module';
 import { calendarReducer } from './core/store/reducers/calendar.reducers';
 import { formReducer } from './core/store/reducers/form.reducers';
 import { SharedModule } from './shared/shared.module';
+import { errorReducer } from './core/store/reducers/error.reducers';
+import { ErrorEffects } from './core/store/effects/error.effects';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
       // router: routerReducer,
       formulario: formReducer,
       calendario: calendarReducer,
+      error: errorReducer,
     }),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
@@ -36,7 +39,8 @@ import { SharedModule } from './shared/shared.module';
     }),
     EffectsModule.forRoot([
       FormEffects,
-      CalendarEffects
+      CalendarEffects,
+      ErrorEffects,
     ]),
     BrowserAnimationsModule,
   ],

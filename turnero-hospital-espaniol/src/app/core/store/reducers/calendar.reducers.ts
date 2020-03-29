@@ -18,6 +18,7 @@ const _setProfesionalesDisponibles = (state: Calendario, profesionalesDisponible
 };
 
 const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadDias[]) => {
+    if (!diasDisponibles) { return state; }
     const stateNew = {...state};
     stateNew.diasDisponibles = [...diasDisponibles.map(x => { return {
         fecha: DateUtils.getDate(x.fecha),
