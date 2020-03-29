@@ -2,13 +2,19 @@ package com.sanatorio.espanol.backend.dto;
 
 public class CentroAtencion {
 
-	String codigo;
+	Integer codigo;
 	String nombre;
 
-	public String getCodigo() {
+	public CentroAtencion(Integer codigo, String nombre) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+	
+	public Integer getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {

@@ -2,16 +2,22 @@ package com.sanatorio.espanol.backend.dto;
 
 public class Profesional {
 
-	String codigo;
+	Integer codigo;
 	String nombreApellido;
 	String observaciones;
 
-
-	public String getCodigo() {
+	public Profesional(Integer codigo, String nombreApellido, String observaciones) {
+		super();
+		this.codigo = codigo;
+		this.nombreApellido = nombreApellido;
+		this.observaciones = observaciones;
+	}
+	
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombreApellido() {
