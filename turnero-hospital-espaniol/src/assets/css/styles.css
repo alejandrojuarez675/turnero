@@ -5,6 +5,7 @@
     --font: #333333;
     --footer-background: #131211;
     --footer-font: #131211;
+    --info-font: rgba(0, 0, 0, 0.12);
 }
 
 body {

@@ -1,4 +1,11 @@
 <div class="cuadro-formulario" *ngIf="(profesionalesDisponiblesLenght$ | async) > 0">
+
+  <div class="row clearfix">
+    <p>
+      Haga click sobre el profesional o turno que desee para seleccionarlo.
+    </p>
+  </div>
+
   <div class="example-container">
     <div class="example-table-container">
       <table mat-table [dataSource]="profesionalesDisponibles$ | async">
@@ -6,19 +13,25 @@
         <ng-container matColumnDef="profesional.nombreApellido">
           <th mat-header-cell *matHeaderCellDef style="width: 40%;">Profesional</th>
           <td mat-cell *matCellDef="let row" style="width: 40%; cursor: pointer;" 
-            (click)="onClickProf(row.profesional)">
+            (click)="onClickProf(row.profesional)" title="Buscar turnos para este Profesional">
             {{row.profesional.nombreApellido}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="turnoManiana.fecha">
           <th mat-header-cell *matHeaderCellDef>Próx. Turno M</th>
-          <td mat-cell *matCellDef="let row">{{row.turnoManiana.fecha | date: 'dd/MM/yyyy'}} {{row.turnoManiana.hora}}</td>
+          <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row, 'M')"
+            title="Seleccionar turno">
+            {{row.turnoManiana.fecha | date: 'dd/MM/yyyy'}} {{row.turnoManiana.hora}}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="turnoTarde.fecha">
           <th mat-header-cell *matHeaderCellDef>Próx. Turno T</th>
-          <td mat-cell *matCellDef="let row">{{row.turnoTarde.fecha | date: 'dd/MM/yyyy' }} {{row.turnoTarde.hora}} </td>
+          <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row, 'T')"
+            title="Seleccionar turno">
+            {{row.turnoTarde.fecha | date: 'dd/MM/yyyy' }} {{row.turnoTarde.hora}} 
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

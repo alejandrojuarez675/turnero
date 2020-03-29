@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Calendario, DisponibilidadDias } from '../../../shared/models/datos.models';
+import { Calendario, DisponibilidadDias, TurnoLight, Turno } from '../../../shared/models/datos.models';
 import * as CalendarActions from '../actions/calendar.actions';
 import { DateUtils } from '../../utils/date.utils';
 
@@ -26,6 +26,12 @@ const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadD
     return stateNew;
 };
 
+const _setTurnoSelected = (state: Calendario, turnoSelected: Turno) => {
+    const stateNew = {...state};
+    stateNew.turnoSelected = turnoSelected;
+    return stateNew;
+};
+
 const _calendarReducer = createReducer(
     initialState,
 
@@ -34,6 +40,9 @@ const _calendarReducer = createReducer(
 
     on(CalendarActions.setDiasDisponibles, (state, { diasDisponibles }) =>
         _setDiasDisponibles(state, diasDisponibles)),
+
+    on(CalendarActions.setTurnoSelected, (state, { turnoSelected }) =>
+        _setTurnoSelected(state, turnoSelected)),
 
 );
 

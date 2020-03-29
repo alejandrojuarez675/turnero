@@ -13,12 +13,12 @@ export class Respuesta {
     respuesta: RespuestaDTO;
 }
 
-export class ObraSocialRespuesta extends Respuesta{
+export class ObraSocialRespuesta extends Respuesta {
     obraSocial: ObraSocial[];
 }
 
 
-export class ObraSocial extends CodigoNombre{
+export class ObraSocial extends CodigoNombre {
     plan: Plan[];
 }
 
@@ -28,7 +28,7 @@ export class Plan extends CodigoNombre {
 export class Especialidad extends CodigoNombre {
 }
 
-export class EspecialidadRespuesta extends Respuesta{
+export class EspecialidadRespuesta extends Respuesta {
     especialidad: Especialidad[];
 }
 
@@ -37,7 +37,7 @@ export class CentroAtencion {
     nombre: string;
 }
 
-export class CentroAtencionRespuesta extends Respuesta{
+export class CentroAtencionRespuesta extends Respuesta {
     centroAtencion: CentroAtencion[];
 }
 
@@ -63,7 +63,7 @@ export class TurnoLight {
 }
 
 
-export class DisponibilidadRespuesta extends Respuesta{
+export class DisponibilidadRespuesta extends Respuesta {
     disponibilidad: Disponibilidad[];
 }
 
@@ -107,6 +107,6 @@ export class Formulario {
 export class Calendario {
     profesionalesDisponibles: Disponibilidad[];
     profesionalSelected: Profesional;
-    turnoSelected: TurnoLight;
+    turnoSelected: Turno;
     diasDisponibles: DisponibilidadDiasStore[];
 }

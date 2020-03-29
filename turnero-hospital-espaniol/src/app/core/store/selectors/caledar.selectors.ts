@@ -1,6 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Calendario, Formulario } from '../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../shared/models/request.models';
+import { DateUtils } from '../../utils/date.utils';
 
 
 export const selectCalendario = createFeatureSelector<Calendario>('calendario');
@@ -30,11 +31,16 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
     selectFormulario,
     (formulario: Formulario) => {
         const request = new BusquedaDiasDisponiblesRequest();
-        request.fechaNacimiento = formulario.fechaNacimiento;
+        request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
         return request;
     }
+);
+
+export const getTurnoSelected = createSelector(
+    selectCalendario,
+    (calendario: Calendario) => calendario.turnoSelected
 );
