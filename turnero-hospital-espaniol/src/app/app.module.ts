@@ -24,7 +24,6 @@ import { ErrorEffects } from './core/store/effects/error.effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
     SharedModule,
     StoreModule.forRoot({
       // router: routerReducer,

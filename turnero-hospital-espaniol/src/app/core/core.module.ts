@@ -8,16 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [
     ServiceService,

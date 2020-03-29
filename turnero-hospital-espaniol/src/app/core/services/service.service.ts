@@ -94,23 +94,23 @@ export class ServiceService {
       console.log('Run mock for: busquedaDiasDisponibles() - filter', filter);
 
       // MOCK SIN ERROR
-      // return getWsFromMock(diasDisponiblesMock);
+      return getWsFromMock(diasDisponiblesMock);
 
       // PARA PROBAR ERRORES CON MOCK
-      const mock: DisponibilidadDiasRespuesta = {
-        dia: diasDisponiblesMock,
-        respuesta: {
-          codigo: 300,
-          mensaje: 'prueba error'
-        }
-      };
-      return getWsFromMock(mock)
-        .pipe(map(
-            (res: DisponibilidadDiasRespuesta) => {
-              throwErrorIfBadCode(res);
-              return res.dia;
-            }
-        ));
+      // const mock: DisponibilidadDiasRespuesta = {
+      //   dia: diasDisponiblesMock,
+      //   respuesta: {
+      //     codigo: 300,
+      //     mensaje: 'prueba error'
+      //   }
+      // };
+      // return getWsFromMock(mock)
+      //   .pipe(map(
+      //       (res: DisponibilidadDiasRespuesta) => {
+      //         throwErrorIfBadCode(res);
+      //         return res.dia;
+      //       }
+      //   ));
 
       } else {
       console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);

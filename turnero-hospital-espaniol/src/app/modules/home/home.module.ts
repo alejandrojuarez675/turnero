@@ -25,8 +25,6 @@ import { MaterialModule } from './material.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    CoreModule,
-    SharedModule,
     MaterialModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],

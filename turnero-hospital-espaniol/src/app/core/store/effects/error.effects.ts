@@ -11,7 +11,7 @@ export class ErrorEffects {
     showError$ = createEffect(() =>
         this.actions$.pipe(
             ofType(ErrorActions.SHOW_ERROR),
-            mergeMap((payload: any) => timer(3000).pipe(
+            mergeMap((payload: any) => timer(100).pipe(
                 map(() => ({ type: ErrorActions.CLEAN_ERROR, error: payload.error })))
             )
         )
