@@ -20,6 +20,13 @@ body {
     display: inline-block;
 }
 
+@media(max-width: 1000px) {
+    .content {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
+
 .cuadro-formulario {
     background-color: white;
     border: 1px solid transparent;
