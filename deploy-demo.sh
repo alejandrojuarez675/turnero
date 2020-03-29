@@ -9,6 +9,7 @@ echo compilacion completa
 cd dist/turnero-hospital-espaniol/
 mv * ../../../../turnero-demo/
 cd ../../../../turnero-demo/
+sed -i 's+../../../assets+./assets+g' main.js
 echo publicando demo en github
 git add .
 git commit -m "commit automatico - ${now}"
