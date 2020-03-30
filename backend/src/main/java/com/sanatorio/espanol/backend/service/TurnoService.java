@@ -19,6 +19,15 @@ public class TurnoService {
 		return listaTurno;
 	}
 	
+	public Turno getTurnoConfirmado() {
+		return new Turno(
+				400, 
+				new Profesional(1, "Juan Perez", ""),
+				new Especialidad(1, "KINESIOLOGÍA"),
+				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
+				new Date(), "10:10", "");
+	}
+	
 	public static List<Turno> listaTurno = 
 		new ArrayList<Turno>(Arrays.asList(
 			new Turno(

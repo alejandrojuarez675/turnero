@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanatorio.espanol.backend.dto.CentroAtencionRespuesta;
+import com.sanatorio.espanol.backend.dto.ConfirmacionRequest;
+import com.sanatorio.espanol.backend.dto.ConfirmacionRespuesta;
 import com.sanatorio.espanol.backend.dto.DiaRequest;
 import com.sanatorio.espanol.backend.dto.DiaRespuesta;
 import com.sanatorio.espanol.backend.dto.DisponibilidadRequest;
@@ -67,5 +69,11 @@ public class TurnoController {
     public ReservaRespuesta reservaTurno(@RequestBody ReservaRequest reservaRequest) {
 		ReservaRespuesta reservaResp = commonService.reservaTurno(reservaRequest);
     	return reservaResp;
+    }
+	
+	@PostMapping("/confirmacionTurno")
+    public ConfirmacionRespuesta confirmacionTurno(@RequestBody ConfirmacionRequest confRequest) {
+		ConfirmacionRespuesta confRta = commonService.confirmacionTurno(confRequest);
+    	return confRta;
     }
 }
