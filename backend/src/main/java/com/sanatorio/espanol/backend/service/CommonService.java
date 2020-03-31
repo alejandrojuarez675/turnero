@@ -1,5 +1,8 @@
 package com.sanatorio.espanol.backend.service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,11 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sanatorio.espanol.backend.dto.CentroAtencionRespuesta;
+import com.sanatorio.espanol.backend.dto.ConfirmacionRequest;
+import com.sanatorio.espanol.backend.dto.ConfirmacionRespuesta;
+import com.sanatorio.espanol.backend.dto.DiaRequest;
+import com.sanatorio.espanol.backend.dto.DiaRespuesta;
 import com.sanatorio.espanol.backend.dto.Disponibilidad;
 import com.sanatorio.espanol.backend.dto.DisponibilidadRequest;
 import com.sanatorio.espanol.backend.dto.DisponibilidadRespuesta;
 import com.sanatorio.espanol.backend.dto.EspecialidadRespuesta;
+import com.sanatorio.espanol.backend.dto.HorarioRequest;
+import com.sanatorio.espanol.backend.dto.HorarioRespuesta;
 import com.sanatorio.espanol.backend.dto.ObraSocialRespuesta;
+import com.sanatorio.espanol.backend.dto.Reserva;
+import com.sanatorio.espanol.backend.dto.ReservaRequest;
+import com.sanatorio.espanol.backend.dto.ReservaRespuesta;
 import com.sanatorio.espanol.backend.dto.RespuestaDTO;
 
 @Service
@@ -19,14 +31,12 @@ public class CommonService {
 
 	public static Integer CODIGO_RTA_OK = 200; 
 
-	@Autowired
-	private ObraSocialService obraSocialService;
-	@Autowired
-	private EspecialidadService especialidadService;
-	@Autowired
-	private CentroAtencionService centroAtencionService;
-	@Autowired
-	private DisponibilidadService disponibilidadService;
+	@Autowired private ObraSocialService obraSocialService;
+	@Autowired private EspecialidadService especialidadService;
+	@Autowired private CentroAtencionService centroAtencionService;
+	@Autowired private DisponibilidadService disponibilidadService;
+	@Autowired private DiaService diaService;
+	@Autowired private TurnoService turnoService;
 	
 	public static RespuestaDTO getRespuestaOK() {
 		return new RespuestaDTO(CODIGO_RTA_OK, "OK");
@@ -60,16 +70,44 @@ public class CommonService {
 		disponibilidadRequest.codigoObraSocial;
 		disponibilidadRequest.codigoPlan
 		*/
+		// TODO:
 		List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()
 			.stream()
 			.filter(d -> d.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
 			.collect(Collectors.toList()); 
-		;
-					    	;
-    	DisponibilidadRespuesta espeResp = new DisponibilidadRespuesta();
+		DisponibilidadRespuesta espeResp = new DisponibilidadRespuesta();
     	espeResp.respuesta = getRespuestaOK();
     	espeResp.disponibilidad = disponibilidades;
     	
     	return espeResp;
     }
+
+	public DiaRespuesta busquedaDias(DiaRequest diaRequest) {
+		DiaRespuesta dResp = new DiaRespuesta();
+		dResp.respuesta = getRespuestaOK();
+    	dResp.dia = diaService.getListaDia(); // TODO:
+    	return dResp;
+   
+	}
+
+	public HorarioRespuesta busquedaHorarios(HorarioRequest horaRequest) {
+		HorarioRespuesta hResp = new HorarioRespuesta();
+		hResp.respuesta = getRespuestaOK();
+    	hResp.turno = turnoService.getListaTurno(); // TODO;
+    	return hResp;
+	}
+
+	public ReservaRespuesta reservaTurno(ReservaRequest reservaRequest) {
+		ReservaRespuesta rResp = new ReservaRespuesta();
+		rResp.respuesta = getRespuestaOK();
+    	rResp.reserva = new Reserva(1001, new GregorianCalendar(2020,5,1).getTime()); // TODO:
+    	return rResp;
+	}
+
+	public ConfirmacionRespuesta confirmacionTurno(ConfirmacionRequest confRequest) {
+		ConfirmacionRespuesta cResp = new ConfirmacionRespuesta();
+		cResp.respuesta = getRespuestaOK();
+    	cResp.turno = turnoService.getTurnoConfirmado();
+    	return cResp;
+	}
 }
