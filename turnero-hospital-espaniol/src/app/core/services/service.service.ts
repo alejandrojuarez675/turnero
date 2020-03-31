@@ -131,7 +131,7 @@ export class ServiceService {
       return getWsFromMock(reservaTurnoMock);
     } else {
       console.log('Run to server ' + this.endpoint_reservaTurno);
-      return this.http.post<DisponibilidadRespuesta>(this.endpoint_busquedaProfesionales, filter)
+      return this.http.post<DisponibilidadRespuesta>(this.endpoint_reservaTurno, filter)
         .pipe(map(
           (res: DisponibilidadRespuesta) => {
             throwErrorIfBadCode(res);

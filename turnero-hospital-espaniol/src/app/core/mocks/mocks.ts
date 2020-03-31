@@ -94,7 +94,7 @@ const diasDisponibles = () => {
     DateUtils.getDaysArray(new Date(), 15).forEach(
         (day: Date, index: number) => {
             response.push({
-                fecha: DateUtils.getFormatDate(day),
+                fecha: day,
                 conDisponibilidad: index % 2 === 0
             });
         }

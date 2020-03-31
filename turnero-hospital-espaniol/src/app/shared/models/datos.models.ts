@@ -73,7 +73,7 @@ export class Turno extends TurnoLight {
 }
 
 export class DisponibilidadDias {
-    fecha: string;
+    fecha: Date;
     conDisponibilidad: boolean;
 }
 
