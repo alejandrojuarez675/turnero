@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Paciente, ReservaFormulario, Turno } from '../../../../shared/models/datos.models';
+import { Paciente, ReservaFormulario, Turno, ReservaRespuesta } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 
 @Component({
@@ -21,14 +21,18 @@ export class ReservaComponent implements OnInit {
   nombreApellido = new FormControl('', [Validators.required]);
   telefono = new FormControl('', [Validators.required]);
   mail = new FormControl('', [Validators.required]);
-  turnoSelected: Observable<Turno>;
+  turnoSelected$: Observable<Turno>;
+  turnoSelected: Turno;
+  reservaSelected$: Observable<ReservaRespuesta>; 
+
 
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>
   ) {
-    this.turnoSelected = store.select(
+    this.turnoSelected$ = store.select(
       CalendarSelectors.getTurnoSelected
     );
+    
 
    }
 
@@ -48,14 +52,19 @@ export class ReservaComponent implements OnInit {
     request.paciente = paciente;
     // const turno: Turno = this.store.dispatch(CalendarSelectors.getTurnoSelected);
 
-    // request.codigoTurno = turno.codigo;
+    //this.turnoSelected$ = this.store.select(CalendarSelectors.getTurnoSelected);
+    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
+    
     this.store.select(ReservaSelector.reservarTurno).subscribe(
       (filter: ReservaTurnoRequest) => {
         //TODO esto no está bien pero sin esto no anda
         filter.paciente = request.paciente;
+
+        filter.codigoTurno = this.turnoSelected.codigo;
         this.store.dispatch(ReservaAction.reservaTurno({filter}));
       }, err => console.error(JSON.stringify(err))
     );
+
   }
 
   isValid() {

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta } from '../../shared/models/datos.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta, ReservaRespuesta } from '../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest } from '../../shared/models/request.models';
 import { centroAtencionesMocks, diasDisponiblesMock, especialidadesMocks, obrasSocialesMocks, profesionalesMocks, reservaTurnoMock } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
@@ -131,11 +131,11 @@ export class ServiceService {
       return getWsFromMock(reservaTurnoMock);
     } else {
       console.log('Run to server ' + this.endpoint_reservaTurno);
-      return this.http.post<DisponibilidadRespuesta>(this.endpoint_reservaTurno, filter)
+      return this.http.post<ReservaRespuesta>(this.endpoint_reservaTurno, filter)
         .pipe(map(
-          (res: DisponibilidadRespuesta) => {
+          (res: ReservaRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.disponibilidad;
+            return res.reserva;
           }
       ));
     }
