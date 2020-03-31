@@ -15,8 +15,8 @@ export class ReservaEffects {
         this.actions$.pipe(
             ofType(ReservaActions.RESERVA_TURNO),
             mergeMap((payload: any) => this.reservaService.reservaTurno(payload.filter).pipe(
-                map(profesionalesDisponibles =>
-                    ({ type: CalendarActions.SET_PROFESIONALES_DISPONIBLES, profesionalesDisponibles })),
+                map(reservaSelected =>
+                    ({ type: ReservaActions.SET_RESERVA, reservaSelected })),
                 catchError((error: Error) =>
                     of({ type: ErrorActions.SHOW_ERROR, error: error.message })
                 )
