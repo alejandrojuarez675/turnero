@@ -16,6 +16,7 @@ import { formReducer } from './core/store/reducers/form.reducers';
 import { SharedModule } from './shared/shared.module';
 import { errorReducer } from './core/store/reducers/error.reducers';
 import { ErrorEffects } from './core/store/effects/error.effects';
+import { ReservaEffects } from './core/store/effects/reserva.effects';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ErrorEffects } from './core/store/effects/error.effects';
       FormEffects,
       CalendarEffects,
       ErrorEffects,
+      ReservaEffects,
     ]),
     BrowserAnimationsModule,
   ],

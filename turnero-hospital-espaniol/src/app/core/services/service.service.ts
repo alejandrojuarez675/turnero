@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 // tslint:disable-next-line: max-line-length
 import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaProfesionalesRequest } from '../../shared/models/request.models';
-import { centroAtencionesMocks, diasDisponiblesMock, especialidadesMocks, obrasSocialesMocks, profesionalesMocks } from '../mocks/mocks';
+import { BusquedaDiasDisponiblesRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest } from '../../shared/models/request.models';
+import { centroAtencionesMocks, diasDisponiblesMock, especialidadesMocks, obrasSocialesMocks, profesionalesMocks, reservaTurnoMock } from '../mocks/mocks';
 import { environment } from './../../../environments/environment';
 import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
 import { map, catchError } from 'rxjs/operators';
@@ -23,6 +23,7 @@ export class ServiceService {
     endpoint_centroAtencion = this.endpoint + '/getCentroAtencion';
     endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
     endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
+    endpoint_reservaTurno = this.endpoint + '/reservaTurno';
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
@@ -121,6 +122,22 @@ export class ServiceService {
               return res.dia;
             }
         ));
+    }
+  }
+
+  reservaTurno(filter: ReservaTurnoRequest): Observable<any> {
+    if (this.useMockups) {
+      console.log('Run mock for: reservaTurno() - filter', filter);
+      return getWsFromMock(reservaTurnoMock);
+    } else {
+      console.log('Run to server ' + this.endpoint_reservaTurno);
+      return this.http.post<DisponibilidadRespuesta>(this.endpoint_busquedaProfesionales, filter)
+        .pipe(map(
+          (res: DisponibilidadRespuesta) => {
+            throwErrorIfBadCode(res);
+            return res.disponibilidad;
+          }
+      ));
     }
   }
 

@@ -12,6 +12,7 @@ import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from './material.module';
+import { ReservaComponent } from './components/reserva/reserva.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MaterialModule } from './material.module';
     SchedulerComponent,
     ConfirmationComponent,
     ConfirmationDialogComponent,
+    ReservaComponent,
   ],
   imports: [
     CommonModule,

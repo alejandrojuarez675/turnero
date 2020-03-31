@@ -1,0 +1,68 @@
+<div class="cuadro-formulario" *ngIf="(turnoSelected | async) != undefined">
+    <div class="row clearfix">
+        <p>
+          Ingrese los siguientes datos para reservar el turno
+        </p>
+    </div>
+
+    <div class="row clearfix">
+        <mat-form-field class="example-full-width">
+            <mat-label>DNI</mat-label>
+            <input matInput [formControl]="dni" 
+                   placeholder="Ingrese su DNI">
+            <mat-error *ngIf="dni.invalid">
+                Ingrese su DNI
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row clearfix">
+        <mat-form-field>
+            <mat-label>Sexo</mat-label>
+            <mat-select [formControl]="sexo">
+                <mat-option *ngFor="let sexo of sexo$" [value]="sexo">
+                    {{sexo}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="sexo.invalid">Ingrese su sexo</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row clearfix">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre y Apellido</mat-label>
+            <input matInput [formControl]="nombreApellido" 
+                   placeholder="Ingrese su nombre y apellido">
+            <mat-error *ngIf="nombreApellido.invalid">
+                Ingrese su nombre y apellido
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row clearfix">
+        <mat-form-field class="example-full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput [formControl]="telefono" 
+                   placeholder="Ingrese su Teléfono">
+            <mat-error *ngIf="telefono.invalid">
+                Ingrese su Teléfono
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row clearfix">
+        <mat-form-field class="example-full-width">
+            <mat-label>Mail</mat-label>
+            <input matInput [formControl]="mail" 
+                   placeholder="Ingrese su mail">
+            <mat-error *ngIf="mail.invalid">
+                Ingrese su mail
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row clearfix">
+        <button style="width: 100%;" class="button" mat-flat-button [disabled]="!isValid()" (click)="onSubmit()">
+            RESERVAR TURNO
+        </button>
+    </div>
+</div>

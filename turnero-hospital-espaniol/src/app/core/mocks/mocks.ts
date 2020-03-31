@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, Reserva } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -69,14 +69,14 @@ const disponibilidad: Disponibilidad = {
     profesional: profesional1,
     especialidad: especialidadesMocks[0],
     turnoManiana: {
-        codigo: '148',
+        codigo: 148,
         centroAtencion: centroAtencionMock,
         fecha: new Date('2020/03/28'),
         hora: '10:00',
         observaciones: ''
     },
     turnoTarde: {
-        codigo: '348',
+        codigo: 348,
         centroAtencion: centroAtencionMock,
         fecha: new Date('2020/03/30'),
         hora: '20:15',
@@ -103,3 +103,10 @@ const diasDisponibles = () => {
 };
 
 export const diasDisponiblesMock = diasDisponibles();
+
+export const reservaTurnoMock = () => {
+    const reserva = new Reserva();
+    reserva.codigoReserva = "123";
+    reserva.vencimientoReserva = new Date('2020/03/30');
+    return reserva;
+}

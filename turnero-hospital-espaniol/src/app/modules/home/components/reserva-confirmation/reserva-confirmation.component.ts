@@ -3,18 +3,16 @@ import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario, Turno } from '../../../../shared/models/datos.models';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { from } from 'rxjs';
 
 @Component({
-  selector: 'app-confirmation',
-  templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.css']
+  selector: 'app-reserva-confirmation',
+  templateUrl: './reserva-confirmation.component.html',
+  styleUrls: ['./reserva-confirmation.component.css']
 })
-export class ConfirmationComponent implements OnInit {
+export class ReservaConfirmationComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
@@ -33,8 +31,7 @@ export class ConfirmationComponent implements OnInit {
     this.dialog.open(ConfirmationDialogComponent, { data: { turno }})
       .afterClosed().subscribe( result => {
         if (result) {
-          console.log("ingresa con " + result);
-          //this.store.dispatch(ReservaActions.setTurnoSelected(turno));
+          console.log('dialog aceptado!');
         } else {
           this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
         }

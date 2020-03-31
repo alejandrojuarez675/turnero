@@ -55,7 +55,7 @@ export class Disponibilidad {
 }
 
 export class TurnoLight {
-    codigo: string;
+    codigo: number;
     centroAtencion: CentroAtencion;
     fecha: Date;
     hora: string;
@@ -88,9 +88,12 @@ export class DisponibilidadDiasStore {
 
 export class Reserva {
     codigoReserva: string;
-    vencimientoReserva: string;
+    vencimientoReserva: Date;
 }
 
+export class ReservaRespuesta extends Respuesta {
+    reserva: Reserva;
+}
 
 
 export class Formulario {
@@ -109,4 +112,25 @@ export class Calendario {
     profesionalSelected: Profesional;
     turnoSelected: Turno;
     diasDisponibles: DisponibilidadDiasStore[];
+}
+
+export class ReservaFormulario {
+    turnoSelected: Turno
+    paciente: Paciente;
+    dni: number;
+    sexo: string;
+    nombreApellido: string;
+    telefono: string;
+    mail: string;
+}
+
+export class Paciente {
+    dni: number;
+    sexo: string;
+    nombreApellido: string;
+    telefono: string;
+    mail: string;
+    fechaNacimiento: Date;
+    codigoObraSocial: number;
+    codigoPlan: number;
 }
