@@ -1,4 +1,8 @@
 <div class="cuadro-formulario" *ngIf="(eventsLength$ | async) > 0">
+  <p>
+    Turnos disponibles para Dr/a. 
+    {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
+  </p>
   <div>
     <div class="row clearfix">
       <div mwlCalendarPreviousView class="cambio-mes"

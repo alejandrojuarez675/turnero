@@ -4,7 +4,7 @@
     --bordes: #EEEEEE;
     --font: #333333;
     --footer-background: #131211;
-    --footer-font: #131211;
+    --footer-font: #F7F7F2;
     --info-font: rgba(0, 0, 0, 0.12);
 }
 
@@ -52,12 +52,15 @@ body {
 
 .footer {
     background-color: var(--footer-background);
-    color: var(--footer-background);
+    color: var(--footer-font);
     position: relative;
     left: 0;
     bottom: 0;
     height: 100px;
     width: 100%;
+    align-content: center;
+    text-align: center;
+    padding: 1vw;
 }
 
 .my-col-20 {

@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario } from '../../../../shared/models/datos.models';
+import { Calendario, Profesional } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
@@ -20,6 +20,7 @@ export class SchedulerComponent {
 
   events$: Observable<CalendarEvent[]>;
   eventsLength$: Observable<number>;
+  profesionalSelected$: Observable<Profesional>;
 
   events: CalendarEvent<any>[];
   CalendarView = CalendarView;
@@ -39,6 +40,8 @@ export class SchedulerComponent {
     this.events$.subscribe((e) => this.events = e);
 
     this.eventsLength$ = store.select(CalendarSelectors.getDiasDisponiblesLength);
+
+    this.profesionalSelected$ = store.select(CalendarSelectors.getProfesionalSelected);
 
   }
 
