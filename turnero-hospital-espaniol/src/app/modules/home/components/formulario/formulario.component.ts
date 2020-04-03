@@ -74,9 +74,8 @@ export class FormularioComponent implements OnInit {
 
   onSubmit() {
     this.store.select(FormSelectors.selectBusquedaProfesionales).subscribe(
-      (filter: BusquedaProfesionalesRequest) => {
-        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
-      }, err => console.error(JSON.stringify(err))
+      (filter: BusquedaProfesionalesRequest) =>
+        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
     );
   }
 }

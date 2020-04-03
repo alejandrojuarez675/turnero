@@ -65,23 +65,27 @@ const profesional1: Profesional = {
     observaciones: '',
 };
 
+const turno1 = {
+    codigo: '148',
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/03/28'),
+    hora: '10:00',
+    observaciones: ''
+};
+
+const turno2 = {
+    codigo: '348',
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/03/30'),
+    hora: '20:15',
+    observaciones: ''
+};
+
 const disponibilidad: Disponibilidad = {
     profesional: profesional1,
     especialidad: especialidadesMocks[0],
-    turnoManiana: {
-        codigo: '148',
-        centroAtencion: centroAtencionMock,
-        fecha: new Date('2020/03/28'),
-        hora: '10:00',
-        observaciones: ''
-    },
-    turnoTarde: {
-        codigo: '348',
-        centroAtencion: centroAtencionMock,
-        fecha: new Date('2020/03/30'),
-        hora: '20:15',
-        observaciones: ''
-    }
+    turnoManiana: turno1,
+    turnoTarde: turno2
 };
 
 export const profesionalesMocks: Disponibilidad[] = [
@@ -103,3 +107,7 @@ const diasDisponibles = () => {
 };
 
 export const diasDisponiblesMock = diasDisponibles();
+
+export const horariosMock = [
+    turno1, turno2
+];

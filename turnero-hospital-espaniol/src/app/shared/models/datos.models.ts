@@ -81,6 +81,10 @@ export class DisponibilidadDiasRespuesta extends Respuesta {
     dia: DisponibilidadDias[];
 }
 
+export class HorariosRespuesta extends Respuesta {
+    turno: Turno[];
+}
+
 export class DisponibilidadDiasStore {
     fecha: Date;
     conDisponibilidad: boolean;
@@ -109,4 +113,6 @@ export class Calendario {
     profesionalSelected: Profesional;
     turnoSelected: Turno;
     diasDisponibles: DisponibilidadDiasStore[];
+    fechaSelected: Date;
+    horariosDisponibles: Turno[];
 }

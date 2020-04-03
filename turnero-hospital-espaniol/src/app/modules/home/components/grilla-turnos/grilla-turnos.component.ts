@@ -37,11 +37,10 @@ export class GrillaTurnosComponent implements OnInit {
   }
 
   onClickProf(profesional: Profesional) {
+    this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
-        const filter = {...request};
-        filter.codigoProfesional = profesional.codigo;
-        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter }));
+        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
       }
     );
   }

@@ -1,6 +1,6 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Calendario, Formulario } from '../../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest } from '../../../shared/models/request.models';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Calendario, Formulario, Profesional } from '../../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest } from '../../../shared/models/request.models';
 import { DateUtils } from '../../utils/date.utils';
 
 
@@ -17,25 +17,33 @@ export const getProfesionalesDisponiblesLength = createSelector(
     (calendario: Calendario) => calendario.profesionalesDisponibles.length
 );
 
-export const getDiasDisponibles = createSelector(
+export const getProfesionalSelected = createSelector(
     selectCalendario,
-    (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad)
+    (calendario: Calendario) => calendario.profesionalSelected
+);
+
+export const getDiasDisponibles = createSelector(
+    [getProfesionalSelected, selectCalendario],
+    (_profesionalSelected: Profesional, calendario: Calendario) =>
+        calendario.diasDisponibles.filter(x => x.conDisponibilidad)
 );
 
 export const getDiasDisponiblesLength = createSelector(
-    selectCalendario,
-    (calendario: Calendario) => calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
+    [getProfesionalSelected, selectCalendario],
+    (_profesionalSelected: Profesional, calendario: Calendario) =>
+        calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(
-    selectFormulario,
-    (formulario: Formulario) => {
+    [getProfesionalSelected, selectFormulario],
+    (profesionalSelected: Profesional, formulario: Formulario) => {
         const request = new BusquedaDiasDisponiblesRequest();
         request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
+        request.codigoProfesional = profesionalSelected.codigo;
         return request;
     }
 );
@@ -43,4 +51,34 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
 export const getTurnoSelected = createSelector(
     selectCalendario,
     (calendario: Calendario) => calendario.turnoSelected
+);
+
+export const getFechaSelected = createSelector(
+    selectCalendario,
+    (calendario: Calendario) => calendario.fechaSelected
+);
+
+export const getBusquedaHorariosRequest = createSelector(
+    [getProfesionalSelected, getFechaSelected, selectFormulario],
+    (profesionalSelected: Profesional, fechaSelected: Date, formulario: Formulario) => {
+        const request = new BusquedaHorariosRequest();
+        request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
+        request.codigoObraSocial = formulario.obraSocialSelected.codigo;
+        request.codigoPlan = formulario.planSelected.codigo;
+        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
+        request.codigoProfesional = profesionalSelected.codigo;
+        request.fecha = fechaSelected;
+        return request;
+    }
+);
+
+export const getHorariosDisponibles = createSelector(
+    [getFechaSelected, selectCalendario],
+    (_fechaSelected: Date, calendario: Calendario) => calendario.horariosDisponibles
+);
+
+export const getHorariosDisponiblesLength = createSelector(
+    [getFechaSelected, selectCalendario],
+    (_fechaSelected: Date, calendario: Calendario) => calendario.horariosDisponibles.length
 );

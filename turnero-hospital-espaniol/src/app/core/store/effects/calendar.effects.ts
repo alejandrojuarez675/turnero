@@ -22,6 +22,19 @@ export class CalendarEffects {
         )
     );
 
+    getHorariosDisponibles$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CalendarActions.GET_HORARIOS_DISPONIBLES),
+            switchMap((payload: any) => this.service.busquedaHorarios(payload.filter).pipe(
+                map((horarios) =>
+                        ({ type: CalendarActions.SET_HORARIOS_DISPONIBLES, horarios })),
+                catchError((error: Error) =>
+                        of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+                )
+            ))
+        )
+    );
+
     constructor(
         private actions$: Actions,
         private service: ServiceService,

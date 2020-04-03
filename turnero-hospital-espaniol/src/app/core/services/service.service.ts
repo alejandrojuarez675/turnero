@@ -1,33 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDias, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, ObraSocial, ObraSocialRespuesta } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaProfesionalesRequest } from '../../shared/models/request.models';
-import { centroAtencionesMocks, diasDisponiblesMock, especialidadesMocks, obrasSocialesMocks, profesionalesMocks } from '../mocks/mocks';
-import { environment } from './../../../environments/environment';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias } from '../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest } from '../../shared/models/request.models';
+import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
-import { map, catchError } from 'rxjs/operators';
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class ServiceService {
 
   constructor (
     protected http: HttpClient
-    ) { }
+  ) { }
 
-    useMockups = environment.mockups;
-    endpoint = environment.endpoint;
-    endpoint_obraSocial = this.endpoint + '/getObraSocial';
-    endpoint_especialidad = this.endpoint + '/getEspecialidad';
-    endpoint_centroAtencion = this.endpoint + '/getCentroAtencion';
-    endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
-    endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
+  useMockups = environment.mockups;
+  endpoint = environment.endpoint;
+  endpoint_obraSocial = this.endpoint + '/getObraSocial';
+  endpoint_especialidad = this.endpoint + '/getEspecialidad';
+  endpoint_centroAtencion = this.endpoint + '/getCentroAtencion';
+  endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
+  endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
+  endpoint_busquedaHorarios = this.endpoint + '/busquedaHorarios';
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
       console.log('Run mock for: getObraSociales()');
-      return getWsFromMock(obrasSocialesMocks);
+      return getWsFromMock(Mock.obrasSocialesMocks);
     } else {
       console.log('Run to server ' + this.endpoint_obraSocial);
       return this.http.get<ObraSocialRespuesta>(this.endpoint_obraSocial)
@@ -43,7 +44,7 @@ export class ServiceService {
   getEspecialidades(): Observable<Especialidad[]> {
     if (this.useMockups) {
       console.log('Run mock for: getEspecialidades()');
-      return getWsFromMock(especialidadesMocks);
+      return getWsFromMock(Mock.especialidadesMocks);
     } else {
       console.log('Run to server ' + this.endpoint_especialidad);
       return this.http.get<EspecialidadRespuesta>(this.endpoint_especialidad)
@@ -59,7 +60,7 @@ export class ServiceService {
   getCentrosDeAtencion(): Observable<CentroAtencion[]> {
    if (this.useMockups) {
       console.log('Run mock for: getCentrosDeAtencion()');
-      return getWsFromMock(centroAtencionesMocks);
+      return getWsFromMock(Mock.centroAtencionesMocks);
     } else {
       console.log('Run to server ' + this.endpoint_centroAtencion);
       return this.http.get<CentroAtencionRespuesta>(this.endpoint_centroAtencion)
@@ -75,7 +76,7 @@ export class ServiceService {
   busquedaProfesionales(filter: BusquedaProfesionalesRequest): Observable<any> {
     if (this.useMockups) {
       console.log('Run mock for: busquedaProfesionales() - filter', filter);
-      return getWsFromMock(profesionalesMocks);
+      return getWsFromMock(Mock.profesionalesMocks);
     } else {
       console.log('Run to server ' + this.endpoint_busquedaProfesionales);
       return this.http.post<DisponibilidadRespuesta>(this.endpoint_busquedaProfesionales, filter)
@@ -89,16 +90,16 @@ export class ServiceService {
   }
 
 
-  busquedaDiasDisponibles(filter: BusquedaDiasDisponiblesRequest): Observable<any> {
+  busquedaDiasDisponibles(filter: BusquedaDiasDisponiblesRequest): Observable<DisponibilidadDias[]> {
     if (this.useMockups) {
       console.log('Run mock for: busquedaDiasDisponibles() - filter', filter);
 
       // MOCK SIN ERROR
-      return getWsFromMock(diasDisponiblesMock);
+      return getWsFromMock(Mock.diasDisponiblesMock);
 
       // PARA PROBAR ERRORES CON MOCK
       // const mock: DisponibilidadDiasRespuesta = {
-      //   dia: diasDisponiblesMock,
+      //   dia: Mock.diasDisponiblesMock,
       //   respuesta: {
       //     codigo: 300,
       //     mensaje: 'prueba error'
@@ -121,6 +122,22 @@ export class ServiceService {
               return res.dia;
             }
         ));
+    }
+  }
+
+  busquedaHorarios(filter: BusquedaHorariosRequest): Observable<Turno[]> {
+    if (this.useMockups) {
+      console.log('Run mock for: busquedaHorarios() - filter', filter);
+      return getWsFromMock(Mock.horariosMock);
+    } else {
+      console.log('Run to server ' + this.endpoint_busquedaHorarios);
+      return this.http.post<HorariosRespuesta>(this.endpoint_busquedaHorarios, filter)
+        .pipe(map(
+          (res: HorariosRespuesta) => {
+            throwErrorIfBadCode(res);
+            return res.turno;
+          }
+      ));
     }
   }
 
