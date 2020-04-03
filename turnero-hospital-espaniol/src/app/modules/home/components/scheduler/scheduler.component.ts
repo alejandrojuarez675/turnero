@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario } from '../../../../shared/models/datos.models';
-import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
+import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
 
 @Component({
@@ -47,8 +47,10 @@ export class SchedulerComponent {
       this.store.dispatch(CalendarActions.setFechaSelected({ fecha: date }));
       this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
         (filtro: BusquedaHorariosRequest) =>
-        this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
-      );
+          this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
+      ).unsubscribe();
+    } else {
+      this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     }
   }
 
