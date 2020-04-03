@@ -30,7 +30,7 @@ body {
 .cuadro-formulario {
     background-color: white;
     border: 1px solid transparent;
-    padding: 1vw;
+    padding: 0.5vw;
     border-color: var(--bordes);
     margin-top: 1vw;
 }
@@ -57,34 +57,31 @@ body {
 
 .my-col-20 {
     width: 20%;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
+    padding: 0.5vw;
     float: left;
 }
 
 .my-col-30 {
     width: 30%;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
+    padding: 0.5vw;
     float: left;
 }
 
 .my-col-40 {
     width: 40%;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
+    padding: 0.5vw;
     float: left;
 }
 
 .my-col-50 {
     width: 50%;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
+    padding: 0.5vw;
     float: left;
 }
 
 .my-col-60 {
     width: 60%;
+    padding: 0.5vw;
     float: left;
 }
 

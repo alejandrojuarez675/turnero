@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -65,7 +65,7 @@ const profesional1: Profesional = {
     observaciones: '',
 };
 
-const turno1 = {
+const turno1: TurnoLight = {
     codigo: '148',
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/28'),
@@ -73,7 +73,7 @@ const turno1 = {
     observaciones: ''
 };
 
-const turno2 = {
+const turno2: TurnoLight = {
     codigo: '348',
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/30'),
@@ -108,6 +108,14 @@ const diasDisponibles = () => {
 
 export const diasDisponiblesMock = diasDisponibles();
 
-export const horariosMock = [
-    turno1, turno2
+export const horariosMock: Turno[] = [
+    {
+        ...turno1,
+        profesional: profesional1,
+        especialidad: especialidadesMocks[0]
+    }, {
+        ...turno2,
+        profesional: profesional1,
+        especialidad: especialidadesMocks[0]
+    }
 ];
