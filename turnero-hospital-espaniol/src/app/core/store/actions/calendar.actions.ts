@@ -9,7 +9,7 @@ export const SET_TURNO_SELECTED = '[Calendar] - setTurnoSelected';
 export const SET_PROFESIONAL_SELECTED = '[Calendar] - setProfesionalSelected';
 export const SET_FECHA_SELECTED = '[Calendar] - setFechaSelected';
 export const GET_HORARIOS_DISPONIBLES = '[Calendar] - getHorariosDisponibles';
-export const SET_HORARIOS_DISPONIBLES = '[API] - SET_HORARIOS_DISPONIBLES';
+export const SET_HORARIOS_DISPONIBLES = '[API] - setHorariosDisponibles';
 
 export const setProfesionalesDisponibles = createAction(
     SET_PROFESIONALES_DISPONIBLES,
