@@ -13,6 +13,10 @@ body {
     color: var(--font);
 }
 
+.body {
+    min-height: calc(100% - 202px);
+}
+
 .content {
     padding-left: 10%;
     padding-right: 10%;
@@ -41,6 +45,7 @@ body {
     left: 0;
     top: 0;
     width: 100%;
+    height: 102px; /* Por la img que tiene */
     border: 1px solid transparent;
     border-color: var(--bordes);
 }
@@ -48,7 +53,7 @@ body {
 .footer {
     background-color: var(--footer-background);
     color: var(--footer-background);
-    position: absolute;
+    position: relative;
     left: 0;
     bottom: 0;
     height: 100px;
