@@ -3,11 +3,9 @@ import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
-import * as ReservaSelectors from '../../../../core/store/selectors/reserva.selectors';
-import { Calendario, Turno, ReservaFormulario } from '../../../../shared/models/datos.models';
+import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
+import { Calendario, Turno } from '../../../../shared/models/datos.models';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-confirmation',
@@ -23,20 +21,17 @@ export class ConfirmationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select(ReservaSelectors.getReserva).pipe(
-      filter(x => x !== undefined && x.codigoReserva !== undefined)
-    ).subscribe(x => {
-      console.log("aca se va a abrir el popup con el id de la reserva "  + x.codigoReserva);
-      }
-    );
+    this.store.select(CalendarSelectors.getTurnoSelected).pipe(
+      filter(x => x !== undefined)
+    ).subscribe(x => this.openDialog(x));
   }
 
 
-  openDialog(reserva: ReservaFormulario): void {
-    this.dialog.open(ConfirmationDialogComponent, { data: { turno: reserva }})
+  openDialog(turno: Turno): void {
+    this.dialog.open(ConfirmationDialogComponent, { data: { turno }})
       .afterClosed().subscribe( result => {
         if (result) {
-          console.log("ingresa con " + result);
+          console.log('dialog aceptado!');
         } else {
           this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
         }
