@@ -1,8 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { ReservaFormulario, Turno, Paciente, Reserva } from '../../../shared/models/datos.models';
+import { Paciente, Reserva, ReservaFormulario, Turno } from '../../../shared/models/datos.models';
 import * as ReservaActions from '../actions/reserva.actions';
-import { ReservaTurnoRequest } from '../../../shared/models/request.models';
-import { reservarTurno } from '../selectors/reserva.selectors';
 
 const initialState: ReservaFormulario = {
     paciente: undefined,
@@ -26,9 +24,7 @@ const _setTurnoSelected = (state: ReservaFormulario, turnoSelected: Turno) => {
 const _setReserva = (state: ReservaFormulario, reservaSelected: Reserva) => {
     const stateNew = {...state};
     console.log("Entra y llega al set Reserva con " + reservaSelected);
-    stateNew.reserva = new Reserva();
-    stateNew.reserva.codigoReserva = reservaSelected.codigoReserva;
-    stateNew.reserva.vencimientoReserva = reservaSelected.vencimientoReserva;
+    stateNew.reserva = reservaSelected;
     return stateNew;
 };
 
@@ -44,11 +40,11 @@ const _reservaReducer = createReducer(
     on(ReservaActions.setTurnoSelected, (state, { turnoSelected }) =>
         _setTurnoSelected(state, turnoSelected)),
 
-    on(ReservaActions.setReservaSelected, (state, { reservaSelected }) =>
-        _setReserva(state, reservaSelected)),
-
     on(ReservaActions.setPaciente, (state, { paciente }) =>
        _setPaciente(state, paciente)),
+
+    // on(ReservaActions.confirmReservaSelected, (state, {reservaSelected}) =>
+    // _setReserva(state, reservaSelected)),
 );
 
 export function reservaReducer(state, action) {

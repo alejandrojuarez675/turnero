@@ -4,7 +4,7 @@ import { Turno, Reserva, ReservaFormulario, Paciente } from "../../../shared/mod
 
 export const RESERVA_TURNO = '[Reserva] - ReservaTurno';
 export const SET_TURNO_SELECTED = '[Calendar] - setTurnoSelected';
-export const SET_RESERVA = '[Reserva] - setReservaSelected ';
+export const SET_RESERVA = '[API] - setReservaSelected ';
 export const GET_RESERVA = '[Reserva] - getReservaSelected ';
 export const SET_PACIENTE = '[Reserva] - setPaciente ';
 

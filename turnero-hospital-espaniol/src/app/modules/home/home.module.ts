@@ -13,6 +13,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from './material.module';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { ReservaEmailComponent } from './components/reserva-email/reserva-email.component';
+import { ReservaEmailDialogComponent } from './components/reserva-email-dialog/reserva-email-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ReservaComponent } from './components/reserva/reserva.component';
     ConfirmationComponent,
     ConfirmationDialogComponent,
     ReservaComponent,
+    ReservaEmailComponent,
+    ReservaEmailDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,7 @@ import { ReservaComponent } from './components/reserva/reserva.component';
   ],
   entryComponents: [
     ConfirmationDialogComponent,
+    ReservaEmailDialogComponent,
   ]
 })
 export class HomeModule { }

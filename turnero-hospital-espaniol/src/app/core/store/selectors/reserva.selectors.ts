@@ -23,7 +23,14 @@ export const getReservaSelected = createSelector(
 );
 
 export const getReserva =  createSelector(
-    selectReserva,
-    (reservaSelected: Reserva) => reservaSelected
+    selectFormulario,
+    (reservaSelected: ReservaFormulario) => {
+        console.log("ESTA ENTRANDO AL SELECTOR DE GET RESERVA con valor " +reservaSelected.reserva);
+        if (reservaSelected.reserva !== undefined) {
+
+            console.log("CODIGO DE RESERVA " +reservaSelected.reserva.codigoReserva);
+        }
+        return reservaSelected;
+    }
 );
 
