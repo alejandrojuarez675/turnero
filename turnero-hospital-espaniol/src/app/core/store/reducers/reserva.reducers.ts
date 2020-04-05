@@ -26,10 +26,15 @@ const _setTurnoSelected = (state: ReservaFormulario, turnoSelected: Turno) => {
 const _setReserva = (state: ReservaFormulario, reservaSelected: Reserva) => {
     const stateNew = {...state};
     console.log("Entra y llega al set Reserva con " + reservaSelected);
-    console.log("Entra y llega " + reservaSelected.codigoReserva);
     stateNew.reserva = new Reserva();
     stateNew.reserva.codigoReserva = reservaSelected.codigoReserva;
     stateNew.reserva.vencimientoReserva = reservaSelected.vencimientoReserva;
+    return stateNew;
+};
+
+const _setPaciente = (state: ReservaFormulario, paciente: Paciente) => {
+    const stateNew = { ...state };
+    stateNew.paciente = paciente;
     return stateNew;
 };
 
@@ -41,6 +46,9 @@ const _reservaReducer = createReducer(
 
     on(ReservaActions.setReservaSelected, (state, { reservaSelected }) =>
         _setReserva(state, reservaSelected)),
+
+    on(ReservaActions.setPaciente, (state, { paciente }) =>
+       _setPaciente(state, paciente)),
 );
 
 export function reservaReducer(state, action) {

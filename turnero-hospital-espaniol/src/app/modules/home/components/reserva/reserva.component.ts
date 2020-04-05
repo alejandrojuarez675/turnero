@@ -25,53 +25,50 @@ export class ReservaComponent implements OnInit {
   turnoSelected: Turno;
   reservaSelected$: Observable<ReservaRespuesta>; 
 
-
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>
   ) {
     this.turnoSelected$ = store.select(
       CalendarSelectors.getTurnoSelected
     );
-    
-
-   }
+  }
 
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    const paciente = new Paciente();
+  reservar() {
+    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);    
+
+    var paciente = new Paciente();
     paciente.dni = this.dni.value;
-    paciente.nombreApellido = this.nombreApellido.value;
     paciente.sexo = this.sexo.value;
+    paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
     paciente.mail = this.mail.value;
-
-    const request= new ReservaTurnoRequest();
-    request.paciente = paciente;
-    // const turno: Turno = this.store.dispatch(CalendarSelectors.getTurnoSelected);
-
-    //this.turnoSelected$ = this.store.select(CalendarSelectors.getTurnoSelected);
-    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
     
-    this.store.select(ReservaSelector.reservarTurno).subscribe(
-      (turnoRequest: ReservaTurnoRequest) => {
+    //paciente.fechaNacimiento =
+    //paciente.codigoObraSocial = this.dni.value;
+    //paciente.codigoPlan = this.dni.value;
 
-        //TODO esto no está bien pero sin esto no anda
-        const filter = {...turnoRequest};
-        filter.paciente = request.paciente;
-        filter.codigoTurno = this.turnoSelected.codigo;
-        this.store.dispatch(ReservaAction.reservaTurno({ filter }));
+    this.store.dispatch(ReservaAction.setPaciente({paciente}));
+
+    this.onSubmit();  
+  }
+
+  onSubmit() {
+    this.store.select(ReservaSelector.reservarTurno).subscribe(
+      (filter: ReservaTurnoRequest) => {
+        this.store.dispatch(ReservaAction.reservaTurno({filter}));
       }, err => console.error(JSON.stringify(err))
     );
-
   }
 
   isValid() {
     let result = false;
     if (
-      this.dni.valid  && this.sexo.valid && this.nombreApellido.valid && this.telefono.valid && this.mail.valid
+      this.dni.valid  && this.sexo.valid && this.nombreApellido.valid && 
+      this.telefono.valid && this.mail.valid
       ) {
       result = true;
     }
