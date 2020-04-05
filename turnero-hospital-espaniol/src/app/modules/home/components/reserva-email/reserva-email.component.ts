@@ -36,7 +36,7 @@ export class ReservaEmailComponent implements OnInit {
     this.dialog.open(ReservaEmailDialogComponent, { data: { reserva: reservaConfirm }})
       .afterClosed().subscribe( result => {
         if (result) {
-          console.log("ingresa con " + result);
+          console.log("Aca hay que reiniciar el sistema");
         } else {
           console.log("ingresa con " + result);
         }

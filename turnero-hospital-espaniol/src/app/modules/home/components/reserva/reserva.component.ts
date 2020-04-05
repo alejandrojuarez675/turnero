@@ -16,11 +16,17 @@ import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 export class ReservaComponent implements OnInit {
 
   sexo$: string[] = ["Femenino", "Masculino"];
-  dni = new FormControl('', [Validators.required]);
+  dni = new FormControl('', [Validators.required, 
+    Validators.minLength(6),
+    Validators.maxLength(10),
+    Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
-  telefono = new FormControl('', [Validators.required]);
-  mail = new FormControl('', [Validators.required]);
+  telefono = new FormControl('', [Validators.required,
+    Validators.minLength(5),
+    Validators.pattern(/^\d+$/)]);
+  mail = new FormControl('', [Validators.required,
+    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
   reservaSelected$: Observable<ReservaRespuesta>; 
@@ -42,7 +48,7 @@ export class ReservaComponent implements OnInit {
 
     var paciente = new Paciente();
     paciente.dni = this.dni.value;
-    paciente.sexo = this.sexo.value;
+    paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
     paciente.mail = this.mail.value;

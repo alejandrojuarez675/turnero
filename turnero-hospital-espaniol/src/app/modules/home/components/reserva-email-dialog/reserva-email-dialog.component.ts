@@ -20,14 +20,6 @@ export class ReservaEmailDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("ENTRA AL MODAL " + this.data);
-    console.log("RESERVA OBJECT " + this.data.reserva);
-    console.log("PACIENTE " + this.data.reserva.paciente);
-    console.log("PACIENTE MAIL " + this.data.reserva.paciente.mail);
 
-    if (this.data.reserva.reserva === undefined){
-      console.log("RESERVA ES NULL");
-    }
-    //this.fecha = this.data.turno.fecha;
   }
 }
