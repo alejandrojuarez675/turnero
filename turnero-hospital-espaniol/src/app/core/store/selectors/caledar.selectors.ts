@@ -38,7 +38,7 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
     [getProfesionalSelected, selectFormulario],
     (profesionalSelected: Profesional, formulario: Formulario) => {
         const request = new BusquedaDiasDisponiblesRequest();
-        request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
+        request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
@@ -62,7 +62,7 @@ export const getBusquedaHorariosRequest = createSelector(
     [getProfesionalSelected, getFechaSelected, selectFormulario],
     (profesionalSelected: Profesional, fechaSelected: Date, formulario: Formulario) => {
         const request = new BusquedaHorariosRequest();
-        request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
+        request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;

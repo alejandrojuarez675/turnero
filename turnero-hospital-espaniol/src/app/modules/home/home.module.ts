@@ -11,6 +11,9 @@ import { SeleccionHorarioComponent } from './components/seleccion-horario/selecc
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule } from './material.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
+import { ReservaEmailComponent } from './components/reserva-email/reserva-email.component';
+import { ReservaEmailDialogComponent } from './components/reserva-email-dialog/reserva-email-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ConfirmationComponent,
     ConfirmationDialogComponent,
     SeleccionHorarioComponent,
+    ReservaComponent,
+    ReservaEmailComponent,
+    ReservaEmailDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +36,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   ],
   entryComponents: [
     ConfirmationDialogComponent,
+    ReservaEmailDialogComponent,
   ]
 })
 export class HomeModule { }

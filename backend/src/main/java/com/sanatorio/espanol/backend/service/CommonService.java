@@ -1,7 +1,5 @@
 package com.sanatorio.espanol.backend.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,6 +98,10 @@ public class CommonService {
 	public ReservaRespuesta reservaTurno(ReservaRequest reservaRequest) {
 		ReservaRespuesta rResp = new ReservaRespuesta();
 		rResp.respuesta = getRespuestaOK();
+		
+		System.out.println("reservaRequest turno " + reservaRequest.getCodigoTurno());
+		System.out.println("reservaRequest dni " + reservaRequest.getPaciente().getDni());
+		
     	rResp.reserva = new Reserva(1001, new GregorianCalendar(2020,5,1).getTime()); // TODO:
     	return rResp;
 	}

@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -66,7 +66,7 @@ const profesional1: Profesional = {
 };
 
 const turno1: TurnoLight = {
-    codigo: '148',
+    codigo: 148,
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/28'),
     hora: '10:00',
@@ -74,7 +74,7 @@ const turno1: TurnoLight = {
 };
 
 const turno2: TurnoLight = {
-    codigo: '348',
+    codigo: 348,
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/30'),
     hora: '20:15',
@@ -98,7 +98,7 @@ const diasDisponibles = () => {
     DateUtils.getDaysArray(new Date(), 15).forEach(
         (day: Date, index: number) => {
             response.push({
-                fecha: DateUtils.getFormatDate(day),
+                fecha: day,
                 conDisponibilidad: index % 2 === 0
             });
         }
@@ -119,3 +119,8 @@ export const horariosMock: Turno[] = [
         especialidad: especialidadesMocks[0]
     }
 ];
+
+export const reservaTurnoMock: Reserva = {
+    codigoReserva: "123",
+    vencimientoReserva: new Date('2020/03/30')
+};

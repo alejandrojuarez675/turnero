@@ -1,5 +1,7 @@
+import { Paciente } from "./datos.models";
+
 export class BusquedaProfesionalesRequest {
-    fechaNacimiento: string;
+    fechaNacimiento: Date;
     codigoObraSocial: number;
     codigoPlan: number;
     codigoEspecialidad: number;
@@ -14,5 +16,10 @@ export class BusquedaDiasDisponiblesRequest
 export class BusquedaHorariosRequest
     extends BusquedaDiasDisponiblesRequest {
     fecha: Date;
+}
+
+export class ReservaTurnoRequest {
+    codigoTurno: number;
+    paciente: Paciente;
 }
 

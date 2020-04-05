@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest } from '../../shared/models/request.models';
+
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta } from '../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
@@ -24,6 +25,7 @@ export class ServiceService {
   endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
   endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
   endpoint_busquedaHorarios = this.endpoint + '/busquedaHorarios';
+  endpoint_reservaTurno = this.endpoint + '/reservaTurno';
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
@@ -136,6 +138,22 @@ export class ServiceService {
           (res: HorariosRespuesta) => {
             throwErrorIfBadCode(res);
             return res.turno;
+          }
+        ));
+      }
+    }            
+
+  reservaTurno(filter: ReservaTurnoRequest): Observable<any> {
+    if (this.useMockups) {
+      console.log('Run mock for: reservaTurno() - filter', filter);
+      return getWsFromMock(Mock.reservaTurnoMock);
+    } else {
+      console.log('Run to server ' + this.endpoint_reservaTurno);
+      return this.http.post<ReservaRespuesta>(this.endpoint_reservaTurno, filter)
+        .pipe(map(
+          (res: ReservaRespuesta) => {
+            throwErrorIfBadCode(res);
+            return res.reserva;
           }
       ));
     }

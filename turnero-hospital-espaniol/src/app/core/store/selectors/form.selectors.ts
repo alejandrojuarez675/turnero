@@ -48,7 +48,7 @@ export const selectBusquedaProfesionales = createSelector(
     selectFormulario,
     (formulario: Formulario) => {
         const request = new BusquedaProfesionalesRequest();
-        request.fechaNacimiento = DateUtils.getFormatDate(formulario.fechaNacimiento);
+        request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;

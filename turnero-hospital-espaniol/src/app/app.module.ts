@@ -16,6 +16,8 @@ import { formReducer } from './core/store/reducers/form.reducers';
 import { SharedModule } from './shared/shared.module';
 import { errorReducer } from './core/store/reducers/error.reducers';
 import { ErrorEffects } from './core/store/effects/error.effects';
+import { ReservaEffects } from './core/store/effects/reserva.effects';
+import { reservaReducer } from './core/store/reducers/reserva.reducers';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ErrorEffects } from './core/store/effects/error.effects';
       // router: routerReducer,
       formulario: formReducer,
       calendario: calendarReducer,
+      reserva: reservaReducer,
       error: errorReducer,
     }),
     StoreRouterConnectingModule.forRoot(),
@@ -40,6 +43,7 @@ import { ErrorEffects } from './core/store/effects/error.effects';
       FormEffects,
       CalendarEffects,
       ErrorEffects,
+      ReservaEffects,
     ]),
     BrowserAnimationsModule,
   ],

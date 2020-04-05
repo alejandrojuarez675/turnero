@@ -14,7 +14,7 @@ export interface DialogData {
 })
 export class ConfirmationDialogComponent implements OnInit {
 
-  fecha = '';
+  fecha = null;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
@@ -22,7 +22,7 @@ export class ConfirmationDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fecha = DateUtils.getFormatDate(this.data.turno.fecha);
+    this.fecha = this.data.turno.fecha;
   }
 
   onNoClick(): void {
