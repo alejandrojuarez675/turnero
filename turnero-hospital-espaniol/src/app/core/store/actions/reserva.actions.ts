@@ -1,10 +1,11 @@
 import { props, createAction } from "@ngrx/store";
 import { ReservaTurnoRequest } from "../../../shared/models/request.models";
-import { Turno, Reserva } from "../../../shared/models/datos.models";
+import { Turno, Reserva, ReservaFormulario } from "../../../shared/models/datos.models";
 
-export const RESERVA_TURNO = '[Form] - ReservaTurno ';
+export const RESERVA_TURNO = '[Reserva] - ReservaTurno';
 export const SET_TURNO_SELECTED = '[Calendar] - setTurnoSelected';
-export const SET_RESERVA = '[Form] - setReservaSelected ';
+export const SET_RESERVA = '[Reserva] - setReservaSelected ';
+export const GET_RESERVA = '[Reserva] - getReservaSelected ';
 
 export const reservaTurno = createAction(
     RESERVA_TURNO,
@@ -19,4 +20,9 @@ export const setTurnoSelected = createAction(
 export const setReservaSelected = createAction(
     SET_RESERVA,
     props<{ reservaSelected: Reserva }>()
+);
+
+export const getReservaSelected = createAction(
+    GET_RESERVA,
+    props<{filter: Reserva}>()
 );

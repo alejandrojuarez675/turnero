@@ -104,9 +104,7 @@ const diasDisponibles = () => {
 
 export const diasDisponiblesMock = diasDisponibles();
 
-export const reservaTurnoMock = () => {
-    const reserva = new Reserva();
-    reserva.codigoReserva = "123";
-    reserva.vencimientoReserva = new Date('2020/03/30');
-    return reserva;
-}
+export const reservaTurnoMock: Reserva = {
+    codigoReserva: "123",
+    vencimientoReserva: new Date('2020/03/30')
+};

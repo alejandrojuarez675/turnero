@@ -117,6 +117,7 @@ export class Calendario {
 export class ReservaFormulario {
     turnoSelected: Turno
     paciente: Paciente;
+    reserva: Reserva;
     dni: number;
     sexo: string;
     nombreApellido: string;

@@ -56,12 +56,13 @@ export class ReservaComponent implements OnInit {
     this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
     
     this.store.select(ReservaSelector.reservarTurno).subscribe(
-      (filter: ReservaTurnoRequest) => {
-        //TODO esto no está bien pero sin esto no anda
-        filter.paciente = request.paciente;
+      (turnoRequest: ReservaTurnoRequest) => {
 
+        //TODO esto no está bien pero sin esto no anda
+        const filter = {...turnoRequest};
+        filter.paciente = request.paciente;
         filter.codigoTurno = this.turnoSelected.codigo;
-        this.store.dispatch(ReservaAction.reservaTurno({filter}));
+        this.store.dispatch(ReservaAction.reservaTurno({ filter }));
       }, err => console.error(JSON.stringify(err))
     );
 
