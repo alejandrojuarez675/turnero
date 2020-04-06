@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
-import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Paciente, ReservaFormulario, Turno, ReservaRespuesta } from '../../../../shared/models/datos.models';
+import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
+import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 
 @Component({
@@ -29,6 +29,14 @@ export class ReservaComponent implements OnInit {
     Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
+  obraSocialSelected$: Observable<ObraSocial>;
+  obraSocialSelected: ObraSocial;
+  planSelected$: Observable<Plan>;
+  planSelected: Plan;
+  fechaNacimientoSelected$: Observable<Date>;
+  fechaNacimientoSelected: Date;
+
+
   reservaSelected$: Observable<ReservaRespuesta>; 
 
   constructor(
@@ -37,7 +45,13 @@ export class ReservaComponent implements OnInit {
     this.turnoSelected$ = store.select(
       ReservaSelector.getTurnoSelected
     );
-  }
+    this.obraSocialSelected$ = store.select(
+      FormularioSelectors.selectObraSocialSelected);
+    this.planSelected$ = store.select(
+      FormularioSelectors.selectPlanSelected);
+    this.fechaNacimientoSelected$ = store.select(
+      FormularioSelectors.selectFechaNacimiento);
+    }
 
 
   ngOnInit() {
@@ -45,6 +59,9 @@ export class ReservaComponent implements OnInit {
 
   reservar() {
     this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);    
+    this.obraSocialSelected$.subscribe(obraSocial => this.obraSocialSelected = obraSocial);
+    this.planSelected$.subscribe(plan => this.planSelected = plan);
+    this.fechaNacimientoSelected$.subscribe(fechaNacimiento => this.fechaNacimientoSelected = fechaNacimiento);
 
     var paciente = new Paciente();
     paciente.dni = this.dni.value;
@@ -53,9 +70,9 @@ export class ReservaComponent implements OnInit {
     paciente.telefono = this.telefono.value;
     paciente.mail = this.mail.value;
     
-    //paciente.fechaNacimiento =
-    //paciente.codigoObraSocial = this.dni.value;
-    //paciente.codigoPlan = this.dni.value;
+    paciente.codigoObraSocial = this.obraSocialSelected.codigo;
+    paciente.codigoPlan = this.planSelected.codigo;
+    paciente.fechaNacimiento = this.fechaNacimientoSelected;
 
     this.store.dispatch(ReservaAction.setPaciente({paciente}));
 
