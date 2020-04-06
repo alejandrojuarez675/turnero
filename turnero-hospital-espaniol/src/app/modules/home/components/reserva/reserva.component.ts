@@ -35,7 +35,7 @@ export class ReservaComponent implements OnInit {
     private store: Store<{ reservaTurno: ReservaFormulario }>
   ) {
     this.turnoSelected$ = store.select(
-      CalendarSelectors.getTurnoSelected
+      ReservaSelector.getTurnoSelected
     );
   }
 

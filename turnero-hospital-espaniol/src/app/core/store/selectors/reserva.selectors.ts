@@ -34,3 +34,8 @@ export const getReserva =  createSelector(
     }
 );
 
+export const getTurnoSelected = createSelector(
+    selectFormulario,
+    (reserva: ReservaFormulario) => reserva.turnoSelected
+);
+
