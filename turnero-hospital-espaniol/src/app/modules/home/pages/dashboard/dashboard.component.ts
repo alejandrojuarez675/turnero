@@ -77,7 +77,8 @@ export class DashboardComponent implements OnInit {
       case 'busquedaProfesionales':
         const filter2 = this.getFilterToBusquedaProfesionalesFromParams(params);
         const filterOld = this.getFilterToBusquedaProfesionalesFromParams(this.oldParams);
-        if (JSON.stringify(filter2) !== JSON.stringify(filterOld)) {
+        if (JSON.stringify(filter2) !== JSON.stringify(filterOld) ||
+          (params.lastClick !== this.oldParams.lastClick && lastClick === 'busquedaProfesionales')) {
           this.store.dispatch(FormActions.getBusquedaProfesionales({ filter: filter2 }));
         }
     }
