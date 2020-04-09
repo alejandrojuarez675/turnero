@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { Calendario, DisponibilidadDias, TurnoLight, Turno, Profesional } from '../../../shared/models/datos.models';
+import { Calendario, DisponibilidadDias, Profesional, Turno } from '../../../shared/models/datos.models';
 import * as CalendarActions from '../actions/calendar.actions';
-import { DateUtils } from '../../utils/date.utils';
 
 const initialState: Calendario = {
     profesionalesDisponibles: [],
@@ -57,6 +56,8 @@ const _setHorariosDisponibles = (state: Calendario, horarios: Turno[] ) => {
 
 const _calendarReducer = createReducer(
     initialState,
+
+    on(CalendarActions.cleanStore, () => initialState),
 
     on(CalendarActions.setProfesionalesDisponibles, (state, { profesionalesDisponibles }) =>
         _setProfesionalesDisponibles(state, profesionalesDisponibles)),

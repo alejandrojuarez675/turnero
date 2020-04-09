@@ -1,13 +1,15 @@
-import { props, createAction } from "@ngrx/store";
-import { ReservaTurnoRequest } from "../../../shared/models/request.models";
-import { Turno, Reserva, ReservaFormulario, Paciente } from "../../../shared/models/datos.models";
+import { createAction, props } from '@ngrx/store';
+import { Paciente, Reserva, Turno } from '../../../shared/models/datos.models';
+import { ReservaTurnoRequest } from '../../../shared/models/request.models';
 
+export const CLEAN_STORE = '[Reserva] - cleanStore';
 export const RESERVA_TURNO = '[Reserva] - ReservaTurno';
 export const SET_TURNO_SELECTED = '[Reserva] - setTurnoSelected';
 export const SET_RESERVA = '[API] - setReservaSelected ';
 export const GET_RESERVA = '[Reserva] - getReservaSelected ';
 export const SET_PACIENTE = '[Reserva] - setPaciente ';
 
+export const cleanStore = createAction(CLEAN_STORE);
 
 export const reservaTurno = createAction(
     RESERVA_TURNO,
