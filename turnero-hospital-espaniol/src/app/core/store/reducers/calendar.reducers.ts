@@ -22,10 +22,12 @@ const _setProfesionalesDisponibles = (state: Calendario, profesionalesDisponible
 const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadDias[]) => {
     if (!diasDisponibles) { return state; }
     const stateNew = {...state};
-    stateNew.diasDisponibles = [...diasDisponibles.map(x => { return {
-        fecha: x.fecha,
-        conDisponibilidad: x.conDisponibilidad
-    }; })];
+    stateNew.diasDisponibles = [...diasDisponibles.map(x => {
+        return {
+            fecha: new Date(x.fecha.toString()),
+            conDisponibilidad: x.conDisponibilidad
+        };
+    })];
     return stateNew;
 };
 

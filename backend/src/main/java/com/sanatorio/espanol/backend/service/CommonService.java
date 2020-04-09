@@ -91,7 +91,7 @@ public class CommonService {
 	public HorarioRespuesta busquedaHorarios(HorarioRequest horaRequest) {
 		HorarioRespuesta hResp = new HorarioRespuesta();
 		hResp.respuesta = getRespuestaOK();
-    	hResp.turno = turnoService.getListaTurno(); // TODO;
+    	hResp.turno = turnoService.getListaTurno(horaRequest);
     	return hResp;
 	}
 

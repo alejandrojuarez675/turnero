@@ -1,5 +1,7 @@
 package com.sanatorio.espanol.backend.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -9,15 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.sanatorio.espanol.backend.dto.CentroAtencion;
 import com.sanatorio.espanol.backend.dto.Especialidad;
+import com.sanatorio.espanol.backend.dto.HorarioRequest;
 import com.sanatorio.espanol.backend.dto.Profesional;
 import com.sanatorio.espanol.backend.dto.Turno;
 
 @Service
 public class TurnoService {
-	
-	public List<Turno> getListaTurno() {
-		return listaTurno;
-	}
 	
 	public Turno getTurnoConfirmado() {
 		return new Turno(
@@ -43,4 +42,15 @@ public class TurnoService {
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "18:10", "")
 		));
+
+	public List<Turno> getListaTurno(HorarioRequest horaRequest) {
+		return listaTurno.stream()
+				.map(x-> x = modificarFechaTurno(x, horaRequest))
+				.collect(toList());
+	}
+
+	private Turno modificarFechaTurno(Turno x, HorarioRequest horaRequest) {
+		x.setFecha(horaRequest.fecha);
+		return x;
+	}
 }

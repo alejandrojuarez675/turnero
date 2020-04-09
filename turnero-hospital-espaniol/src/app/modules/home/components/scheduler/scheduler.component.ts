@@ -58,7 +58,10 @@ export class SchedulerComponent {
   }
 
   isPartOfEvents(events: CalendarEvent[], date: Date) {
-    return events.map(x => x.start.getTime()).indexOf(date.getTime()) !== -1;
+    return events.map(x => {
+      x.start.setHours(0, 0, 0, 0);
+      return x.start.getTime();
+    }).indexOf(date.getTime()) !== -1;
   }
 
   closeOpenMonthViewDay() {

@@ -1,22 +1,22 @@
 package com.sanatorio.espanol.backend.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Dia {
 
-	Date fecha;
+	LocalDateTime fecha;
 	Boolean conDisponibilidad;
 	
-	public Dia(Date fecha, Boolean conDisponibilidad) {
+	public Dia(LocalDateTime fecha, Boolean conDisponibilidad) {
 		super();
 		this.fecha = fecha;
 		this.conDisponibilidad = conDisponibilidad;
 	}
 	
-	public Date getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 	public Boolean getConDisponibilidad() {
