@@ -97,6 +97,7 @@ const diasDisponibles = () => {
     const response: DisponibilidadDias[] = [];
     DateUtils.getDaysArray(new Date(), 15).forEach(
         (day: Date, index: number) => {
+            day.setHours(0, 0, 0, 0);
             response.push({
                 fecha: day,
                 conDisponibilidad: index % 2 === 0
@@ -121,6 +122,6 @@ export const horariosMock: Turno[] = [
 ];
 
 export const reservaTurnoMock: Reserva = {
-    codigoReserva: "123",
+    codigoReserva: '123',
     vencimientoReserva: new Date('2020/03/30')
 };

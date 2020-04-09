@@ -23,9 +23,11 @@
         <mat-form-field style="width: 45%;">
             <mat-label>Plan</mat-label>
             <mat-select (selectionChange)="cambioPlan($event)" [formControl]="plan">
-                <mat-option *ngFor="let p of planes$ | async" [value]="p">
-                    {{p.nombre}}
-                </mat-option>
+                <ng-container *ngIf="obrasSocial.value">
+                    <mat-option *ngFor="let p of obrasSocial.value.plan" [value]="p">
+                        {{p.nombre}}
+                    </mat-option>
+                </ng-container>
             </mat-select>
             <mat-error *ngIf="plan.invalid">Ingrese su Plan</mat-error>
         </mat-form-field>

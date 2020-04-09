@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario, Disponibilidad, Profesional, Turno } from '../../../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grilla-turnos',
@@ -21,7 +21,9 @@ export class GrillaTurnosComponent implements OnInit {
   ];
 
   constructor(
-    private store: Store<{ calendario: Calendario }>,
+    store: Store<{ calendario: Calendario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     this.profesionalesDisponibles$ = store.select(
@@ -37,16 +39,16 @@ export class GrillaTurnosComponent implements OnInit {
   }
 
   onClickProf(profesional: Profesional) {
-    this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
-    this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
-      (request: BusquedaDiasDisponiblesRequest) => {
-        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
-      }
-    );
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: {
+        codigoProfesional: profesional.codigo, lastClick: 'busquedaDiasDisponibles' },
+      queryParamsHandling: 'merge',
+    });
   }
 
   onClickTurno(row: Disponibilidad, horario: string) {
     const turnoLigthSelected = horario === 'T' ? row.turnoTarde : row.turnoManiana;
+
     const turnoSelected: Turno = {
       profesional: row.profesional,
       especialidad: row.especialidad,
@@ -56,6 +58,11 @@ export class GrillaTurnosComponent implements OnInit {
       hora: turnoLigthSelected.hora,
       observaciones: turnoLigthSelected.observaciones
     };
-    this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
+
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: {
+        turnoSelected: JSON.stringify(turnoSelected), lastClick: 'turnoSelected' },
+      queryParamsHandling: 'merge',
+    });
   }
 }

@@ -8,6 +8,7 @@ import * as CalendarSelectors from '../../../../core/store/selectors/caledar.sel
 import { Calendario, Profesional } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -32,6 +33,8 @@ export class SchedulerComponent {
 
   constructor(
     private store: Store<{ calendario: Calendario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
@@ -47,11 +50,11 @@ export class SchedulerComponent {
 
   dayClicked({ date }: { date: Date }): void {
     if (this.isPartOfEvents(this.events, date)) {
-      this.store.dispatch(CalendarActions.setFechaSelected({ fecha: date }));
-      this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
-        (filtro: BusquedaHorariosRequest) =>
-          this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
-      ).unsubscribe();
+      this.router.navigate([], {
+        relativeTo: this.route, queryParams: {
+          fechaSelected: date, lastClick: 'busquedaHorarios' },
+        queryParamsHandling: 'merge',
+      });
     } else {
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     }

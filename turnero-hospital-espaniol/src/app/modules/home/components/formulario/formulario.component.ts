@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
-import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
+import { CentroAtencion, Especialidad, Formulario, ObraSocial } from '../../../../shared/models/datos.models';
 
 @Component({
   selector: 'app-formulario',
@@ -16,7 +17,6 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 export class FormularioComponent implements OnInit {
 
   obrasSociales$: Observable<ObraSocial[]>;
-  planes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
 
@@ -27,10 +27,11 @@ export class FormularioComponent implements OnInit {
   centroAtencion = new FormControl('', [Validators.required]);
 
   constructor(
-    private store: Store<{ formulario: Formulario }>
+    private store: Store<{ formulario: Formulario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.obrasSociales$ = store.select(FormSelectors.selectAllObrasSociales);
-    this.planes$ = store.select(FormSelectors.selectPlanes);
     this.especialidades$ = store.select(FormSelectors.selectAllEspecialidades);
     this.centrosDeAtencion$ = store.select(FormSelectors.selectAllCentrosDeAtencion);
   }
@@ -39,26 +40,89 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.getObraSociales());
     this.store.dispatch(FormActions.getEspecialidades());
     this.store.dispatch(FormActions.getCentrosDeAtencion());
+
+    this.route.queryParams.subscribe(
+      (params) => this.setValuesFromParams(params)
+    ).unsubscribe();
+  }
+
+  setValuesFromParams(params: Params): void {
+    if (params.fechaNacimiento) {
+      this.fechaNacimiento.setValue(new Date(params.fechaNacimiento));
+    }
+
+    if (params.codigoObraSocial) {
+      this.obrasSociales$.pipe(
+        map(x => x.filter(y => y.codigo.toString() === params.codigoObraSocial))
+      ).subscribe(
+        (os) => {
+          if (os.length > 0) {
+            const obrasSocialSelected = os[0];
+            this.obrasSocial.setValue(obrasSocialSelected);
+
+            if (params.codigoPlan) {
+              const planSelected = obrasSocialSelected.plan
+                .filter(x => x.codigo.toString() === params.codigoPlan);
+
+              if (planSelected.length > 0) {
+                this.plan.setValue(planSelected[0]);
+              }
+            }
+          }
+        }
+      );
+    }
+
+    if (params.codigoEspecialidad) {
+      this.especialidades$.pipe(
+        map(x => x.filter(y => y.codigo.toString() === params.codigoEspecialidad))
+      ).subscribe(
+        (x) => { if (x.length > 0) { this.especialidad.setValue(x[0]); } }
+      );
+    }
+
+    if (params.codigoCentroAtencion) {
+      this.centrosDeAtencion$.pipe(
+        map(x => x.filter(y => y.codigo.toString() === params.codigoCentroAtencion))
+      ).subscribe(
+        (x) => { if (x.length > 0) { this.centroAtencion.setValue(x[0]); } }
+      );
+    }
   }
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
-    this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: { fechaNacimiento: event.value },
+      queryParamsHandling: 'merge',
+    });
   }
 
   cambioObraSocial(event) {
-    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: { codigoObraSocial: event.value.codigo },
+      queryParamsHandling: 'merge',
+    });
   }
 
   cambioPlan(event) {
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: { codigoPlan: event.value.codigo },
+      queryParamsHandling: 'merge',
+    });
   }
 
   cambioEspecialidad(event) {
-    this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: event.value }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: { codigoEspecialidad: event.value.codigo },
+      queryParamsHandling: 'merge',
+    });
   }
 
   cambioCentroDeAtencion(event) {
-    this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: { codigoCentroAtencion: event.value.codigo },
+      queryParamsHandling: 'merge',
+    });
   }
 
   isValid() {
@@ -66,16 +130,19 @@ export class FormularioComponent implements OnInit {
     if (
       this.fechaNacimiento.valid && this.obrasSocial.valid && this.plan.valid
       && this.especialidad.valid && this.centroAtencion.valid
-      ) {
+    ) {
       result = true;
     }
     return result;
   }
 
   onSubmit() {
-    this.store.select(FormSelectors.selectBusquedaProfesionales).subscribe(
-      (filter: BusquedaProfesionalesRequest) =>
-        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
-    );
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        lastClick: 'busquedaProfesionales'
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }

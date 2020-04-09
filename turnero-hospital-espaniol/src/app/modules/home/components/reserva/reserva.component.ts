@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
-import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
-import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import { Paciente, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 
 @Component({
@@ -15,8 +15,8 @@ import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 })
 export class ReservaComponent implements OnInit {
 
-  sexo$: string[] = ["Femenino", "Masculino"];
-  dni = new FormControl('', [Validators.required, 
+  sexo$: string[] = ['Femenino', 'Masculino'];
+  dni = new FormControl('', [Validators.required,
     Validators.minLength(6),
     Validators.maxLength(10),
     Validators.pattern(/^\d+$/)]);
@@ -26,31 +26,21 @@ export class ReservaComponent implements OnInit {
     Validators.minLength(5),
     Validators.pattern(/^\d+$/)]);
   mail = new FormControl('', [Validators.required,
-    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
+    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
-  obraSocialSelected$: Observable<ObraSocial>;
-  obraSocialSelected: ObraSocial;
-  planSelected$: Observable<Plan>;
-  planSelected: Plan;
-  fechaNacimientoSelected$: Observable<Date>;
-  fechaNacimientoSelected: Date;
 
 
-  reservaSelected$: Observable<ReservaRespuesta>; 
+  reservaSelected$: Observable<ReservaRespuesta>;
 
   constructor(
-    private store: Store<{ reservaTurno: ReservaFormulario }>
+    private store: Store<{ reservaTurno: ReservaFormulario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.turnoSelected$ = store.select(
       ReservaSelector.getTurnoSelected
     );
-    this.obraSocialSelected$ = store.select(
-      FormularioSelectors.selectObraSocialSelected);
-    this.planSelected$ = store.select(
-      FormularioSelectors.selectPlanSelected);
-    this.fechaNacimientoSelected$ = store.select(
-      FormularioSelectors.selectFechaNacimiento);
     }
 
 
@@ -58,25 +48,25 @@ export class ReservaComponent implements OnInit {
   }
 
   reservar() {
-    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);    
-    this.obraSocialSelected$.subscribe(obraSocial => this.obraSocialSelected = obraSocial);
-    this.planSelected$.subscribe(plan => this.planSelected = plan);
-    this.fechaNacimientoSelected$.subscribe(fechaNacimiento => this.fechaNacimientoSelected = fechaNacimiento);
+    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
 
-    var paciente = new Paciente();
+    const paciente = new Paciente();
     paciente.dni = this.dni.value;
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
     paciente.mail = this.mail.value;
-    
-    paciente.codigoObraSocial = this.obraSocialSelected.codigo;
-    paciente.codigoPlan = this.planSelected.codigo;
-    paciente.fechaNacimiento = this.fechaNacimientoSelected;
 
-    this.store.dispatch(ReservaAction.setPaciente({paciente}));
+    this.route.queryParams.subscribe(
+      (params) => {
+        paciente.codigoObraSocial = params.codigoObraSocial;
+        paciente.codigoPlan = params.codigoPlan;
+        paciente.fechaNacimiento = params.fechaNacimiento;
+        this.store.dispatch(ReservaAction.setPaciente({ paciente }));
+      }
+    )
 
-    this.onSubmit();  
+    this.onSubmit();
   }
 
   onSubmit() {
@@ -90,7 +80,7 @@ export class ReservaComponent implements OnInit {
   isValid() {
     let result = false;
     if (
-      this.dni.valid  && this.sexo.valid && this.nombreApellido.valid && 
+      this.dni.valid  && this.sexo.valid && this.nombreApellido.valid &&
       this.telefono.valid && this.mail.valid
       ) {
       result = true;

@@ -7,6 +7,7 @@ import * as ReservaActions from '../../../../core/store/actions/reserva.actions'
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario, Turno } from '../../../../shared/models/datos.models';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirmation',
@@ -18,6 +19,8 @@ export class ConfirmationComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private store: Store<{ calendario: Calendario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -32,11 +35,17 @@ export class ConfirmationComponent implements OnInit {
     this.dialog.open(ConfirmationDialogComponent, { data: { turno }})
       .afterClosed().subscribe( result => {
         if (result) {
-          const turnoSelected = turno
-          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected}));
+          this.router.navigate([], {
+            relativeTo: this.route, queryParams: {
+              lastClick: 'reserva' },
+            queryParamsHandling: 'merge',
+          });
         } else {
-          this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
-          this.store.dispatch(ReservaActions.setTurnoSelected(undefined));
+          this.router.navigate([], {
+            relativeTo: this.route, queryParams: {
+              turnoSelected: undefined, lastClick: 'busquedaDiasDisponibles' },
+            queryParamsHandling: 'merge',
+          });
         }
       });
   }

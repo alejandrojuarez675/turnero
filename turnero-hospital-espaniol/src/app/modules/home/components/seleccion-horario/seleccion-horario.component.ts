@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import { Calendario, Turno } from '../../../../shared/models/datos.models';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-seleccion-horario',
@@ -18,7 +19,9 @@ export class SeleccionHorarioComponent implements OnInit {
   displayedColumns = ['fecha', 'hora'];
 
   constructor(
-    private store: Store<{ calendario: Calendario }>,
+    store: Store<{ calendario: Calendario }>,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.horarios$ = store.select(CalendarSelectors.getHorariosDisponibles);
     this.horariosLength$ = store.select(CalendarSelectors.getHorariosDisponiblesLength);
@@ -28,7 +31,11 @@ export class SeleccionHorarioComponent implements OnInit {
   }
 
   onClickTurno(turnoSelected: Turno) {
-    this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
+    this.router.navigate([], {
+      relativeTo: this.route, queryParams: {
+        turnoSelected: JSON.stringify(turnoSelected), lastClick: 'turnoSelected' },
+      queryParamsHandling: 'merge',
+    });
   }
 
 }
