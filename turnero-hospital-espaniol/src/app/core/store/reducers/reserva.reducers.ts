@@ -16,14 +16,12 @@ const initialState: ReservaFormulario = {
 
 const _setTurnoSelected = (state: ReservaFormulario, turnoSelected: Turno) => {
     const stateNew = {...state};
-    console.log("Entra al setTurnoSelected " + turnoSelected);
     stateNew.turnoSelected = turnoSelected;
     return stateNew;
 };
 
 const _setReserva = (state: ReservaFormulario, reservaSelected: Reserva) => {
     const stateNew = {...state};
-    console.log("Entra y llega al set Reserva con " + reservaSelected);
     stateNew.reserva = reservaSelected;
     return stateNew;
 };
@@ -36,6 +34,8 @@ const _setPaciente = (state: ReservaFormulario, paciente: Paciente) => {
 
 const _reservaReducer = createReducer(
     initialState,
+
+    on(ReservaActions.cleanStore, () => initialState),
 
     on(ReservaActions.setTurnoSelected, (state, { turnoSelected }) =>
         _setTurnoSelected(state, turnoSelected)),

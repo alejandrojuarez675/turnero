@@ -7,6 +7,7 @@ import * as ReservaSelector from '../../../../core/store/selectors/reserva.selec
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reserva',
@@ -15,18 +16,18 @@ import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 })
 export class ReservaComponent implements OnInit {
 
-  sexo$: string[] = ["Femenino", "Masculino"];
-  dni = new FormControl('', [Validators.required, 
-    Validators.minLength(6),
-    Validators.maxLength(10),
-    Validators.pattern(/^\d+$/)]);
+  sexo$: string[] = ['Femenino', 'Masculino'];
+  dni = new FormControl('', [Validators.required,
+  Validators.minLength(6),
+  Validators.maxLength(10),
+  Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
   telefono = new FormControl('', [Validators.required,
-    Validators.minLength(5),
-    Validators.pattern(/^\d+$/)]);
+  Validators.minLength(5),
+  Validators.pattern(/^\d+$/)]);
   mail = new FormControl('', [Validators.required,
-    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
+  Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
   obraSocialSelected$: Observable<ObraSocial>;
@@ -37,7 +38,7 @@ export class ReservaComponent implements OnInit {
   fechaNacimientoSelected: Date;
 
 
-  reservaSelected$: Observable<ReservaRespuesta>; 
+  reservaSelected$: Observable<ReservaRespuesta>;
 
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>
@@ -51,48 +52,51 @@ export class ReservaComponent implements OnInit {
       FormularioSelectors.selectPlanSelected);
     this.fechaNacimientoSelected$ = store.select(
       FormularioSelectors.selectFechaNacimiento);
-    }
+  }
 
 
   ngOnInit() {
   }
 
   reservar() {
-    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);    
+    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
     this.obraSocialSelected$.subscribe(obraSocial => this.obraSocialSelected = obraSocial);
     this.planSelected$.subscribe(plan => this.planSelected = plan);
     this.fechaNacimientoSelected$.subscribe(fechaNacimiento => this.fechaNacimientoSelected = fechaNacimiento);
 
-    var paciente = new Paciente();
+    const paciente = new Paciente();
     paciente.dni = this.dni.value;
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
     paciente.mail = this.mail.value;
-    
+
     paciente.codigoObraSocial = this.obraSocialSelected.codigo;
     paciente.codigoPlan = this.planSelected.codigo;
     paciente.fechaNacimiento = this.fechaNacimientoSelected;
 
-    this.store.dispatch(ReservaAction.setPaciente({paciente}));
+    this.store.dispatch(ReservaAction.setPaciente({ paciente }));
 
-    this.onSubmit();  
+    this.onSubmit();
   }
 
   onSubmit() {
     this.store.select(ReservaSelector.reservarTurno).subscribe(
+      // tslint:disable-next-line: no-shadowed-variable
       (filter: ReservaTurnoRequest) => {
-        this.store.dispatch(ReservaAction.reservaTurno({filter}));
-      }, err => console.error(JSON.stringify(err))
+        if (filter) {
+          this.store.dispatch(ReservaAction.reservaTurno({ filter }));
+        }
+      }
     );
   }
 
   isValid() {
     let result = false;
     if (
-      this.dni.valid  && this.sexo.valid && this.nombreApellido.valid && 
+      this.dni.valid && this.sexo.valid && this.nombreApellido.valid &&
       this.telefono.valid && this.mail.valid
-      ) {
+    ) {
       result = true;
     }
     return result;

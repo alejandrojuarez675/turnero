@@ -32,8 +32,7 @@ export class ConfirmationComponent implements OnInit {
     this.dialog.open(ConfirmationDialogComponent, { data: { turno }})
       .afterClosed().subscribe( result => {
         if (result) {
-          const turnoSelected = turno
-          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected}));
+          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno }));
         } else {
           this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
           this.store.dispatch(ReservaActions.setTurnoSelected(undefined));
