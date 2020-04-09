@@ -14,10 +14,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { ReservaEmailComponent } from './components/reserva-email/reserva-email.component';
 import { ReservaEmailDialogComponent } from './components/reserva-email-dialog/reserva-email-dialog.component';
+import { ReservaPageComponent } from './pages/reserva-page/reserva-page.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    ReservaPageComponent,
     FormularioComponent,
     GrillaTurnosComponent,
     SchedulerComponent,

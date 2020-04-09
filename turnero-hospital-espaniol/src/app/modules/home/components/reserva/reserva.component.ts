@@ -7,6 +7,7 @@ import * as ReservaSelector from '../../../../core/store/selectors/reserva.selec
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reserva',
@@ -40,7 +41,8 @@ export class ReservaComponent implements OnInit {
   reservaSelected$: Observable<ReservaRespuesta>; 
 
   constructor(
-    private store: Store<{ reservaTurno: ReservaFormulario }>
+    private store: Store<{ reservaTurno: ReservaFormulario }>,
+    private router: Router
   ) {
     this.turnoSelected$ = store.select(
       ReservaSelector.getTurnoSelected
@@ -55,6 +57,9 @@ export class ReservaComponent implements OnInit {
 
 
   ngOnInit() {
+    this.turnoSelected$.subscribe(
+      (turno) => { if (!turno) { this.router.navigate(['/home']); }}
+    );
   }
 
   reservar() {
