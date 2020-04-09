@@ -76,6 +76,6 @@ export class FormularioComponent implements OnInit {
     this.store.select(FormSelectors.selectBusquedaProfesionales).subscribe(
       (filter: BusquedaProfesionalesRequest) =>
         this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
-    );
+    ).unsubscribe();
   }
 }
