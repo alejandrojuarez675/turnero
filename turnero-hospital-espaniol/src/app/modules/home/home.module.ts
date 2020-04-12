@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -14,6 +14,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { ReservaEmailComponent } from './components/reserva-email/reserva-email.component';
 import { ReservaEmailDialogComponent } from './components/reserva-email-dialog/reserva-email-dialog.component';
+import localeAR from '@angular/common/locales/es-AR'; // to register french
+
+registerLocaleData(localeAR);
 
 @NgModule({
   declarations: [
