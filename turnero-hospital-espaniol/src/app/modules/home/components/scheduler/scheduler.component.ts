@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { CalendarEvent, CalendarView, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
@@ -13,8 +13,10 @@ import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-ut
 @Component({
   selector: 'app-scheduler',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './scheduler.component.html',
-  styleUrls: ['./scheduler.component.css']
+  styleUrls: ['./scheduler.component.css'],
+
 })
 export class SchedulerComponent {
 
@@ -23,17 +25,35 @@ export class SchedulerComponent {
   profesionalSelected$: Observable<Profesional>;
 
   events: CalendarEvent<any>[];
+  locale: string = 'es';
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   activeDayIsOpen: boolean;
   view: CalendarView = CalendarView.Month;
   refresh: Subject<any> = new Subject();
 
+  beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
+    this.store.select(CalendarSelectors.getDiasDisponibles).forEach(
+      (dia) => {console.log("TODO: manejar esto" + dia);
+      }
+    );
+
+    // example
+    renderEvent.body.forEach((day) => {
+      const dayOfMonth = day.date.getDate();
+      console.log(dayOfMonth);
+      if (dayOfMonth > 2 && dayOfMonth < 10 && day.inMonth) {
+        day.cssClass = 'lightskyblue';
+      }
+    });
+
+  }
 
   constructor(
     private store: Store<{ calendario: Calendario }>,
   ) {
 
+    // marca al el cuadro azul
     this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );

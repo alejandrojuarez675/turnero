@@ -5,14 +5,26 @@ const colors: any = {
         primary: '#1061a7',
         secondary: '#1061a7'
     },
+    yellow: {
+        primary: '#cbe620',
+        secondary: '#e32296'
+    },
 };
 
 export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDiasStore) => {
-    return {
-        start: dia.fecha,
-        title: '',
-        color: colors.blue,
-    };
+    if (dia.conDisponibilidad) {
+        return {
+            start: dia.fecha,
+            title: '',
+            color: colors.blue,
+        };
+    } else {
+        return {
+            start: dia.fecha,
+            title: '',
+            color: colors.yellow,
+        };
+    }
 };
 
 export const toMonthString = (month: number) => {

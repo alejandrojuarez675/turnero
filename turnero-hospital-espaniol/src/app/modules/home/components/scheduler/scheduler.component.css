@@ -1,3 +1,7 @@
+.lightskyblue {
+    background-color: lightskyblue !important;
+}
+
 .cambio-mes{
     padding-left: 2%;
     padding-right: 2%;
@@ -8,3 +12,4 @@
 .cambio-mes:hover {
     cursor: pointer;
 }
+

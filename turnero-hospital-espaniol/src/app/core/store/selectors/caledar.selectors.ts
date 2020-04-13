@@ -25,13 +25,13 @@ export const getProfesionalSelected = createSelector(
 export const getDiasDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: Profesional, calendario: Calendario) =>
-        calendario.diasDisponibles.filter(x => x.conDisponibilidad)
+        calendario.diasDisponibles
 );
 
 export const getDiasDisponiblesLength = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: Profesional, calendario: Calendario) =>
-        calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
+        calendario.diasDisponibles.length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(

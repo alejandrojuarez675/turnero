@@ -1,6 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
