@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest } from '../../shared/models/request.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta } from '../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
@@ -26,6 +26,7 @@ export class ServiceService {
   endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
   endpoint_busquedaHorarios = this.endpoint + '/busquedaHorarios';
   endpoint_reservaTurno = this.endpoint + '/reservaTurno';
+  endpoint_confirmacionTurno = this.endpoint + '/confirmacionTurno';
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
@@ -159,4 +160,19 @@ export class ServiceService {
     }
   }
 
+  retrieveTurno(reserva: ConfirmacionTurnoRequest): Observable<any> {
+    if (this.useMockups) {
+      console.log('Run mock for: retrieveTurno() - reserva', reserva);
+      return getWsFromMock(Mock.turnoMock);
+    } else {
+      console.log('Run to server ' + this.endpoint_confirmacionTurno);
+      return this.http.post<TurnoRespuesta>(this.endpoint_confirmacionTurno, reserva)
+        .pipe(map(
+          (res: TurnoRespuesta) => {
+            throwErrorIfBadCode(res);
+            return res.turno;
+          }
+      ));
+    }
+  }  
 }

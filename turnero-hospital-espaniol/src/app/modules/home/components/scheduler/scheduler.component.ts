@@ -24,13 +24,14 @@ export class SchedulerComponent {
   eventsLength$: Observable<number>;
   profesionalSelected$: Observable<Profesional>;
 
+
   events: CalendarEvent<any>[];
-  locale: string = 'es';
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   activeDayIsOpen: boolean;
   view: CalendarView = CalendarView.Month;
   refresh: Subject<any> = new Subject();
+  locale: string = 'es-AR';
 
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
     this.store.select(CalendarSelectors.getDiasDisponibles).forEach(

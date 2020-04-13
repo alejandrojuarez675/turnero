@@ -23,3 +23,7 @@ export class ReservaTurnoRequest {
     paciente: Paciente;
 }
 
+export class ConfirmacionTurnoRequest {
+    codigoReserva: number;
+}
+

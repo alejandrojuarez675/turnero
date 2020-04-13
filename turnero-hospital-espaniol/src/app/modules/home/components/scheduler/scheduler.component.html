@@ -26,6 +26,7 @@
       [events]="events$ | async"
       [refresh]="refresh"
       (beforeViewRender)="beforeMonthViewRender($event)"
+      [locale]="locale"
       (dayClicked)="dayClicked($event.day)">
     </mwl-calendar-month-view>
   </div>
