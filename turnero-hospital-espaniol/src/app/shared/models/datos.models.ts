@@ -91,7 +91,7 @@ export class DisponibilidadDiasStore {
 }
 
 export class Reserva {
-    codigoReserva: string;
+    codigoReserva: number;
     vencimientoReserva: Date;
 }
 
@@ -99,6 +99,9 @@ export class ReservaRespuesta extends Respuesta {
     reserva: Reserva;
 }
 
+export class TurnoRespuesta extends Respuesta {
+    turno: Turno;
+}
 
 export class Formulario {
     obrasSociales: ObraSocial[];

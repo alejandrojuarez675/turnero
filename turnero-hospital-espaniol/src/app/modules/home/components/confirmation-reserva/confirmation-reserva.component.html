@@ -1,0 +1,35 @@
+<div class="cuadro-formulario" >
+    <div class="row clearfix">
+        <p>
+          Se ha realizado exitosamente la confirmación del siguiente turno
+        </p>
+    </div>
+
+    <div *ngIf="turno != undefined">
+        <div class="row clearfix">
+            <div style="width: 10%;">Fecha y hora: </div>
+            <div>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.hora }} hs</div>
+        </div>
+        <div class="row clearfix" *ngIf='turno.observaciones !== ""'>
+            <div style="width: 10%;">Observaciones: </div>
+            <div>{{ turno.observaciones }}</div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Profesional: </div>
+            <div>{{ turno.profesional.nombreApellido }} </div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Especialidad: </div>
+            <div>{{ turno.especialidad.nombre }} </div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Centro Médico: </div>
+            <div>{{ turno.centroAtencion.nombre }} </div>
+        </div>
+    </div>
+
+    <button style="width: 100%;" class="button" mat-flat-button (click)="cargarDatos()">
+        CARGAR DATOS
+    </button>
+
+</div>

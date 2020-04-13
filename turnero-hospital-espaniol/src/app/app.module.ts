@@ -18,10 +18,12 @@ import { errorReducer } from './core/store/reducers/error.reducers';
 import { ErrorEffects } from './core/store/effects/error.effects';
 import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
+import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmationReservaComponent,
   ],
   imports: [
     BrowserModule,

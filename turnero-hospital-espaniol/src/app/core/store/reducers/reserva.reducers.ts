@@ -43,6 +43,8 @@ const _reservaReducer = createReducer(
     on(ReservaActions.setPaciente, (state, { paciente }) =>
        _setPaciente(state, paciente)),
 
+    on(ReservaActions.setTurno, (state, {turno}) => 
+        _setTurnoSelected(state, turno)),
     // on(ReservaActions.setReservaSelected, (state, {reservaSelected}) =>
     // _setReserva(state, reservaSelected)),
 );
