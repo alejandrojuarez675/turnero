@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario, Profesional } from '../../../../shared/models/datos.models';
+import { Calendario, Profesional, DisponibilidadDiasStore } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
@@ -20,6 +20,7 @@ import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-ut
 })
 export class SchedulerComponent {
 
+  dias$: Observable<DisponibilidadDiasStore[]>;
   events$: Observable<CalendarEvent[]>;
   eventsLength$: Observable<number>;
   profesionalSelected$: Observable<Profesional>;
@@ -34,27 +35,31 @@ export class SchedulerComponent {
   locale: string = 'es-AR';
 
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
-    this.store.select(CalendarSelectors.getDiasDisponibles).forEach(
-      (dia) => {console.log("TODO: manejar esto" + dia);
-      }
+    this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
+    this.dias$.subscribe(x => 
+      x.forEach(d => {
+        renderEvent.body.forEach(day => {
+          var a = true;
+          if (a && day.date.getDate() == d.fecha.getDate() && 
+            day.date.getMonth() == d.fecha.getMonth() && 
+            day.date.getFullYear() == d.fecha.getFullYear()) {
+            a = false;
+            if (d.conDisponibilidad) {
+              day.cssClass =  'lightskyblue';
+            } else {
+              day.cssClass = 'lightslategray';
+            }
+          }
+        });
+      })
     );
-
-    // example
-    renderEvent.body.forEach((day) => {
-      const dayOfMonth = day.date.getDate();
-      console.log(dayOfMonth);
-      if (dayOfMonth > 2 && dayOfMonth < 10 && day.inMonth) {
-        day.cssClass = 'lightskyblue';
-      }
-    });
-
   }
 
   constructor(
     private store: Store<{ calendario: Calendario }>,
   ) {
 
-    // marca al el cuadro azul
+    // crea los eventos (puntitos) visualmente quedaria mejor sin el contador
     this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );
