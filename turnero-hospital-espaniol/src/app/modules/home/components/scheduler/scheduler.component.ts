@@ -35,6 +35,12 @@ export class SchedulerComponent {
   locale: string = 'es-AR';
 
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
+    renderEvent.body.forEach((day) => {
+      day.badgeTotal = day.events.filter(
+        (event) => event.meta.incrementsBadgeTotal
+      ).length;
+    });
+
     this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
     this.dias$.subscribe(x => 
       x.forEach(d => {
@@ -59,7 +65,7 @@ export class SchedulerComponent {
     private store: Store<{ calendario: Calendario }>,
   ) {
 
-    // crea los eventos (puntitos) visualmente quedaria mejor sin el contador
+    // crea los eventos (puntitos) 
     this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );

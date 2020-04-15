@@ -17,12 +17,18 @@ export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDiasStore) 
             start: dia.fecha,
             title: '',
             color: colors.blue,
+            meta: {
+                incrementsBadgeTotal: false,
+            },
         };
     } else {
         return {
             start: dia.fecha,
             title: '',
             color: colors.yellow,
+            meta: {
+                incrementsBadgeTotal: false,
+            },
         };
     }
 };
