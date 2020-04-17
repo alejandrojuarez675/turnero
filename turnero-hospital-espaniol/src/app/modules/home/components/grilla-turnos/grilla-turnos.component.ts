@@ -17,7 +17,7 @@ export class GrillaTurnosComponent implements OnInit {
   profesionalesDisponiblesLenght$: Observable<number>;
 
   displayedColumns = [
-    'profesional.nombreApellido', 'turnoManiana.fecha', 'turnoTarde.fecha'
+    'profesional.nombreApellido', 'turnoManiana.fecha', 'turnoTarde.fecha', 'profesional.observaciones'
   ];
 
   constructor(

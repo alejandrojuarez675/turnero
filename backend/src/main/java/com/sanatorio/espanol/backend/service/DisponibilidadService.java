@@ -45,7 +45,7 @@ public class DisponibilidadService {
 				null
 			),
 			new Disponibilidad(
-				new Profesional(1, "Mario Gomez", ""), 
+				new Profesional(1, "Mario Gomez", "Solo particular"), 
 				new Especialidad(1, "KINESIOLOGÍA"), 
 				new TurnoManiana(
 						400, 
