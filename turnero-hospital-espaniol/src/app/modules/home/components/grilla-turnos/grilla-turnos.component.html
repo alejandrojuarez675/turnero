@@ -49,8 +49,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
-
-    <mat-paginator [length]="profesionalesDisponiblesLenght$ | async" [pageSize]="5"></mat-paginator>
   </div>
 </div>
 <app-confirmation></app-confirmation>
