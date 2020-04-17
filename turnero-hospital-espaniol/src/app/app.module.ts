@@ -19,6 +19,7 @@ import { ErrorEffects } from './core/store/effects/error.effects';
 import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
 import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,10 +49,12 @@ import { ConfirmationReservaComponent } from './modules/home/components/confirma
       ReservaEffects,
     ]),
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CoreModule,
-    SharedModule
+    SharedModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

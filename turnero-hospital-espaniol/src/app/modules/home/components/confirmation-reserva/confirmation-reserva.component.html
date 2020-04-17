@@ -1,11 +1,12 @@
 <div class="cuadro-formulario" >
-    <div class="row clearfix">
-        <p>
-          Se ha realizado exitosamente la confirmación del siguiente turno
-        </p>
-    </div>
+    <mat-spinner *ngIf="loading"></mat-spinner>
 
     <div *ngIf="turno != undefined">
+        <div class="row clearfix">
+            <p>
+              Se ha realizado exitosamente la confirmación del siguiente turno
+            </p>
+        </div>
         <div class="row clearfix">
             <div style="width: 10%;">Fecha y hora: </div>
             <div>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.hora }} hs</div>
@@ -27,9 +28,4 @@
             <div>{{ turno.centroAtencion.nombre }} </div>
         </div>
     </div>
-
-    <button style="width: 100%;" class="button" mat-flat-button (click)="cargarDatos()">
-        CARGAR DATOS
-    </button>
-
 </div>
