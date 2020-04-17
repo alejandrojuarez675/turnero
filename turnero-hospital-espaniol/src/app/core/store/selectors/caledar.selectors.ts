@@ -22,6 +22,12 @@ export const getProfesionalSelected = createSelector(
     (calendario: Calendario) => calendario.profesionalSelected
 );
 
+export const getDiasTurnosDisponibles = createSelector(
+    [getProfesionalSelected, selectCalendario],
+    (_profesionalSelected: Profesional, calendario: Calendario) =>
+        calendario.diasDisponibles.filter(x => x.conDisponibilidad)
+);
+
 export const getDiasDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: Profesional, calendario: Calendario) =>

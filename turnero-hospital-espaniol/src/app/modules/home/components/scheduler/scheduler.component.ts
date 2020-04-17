@@ -66,7 +66,7 @@ export class SchedulerComponent {
   ) {
 
     // crea los eventos (puntitos) 
-    this.events$ = store.select(CalendarSelectors.getDiasDisponibles).pipe(
+    this.events$ = store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );
     this.events$.subscribe((e) => this.events = e);
