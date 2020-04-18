@@ -17,6 +17,7 @@ export class ConfirmationReservaComponent implements OnInit {
   codigoReserva: number;
   turnoSelected$: Observable<Turno>;
   turno: Turno;
+  loading = false;
 
   constructor(
     private store: Store<{ reserva: ReservaFormulario }>,
@@ -27,29 +28,23 @@ export class ConfirmationReservaComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.loading = true;
     this.route.queryParams
     .subscribe(params => {
       this.codigoReserva = params['reserva'];
     });
 
-    console.log("CODIGO DE RESERVA " + this.codigoReserva);
     const reserva = new ConfirmacionTurnoRequest;
     reserva.codigoReserva = this.codigoReserva;
     this.store.dispatch(ReservaAction.retrieveTurno( { reserva}));
-    console.log("LLAMO al select ");
     this.turnoSelected$ = this.store.select(ReservaSelector.getTurnoSelected);
-    console.log("Cargo el turno " + this.turnoSelected$);
-    this.turnoSelected$.toPromise().then(turno => this.turno = turno);
-    console.log("El turno quedo con los datos  " + this.turno);
-  }
-
-  cargarDatos() {
-    console.log("ENtra al metodo");
     this.turnoSelected$.subscribe(turno => this.turno = turno);
-    console.log("queda con turno " + this.turno.codigo);
+
   }
 
-
-
+  ngDoCheck(){
+    if (this.turno != undefined) {
+      this.loading = false;
+    }
+  }
 }
