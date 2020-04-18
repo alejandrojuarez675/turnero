@@ -5,8 +5,6 @@ import * as ReservaActions from '../actions/reserva.actions';
 const initialState: ReservaFormulario = {
     paciente: undefined,
     turnoSelected: undefined,
-    reserva: undefined,
-
     dni: undefined,
     mail: undefined,
     telefono: undefined,
@@ -17,12 +15,6 @@ const initialState: ReservaFormulario = {
 const _setTurnoSelected = (state: ReservaFormulario, turnoSelected: Turno) => {
     const stateNew = {...state};
     stateNew.turnoSelected = turnoSelected;
-    return stateNew;
-};
-
-const _setReserva = (state: ReservaFormulario, reservaSelected: Reserva) => {
-    const stateNew = {...state};
-    stateNew.reserva = reservaSelected;
     return stateNew;
 };
 
@@ -45,8 +37,7 @@ const _reservaReducer = createReducer(
 
     on(ReservaActions.setTurno, (state, {turno}) => 
         _setTurnoSelected(state, turno)),
-    // on(ReservaActions.setReservaSelected, (state, {reservaSelected}) =>
-    // _setReserva(state, reservaSelected)),
+
 );
 
 export function reservaReducer(state, action) {

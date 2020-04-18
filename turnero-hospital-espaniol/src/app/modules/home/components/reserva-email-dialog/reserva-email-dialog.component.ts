@@ -4,7 +4,7 @@ import { Turno, ReservaFormulario, Reserva } from '../../../../shared/models/dat
 import { DateUtils } from '../../../../core/utils/date.utils';
 
 export interface DialogData {
-  reserva: ReservaFormulario;
+  reserva: Reserva;
 }
 
 @Component({

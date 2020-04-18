@@ -91,8 +91,8 @@ export class DisponibilidadDiasStore {
 }
 
 export class Reserva {
-    codigoReserva: number;
-    vencimientoReserva: Date;
+    codigo: number;
+    vencimiento: Date;
 }
 
 export class ReservaRespuesta extends Respuesta {
@@ -126,7 +126,6 @@ export class Calendario {
 export class ReservaFormulario {
     turnoSelected: Turno;
     paciente: Paciente;
-    reserva: Reserva;
     dni: number;
     sexo: string;
     nombreApellido: string;

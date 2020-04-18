@@ -121,8 +121,8 @@ export const horariosMock: Turno[] = [
 ];
 
 export const reservaTurnoMock: Reserva = {
-    codigoReserva: 123,
-    vencimientoReserva: new Date('2020/03/30')
+    codigo: 123,
+    vencimiento: new Date('2020/03/30')
 };
 
 export const turnoMock : Turno = {

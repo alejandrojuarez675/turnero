@@ -16,11 +16,6 @@ export const reservarTurno = createSelector(
     }
 );
 
-export const getReservaSelected = createSelector(
-    selectFormulario,
-    (reserva: ReservaFormulario) => reserva
-);
-
 export const getReserva =  createSelector(
     selectFormulario,
     (reservaSelected: ReservaFormulario) => {

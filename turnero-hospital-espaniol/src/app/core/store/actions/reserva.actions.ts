@@ -5,7 +5,6 @@ import { ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../../shared/m
 export const CLEAN_STORE = '[Reserva] - cleanStore';
 export const RESERVA_TURNO = '[Reserva] - ReservaTurno';
 export const SET_TURNO_SELECTED = '[Reserva] - setTurnoSelected';
-export const SET_RESERVA = '[API] - setReservaSelected ';
 export const GET_RESERVA = '[Reserva] - getReservaSelected ';
 export const SET_PACIENTE = '[Reserva] - setPaciente ';
 export const RETRIEVE_TURNO = '[Reserva] - retrieveTurno';
@@ -21,11 +20,6 @@ export const reservaTurno = createAction(
 export const setTurnoSelected = createAction(
     SET_TURNO_SELECTED,
     props<{ turnoSelected: Turno }>()
-);
-
-export const setReservaSelected = createAction(
-    SET_RESERVA,
-    props<{ reservaSelected: Reserva }>()
 );
 
 export const getReservaSelected = createAction(
