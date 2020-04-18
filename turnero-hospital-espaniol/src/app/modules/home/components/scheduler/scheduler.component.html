@@ -1,7 +1,12 @@
 <div class="cuadro-formulario" *ngIf="(eventsLength$ | async) > 0">
   <p>
-    Turnos disponibles para Dr/a. 
-    {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
+    Turnos disponibles para 
+    <span *ngIf="(profesionalSelected$ | async) != undefined">
+      Dr/a. {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
+    </span>
+    <span *ngIf="(profesionalSelected$ | async) == undefined">
+      {{especialidad.nombre || 'N/A'}}
+    </span>
   </p>
   <div>
     <div class="row clearfix">

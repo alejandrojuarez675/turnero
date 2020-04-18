@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario, Profesional, DisponibilidadDiasStore } from '../../../../shared/models/datos.models';
+import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
@@ -24,6 +24,8 @@ export class SchedulerComponent {
   events$: Observable<CalendarEvent[]>;
   eventsLength$: Observable<number>;
   profesionalSelected$: Observable<Profesional>;
+  profesionalesDisponibles$: Observable<Disponibilidad[]>;
+  especialidad: Especialidad;
 
 
   events: CalendarEvent<any>[];
@@ -74,8 +76,13 @@ export class SchedulerComponent {
     this.eventsLength$ = store.select(CalendarSelectors.getDiasDisponiblesLength);
 
     this.profesionalSelected$ = store.select(CalendarSelectors.getProfesionalSelected);
-
-  }
+    this.profesionalesDisponibles$ = store.select(CalendarSelectors.getProfesionalesDisponibles);
+    this.profesionalesDisponibles$.subscribe(disponibilidad => {
+      disponibilidad.filter(x => {
+        this.especialidad = x.especialidad;
+      })
+    })
+  };
 
   dayClicked({ date }: { date: Date }): void {
     if (this.isPartOfEvents(this.events, date)) {
