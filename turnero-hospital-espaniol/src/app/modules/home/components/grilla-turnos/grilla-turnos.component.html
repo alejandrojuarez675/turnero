@@ -1,3 +1,9 @@
+<div class="cuadro-formulario" *ngIf="(profesionalesDisponiblesLenght$ | async) == 0">
+  <p>
+    No se encontraron turnos para los criterios ingresados.
+  </p>
+</div>
+
 <div class="cuadro-formulario" *ngIf="(profesionalesDisponiblesLenght$ | async) > 0">
 
   <div class="row clearfix">
