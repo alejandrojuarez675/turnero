@@ -19,14 +19,18 @@ export class ServiceService {
 
   useMockups = environment.mockups;
   endpoint = environment.endpoint;
-  endpoint_obraSocial = this.endpoint + '/getObraSocial';
-  endpoint_especialidad = this.endpoint + '/getEspecialidad';
-  endpoint_centroAtencion = this.endpoint + '/getCentroAtencion';
-  endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
-  endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
-  endpoint_busquedaHorarios = this.endpoint + '/busquedaHorarios';
-  endpoint_reservaTurno = this.endpoint + '/reservaTurno';
-  endpoint_confirmacionTurno = this.endpoint + '/confirmacionTurno';
+  endpointC = this.endpoint + "/Consext" ;
+  endpointG = this.endpoint + "/Gestion" ;
+
+  
+  endpoint_obraSocial = this.endpointC + '/getObraSocial';
+  endpoint_especialidad = this.endpointC + '/getEspecialidad';
+  endpoint_centroAtencion = this.endpointG + '/getCentroAtencion';
+  endpoint_busquedaProfesionales = this.endpointC + '/busquedaProfesionales';
+  endpoint_busquedaDiasDisponibles = this.endpointC + '/busquedaDiasDisponibles';
+  endpoint_busquedaHorarios = this.endpointC + '/busquedaHorarios';
+  endpoint_reservaTurno = this.endpointC + '/reservaTurno';
+  endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
