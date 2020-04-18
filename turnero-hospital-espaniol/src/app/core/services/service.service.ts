@@ -117,9 +117,9 @@ export class ServiceService {
       //   ));
 
       } else {
-      console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
-      return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
-        .pipe(map(
+        console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
+        return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
+          .pipe(map(
             (res: DisponibilidadDiasRespuesta) => {
               throwErrorIfBadCode(res);
               return res.dia;

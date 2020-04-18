@@ -49,7 +49,9 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
-        request.codigoProfesional = profesionalSelected.codigo;
+        if (profesionalSelected != undefined) {
+            request.codigoProfesional = profesionalSelected.codigo;
+        }
         return request;
     }
 );

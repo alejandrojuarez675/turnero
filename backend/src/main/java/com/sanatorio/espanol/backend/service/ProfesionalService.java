@@ -24,7 +24,8 @@ public class ProfesionalService {
 	public static List<Profesional> listaProfesional = 
 		new ArrayList<Profesional>(Arrays.asList(
 				new Profesional(1, "Juan Perez", ""),
-				new Profesional(2, "María Gonzalez", "")
+				new Profesional(2, "María Gonzalez", ""),
+				new Profesional(3, "Mario Gomez", "")
 		));
 	
 }

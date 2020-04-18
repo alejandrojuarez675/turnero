@@ -36,6 +36,15 @@ export class GrillaTurnosComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClickTodos() {
+    this.store.dispatch(CalendarActions.setProfesionalSelected(undefined));
+    this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
+      (request: BusquedaDiasDisponiblesRequest) => {
+        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
+      }
+    );
+  }
+
   onClickProf(profesional: Profesional) {
     this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
@@ -58,4 +67,5 @@ export class GrillaTurnosComponent implements OnInit {
     };
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
   }
+
 }

@@ -83,9 +83,14 @@ public class CommonService {
 	public DiaRespuesta busquedaDias(DiaRequest diaRequest) {
 		DiaRespuesta dResp = new DiaRespuesta();
 		dResp.respuesta = getRespuestaOK();
-    	dResp.dia = diaService.getListaDia(); // TODO:
-    	return dResp;
-   
+		if (diaRequest.codigoProfesional != null) {
+			System.out.println("busq por profesional " + diaRequest.codigoProfesional);
+			dResp.dia = diaService.getListaDiaReducida();
+		} else {
+			System.out.println("busq todos " + diaRequest.codigoProfesional);
+			dResp.dia = diaService.getListaDia();
+		}
+		return dResp;
 	}
 
 	public HorarioRespuesta busquedaHorarios(HorarioRequest horaRequest) {

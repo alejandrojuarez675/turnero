@@ -2,7 +2,7 @@
 
   <div class="row clearfix">
     <p>
-      Haga click sobre el profesional o turno que desee para seleccionarlo.
+      Haga click sobre el profesional para ver todos los turnos disponibles o sobre el turno que desee reservar.
     </p>
   </div>
 
@@ -50,5 +50,12 @@
       </table>
     </div>
   </div>
+
+  <div class="row clearfix">
+    <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
+        VER TODOS
+    </button>
+  </div>
+  
 </div>
 <app-confirmation></app-confirmation>
