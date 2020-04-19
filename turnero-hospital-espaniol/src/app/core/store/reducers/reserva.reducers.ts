@@ -2,14 +2,9 @@ import { createReducer, on } from '@ngrx/store';
 import { Paciente, Reserva, ReservaFormulario, Turno } from '../../../shared/models/datos.models';
 import * as ReservaActions from '../actions/reserva.actions';
 
-const initialState: ReservaFormulario = {
+export const initialState: ReservaFormulario = {
     paciente: undefined,
     turnoSelected: undefined,
-    dni: undefined,
-    mail: undefined,
-    telefono: undefined,
-    nombreApellido: undefined,
-    sexo: undefined
 };
 
 const _setTurnoSelected = (state: ReservaFormulario, turnoSelected: Turno) => {
@@ -26,6 +21,8 @@ const _setPaciente = (state: ReservaFormulario, paciente: Paciente) => {
 
 const _reservaReducer = createReducer(
     initialState,
+
+    on(ReservaActions.cleanStore, () => initialState),
 
     on(ReservaActions.setTurnoSelected, (state, { turnoSelected }) =>
         _setTurnoSelected(state, turnoSelected)),

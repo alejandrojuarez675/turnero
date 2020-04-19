@@ -3,7 +3,6 @@ import { Reserva, ReservaFormulario } from '../../../shared/models/datos.models'
 import { ReservaTurnoRequest } from '../../../shared/models/request.models';
 
 export const selectFormulario = createFeatureSelector<ReservaFormulario>('reserva');
-export const selectReserva = createFeatureSelector<Reserva>('reserva');
 
 export const reservarTurno = createSelector(
     selectFormulario,

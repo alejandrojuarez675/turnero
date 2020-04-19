@@ -130,11 +130,6 @@ export class Calendario {
 export class ReservaFormulario {
     turnoSelected: Turno;
     paciente: Paciente;
-    dni: number;
-    sexo: string;
-    nombreApellido: string;
-    telefono: string;
-    mail: string;
 }
 
 export class Paciente {
