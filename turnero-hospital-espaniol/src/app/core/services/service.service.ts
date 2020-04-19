@@ -42,7 +42,11 @@ export class ServiceService {
         .pipe(map(
           (res: ObraSocialRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.obraSocial;
+            return res.obraSocial.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
@@ -58,7 +62,11 @@ export class ServiceService {
         .pipe(map(
           (res: EspecialidadRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.especialidad;
+            return res.especialidad.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
@@ -74,7 +82,11 @@ export class ServiceService {
         .pipe(map(
           (res: CentroAtencionRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.centroAtencion;
+            return res.centroAtencion.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
