@@ -56,7 +56,6 @@ export class FormularioComponent implements OnInit {
   }
 
   cambioEspecialidad(event) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: event.value }));
   }
 

@@ -3,7 +3,9 @@ import { Store } from '@ngrx/store';
 import { CalendarEvent, CalendarView, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
@@ -19,6 +21,8 @@ import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-ut
 
 })
 export class SchedulerComponent {
+
+  estado$: Observable<number>;
 
   dias$: Observable<DisponibilidadDiasStore[]>;
   events$: Observable<CalendarEvent[]>;
@@ -67,6 +71,8 @@ export class SchedulerComponent {
     private store: Store<{ calendario: Calendario }>,
   ) {
 
+    this.estado$ = store.select(ContextoSelectors.getEstado);
+
     // crea los eventos (puntitos) 
     this.events$ = store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
@@ -86,12 +92,14 @@ export class SchedulerComponent {
 
   dayClicked({ date }: { date: Date }): void {
     if (this.isPartOfEvents(this.events, date)) {
+      this.store.dispatch(ContextoActions.setEstado({ newEstado: 4 }));
       this.store.dispatch(CalendarActions.setFechaSelected({ fecha: date }));
       this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
         (filtro: BusquedaHorariosRequest) =>
           this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
       ).unsubscribe();
     } else {
+      this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     }
   }
