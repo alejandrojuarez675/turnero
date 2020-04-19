@@ -1,6 +1,7 @@
-<div class="cuadro-formulario" *ngIf="(profesionalesDisponiblesLenght$ | async) == 0">
+<div class="cuadro-formulario" 
+  *ngIf="(((profesionalesDisponiblesLenght$ | async) == 0) && ((estado$ | async) == 2))">
   <p>
-    No se encontraron turnos para los criterios ingresados.
+    No se encontraron turnos para los criterios ingresados. {{estado$}}
   </p>
 </div>
 

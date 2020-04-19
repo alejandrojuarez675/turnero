@@ -103,6 +103,10 @@ export class TurnoRespuesta extends Respuesta {
     turno: Turno;
 }
 
+export class Contexto {
+    estado: number;
+}
+
 export class Formulario {
     obrasSociales: ObraSocial[];
     especialidades: Especialidad[];

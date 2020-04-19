@@ -3,7 +3,8 @@ import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../.
 import * as FormActions from '../actions/form.actions';
 
 
-export const initialState: Formulario = {
+export const initialState: 
+Formulario = {
     obrasSociales: [],
     especialidades: [],
     centrosDeAtencion: [],

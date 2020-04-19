@@ -4,6 +4,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as FormActions from '../../../../core/store/actions/form.actions';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
@@ -47,6 +48,7 @@ export class FormularioComponent implements OnInit {
 
   cambioObraSocial(event) {
     this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined })); // FIXME
   }
 
   cambioPlan(event) {
@@ -54,6 +56,7 @@ export class FormularioComponent implements OnInit {
   }
 
   cambioEspecialidad(event) {
+    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: event.value }));
   }
 
@@ -74,8 +77,10 @@ export class FormularioComponent implements OnInit {
 
   onSubmit() {
     this.store.select(FormSelectors.selectBusquedaProfesionales).subscribe(
-      (filter: BusquedaProfesionalesRequest) =>
-        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
+      (filter: BusquedaProfesionalesRequest) => {
+        this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 }));
+        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+      }
     );
   }
 }

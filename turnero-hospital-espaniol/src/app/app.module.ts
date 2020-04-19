@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { calendarReducer } from './core/store/reducers/calendar.reducers';
+import { contextoReducer } from './core/store/reducers/contexto.reducers';
 import { formReducer } from './core/store/reducers/form.reducers';
 import { SharedModule } from './shared/shared.module';
 import { errorReducer } from './core/store/reducers/error.reducers';
@@ -35,6 +36,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     SharedModule,
     StoreModule.forRoot({
       // router: routerReducer,
+      contexto: contextoReducer,
       formulario: formReducer,
       calendario: calendarReducer,
       reserva: reservaReducer,
