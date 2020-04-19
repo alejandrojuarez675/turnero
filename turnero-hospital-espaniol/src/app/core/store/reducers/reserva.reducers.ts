@@ -27,8 +27,6 @@ const _setPaciente = (state: ReservaFormulario, paciente: Paciente) => {
 const _reservaReducer = createReducer(
     initialState,
 
-    on(ReservaActions.cleanStore, () => initialState),
-
     on(ReservaActions.setTurnoSelected, (state, { turnoSelected }) =>
         _setTurnoSelected(state, turnoSelected)),
 

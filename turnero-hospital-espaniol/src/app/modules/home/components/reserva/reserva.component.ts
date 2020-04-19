@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
@@ -16,6 +17,7 @@ import { filter } from 'rxjs/operators';
 })
 export class ReservaComponent implements OnInit {
 
+  estado$: Observable<number>;
   sexo$: string[] = ['Femenino', 'Masculino'];
   dni = new FormControl('', [Validators.required,
   Validators.minLength(6),
@@ -43,15 +45,11 @@ export class ReservaComponent implements OnInit {
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>
   ) {
-    this.turnoSelected$ = store.select(
-      ReservaSelector.getTurnoSelected
-    );
-    this.obraSocialSelected$ = store.select(
-      FormularioSelectors.selectObraSocialSelected);
-    this.planSelected$ = store.select(
-      FormularioSelectors.selectPlanSelected);
-    this.fechaNacimientoSelected$ = store.select(
-      FormularioSelectors.selectFechaNacimiento);
+    this.estado$ = store.select(ContextoSelectors.getEstado);
+    this.turnoSelected$ = store.select(ReservaSelector.getTurnoSelected);
+    this.obraSocialSelected$ = store.select(FormularioSelectors.selectObraSocialSelected);
+    this.planSelected$ = store.select(FormularioSelectors.selectPlanSelected);
+    this.fechaNacimientoSelected$ = store.select(FormularioSelectors.selectFechaNacimiento);
   }
 
 

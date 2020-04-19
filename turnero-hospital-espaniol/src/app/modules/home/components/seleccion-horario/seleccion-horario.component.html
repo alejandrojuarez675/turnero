@@ -1,4 +1,4 @@
-<div class="cuadro-formulario" *ngIf="(horariosLength$ | async) > 0">
+<div class="cuadro-formulario" *ngIf="(((horariosLength$ | async) > 0) && ((estado$ | async) >=4))">
 
   <div class="row clearfix">
     <p>

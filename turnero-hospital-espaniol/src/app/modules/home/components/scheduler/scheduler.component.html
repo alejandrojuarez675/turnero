@@ -1,4 +1,4 @@
-<div class="cuadro-formulario" *ngIf="(eventsLength$ | async) > 0">
+<div class="cuadro-formulario" *ngIf="(((eventsLength$ | async) > 0) && ((estado$ | async) >= 3))">
   <p>
     Turnos disponibles para 
     <span *ngIf="(profesionalSelected$ | async) != undefined">

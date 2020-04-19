@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
 import * as ReservacionActions from '../../../../core/store/actions/reservacion.actions';
@@ -47,6 +48,8 @@ export class ReservaEmailComponent implements OnInit {
   openDialog(datosReserva: DatosReserva): void {
     this.dialog.open(ReservaEmailDialogComponent, { data: { datosReserva: datosReserva }})
       .afterClosed().subscribe( () => {
+        this.store.dispatch(ContextoActions.setEstado({ newEstado: 1}));
+        this.store.dispatch(ContextoActions.cleanStore());
         this.store.dispatch(CalendarActions.cleanStore());
         this.store.dispatch(ReservaActions.cleanStore());
         this.store.dispatch(ReservacionActions.cleanStore());
