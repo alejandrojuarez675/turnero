@@ -21,7 +21,7 @@ import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
 import { reservacionReducer } from './core/store/reducers/reservacion.reducers';
 import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MAT_DATE_LOCALE } from '@angular/material';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 
@@ -56,6 +56,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     ]),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    
   ],
   exports: [
     CoreModule,
@@ -67,7 +68,8 @@ import { TokenInterceptor } from './auth/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'}
   ],
   bootstrap: [AppComponent]
 })
