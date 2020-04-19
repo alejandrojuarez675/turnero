@@ -33,15 +33,11 @@ export class ReservaEmailComponent implements OnInit {
 
     this.datosReserva = new DatosReserva();
     this.store.select(ReservacionSelectors.getReserva).pipe(
-    // TODO cambiarlo por codigo reserva cuando ya esté funcionando bien
       filter(x => x != undefined && x.codigo != undefined)
-      //filter(x => x !== undefined && x.paciente !== undefined && x.paciente.dni !== undefined)
     ).subscribe(x => {
       this.reserva$ = this.store.select(ReservaSelectors.getReserva);
       this.reserva$.subscribe(reserva => this.datosReserva.paciente = reserva.paciente);
-        console.log("Paciente : " + this.datosReserva.paciente != undefined ? this.datosReserva.paciente.nombreApellido : "LLEGA NUll");
       this.datosReserva.reserva = x;
-      console.log("Reserva : " + this.datosReserva.reserva != undefined ? this.datosReserva.reserva.codigo : "RESE NULL");
       this.openDialog(this.datosReserva);
       }
     );
@@ -51,9 +47,9 @@ export class ReservaEmailComponent implements OnInit {
   openDialog(datosReserva: DatosReserva): void {
     this.dialog.open(ReservaEmailDialogComponent, { data: { datosReserva: datosReserva }})
       .afterClosed().subscribe( () => {
+        this.store.dispatch(CalendarActions.cleanStore());
         this.store.dispatch(ReservaActions.cleanStore());
         this.store.dispatch(ReservacionActions.cleanStore());
-        this.store.dispatch(CalendarActions.cleanStore());
       });
   }
 
