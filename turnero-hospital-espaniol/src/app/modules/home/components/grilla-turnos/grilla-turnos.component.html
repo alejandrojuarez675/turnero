@@ -15,10 +15,11 @@
 
   <div class="example-container">
     <div class="example-table-container">
-      <table mat-table [dataSource]="profesionalesDisponibles$ | async">
+      <table mat-table [dataSource]="profesionalesDataSouce" matSort>
 
         <ng-container matColumnDef="profesional.nombreApellido">
-          <th mat-header-cell *matHeaderCellDef style="width: 40%;">Profesional</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 40%;" 
+            mat-sort-header="profesional.nombreApellido">Profesional</th>
           <td mat-cell *matCellDef="let row" style="width: 40%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para este Profesional">
             {{row.profesional.nombreApellido}}
@@ -26,7 +27,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoManiana.fecha">
-          <th mat-header-cell *matHeaderCellDef>Próx. Turno M</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="turnoManiana.fecha">Próx. Turno M</th>
           <td mat-cell *matCellDef="let row" title="Seleccionar turno">
             <span *ngIf="row.turnoManiana != undefined && row.turnoManiana.fecha != undefined"
               (click)="onClickTurno(row, 'M')" style="cursor: pointer;">
@@ -35,24 +36,24 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="turnoTarde.fecha">
-          <th mat-header-cell *matHeaderCellDef>Próx. Turno T</th>
-          <td mat-cell *matCellDef="let row" title="Seleccionar turno">
+        <!-- <ng-container matColumnDef="turnoTarde.fecha">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno T</mat-header-cell>
+          <mat-cell *matCellDef="let row" title="Seleccionar turno">
             <span *ngIf="row.turnoTarde != undefined && row.turnoTarde.fecha != undefined"
               (click)="onClickTurno(row, 'T')" style="cursor: pointer;">
               {{row.turnoTarde.fecha | date: 'dd/MM/yyyy' }} {{row.turnoTarde.hora}} 
             </span>
-          </td>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="profesional.observaciones">
-          <th mat-header-cell *matHeaderCellDef>Observaciones</th>
-          <td mat-cell *matCellDef="let row">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</mat-header-cell>
+          <mat-cell *matCellDef="let row">
             {{row.profesional.observaciones}} 
-          </td>
-        </ng-container>
+          </mat-cell>
+        </ng-container> -->
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
