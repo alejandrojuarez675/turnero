@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,19 +17,20 @@ import { filter } from 'rxjs/operators';
 })
 export class ReservaComponent implements OnInit {
 
-  estado$: Observable<number>;
-  sexo$: string[] = ['Femenino', 'Masculino'];
   dni = new FormControl('', [Validators.required,
-  Validators.minLength(6),
-  Validators.maxLength(10),
-  Validators.pattern(/^\d+$/)]);
+    Validators.minLength(6), 
+    Validators.maxLength(10), 
+    Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
-  telefono = new FormControl('', [Validators.required,
-  Validators.minLength(5),
-  Validators.pattern(/^\d+$/)]);
+  telefono = new FormControl('', [Validators.required, 
+    Validators.minLength(5), 
+    Validators.pattern(/^\d+$/)]);
   mail = new FormControl('', [Validators.required,
-  Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
+    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
+  
+  estado$: Observable<number>;
+  sexo$: string[] = ['Femenino', 'Masculino'];
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
   obraSocialSelected$: Observable<ObraSocial>;
@@ -38,10 +39,8 @@ export class ReservaComponent implements OnInit {
   planSelected: Plan;
   fechaNacimientoSelected$: Observable<Date>;
   fechaNacimientoSelected: Date;
-
-
   reservaSelected$: Observable<ReservaRespuesta>;
-
+  
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>
   ) {
@@ -54,6 +53,7 @@ export class ReservaComponent implements OnInit {
 
 
   ngOnInit() {
+    this.clearFormulario();
   }
 
   reservar() {
@@ -79,14 +79,26 @@ export class ReservaComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.select(ReservaSelector.reservarTurno).subscribe(
-      // tslint:disable-next-line: no-shadowed-variable
-      (filter: ReservaTurnoRequest) => {
-        if (filter) {
-          this.store.dispatch(ReservaAction.reservaTurno({ filter }));
-        }
-      }
-    );
+    if (this.isValid) {
+      this.store.select(ReservaSelector.reservarTurno)
+      .subscribe(
+        (filter: ReservaTurnoRequest) => {
+          if (filter) {
+            this.store.dispatch(ReservaAction.reservaTurno({ filter }));
+            this.clearFormulario();
+          }
+        }      
+      )
+      .unsubscribe();
+    };
+  }
+
+  clearFormulario() {
+    this.dni.setValue(undefined);
+    this.sexo.setValue(undefined);
+    this.nombreApellido.setValue(undefined);
+    this.telefono.setValue(undefined);
+    this.mail.setValue(undefined);
   }
 
   isValid() {
