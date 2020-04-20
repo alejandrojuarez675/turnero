@@ -71,7 +71,7 @@ public class CommonService {
 		// TODO:
 		List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()
 			.stream()
-			.filter(d -> d.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
+			.filter(d -> d.profesional.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
 			.collect(Collectors.toList()); 
 		DisponibilidadRespuesta espeResp = new DisponibilidadRespuesta();
     	espeResp.respuesta = getRespuestaOK();

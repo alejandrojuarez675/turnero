@@ -6,19 +6,17 @@ public class Turno {
 
 	Integer codigo;
 	Profesional profesional;
-	Especialidad especialidad;
 	CentroAtencion centroAtencion;
 	Date fecha;
 	String hora;
 	String observaciones;
 
 	public Turno(Integer codigo, 
-			Profesional profesional, Especialidad especialidad, CentroAtencion centroAtencion,
+			Profesional profesional, CentroAtencion centroAtencion,
 			Date fecha, String hora, String observaciones) {
 		super();
 		this.codigo = codigo;
 		this.profesional = profesional;
-		this.especialidad = especialidad;
 		this.centroAtencion = centroAtencion;
 		this.fecha = fecha;
 		this.hora = hora;
@@ -48,13 +46,6 @@ public class Turno {
 		this.profesional = profesional;
 	}
 
-	public Especialidad getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(Especialidad especialidad) {
-		this.especialidad = especialidad;
-	}
 
 	public CentroAtencion getCentroAtencion() {
 		return centroAtencion;

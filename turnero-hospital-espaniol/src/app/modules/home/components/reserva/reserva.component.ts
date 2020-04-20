@@ -67,7 +67,7 @@ export class ReservaComponent implements OnInit {
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
-    paciente.mail = this.mail.value;
+    paciente.email = this.mail.value;
 
     paciente.codigoObraSocial = this.obraSocialSelected.codigo;
     paciente.codigoPlan = this.planSelected.codigo;

@@ -63,6 +63,7 @@ const profesional1: Profesional = {
     codigo: 'PeJu',
     nombreApellido: 'Perez, Juan',
     observaciones: '',
+    especialidad: especialidadesMocks[0]
 };
 
 const turno1: TurnoLight = {
@@ -83,7 +84,6 @@ const turno2: TurnoLight = {
 
 const disponibilidad: Disponibilidad = {
     profesional: profesional1,
-    especialidad: especialidadesMocks[0],
     turnoManiana: turno1,
     turnoTarde: turno2
 };

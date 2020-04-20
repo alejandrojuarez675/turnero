@@ -24,8 +24,7 @@ public class DisponibilidadService {
 	public static List<Disponibilidad> listaDisponibilidad = 
 		new ArrayList<Disponibilidad>(Arrays.asList(
 			new Disponibilidad(
-				new Profesional(1, "Juan Perez", ""), 
-				new Especialidad(1, "KINESIOLOGÍA"), 
+				new Profesional(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						400, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -36,8 +35,7 @@ public class DisponibilidadService {
 						new Date(), "18:10", "")
 			),
 			new Disponibilidad(
-				new Profesional(2, "María Gonzalez", ""), 
-				new Especialidad(1, "KINESIOLOGÍA"), 
+				new Profesional(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						402, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -45,8 +43,7 @@ public class DisponibilidadService {
 				null
 			),
 			new Disponibilidad(
-				new Profesional(3, "Mario Gomez", "Solo particular"), 
-				new Especialidad(1, "KINESIOLOGÍA"), 
+				new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						400, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -57,8 +54,7 @@ public class DisponibilidadService {
 						new Date(), "16:10", "")
 			),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -69,8 +65,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -81,8 +76,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -93,8 +87,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -105,8 +98,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -117,8 +109,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -129,8 +120,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -141,8 +131,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -153,8 +142,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -165,8 +153,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -177,8 +164,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -189,8 +175,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular"), 
-					new Especialidad(1, "KINESIOLOGÍA"), 
+					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),

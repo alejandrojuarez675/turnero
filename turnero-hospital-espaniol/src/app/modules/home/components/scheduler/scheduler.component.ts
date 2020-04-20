@@ -85,7 +85,7 @@ export class SchedulerComponent {
     this.profesionalesDisponibles$ = store.select(CalendarSelectors.getProfesionalesDisponibles);
     this.profesionalesDisponibles$.subscribe(disponibilidad => {
       disponibilidad.filter(x => {
-        this.especialidad = x.especialidad;
+        this.especialidad = x.profesional.especialidad;
       })
     })
   };

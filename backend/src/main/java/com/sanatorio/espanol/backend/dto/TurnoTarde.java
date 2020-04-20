@@ -6,7 +6,7 @@ public class TurnoTarde extends Turno{
 
 	public TurnoTarde(Integer codigo, CentroAtencion centroAtencion, 
 			Date fecha, String hora, String observaciones) {
-		super(codigo, null, null, centroAtencion, fecha, hora, observaciones);
+		super(codigo, null, centroAtencion, fecha, hora, observaciones);
 	}
 
 }

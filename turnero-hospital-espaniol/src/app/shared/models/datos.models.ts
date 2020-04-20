@@ -45,11 +45,11 @@ export class Profesional {
     codigo: string;
     nombreApellido: string;
     observaciones: string;
+    especialidad: Especialidad;
 }
 
 export class Disponibilidad {
     profesional: Profesional;
-    especialidad: Especialidad;
     turnoManiana: TurnoLight;
     turnoTarde: TurnoLight;
 }
@@ -137,7 +137,7 @@ export class Paciente {
     sexo: string;
     nombreApellido: string;
     telefono: string;
-    mail: string;
+    email: string;
     fechaNacimiento: Date;
     codigoObraSocial: number;
     codigoPlan: number;
