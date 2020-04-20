@@ -5,7 +5,8 @@
   </p>
 </div>
 
-<div class="cuadro-formulario" *ngIf="(profesionalesDisponiblesLenght$ | async) > 0">
+<div class="cuadro-formulario" 
+  *ngIf="(((profesionalesDisponiblesLenght$ | async) > 0)  && ((estado$ | async) >= 2))">
 
   <div class="row clearfix">
     <p>
