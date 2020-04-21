@@ -102,6 +102,9 @@ export class ServiceService {
         .pipe(map(
           (res: DisponibilidadRespuesta) => {
             throwErrorIfBadCode(res);
+            if (res.disponibilidad == undefined || res.disponibilidad.length == 0) {
+              throw new Error(`No se encontraron coincidencias para los criterios ingresados.`);
+            }
             return res.disponibilidad;
           }
       ));
