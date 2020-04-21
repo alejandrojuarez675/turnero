@@ -112,11 +112,9 @@ export const horariosMock: Turno[] = [
     {
         ...turno1,
         profesional: profesional1,
-        especialidad: especialidadesMocks[0]
     }, {
         ...turno2,
         profesional: profesional1,
-        especialidad: especialidadesMocks[0]
     }
 ];
 
@@ -128,5 +126,4 @@ export const reservaTurnoMock: Reserva = {
 export const turnoMock : Turno = {
     ...turno1,
     profesional: profesional1,
-    especialidad: especialidadesMocks[0]
 }
