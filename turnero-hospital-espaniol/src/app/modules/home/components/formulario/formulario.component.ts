@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
+import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
@@ -43,28 +44,28 @@ export class FormularioComponent implements OnInit {
   }
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 
   cambioObraSocial(event) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined })); // FIXME
   }
 
   cambioPlan(event) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
   }
 
   cambioEspecialidad(event) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: event.value }));
   }
 
   cambioCentroDeAtencion(event) {
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
   }
 
@@ -84,11 +85,16 @@ export class FormularioComponent implements OnInit {
       this.store.select(FormSelectors.selectBusquedaProfesionales)
       .subscribe(
         (filter: BusquedaProfesionalesRequest) => {
-          this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 }));
+          this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
           this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
         }
       )
       .unsubscribe();
     }
+  }
+
+  cleanResultadoDisponibilidad() {
+    this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }));
+    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
   }
 }
