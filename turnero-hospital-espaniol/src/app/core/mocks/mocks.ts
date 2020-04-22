@@ -95,10 +95,10 @@ export const profesionalesMocks: Disponibilidad[] = [
 
 const diasDisponibles = () => {
     const response: DisponibilidadDias[] = [];
-    DateUtils.getDaysArray(new Date(), 15).forEach(
+    DateUtils.getDaysArray(new Date(), 9).forEach(
         (day: Date, index: number) => {
             response.push({
-                fecha: day,
+                fecha: "2020-04-0" + index,
                 conDisponibilidad: index % 2 === 0
             });
         }

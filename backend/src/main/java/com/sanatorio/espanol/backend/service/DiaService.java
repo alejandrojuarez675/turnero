@@ -22,32 +22,36 @@ public class DiaService {
 	
 	public static List<Dia> listaDiaReducida = 
 			new ArrayList<Dia>(Arrays.asList(
-				new Dia(LocalDateTime.of(2020,4,1,0,0), Boolean.TRUE), 
-				new Dia(LocalDateTime.of(2020,4,2,0,0), Boolean.FALSE),
-				new Dia(LocalDateTime.of(2020,4,8,0,0), Boolean.TRUE),
-				new Dia(LocalDateTime.of(2020,4,9,0,0), Boolean.TRUE),
-				new Dia(LocalDateTime.of(2020,4,15,0,0), Boolean.FALSE),
-				new Dia(LocalDateTime.of(2020,4,16,0,0), Boolean.TRUE),
-				new Dia(LocalDateTime.of(2020,4,29,0,0), Boolean.TRUE),
-				new Dia(LocalDateTime.of(2020,4,30,0,0), Boolean.TRUE),
-				new Dia(LocalDateTime.of(2020,5,6,0,0), Boolean.FALSE),
-				new Dia(LocalDateTime.of(2020,5,7,0,0), Boolean.TRUE)
+				new Dia("2020-04-01", Boolean.TRUE), 
+				new Dia("2020-04-05", Boolean.FALSE),
+				new Dia("2020-04-08", Boolean.TRUE),
+				new Dia("2020-04-09", Boolean.TRUE),
+				new Dia("2020-04-15", Boolean.FALSE),
+				new Dia("2020-04-16", Boolean.TRUE),
+				new Dia("2020-04-29", Boolean.TRUE),
+				new Dia("2020-04-30", Boolean.TRUE),
+				new Dia("2020-05-06", Boolean.FALSE),
+				new Dia("2020-05-07", Boolean.TRUE)
 			));
 	
 	public static List<Dia> listaDia = 
 		new ArrayList<Dia>(Arrays.asList(
-			new Dia(LocalDateTime.of(2020,4,1,0,0), Boolean.TRUE), 
-			new Dia(LocalDateTime.of(2020,4,2,0,0), Boolean.FALSE),
-			new Dia(LocalDateTime.of(2020,4,3,0,0), Boolean.FALSE),
-			new Dia(LocalDateTime.of(2020,4,8,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,9,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,12,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,15,0,0), Boolean.FALSE),
-			new Dia(LocalDateTime.of(2020,4,16,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,18,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,29,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,4,30,0,0), Boolean.TRUE),
-			new Dia(LocalDateTime.of(2020,5,6,0,0), Boolean.FALSE),
-			new Dia(LocalDateTime.of(2020,5,7,0,0), Boolean.TRUE)
-		));
+			new Dia("2020-04-01", Boolean.TRUE), 
+			new Dia("2020-04-05", Boolean.FALSE),
+			new Dia("2020-04-06", Boolean.FALSE),
+			new Dia("2020-04-08", Boolean.TRUE),
+			new Dia("2020-04-09", Boolean.TRUE),
+			new Dia("2020-04-15", Boolean.FALSE),
+			new Dia("2020-04-16", Boolean.TRUE),
+			new Dia("2020-04-18", Boolean.TRUE),
+			new Dia("2020-04-24", Boolean.TRUE),
+			new Dia("2020-04-29", Boolean.TRUE),
+			new Dia("2020-04-30", Boolean.TRUE),
+			new Dia("2020-05-01", Boolean.FALSE),
+			new Dia("2020-05-02", Boolean.FALSE),
+			new Dia("2020-05-03", Boolean.FALSE),
+			new Dia("2020-05-06", Boolean.FALSE),
+			new Dia("2020-05-07", Boolean.TRUE)
+		)
+	);
 }
