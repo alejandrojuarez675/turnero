@@ -5,12 +5,12 @@ export class BusquedaProfesionalesRequest {
     codigoObraSocial: number;
     codigoPlan: number;
     codigoEspecialidad: number;
-    codigoCentroAtencion: string;
+    codigoCentroAtencion: number;
 }
 
 export class BusquedaDiasDisponiblesRequest
     extends BusquedaProfesionalesRequest {
-    codigoProfesional: string;
+    codigoProfesional: number;
 }
 
 export class BusquedaHorariosRequest

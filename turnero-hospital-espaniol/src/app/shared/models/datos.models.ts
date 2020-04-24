@@ -33,7 +33,7 @@ export class EspecialidadRespuesta extends Respuesta {
 }
 
 export class CentroAtencion {
-    codigo: string;
+    codigo: number;
     nombre: string;
 }
 
@@ -42,7 +42,7 @@ export class CentroAtencionRespuesta extends Respuesta {
 }
 
 export class Profesional {
-    codigo: string;
+    codigo: number;
     nombreApellido: string;
     observaciones: string;
     especialidad: Especialidad;
@@ -141,6 +141,7 @@ export class Paciente {
     fechaNacimiento: Date;
     codigoObraSocial: number;
     codigoPlan: number;
+    codigoProfesional: number;
 }
 
 export class DatosReserva {

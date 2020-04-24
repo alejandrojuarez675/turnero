@@ -4,7 +4,7 @@ import { ConfirmationReservaComponent } from './modules/home/components/confirma
 
 const routes: Routes = [
   {path: 'home', loadChildren: './modules/home/home.module#HomeModule'},
-  {path: 'confirmacionreserva', component: ConfirmationReservaComponent},
+  {path: 'confirmacionReserva', component: ConfirmationReservaComponent},
   {path: '**', redirectTo: 'home'}
 ];
 

@@ -53,14 +53,14 @@ export const especialidadesMocks: Especialidad[] = [
 
 
 export const centroAtencionMock: CentroAtencion = {
-    codigo: 'HE',
+    codigo: 1,
     nombre: 'Hospital Español'
 };
 
 export const centroAtencionesMocks: CentroAtencion[] = [centroAtencionMock];
 
 const profesional1: Profesional = {
-    codigo: 'PeJu',
+    codigo: 1,
     nombreApellido: 'Perez, Juan',
     observaciones: '',
     especialidad: especialidadesMocks[0]

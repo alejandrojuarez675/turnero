@@ -32,6 +32,7 @@ public class TurnoController {
 	@RequestMapping("/Consext/getObraSocial")
     public ObraSocialRespuesta getObraSocial() {
 		ObraSocialRespuesta oBS = commonService.getObraSocial();
+		Integer a = null; a.equals(a);
 		return oBS;
     }
 	

@@ -4,7 +4,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ServiceService } from './services/service.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../core/authentification/auth.service';
 
 @NgModule({
   declarations: [
