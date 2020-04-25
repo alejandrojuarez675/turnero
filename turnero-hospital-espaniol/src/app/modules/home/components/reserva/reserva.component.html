@@ -2,8 +2,20 @@
     (((turnoSelected$ | async) != undefined) && ((estado$ | async) == 5))">
     <div class="row clearfix">
         <p>
-          Ingrese los siguientes datos para reservar el turno
+          Ingrese los siguientes datos para finalizar la reserva del turno
         </p>
+    </div>
+    <div class="row clearfix">
+        <div style="width: 30%;">Profesional: </div>
+        <div>{{ turnoSelected?.profesional?.nombreApellido }} </div>
+    </div>
+    <div class="row clearfix">
+        <div style="width: 30%;">Especialidad: </div>
+        <div>{{ turnoSelected?.profesional?.especialidad?.nombre }} </div>
+    </div>
+    <div class="row clearfix">
+        <div style="width: 30%;">Turno: </div>
+        <div>{{turnoSelected?.fecha | date: 'dd/MM/yyyy'}} {{turnoSelected?.hora}} </div>
     </div>
 
     <div class="row clearfix">

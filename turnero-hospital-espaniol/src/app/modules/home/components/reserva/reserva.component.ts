@@ -53,11 +53,10 @@ export class ReservaComponent implements OnInit {
 
 
   ngOnInit() {
-    
+    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
   }
 
   reservar() {
-    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
     this.obraSocialSelected$.subscribe(obraSocial => this.obraSocialSelected = obraSocial);
     this.planSelected$.subscribe(plan => this.planSelected = plan);
     this.fechaNacimientoSelected$.subscribe(fechaNacimiento => this.fechaNacimientoSelected = fechaNacimiento);
