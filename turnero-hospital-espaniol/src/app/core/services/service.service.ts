@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta } from '../../shared/models/datos.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta, Login, loginRespuesta } from '../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
@@ -21,8 +21,9 @@ export class ServiceService {
   endpoint = environment.endpoint;
   endpointC = this.endpoint + "/Consext" ;
   endpointG = this.endpoint + "/Gestion" ;
+  endpointA = this.endpoint + "/Auth" ;
 
-  
+  endpoint_login = this.endpointA + '/Login';
   endpoint_obraSocial = this.endpointC + '/getObraSocial';
   endpoint_especialidad = this.endpointC + '/getEspecialidad';
   endpoint_centroAtencion = this.endpointG + '/getCentroAtencion';
@@ -31,6 +32,22 @@ export class ServiceService {
   endpoint_busquedaHorarios = this.endpointC + '/busquedaHorarios';
   endpoint_reservaTurno = this.endpointC + '/reservaTurno';
   endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
+
+  login(usuario: Login): Observable<any> {
+    if (this.useMockups) {
+      return getWsFromMock(Mock.tokenMock);
+    } else {
+      return this.http.post<loginRespuesta>(this.endpoint_login, usuario)
+        .pipe(map(
+          (res: loginRespuesta) => {
+            if (res.token == undefined || res.token.length == 0) {
+              throwErrorToUser(`Por favor intente más tarde.`);
+            }
+            return res.token;
+          }
+      ));
+    }
+  }
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {

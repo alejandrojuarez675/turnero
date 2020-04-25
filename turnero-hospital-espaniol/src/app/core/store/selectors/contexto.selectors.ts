@@ -11,3 +11,10 @@ export const getEstado =  createSelector(
         return contexto.estado;
     }
 );
+
+export const getToken =  createSelector(
+    selectContexto,
+    (contexto: Contexto) => {
+        return contexto.token;
+    }
+);

@@ -104,6 +104,7 @@ export class TurnoRespuesta extends Respuesta {
 
 export class Contexto {
     estado: number;
+    token: string;
 }
 
 export class Formulario {
@@ -147,4 +148,15 @@ export class Paciente {
 export class DatosReserva {
     paciente: Paciente;
     reserva: Reserva;
+}
+
+export class Login {
+    username: string;
+    password: string;
+}
+
+export class loginRespuesta {
+    username: string;
+    token: string;
+    expires: Date;
 }

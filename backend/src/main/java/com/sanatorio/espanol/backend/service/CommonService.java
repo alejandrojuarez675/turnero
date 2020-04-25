@@ -49,7 +49,9 @@ public class CommonService {
 	}
 
 	public LoginRespuesta login(LoginDTO loginRequest) {
-		return new LoginRespuesta();
+		LoginRespuesta resp = new LoginRespuesta();
+		return resp;
+		
 	}
 	
 	public ObraSocialRespuesta getObraSocial() {

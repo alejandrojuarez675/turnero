@@ -25,6 +25,7 @@ import { MatProgressSpinnerModule, MAT_DATE_LOCALE } from '@angular/material';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
+import { ContextEffects } from './core/store/effects/context.effects';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
       CalendarEffects,
       ErrorEffects,
       ReservaEffects,
+      ContextEffects,
     ]),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,

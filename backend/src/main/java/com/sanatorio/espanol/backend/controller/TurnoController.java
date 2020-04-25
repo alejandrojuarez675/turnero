@@ -32,8 +32,10 @@ public class TurnoController {
 	private CommonService commonService;
 	
 	@PostMapping("/Auth/Login")
-    public LoginRespuesta login(@RequestBody LoginDTO LoginRequest) {
-		return commonService.login(LoginRequest);
+    public LoginRespuesta login(@RequestBody LoginDTO loginRequest) {
+		LoginRespuesta res = commonService.login(loginRequest);
+		
+		return res;
     }
 	
 	@RequestMapping("/Consext/getObraSocial")
