@@ -28,6 +28,8 @@ export class FormularioComponent implements OnInit {
   especialidad = new FormControl('', [Validators.required]);
   centroAtencion = new FormControl('', [Validators.required]);
 
+  maxDate: Date;
+
   constructor(
     private store: Store<{ formulario: Formulario }>
   ) {
@@ -35,6 +37,7 @@ export class FormularioComponent implements OnInit {
     this.planes$ = store.select(FormSelectors.selectPlanes);
     this.especialidades$ = store.select(FormSelectors.selectAllEspecialidades);
     this.centrosDeAtencion$ = store.select(FormSelectors.selectAllCentrosDeAtencion);
+    this.maxDate = new Date();
   }
 
   ngOnInit() {
