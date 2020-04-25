@@ -12,16 +12,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { calendarReducer } from './core/store/reducers/calendar.reducers';
+import { contextoReducer } from './core/store/reducers/contexto.reducers';
 import { formReducer } from './core/store/reducers/form.reducers';
 import { SharedModule } from './shared/shared.module';
 import { errorReducer } from './core/store/reducers/error.reducers';
 import { ErrorEffects } from './core/store/effects/error.effects';
 import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
+import { reservacionReducer } from './core/store/reducers/reservacion.reducers';
+import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
+import { MatProgressSpinnerModule, MAT_DATE_LOCALE } from '@angular/material';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptor/token.interceptor';
+import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
+import { ContextEffects } from './core/store/effects/context.effects';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmationReservaComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +38,11 @@ import { reservaReducer } from './core/store/reducers/reserva.reducers';
     SharedModule,
     StoreModule.forRoot({
       // router: routerReducer,
+      contexto: contextoReducer,
       formulario: formReducer,
       calendario: calendarReducer,
       reserva: reservaReducer,
+      reservacion: reservacionReducer,
       error: errorReducer,
     }),
     StoreRouterConnectingModule.forRoot(),
@@ -44,14 +55,30 @@ import { reservaReducer } from './core/store/reducers/reserva.reducers';
       CalendarEffects,
       ErrorEffects,
       ReservaEffects,
+      ContextEffects,
     ]),
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    
   ],
   exports: [
     CoreModule,
-    SharedModule
+    SharedModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

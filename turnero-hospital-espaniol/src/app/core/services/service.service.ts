@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest } from '../../shared/models/request.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta, Login, loginRespuesta } from '../../shared/models/datos.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
-import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
+import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
 
 @Injectable()
@@ -19,13 +19,35 @@ export class ServiceService {
 
   useMockups = environment.mockups;
   endpoint = environment.endpoint;
-  endpoint_obraSocial = this.endpoint + '/getObraSocial';
-  endpoint_especialidad = this.endpoint + '/getEspecialidad';
-  endpoint_centroAtencion = this.endpoint + '/getCentroAtencion';
-  endpoint_busquedaProfesionales = this.endpoint + '/busquedaProfesionales';
-  endpoint_busquedaDiasDisponibles = this.endpoint + '/busquedaDiasDisponibles';
-  endpoint_busquedaHorarios = this.endpoint + '/busquedaHorarios';
-  endpoint_reservaTurno = this.endpoint + '/reservaTurno';
+  endpointC = this.endpoint + "/Consext" ;
+  endpointG = this.endpoint + "/Gestion" ;
+  endpointA = this.endpoint + "/Auth" ;
+
+  endpoint_login = this.endpointA + '/Login';
+  endpoint_obraSocial = this.endpointC + '/getObraSocial';
+  endpoint_especialidad = this.endpointC + '/getEspecialidad';
+  endpoint_centroAtencion = this.endpointG + '/getCentroAtencion';
+  endpoint_busquedaProfesionales = this.endpointC + '/busquedaProfesionales';
+  endpoint_busquedaDiasDisponibles = this.endpointC + '/busquedaDiasDisponibles';
+  endpoint_busquedaHorarios = this.endpointC + '/busquedaHorarios';
+  endpoint_reservaTurno = this.endpointC + '/reservaTurno';
+  endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
+
+  login(usuario: Login): Observable<any> {
+    if (this.useMockups) {
+      return getWsFromMock(Mock.tokenMock);
+    } else {
+      return this.http.post<loginRespuesta>(this.endpoint_login, usuario)
+        .pipe(map(
+          (res: loginRespuesta) => {
+            if (res.token == undefined || res.token.length == 0) {
+              throwErrorToUser(`Por favor intente más tarde.`);
+            }
+            return res.token;
+          }
+      ));
+    }
+  }
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
@@ -37,7 +59,11 @@ export class ServiceService {
         .pipe(map(
           (res: ObraSocialRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.obraSocial;
+            return res.obraSocial.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
@@ -53,7 +79,11 @@ export class ServiceService {
         .pipe(map(
           (res: EspecialidadRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.especialidad;
+            return res.especialidad.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
@@ -69,7 +99,11 @@ export class ServiceService {
         .pipe(map(
           (res: CentroAtencionRespuesta) => {
             throwErrorIfBadCode(res);
-            return res.centroAtencion;
+            return res.centroAtencion.sort((a, b) => {
+              if (a.nombre > b.nombre) return 1;
+              if (a.nombre < b.nombre) return -1;
+              return 0;
+            });
           }
       ));
     }
@@ -85,6 +119,9 @@ export class ServiceService {
         .pipe(map(
           (res: DisponibilidadRespuesta) => {
             throwErrorIfBadCode(res);
+            if (res.disponibilidad == undefined || res.disponibilidad.length == 0) {
+              throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
+            }
             return res.disponibilidad;
           }
       ));
@@ -116,9 +153,9 @@ export class ServiceService {
       //   ));
 
       } else {
-      console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
-      return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
-        .pipe(map(
+        console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
+        return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
+          .pipe(map(
             (res: DisponibilidadDiasRespuesta) => {
               throwErrorIfBadCode(res);
               return res.dia;
@@ -137,6 +174,9 @@ export class ServiceService {
         .pipe(map(
           (res: HorariosRespuesta) => {
             throwErrorIfBadCode(res);
+            if (res.turno == undefined || res.turno.length == 0) {
+              throwErrorToUser(`No hay turnos disponibles para el día seleccionado`);
+            }  
             return res.turno;
           }
         ));
@@ -159,4 +199,19 @@ export class ServiceService {
     }
   }
 
+  retrieveTurno(reserva: ConfirmacionTurnoRequest): Observable<any> {
+    if (this.useMockups) {
+      console.log('Run mock for: retrieveTurno() - reserva', reserva);
+      return getWsFromMock(Mock.turnoMock);
+    } else {
+      console.log('Run to server ' + this.endpoint_confirmacionTurno);
+      return this.http.post<TurnoRespuesta>(this.endpoint_confirmacionTurno, reserva)
+        .pipe(map(
+          (res: TurnoRespuesta) => {
+            throwErrorIfBadCode(res);
+            return res.turno;
+          }
+      ));
+    }
+  }  
 }

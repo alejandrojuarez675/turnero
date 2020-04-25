@@ -8,6 +8,7 @@ import * as FormularioSelectors from '../../../../core/store/selectors/form.sele
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 
 @Component({
   selector: 'app-reserva',
@@ -16,18 +17,20 @@ import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 })
 export class ReservaComponent implements OnInit {
 
-  sexo$: string[] = ['Femenino', 'Masculino'];
   dni = new FormControl('', [Validators.required,
-  Validators.minLength(6),
-  Validators.maxLength(10),
-  Validators.pattern(/^\d+$/)]);
+    Validators.minLength(6),
+    Validators.maxLength(10),
+    Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
   telefono = new FormControl('', [Validators.required,
-  Validators.minLength(5),
-  Validators.pattern(/^\d+$/)]);
+    Validators.minLength(5),
+    Validators.pattern(/^\d+$/)]);
   mail = new FormControl('', [Validators.required,
-  Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
+    Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
+
+  estado$: Observable<number>;
+  sexo$: string[] = ['Femenino', 'Masculino'];
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
   obraSocialSelected$: Observable<ObraSocial>;
@@ -36,23 +39,17 @@ export class ReservaComponent implements OnInit {
   planSelected: Plan;
   fechaNacimientoSelected$: Observable<Date>;
   fechaNacimientoSelected: Date;
-
-
   reservaSelected$: Observable<ReservaRespuesta>;
 
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>,
     private router: Router
   ) {
-    this.turnoSelected$ = store.select(
-      ReservaSelector.getTurnoSelected
-    );
-    this.obraSocialSelected$ = store.select(
-      FormularioSelectors.selectObraSocialSelected);
-    this.planSelected$ = store.select(
-      FormularioSelectors.selectPlanSelected);
-    this.fechaNacimientoSelected$ = store.select(
-      FormularioSelectors.selectFechaNacimiento);
+    this.estado$ = store.select(ContextoSelectors.getEstado);
+    this.turnoSelected$ = store.select(ReservaSelector.getTurnoSelected);
+    this.obraSocialSelected$ = store.select(FormularioSelectors.selectObraSocialSelected);
+    this.planSelected$ = store.select(FormularioSelectors.selectPlanSelected);
+    this.fechaNacimientoSelected$ = store.select(FormularioSelectors.selectFechaNacimiento);
   }
 
 
@@ -73,11 +70,14 @@ export class ReservaComponent implements OnInit {
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
     paciente.telefono = this.telefono.value;
-    paciente.mail = this.mail.value;
+    paciente.email = this.mail.value;
 
     paciente.codigoObraSocial = this.obraSocialSelected.codigo;
     paciente.codigoPlan = this.planSelected.codigo;
     paciente.fechaNacimiento = this.fechaNacimientoSelected;
+
+    paciente.codigoProfesional = this.turnoSelected.profesional.codigo;
+    paciente.codigoEspecialidad = this.turnoSelected.profesional.especialidad.codigo;
 
     this.store.dispatch(ReservaAction.setPaciente({ paciente }));
 
@@ -85,14 +85,17 @@ export class ReservaComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.select(ReservaSelector.reservarTurno).subscribe(
-      // tslint:disable-next-line: no-shadowed-variable
-      (filter: ReservaTurnoRequest) => {
-        if (filter) {
-          this.store.dispatch(ReservaAction.reservaTurno({ filter }));
+    if (this.isValid) {
+      this.store.select(ReservaSelector.reservarTurno)
+      .subscribe(
+        (filter: ReservaTurnoRequest) => {
+          if (filter) {
+            this.store.dispatch(ReservaAction.reservaTurno({ filter }));
+          }
         }
-      }
-    );
+      )
+      .unsubscribe();
+    }
   }
 
   isValid() {

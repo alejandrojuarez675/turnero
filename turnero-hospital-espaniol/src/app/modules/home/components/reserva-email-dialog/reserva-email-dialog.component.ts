@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Turno, ReservaFormulario, Reserva } from '../../../../shared/models/datos.models';
-import { DateUtils } from '../../../../core/utils/date.utils';
+import { DatosReserva } from '../../../../shared/models/datos.models';
 
 export interface DialogData {
-  reserva: ReservaFormulario;
+  datosReserva: DatosReserva;
 }
 
 @Component({

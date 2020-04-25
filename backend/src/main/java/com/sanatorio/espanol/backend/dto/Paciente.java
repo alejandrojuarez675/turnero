@@ -13,6 +13,10 @@ public class Paciente {
 	public Integer codigoObraSocial;
 	public Integer codigoPlan;
 	
+	public Integer codigoProfesional;
+	public Integer codigoEspecialidad;
+	
+	
 	public String getDni() {
 		return dni;
 	}
@@ -60,5 +64,17 @@ public class Paciente {
 	}
 	public void setCodigoPlan(Integer codigoPlan) {
 		this.codigoPlan = codigoPlan;
+	}
+	public Integer getCodigoProfesional() {
+		return codigoProfesional;
+	}
+	public void setCodigoProfesional(Integer codigoProfesional) {
+		this.codigoProfesional = codigoProfesional;
+	}
+	public Integer getCodigoEspecialidad() {
+		return codigoEspecialidad;
+	}
+	public void setCodigoEspecialidad(Integer codigoEspecialidad) {
+		this.codigoEspecialidad = codigoEspecialidad;
 	}
 }

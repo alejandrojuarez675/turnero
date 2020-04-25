@@ -53,16 +53,24 @@ export const especialidadesMocks: Especialidad[] = [
 
 
 export const centroAtencionMock: CentroAtencion = {
-    codigo: 'HE',
+    codigo: 1,
     nombre: 'Hospital Español'
 };
 
 export const centroAtencionesMocks: CentroAtencion[] = [centroAtencionMock];
 
 const profesional1: Profesional = {
-    codigo: 'PeJu',
+    codigo: 1,
     nombreApellido: 'Perez, Juan',
     observaciones: '',
+    especialidad: especialidadesMocks[0]
+};
+
+const profesional2: Profesional = {
+    codigo: 2,
+    nombreApellido: 'Riquelme, Roman',
+    observaciones: '',
+    especialidad: especialidadesMocks[0]
 };
 
 const turno1: TurnoLight = {
@@ -81,24 +89,45 @@ const turno2: TurnoLight = {
     observaciones: ''
 };
 
+const turno3: TurnoLight = {
+    codigo: 548,
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/03/29'),
+    hora: '10:00',
+    observaciones: ''
+};
+
+const turno4: TurnoLight = {
+    codigo: 648,
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/04/4'),
+    hora: '20:15',
+    observaciones: ''
+};
+
 const disponibilidad: Disponibilidad = {
     profesional: profesional1,
-    especialidad: especialidadesMocks[0],
     turnoManiana: turno1,
     turnoTarde: turno2
 };
 
+const disponibilidad2: Disponibilidad = {
+    profesional: profesional2,
+    turnoManiana: turno3,
+    turnoTarde: turno4
+};
+
 export const profesionalesMocks: Disponibilidad[] = [
-    disponibilidad, disponibilidad
+    disponibilidad, disponibilidad2
 ];
 
 
 const diasDisponibles = () => {
     const response: DisponibilidadDias[] = [];
-    DateUtils.getDaysArray(new Date(), 15).forEach(
+    DateUtils.getDaysArray(new Date(), 9).forEach(
         (day: Date, index: number) => {
             response.push({
-                fecha: day,
+                fecha: '2020-04-0' + index,
                 conDisponibilidad: index % 2 === 0
             });
         }
@@ -112,15 +141,21 @@ export const horariosMock: Turno[] = [
     {
         ...turno1,
         profesional: profesional1,
-        especialidad: especialidadesMocks[0]
     }, {
         ...turno2,
         profesional: profesional1,
-        especialidad: especialidadesMocks[0]
     }
 ];
 
 export const reservaTurnoMock: Reserva = {
-    codigoReserva: "123",
-    vencimientoReserva: new Date('2020/03/30')
+    codigo: 123,
+    vencimiento: new Date('2020/03/30')
 };
+
+export const turnoMock: Turno = {
+    ...turno1,
+    profesional: profesional1,
+};
+
+// tslint:disable-next-line: max-line-length
+export const tokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6IlNPUE9SVEVJVCIsIlNlc3Npb25JZCI6IjExYTEzYTljLTc3NmQtNGM3Ni05YjUwLThjZDM0YWIwZThiNCIsImV4cCI6MTU4NzkwMDMxOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIn0.n5SJmebQ5BzAwRrWt0JCDoD5qW7rVr7aXVGcGJSk7eY';

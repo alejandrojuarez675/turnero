@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
+import * as ReservacionActions from '../../../../core/store/actions/reservacion.actions';
 import * as ReservaSelectors from '../../../../core/store/selectors/reserva.selectors';
-import { ReservaFormulario } from '../../../../shared/models/datos.models';
+import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
+import { DatosReserva, Reserva, ReservaFormulario } from '../../../../shared/models/datos.models';
 import { ReservaEmailDialogComponent } from '../reserva-email-dialog/reserva-email-dialog.component';
 
 @Component({
@@ -15,30 +19,40 @@ import { ReservaEmailDialogComponent } from '../reserva-email-dialog/reserva-ema
 })
 export class ReservaEmailComponent implements OnInit {
 
+  datosReserva: DatosReserva;
+  reserva$: Observable<ReservaFormulario>;
+
+
   constructor(
     public dialog: MatDialog,
-    private store: Store<{ reserva: ReservaFormulario }>,
+    private store: Store<{ reservacion: Reserva }>,
   ) {
+
   }
 
   ngOnInit() {
 
-    this.store.select(ReservaSelectors.getReserva).pipe(
-    // TODO cambiarlo por codigo reserva cuando ya esté funcionando bien
-      // filter(x => x !== undefined && x.reserva !== undefined && x.reserva.codigoReserva !== undefined)
-      filter(x => x !== undefined && x.paciente !== undefined && x.paciente.dni !== undefined)
+    this.datosReserva = new DatosReserva();
+    this.store.select(ReservacionSelectors.getReserva).pipe(
+      filter(x => x != undefined && x.codigo != undefined)
     ).subscribe(x => {
-      this.openDialog(x);
+      this.reserva$ = this.store.select(ReservaSelectors.getReserva);
+      this.reserva$.subscribe(reserva => this.datosReserva.paciente = reserva.paciente);
+      this.datosReserva.reserva = x;
+      this.openDialog(this.datosReserva);
       }
     );
   }
 
 
-  openDialog(reservaConfirm: ReservaFormulario): void {
-    this.dialog.open(ReservaEmailDialogComponent, { data: { reserva: reservaConfirm }})
+  openDialog(datosReserva: DatosReserva): void {
+    this.dialog.open(ReservaEmailDialogComponent, { data: { datosReserva: datosReserva }})
       .afterClosed().subscribe( () => {
-        this.store.dispatch(ReservaActions.cleanStore());
+        this.store.dispatch(ContextoActions.setEstado({ newEstado: 1}));
+        this.store.dispatch(ContextoActions.cleanStore());
         this.store.dispatch(CalendarActions.cleanStore());
+        this.store.dispatch(ReservaActions.cleanStore());
+        this.store.dispatch(ReservacionActions.cleanStore());
       });
   }
 

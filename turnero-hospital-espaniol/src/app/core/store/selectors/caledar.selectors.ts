@@ -22,16 +22,22 @@ export const getProfesionalSelected = createSelector(
     (calendario: Calendario) => calendario.profesionalSelected
 );
 
-export const getDiasDisponibles = createSelector(
+export const getDiasTurnosDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: Profesional, calendario: Calendario) =>
         calendario.diasDisponibles.filter(x => x.conDisponibilidad)
 );
 
+export const getDiasDisponibles = createSelector(
+    [getProfesionalSelected, selectCalendario],
+    (_profesionalSelected: Profesional, calendario: Calendario) =>
+        calendario.diasDisponibles
+);
+
 export const getDiasDisponiblesLength = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: Profesional, calendario: Calendario) =>
-        calendario.diasDisponibles.filter(x => x.conDisponibilidad).length
+        calendario.diasDisponibles.length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(
@@ -43,7 +49,9 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
-        request.codigoProfesional = profesionalSelected.codigo;
+        if (profesionalSelected != undefined) {
+            request.codigoProfesional = profesionalSelected.codigo;
+        }
         return request;
     }
 );
@@ -67,7 +75,9 @@ export const getBusquedaHorariosRequest = createSelector(
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
-        request.codigoProfesional = profesionalSelected.codigo;
+        if (profesionalSelected != undefined) {
+            request.codigoProfesional = profesionalSelected.codigo;
+        }
         request.fecha = fechaSelected;
         return request;
     }

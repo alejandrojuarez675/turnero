@@ -3,14 +3,14 @@ import { Disponibilidad, DisponibilidadDias, Turno, Profesional } from '../../..
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest } from '../../../shared/models/request.models';
 
 export const CLEAN_STORE = '[Calendar] - cleanStore';
-export const SET_PROFESIONALES_DISPONIBLES = '[API] - setProfesionalesDisponibles';
+export const SET_PROFESIONALES_DISPONIBLES = '[Calendar] - setProfesionalesDisponibles';
 export const GET_DIAS_DISPONIBLES = '[Calendar] - getDiasDisponibles';
-export const SET_DIAS_DISPONIBLES = '[API] - setDiasDisponibles';
+export const SET_DIAS_DISPONIBLES = '[Calendar] - setDiasDisponibles';
 export const SET_TURNO_SELECTED = '[Calendar] - setTurnoSelected';
 export const SET_PROFESIONAL_SELECTED = '[Calendar] - setProfesionalSelected';
 export const SET_FECHA_SELECTED = '[Calendar] - setFechaSelected';
 export const GET_HORARIOS_DISPONIBLES = '[Calendar] - getHorariosDisponibles';
-export const SET_HORARIOS_DISPONIBLES = '[API] - setHorariosDisponibles';
+export const SET_HORARIOS_DISPONIBLES = '[Calendar] - setHorariosDisponibles';
 
 export const cleanStore = createAction(CLEAN_STORE);
 

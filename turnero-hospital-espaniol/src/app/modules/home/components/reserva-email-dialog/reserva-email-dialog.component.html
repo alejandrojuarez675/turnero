@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>Reserva de turno</h1>
 
 <mat-dialog-content class="mat-typography">
-  <p *ngIf="data?.reserva">
-    Se le ha enviado un mail a la dirección {{ data.reserva.paciente.mail}}.
+  <p *ngIf="data?.datosReserva?.paciente">
+    Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}}.
   </p>
-  <p *ngIf="data?.reserva?.reserva?.vencimientoReserva">
+  <p *ngIf="data?.datosReserva?.reserva?.vencimiento">
     Tiene tiempo hasta el día 
-    {{ data.reserva.reserva.vencimientoReserva | date:'dd/MM/yyyy'}}
+    {{ data.datosReserva.reserva.vencimiento | date:'dd/MM/yyyy'}}
     para confirmarlo.
   </p>
 </mat-dialog-content>

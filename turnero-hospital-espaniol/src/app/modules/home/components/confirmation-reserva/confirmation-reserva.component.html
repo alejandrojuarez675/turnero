@@ -1,0 +1,31 @@
+<div class="cuadro-formulario" >
+    <mat-spinner *ngIf="loading"></mat-spinner>
+
+    <div *ngIf="turno != undefined">
+        <div class="row clearfix">
+            <p>
+              Se ha realizado exitosamente la confirmación del siguiente turno
+            </p>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Fecha y hora: </div>
+            <div>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.hora }} hs</div>
+        </div>
+        <div class="row clearfix" *ngIf='turno.observaciones !== ""'>
+            <div style="width: 10%;">Observaciones: </div>
+            <div>{{ turno.observaciones }}</div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Profesional: </div>
+            <div>{{ turno.profesional?.nombreApellido }} </div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Especialidad: </div>
+            <div>{{ turno.profesional?.especialidad?.nombre }} </div>
+        </div>
+        <div class="row clearfix">
+            <div style="width: 10%;">Centro Médico: </div>
+            <div>{{ turno.centroAtencion.nombre }} </div>
+        </div>
+    </div>
+</div>

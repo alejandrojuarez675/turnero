@@ -1,6 +1,9 @@
 now=$(date)
+echo actualizando paquetes
+cd turnero-hospital-espaniol
+npm install
 echo borrando archivos anteriores...
-cd ../turnero-demo/
+cd ../../turnero-demo/
 rm -R assets
 cd ../turnero-hospital-espaniol/turnero-hospital-espaniol/
 echo compilando...

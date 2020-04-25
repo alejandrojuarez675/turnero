@@ -17,6 +17,8 @@ import com.sanatorio.espanol.backend.dto.DisponibilidadRespuesta;
 import com.sanatorio.espanol.backend.dto.EspecialidadRespuesta;
 import com.sanatorio.espanol.backend.dto.HorarioRequest;
 import com.sanatorio.espanol.backend.dto.HorarioRespuesta;
+import com.sanatorio.espanol.backend.dto.LoginDTO;
+import com.sanatorio.espanol.backend.dto.LoginRespuesta;
 import com.sanatorio.espanol.backend.dto.ObraSocialRespuesta;
 import com.sanatorio.espanol.backend.dto.ReservaRequest;
 import com.sanatorio.espanol.backend.dto.ReservaRespuesta;
@@ -29,49 +31,56 @@ public class TurnoController {
 	@Autowired
 	private CommonService commonService;
 	
-	@RequestMapping("/getObraSocial")
+	@PostMapping("/Auth/Login")
+    public LoginRespuesta login(@RequestBody LoginDTO loginRequest) {
+		LoginRespuesta res = commonService.login(loginRequest);
+		
+		return res;
+    }
+	
+	@RequestMapping("/Consext/getObraSocial")
     public ObraSocialRespuesta getObraSocial() {
 		ObraSocialRespuesta oBS = commonService.getObraSocial();
 		return oBS;
     }
 	
-	@RequestMapping("/getEspecialidad")
+	@RequestMapping("/Consext/getEspecialidad")
     public EspecialidadRespuesta getEspecialidades() {
 		EspecialidadRespuesta espeResp = commonService.getEspecialidad();
     	return espeResp;
     }
 
-	@RequestMapping("/getCentroAtencion")
+	@RequestMapping("/Gestion/getCentroAtencion")
     public CentroAtencionRespuesta getCentro() {
 		CentroAtencionRespuesta centroResp = commonService.getCentro();
 		return centroResp;
     }
 
-	@PostMapping("/busquedaProfesionales")
+	@PostMapping("/Consext/busquedaProfesionales")
     public DisponibilidadRespuesta busquedaProfesionales(@RequestBody DisponibilidadRequest disponibilidadRequest) {
 		DisponibilidadRespuesta espeResp = commonService.busquedaProfe(disponibilidadRequest);
     	return espeResp;
     }
 
-	@PostMapping("/busquedaDiasDisponibles")
+	@PostMapping("/Consext/busquedaDiasDisponibles")
     public DiaRespuesta busquedaDiasDisponibles(@RequestBody DiaRequest diaRequest) {
 		DiaRespuesta diaResp = commonService.busquedaDias(diaRequest);
     	return diaResp;
     }
 	
-	@PostMapping("/busquedaHorarios")
+	@PostMapping("/Consext/busquedaHorarios")
     public HorarioRespuesta busquedaHorarios(@RequestBody HorarioRequest horaRequest) {
 		HorarioRespuesta horaResp = commonService.busquedaHorarios(horaRequest);
     	return horaResp;
     }
 	
-	@PostMapping("/reservaTurno")
-    public ReservaRespuesta reservaTurno(@RequestBody ReservaRequest reservaRequest) {
+	@PostMapping("/Consext/reservaTurno")
+	public ReservaRespuesta reservaTurno(@RequestBody ReservaRequest reservaRequest) {
 		ReservaRespuesta reservaResp = commonService.reservaTurno(reservaRequest);
     	return reservaResp;
     }
 	
-	@PostMapping("/confirmacionTurno")
+	@PostMapping("/Consext/confirmacionTurno")
     public ConfirmacionRespuesta confirmacionTurno(@RequestBody ConfirmacionRequest confRequest) {
 		ConfirmacionRespuesta confRta = commonService.confirmacionTurno(confRequest);
     	return confRta;

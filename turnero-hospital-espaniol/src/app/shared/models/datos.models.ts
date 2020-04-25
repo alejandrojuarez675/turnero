@@ -33,7 +33,7 @@ export class EspecialidadRespuesta extends Respuesta {
 }
 
 export class CentroAtencion {
-    codigo: string;
+    codigo: number;
     nombre: string;
 }
 
@@ -42,14 +42,14 @@ export class CentroAtencionRespuesta extends Respuesta {
 }
 
 export class Profesional {
-    codigo: string;
+    codigo: number;
     nombreApellido: string;
     observaciones: string;
+    especialidad: Especialidad;
 }
 
 export class Disponibilidad {
     profesional: Profesional;
-    especialidad: Especialidad;
     turnoManiana: TurnoLight;
     turnoTarde: TurnoLight;
 }
@@ -69,11 +69,10 @@ export class DisponibilidadRespuesta extends Respuesta {
 
 export class Turno extends TurnoLight {
     profesional: Profesional;
-    especialidad: Especialidad;
 }
 
 export class DisponibilidadDias {
-    fecha: Date;
+    fecha: String;
     conDisponibilidad: boolean;
 }
 
@@ -91,14 +90,22 @@ export class DisponibilidadDiasStore {
 }
 
 export class Reserva {
-    codigoReserva: string;
-    vencimientoReserva: Date;
+    codigo: number;
+    vencimiento: Date;
 }
 
 export class ReservaRespuesta extends Respuesta {
     reserva: Reserva;
 }
 
+export class TurnoRespuesta extends Respuesta {
+    turno: Turno;
+}
+
+export class Contexto {
+    estado: number;
+    token: string;
+}
 
 export class Formulario {
     obrasSociales: ObraSocial[];
@@ -123,12 +130,6 @@ export class Calendario {
 export class ReservaFormulario {
     turnoSelected: Turno;
     paciente: Paciente;
-    reserva: Reserva;
-    dni: number;
-    sexo: string;
-    nombreApellido: string;
-    telefono: string;
-    mail: string;
 }
 
 export class Paciente {
@@ -136,8 +137,26 @@ export class Paciente {
     sexo: string;
     nombreApellido: string;
     telefono: string;
-    mail: string;
+    email: string;
     fechaNacimiento: Date;
     codigoObraSocial: number;
     codigoPlan: number;
+    codigoProfesional: number;
+    codigoEspecialidad: number;
+}
+
+export class DatosReserva {
+    paciente: Paciente;
+    reserva: Reserva;
+}
+
+export class Login {
+    username: string;
+    password: string;
+}
+
+export class loginRespuesta {
+    username: string;
+    token: string;
+    expires: Date;
 }

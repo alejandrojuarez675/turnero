@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import { Calendario, Turno } from '../../../../shared/models/datos.models';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -36,6 +37,8 @@ export class ConfirmationComponent implements OnInit {
         if (result) {
           this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno}));
           this.router.navigate(['/home/reserva']);
+          this.store.dispatch(ContextoActions.setEstado({ newEstado: 5 }));
+          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno }));
         } else {
           this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
           this.store.dispatch(ReservaActions.setTurnoSelected(undefined));

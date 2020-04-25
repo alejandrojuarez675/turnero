@@ -23,7 +23,7 @@ const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadD
     const stateNew = {...state};
     stateNew.diasDisponibles = [...diasDisponibles.map(x => {
         return {
-            fecha: new Date(x.fecha.toString()),
+            fecha: new Date(x.fecha.toString() + 'T00:00:00'),
             conDisponibilidad: x.conDisponibilidad
         };
     })];

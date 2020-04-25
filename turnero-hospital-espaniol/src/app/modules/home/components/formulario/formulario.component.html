@@ -2,7 +2,7 @@
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
             <mat-label>Fecha de Nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" (dateInput)="cambioFechaNacimiento($event)"
+            <input matInput [matDatepicker]="picker" [max]="maxDate" (dateInput)="cambioFechaNacimiento($event)"
                 [formControl]="fechaNacimiento">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>

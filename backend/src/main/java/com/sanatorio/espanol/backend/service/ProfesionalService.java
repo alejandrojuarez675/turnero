@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sanatorio.espanol.backend.dto.Especialidad;
 import com.sanatorio.espanol.backend.dto.Profesional;
 
 @Service
@@ -23,8 +24,9 @@ public class ProfesionalService {
 	
 	public static List<Profesional> listaProfesional = 
 		new ArrayList<Profesional>(Arrays.asList(
-				new Profesional(1, "Juan Perez", ""),
-				new Profesional(2, "María Gonzalez", "")
+				new Profesional(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
+				new Profesional(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")),
+				new Profesional(3, "Mario Gomez", "", new Especialidad(1, "KINESIOLOGÍA"))
 		));
 	
 }

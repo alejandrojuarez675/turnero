@@ -8,6 +8,10 @@ export function getWsFromMock(mockup: any, delayMs?: number) {
     return of(mockup).pipe(delay(delayMs));
 }
 
+export function throwErrorToUser(msj: any) {
+    throw new Error(`${msj}`);
+}
+
 export function throwErrorIfBadCode(res: any) {
     if (res.respuesta.codigo !== 200) {
       throw new Error(`${res.respuesta.codigo} - ${res.respuesta.mensaje}`);

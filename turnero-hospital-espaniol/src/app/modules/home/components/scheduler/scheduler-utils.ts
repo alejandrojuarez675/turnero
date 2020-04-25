@@ -2,17 +2,35 @@ import { DisponibilidadDiasStore } from '../../../../shared/models/datos.models'
 
 const colors: any = {
     blue: {
-        primary: '#1061a7',
-        secondary: '#1061a7'
+        primary: '#87cefa', // lo hacemos coincidir con el fondo del recuadro
+        secondary: '#87cefa' 
+    },
+    yellow: {
+        primary: '#cbe620',
+        secondary: '#e32296'
     },
 };
 
 export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDiasStore) => {
-    return {
-        start: dia.fecha,
-        title: '',
-        color: colors.blue,
-    };
+    if (dia.conDisponibilidad) {
+        return {
+            start: dia.fecha,
+            title: '',
+            color: colors.blue,
+            meta: {
+                incrementsBadgeTotal: false,
+            },
+        };
+    } else {
+        return {
+            start: dia.fecha,
+            title: '',
+            color: colors.yellow,
+            meta: {
+                incrementsBadgeTotal: false,
+            },
+        };
+    }
 };
 
 export const toMonthString = (month: number) => {
