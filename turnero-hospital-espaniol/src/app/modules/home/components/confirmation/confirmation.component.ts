@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
@@ -19,6 +20,7 @@ export class ConfirmationComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private store: Store<{ calendario: Calendario }>,
+    private router: Router,
   ) {
   }
 
@@ -33,6 +35,8 @@ export class ConfirmationComponent implements OnInit {
     this.dialog.open(ConfirmationDialogComponent, { data: { turno }})
       .afterClosed().subscribe( result => {
         if (result) {
+          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno}));
+          this.router.navigate(['/home/reserva']);
           this.store.dispatch(ContextoActions.setEstado({ newEstado: 5 }));
           this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno }));
         } else {

@@ -2,7 +2,6 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR'; // to register spanish
 import { NgModule } from '@angular/core';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
@@ -16,12 +15,15 @@ import { SeleccionHorarioComponent } from './components/seleccion-horario/selecc
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule } from './material.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ReservaPageComponent } from './pages/reserva-page/reserva-page.component';
+
 
 registerLocaleData(localeAR);
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    ReservaPageComponent,
     FormularioComponent,
     GrillaTurnosComponent,
     SchedulerComponent,

@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import * as FormActions from '../../../../core/store/actions/form.actions';
-import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
-import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan, Contexto, Login } from '../../../../shared/models/datos.models';
-import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
+import { filter } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
+import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
+import * as FormActions from '../../../../core/store/actions/form.actions';
+import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
+import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
+import { CentroAtencion, Especialidad, Formulario, Login, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
 
 @Component({
   selector: 'app-formulario',
@@ -51,14 +51,14 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(ContextoActions.getToken( { login } ));
 
     this.store.select(ContextSelectors.getToken).pipe(
-      filter(token => token != undefined)
+      filter(token => token !== undefined)
     ).subscribe(
       () => {
         this.store.dispatch(FormActions.getObraSociales());
         this.store.dispatch(FormActions.getEspecialidades());
         this.store.dispatch(FormActions.getCentrosDeAtencion());
       }
-    )
+    );
   }
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
@@ -102,6 +102,7 @@ export class FormularioComponent implements OnInit {
     if (this.isValid()) {
       this.store.select(FormSelectors.selectBusquedaProfesionales)
       .subscribe(
+        // tslint:disable-next-line: no-shadowed-variable
         (filter: BusquedaProfesionalesRequest) => {
           this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
           this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));

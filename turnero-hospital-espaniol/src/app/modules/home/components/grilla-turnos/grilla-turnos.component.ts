@@ -58,7 +58,7 @@ export class GrillaTurnosComponent implements OnInit {
       (request: BusquedaDiasDisponiblesRequest) => {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
       }
-    );
+    ).unsubscribe();
   }
 
   onClickTurno(row: Disponibilidad, horario: string) {

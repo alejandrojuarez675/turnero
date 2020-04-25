@@ -1,14 +1,14 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
-import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
-import { Paciente, ReservaFormulario, Turno, ReservaRespuesta, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
+import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
-import { filter } from 'rxjs/operators';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 
 @Component({
   selector: 'app-reserva',
@@ -18,17 +18,17 @@ import { filter } from 'rxjs/operators';
 export class ReservaComponent implements OnInit {
 
   dni = new FormControl('', [Validators.required,
-    Validators.minLength(6), 
-    Validators.maxLength(10), 
+    Validators.minLength(6),
+    Validators.maxLength(10),
     Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
-  telefono = new FormControl('', [Validators.required, 
-    Validators.minLength(5), 
+  telefono = new FormControl('', [Validators.required,
+    Validators.minLength(5),
     Validators.pattern(/^\d+$/)]);
   mail = new FormControl('', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
-  
+
   estado$: Observable<number>;
   sexo$: string[] = ['Femenino', 'Masculino'];
   turnoSelected$: Observable<Turno>;
@@ -40,9 +40,10 @@ export class ReservaComponent implements OnInit {
   fechaNacimientoSelected$: Observable<Date>;
   fechaNacimientoSelected: Date;
   reservaSelected$: Observable<ReservaRespuesta>;
-  
+
   constructor(
-    private store: Store<{ reservaTurno: ReservaFormulario }>
+    private store: Store<{ reservaTurno: ReservaFormulario }>,
+    private router: Router
   ) {
     this.estado$ = store.select(ContextoSelectors.getEstado);
     this.turnoSelected$ = store.select(ReservaSelector.getTurnoSelected);
@@ -53,7 +54,9 @@ export class ReservaComponent implements OnInit {
 
 
   ngOnInit() {
-    this.turnoSelected$.subscribe(turno => this.turnoSelected = turno);
+    this.turnoSelected$.subscribe(
+      (turno) => { if (!turno) { this.router.navigate(['/home']); }}
+    );
   }
 
   reservar() {
@@ -88,10 +91,10 @@ export class ReservaComponent implements OnInit {
           if (filter) {
             this.store.dispatch(ReservaAction.reservaTurno({ filter }));
           }
-        }      
+        }
       )
       .unsubscribe();
-    };
+    }
   }
 
   isValid() {
