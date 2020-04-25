@@ -157,6 +157,9 @@ export class ServiceService {
         .pipe(map(
           (res: HorariosRespuesta) => {
             throwErrorIfBadCode(res);
+            if (res.turno == undefined || res.turno.length == 0) {
+              throw new Error(`No hay turnos disponibles para el día seleccionado`);
+            }  
             return res.turno;
           }
         ));

@@ -53,7 +53,7 @@ export class ReservaComponent implements OnInit {
 
 
   ngOnInit() {
-    this.clearFormulario();
+    
   }
 
   reservar() {
@@ -88,20 +88,11 @@ export class ReservaComponent implements OnInit {
         (filter: ReservaTurnoRequest) => {
           if (filter) {
             this.store.dispatch(ReservaAction.reservaTurno({ filter }));
-            this.clearFormulario();
           }
         }      
       )
       .unsubscribe();
     };
-  }
-
-  clearFormulario() {
-    this.dni.setValue(undefined);
-    this.sexo.setValue(undefined);
-    this.nombreApellido.setValue(undefined);
-    this.telefono.setValue(undefined);
-    this.mail.setValue(undefined);
   }
 
   isValid() {
