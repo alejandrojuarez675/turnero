@@ -17,6 +17,8 @@ import com.sanatorio.espanol.backend.dto.DisponibilidadRespuesta;
 import com.sanatorio.espanol.backend.dto.EspecialidadRespuesta;
 import com.sanatorio.espanol.backend.dto.HorarioRequest;
 import com.sanatorio.espanol.backend.dto.HorarioRespuesta;
+import com.sanatorio.espanol.backend.dto.LoginDTO;
+import com.sanatorio.espanol.backend.dto.LoginRespuesta;
 import com.sanatorio.espanol.backend.dto.ObraSocialRespuesta;
 import com.sanatorio.espanol.backend.dto.ReservaRequest;
 import com.sanatorio.espanol.backend.dto.ReservaRespuesta;
@@ -29,10 +31,14 @@ public class TurnoController {
 	@Autowired
 	private CommonService commonService;
 	
+	@PostMapping("/Auth/Login")
+    public LoginRespuesta login(@RequestBody LoginDTO LoginRequest) {
+		return commonService.login(LoginRequest);
+    }
+	
 	@RequestMapping("/Consext/getObraSocial")
     public ObraSocialRespuesta getObraSocial() {
 		ObraSocialRespuesta oBS = commonService.getObraSocial();
-		Integer a = null; a.equals(a);
 		return oBS;
     }
 	
@@ -67,7 +73,7 @@ public class TurnoController {
     }
 	
 	@PostMapping("/Consext/reservaTurno")
-    public ReservaRespuesta reservaTurno(@RequestBody ReservaRequest reservaRequest) {
+	public ReservaRespuesta reservaTurno(@RequestBody ReservaRequest reservaRequest) {
 		ReservaRespuesta reservaResp = commonService.reservaTurno(reservaRequest);
     	return reservaResp;
     }

@@ -142,6 +142,7 @@ export class Paciente {
     codigoObraSocial: number;
     codigoPlan: number;
     codigoProfesional: number;
+    codigoEspecialidad: number;
 }
 
 export class DatosReserva {

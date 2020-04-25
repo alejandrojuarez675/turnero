@@ -74,6 +74,7 @@ export class ReservaComponent implements OnInit {
     paciente.fechaNacimiento = this.fechaNacimientoSelected;
 
     paciente.codigoProfesional = this.turnoSelected.profesional.codigo;
+    paciente.codigoEspecialidad = this.turnoSelected.profesional.especialidad.codigo;
 
     this.store.dispatch(ReservaAction.setPaciente({ paciente }));
 

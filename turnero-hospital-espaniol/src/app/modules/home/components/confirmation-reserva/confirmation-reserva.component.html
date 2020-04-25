@@ -17,11 +17,11 @@
         </div>
         <div class="row clearfix">
             <div style="width: 10%;">Profesional: </div>
-            <div>{{ turno.profesional.nombreApellido }} </div>
+            <div>{{ turno.profesional?.nombreApellido }} </div>
         </div>
         <div class="row clearfix">
             <div style="width: 10%;">Especialidad: </div>
-            <div>{{ turno.especialidad.nombre }} </div>
+            <div>{{ turno.profesional?.especialidad?.nombre }} </div>
         </div>
         <div class="row clearfix">
             <div style="width: 10%;">Centro Médico: </div>
