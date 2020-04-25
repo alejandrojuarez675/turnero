@@ -24,6 +24,7 @@ import { ConfirmationReservaComponent } from './modules/home/components/confirma
 import { MatProgressSpinnerModule, MAT_DATE_LOCALE } from '@angular/material';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
+import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,11 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     },
     {provide: MAT_DATE_LOCALE, useValue: 'es-AR'}

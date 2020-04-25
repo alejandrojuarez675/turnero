@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta } from '../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
-import { getWsFromMock, throwErrorIfBadCode } from '../utils/service.utils';
+import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
 
 @Injectable()
@@ -103,7 +103,7 @@ export class ServiceService {
           (res: DisponibilidadRespuesta) => {
             throwErrorIfBadCode(res);
             if (res.disponibilidad == undefined || res.disponibilidad.length == 0) {
-              throw new Error(`No se encontraron coincidencias para los criterios ingresados.`);
+              throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
             }
             return res.disponibilidad;
           }
@@ -158,7 +158,7 @@ export class ServiceService {
           (res: HorariosRespuesta) => {
             throwErrorIfBadCode(res);
             if (res.turno == undefined || res.turno.length == 0) {
-              throw new Error(`No hay turnos disponibles para el día seleccionado`);
+              throwErrorToUser(`No hay turnos disponibles para el día seleccionado`);
             }  
             return res.turno;
           }

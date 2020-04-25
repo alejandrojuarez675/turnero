@@ -66,7 +66,6 @@ export class GrillaTurnosComponent implements OnInit {
     const turnoLigthSelected = horario === 'T' ? row.turnoTarde : row.turnoManiana;
     const turnoSelected: Turno = {
       profesional: row.profesional,
-      especialidad: row.profesional.especialidad,
       codigo: turnoLigthSelected.codigo,
       centroAtencion: turnoLigthSelected.centroAtencion,
       fecha: turnoLigthSelected.fecha,

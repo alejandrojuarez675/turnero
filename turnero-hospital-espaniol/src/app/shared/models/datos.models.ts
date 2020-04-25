@@ -69,7 +69,6 @@ export class DisponibilidadRespuesta extends Respuesta {
 
 export class Turno extends TurnoLight {
     profesional: Profesional;
-    especialidad: Especialidad;
 }
 
 export class DisponibilidadDias {
