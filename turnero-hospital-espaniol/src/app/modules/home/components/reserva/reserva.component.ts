@@ -55,7 +55,10 @@ export class ReservaComponent implements OnInit {
 
   ngOnInit() {
     this.turnoSelected$.subscribe(
-      (turno) => { if (!turno) { this.router.navigate(['/home']); }}
+      (turno) => {
+        this.turnoSelected = turno;
+        if (!turno) { this.router.navigate(['/home']); }
+      }
     );
   }
 
