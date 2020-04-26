@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import { Calendario, Disponibilidad, Profesional, Turno } from '../../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
 
@@ -13,16 +14,19 @@ import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/reques
   templateUrl: './grilla-turnos.component.html',
   styleUrls: ['./grilla-turnos.component.css']
 })
-export class GrillaTurnosComponent implements OnInit {
+export class GrillaTurnosComponent {
 
   estado$: Observable<number>;
   profesionalesDisponibles$: Observable<Disponibilidad[]>;
   profesionalesDisponiblesLenght$: Observable<number>;
 
   displayedColumns = [
-    'profesional.nombreApellido', 'turnoManiana.fecha', 'turnoTarde.fecha',
+    'nombreApellido', 'turnoM', 'turnoT',
     // 'profesional.observaciones' // EN MOBILE NO SE VE BIEN (LO SACAMOS SOLO EN MOBILE?)
   ];
+
+  @ViewChild(MatSort) sort: MatSort;
+  datasource = new MatTableDataSource([]);
 
   constructor(
     private store: Store<{ calendario: Calendario }>,
@@ -30,16 +34,24 @@ export class GrillaTurnosComponent implements OnInit {
 
     this.estado$ = store.select(ContextoSelectors.getEstado);
 
-    this.profesionalesDisponibles$ = store.select(
-      CalendarSelectors.getProfesionalesDisponibles);
+    store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
+      (disponibilidades) => {
+        this.datasource = new MatTableDataSource<any>(disponibilidades
+          .map(x => ({
+            ...x,
+            nombreApellido: x.profesional.nombreApellido,
+            turnoM: x.turnoManiana.fecha,
+            turnoT: x.turnoTarde.fecha,
+          }))
+        );
+        this.datasource.sort = this.sort;
+      }
+    );
 
     this.profesionalesDisponiblesLenght$ = store.select(
       CalendarSelectors.getProfesionalesDisponiblesLength
     );
 
-  }
-
-  ngOnInit() {
   }
 
   onClickTodos() {

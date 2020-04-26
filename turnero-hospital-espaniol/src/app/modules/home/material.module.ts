@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatInputModule, MatPaginatorModule, MatTableModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
+// tslint:disable-next-line: max-line-length
+import { MatButtonModule, MatDialogModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,6 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
         ReactiveFormsModule,
         MatDialogModule,
         MatProgressSpinnerModule,
+        MatSortModule,
+        MatPaginatorModule,
     ],
     declarations: [],
 })

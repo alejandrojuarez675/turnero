@@ -59,7 +59,6 @@ import { ContextEffects } from './core/store/effects/context.effects';
     ]),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    
   ],
   exports: [
     CoreModule,
