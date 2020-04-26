@@ -1,3 +1,35 @@
+h3 {
+    margin: 0 0 10px;
+    font-size: 1.75rem;
+}  
+
+.col-md-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+}
+
+.col-md-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.text-right {
+    text-align: right !important;
+ }
+
+.text-left {
+   text-align: left !important;
+}
+
+.text-center {
+   text-align: center !important;
+}
+
 .lightskyblue {
     background-color: #1061a760 !important;
 }
@@ -15,10 +47,11 @@
 }
 
 .cambio-mes{
+    margin: 0 0 10px;
+    font-size: 1.75rem;
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 1%;
-    font-size: 24px;
 }
 
 .cambio-mes:hover {

@@ -2,7 +2,7 @@
 
 <mat-dialog-content class="mat-typography">
   <p *ngIf="data?.datosReserva?.paciente">
-    Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}}.
+    Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}} con un enlace para completar el proceso de solicitud de turno.
   </p>
   <p *ngIf="data?.datosReserva?.reserva?.vencimiento">
     Tiene tiempo hasta el día 
@@ -11,6 +11,6 @@
   </p>
 </mat-dialog-content>
 
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+<div mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>ACEPTAR</button>
 </div>

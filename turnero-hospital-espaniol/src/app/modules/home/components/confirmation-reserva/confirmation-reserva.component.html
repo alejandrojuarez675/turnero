@@ -1,32 +1,33 @@
-<div class="cuadro-formulario" >
-    <div class="center">
-        <mat-spinner *ngIf="loading"></mat-spinner> 
-    </div>
-    <div *ngIf="turno != undefined">
-        <div class="row clearfix">
-            <p>
-              Se ha realizado exitosamente la confirmación del siguiente turno
-            </p>
-        </div>
-        <div class="row clearfix">
-            <div style="width: 10%;">Fecha y hora: </div>
-            <div>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.hora }} hs</div>
-        </div>
-        <div class="row clearfix" *ngIf='turno.observaciones !== ""'>
-            <div style="width: 10%;">Observaciones: </div>
-            <div>{{ turno.observaciones }}</div>
-        </div>
-        <div class="row clearfix">
-            <div style="width: 10%;">Profesional: </div>
-            <div>{{ turno.profesional?.nombreApellido }} </div>
-        </div>
-        <div class="row clearfix">
-            <div style="width: 10%;">Especialidad: </div>
-            <div>{{ turno.profesional?.especialidad?.nombre }} </div>
-        </div>
-        <div class="row clearfix">
-            <div style="width: 10%;">Centro Médico: </div>
-            <div>{{ turno.centroAtencion.nombre }} </div>
+<div class="content">
+    <div class="my-col-60">
+        <div class="cuadro-formulario" >
+            <div class="center">
+                <mat-spinner *ngIf="loading"></mat-spinner> 
+            </div>
+            <div *ngIf="turno != undefined">
+                <div class="row clearfix info">
+                    <span class="material-icons icon-image-preview">done</span>
+                    <p class="texto">Se ha confirmado la reserva del turno:</p>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6 texto">
+                        <span class="material-icons icon-image-preview">calendar_today</span>
+                        Fecha y hora:  {{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.hora }} hs
+                    </div>
+                    <div class="col-md-6 texto">
+                        <span class="material-icons icon-image-preview">local_hospital</span>
+                        Centro Médico: {{ turno.centroAtencion.nombre }}
+                    </div>
+                    <div class="col-md-6 texto">
+                        <span class="material-icons icon-image-preview">person</span>
+                        Profesional: {{ turno.profesional?.nombreApellido }}
+                    </div>
+                    <div class="col-md-6 texto">
+                        <span class="material-icons icon-image-preview">work</span>
+                        Especialidad: {{ turno.profesional?.especialidad?.nombre }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
