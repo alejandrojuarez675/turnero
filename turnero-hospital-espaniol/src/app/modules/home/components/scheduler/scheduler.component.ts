@@ -94,6 +94,7 @@ export class SchedulerComponent {
     if (this.isPartOfEvents(this.events, date)) {
       this.store.dispatch(ContextoActions.setEstado({ newEstado: 4 }));
       this.store.dispatch(CalendarActions.setFechaSelected({ fecha: date }));
+      this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
       this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
         (filtro: BusquedaHorariosRequest) =>
           this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
