@@ -23,6 +23,8 @@ export class GrillaTurnosComponent {
   displayedColumns = [
     'nombreApellido', 'turnoM', 'turnoT',
     // 'profesional.observaciones' // EN MOBILE NO SE VE BIEN (LO SACAMOS SOLO EN MOBILE?)
+    // FIXME: es una columna importante pq sirve, por ej, para saber si atiende por obra social o solo particular
+    // vamos a consultar si puede ser alguna otra alternativa de como mostrarlo: icono de alerta q muestra la observacion en el hover
   ];
 
   @ViewChild(MatSort) sort: MatSort;
@@ -40,8 +42,8 @@ export class GrillaTurnosComponent {
           .map(x => ({
             ...x,
             nombreApellido: x.profesional.nombreApellido,
-            turnoM: x.turnoManiana.fecha,
-            turnoT: x.turnoTarde.fecha,
+            turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
+            turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
           }))
         );
         this.datasource.sort = this.sort;

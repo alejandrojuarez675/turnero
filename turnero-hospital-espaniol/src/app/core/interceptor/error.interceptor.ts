@@ -22,13 +22,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         if (error instanceof ErrorEvent) {
           // client-side error
-          errorMessage = `Client-side error: ${error.error.message}`;
+          //errorMessage = `Client-side error: ${error.error.message}`;
+          errorMessage = `Se ha producido un error. Por favor reintente más tarde`;
         } else {
           // backend error
           if (error.error != undefined && error.error.mensaje) {
             errorMessage = `${error.error.mensaje}`;
           } else {
-            errorMessage = `Error ${error.status}: ${error.message}`;
+            //errorMessage = `Error ${error.status}: ${error.message}`;
+            errorMessage = `Se ha producido un error. Por favor reintente más tarde`;
           }
           console.log(`Server-side error: ${error.error.codigo} ${error.error.mensaje}`);
         }
