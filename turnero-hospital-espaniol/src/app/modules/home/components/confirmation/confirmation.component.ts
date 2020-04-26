@@ -38,7 +38,6 @@ export class ConfirmationComponent implements OnInit {
           this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno}));
           this.router.navigate(['/home/reserva']);
           this.store.dispatch(ContextoActions.setEstado({ newEstado: 5 }));
-          this.store.dispatch(ReservaActions.setTurnoSelected( { turnoSelected: turno }));
         } else {
           this.store.dispatch(CalendarActions.setTurnoSelected(undefined));
           this.store.dispatch(ReservaActions.setTurnoSelected(undefined));

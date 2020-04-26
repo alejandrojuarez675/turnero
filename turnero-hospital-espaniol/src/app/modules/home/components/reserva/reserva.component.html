@@ -71,7 +71,10 @@
     </div>
 
     <div class="row clearfix">
-        <button style="width: 100%;" class="button" mat-flat-button [disabled]="!isValid()" (click)="reservar()">
+        <button style="width: 50%;" class="button-default" mat-flat-button (click)="volverASeleccionDeTurno()">
+            VOLVER ATRAS
+        </button>
+        <button style="width: 50%;" class="button" mat-flat-button [disabled]="!isValid()" (click)="reservar()">
             RESERVAR TURNO
         </button>
     </div>

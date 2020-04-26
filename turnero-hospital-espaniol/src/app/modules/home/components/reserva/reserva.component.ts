@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
+import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
@@ -109,6 +110,12 @@ export class ReservaComponent implements OnInit {
       result = true;
     }
     return result;
+  }
+
+  volverASeleccionDeTurno() {
+    this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected: undefined }));
+    this.store.dispatch(ReservaAction.setTurnoSelected({ turnoSelected: undefined }));
+    this.router.navigate(['/home']);
   }
 
 }
