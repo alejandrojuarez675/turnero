@@ -136,3 +136,21 @@ body {
     background-color: #f2f2f2;
     color: var(--font);
 }
+
+.center {
+    position: absolute;
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.overlay{
+    height:100vh;
+    width:100%;
+    background-color:rgba(0, 0, 0, 0.286);
+    z-index:    10;
+    top:        0; 
+    left:       0; 
+    position:   fixed;
+  }

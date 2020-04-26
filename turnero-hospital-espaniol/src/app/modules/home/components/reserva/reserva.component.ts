@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
+import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reserva',
@@ -41,6 +43,7 @@ export class ReservaComponent implements OnInit {
   fechaNacimientoSelected$: Observable<Date>;
   fechaNacimientoSelected: Date;
   reservaSelected$: Observable<ReservaRespuesta>;
+  loading = false;
 
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>,
@@ -89,6 +92,7 @@ export class ReservaComponent implements OnInit {
 
   onSubmit() {
     if (this.isValid) {
+      this.loading = true;
       this.store.select(ReservaSelector.reservarTurno)
       .subscribe(
         (filter: ReservaTurnoRequest) => {
@@ -98,6 +102,14 @@ export class ReservaComponent implements OnInit {
         }
       )
       .unsubscribe();
+
+      this.store.select(ReservacionSelectors.getReserva).pipe(
+        filter(reserva => reserva != undefined && reserva.codigo != undefined)
+      ).subscribe(() => {
+        this.loading = false;
+        }
+      );
+  
     }
   }
 
