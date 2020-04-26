@@ -22,7 +22,7 @@ export class ErrorControlComponent implements OnInit {
   openDialog(msg: string): void {
     if (msg) {
       this.snackBar.open(msg, 'x', {
-        duration: 3000,
+        duration: 5000,
       });
     }
   }
