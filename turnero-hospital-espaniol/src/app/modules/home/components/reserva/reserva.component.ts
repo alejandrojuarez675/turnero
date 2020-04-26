@@ -8,10 +8,12 @@ import * as CalendarActions from '../../../../core/store/actions/calendar.action
 import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
+import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
 import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import { filter } from 'rxjs/operators';
+import { Errors } from '../../../../core/store/reducers/error.reducers';
 
 @Component({
   selector: 'app-reserva',
@@ -43,6 +45,7 @@ export class ReservaComponent implements OnInit {
   fechaNacimientoSelected$: Observable<Date>;
   fechaNacimientoSelected: Date;
   reservaSelected$: Observable<ReservaRespuesta>;
+  errorBackend$: Observable<number>;
   loading = false;
 
   constructor(
@@ -54,6 +57,7 @@ export class ReservaComponent implements OnInit {
     this.obraSocialSelected$ = store.select(FormularioSelectors.selectObraSocialSelected);
     this.planSelected$ = store.select(FormularioSelectors.selectPlanSelected);
     this.fechaNacimientoSelected$ = store.select(FormularioSelectors.selectFechaNacimiento);
+    this.errorBackend$ = store.select(ErrorSelector.getCountError);
   }
 
 
@@ -64,6 +68,10 @@ export class ReservaComponent implements OnInit {
         if (!turno) { this.router.navigate(['/home']); }
       }
     );
+
+    this.errorBackend$.subscribe(() => {
+      this.loading = false;
+    });
   }
 
   reservar() {
@@ -107,8 +115,7 @@ export class ReservaComponent implements OnInit {
         filter(reserva => reserva != undefined && reserva.codigo != undefined)
       ).subscribe(() => {
         this.loading = false;
-        }
-      );
+      });
   
     }
   }

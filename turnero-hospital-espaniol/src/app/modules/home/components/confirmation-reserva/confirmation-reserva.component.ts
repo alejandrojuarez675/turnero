@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
+import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
 import { Turno, ReservaFormulario } from '../../../../shared/models/datos.models';
 import { ConfirmacionTurnoRequest } from '../../../../shared/models/request.models';
 
@@ -19,18 +20,23 @@ export class ConfirmationReservaComponent implements OnInit {
   turno: Turno;
   loading = false;
   subscription: Subscription;
+  errorBackend$: Observable<number>;
 
   constructor(
     private store: Store<{ reserva: ReservaFormulario }>,
     private route: ActivatedRoute,
   ) {
-
+    this.errorBackend$ = store.select(ErrorSelector.getCountError);
   }
 
   ngOnInit() {
     this.loading = true;
     this.subscription = this.route.queryParams.subscribe(params => {
       this.codigoReserva = params['reserva'];
+    });
+
+    this.errorBackend$.subscribe(() => {
+      this.loading = false;
     });
 
     const reserva = new ConfirmacionTurnoRequest;
