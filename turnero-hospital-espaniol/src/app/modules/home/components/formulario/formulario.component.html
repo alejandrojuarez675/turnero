@@ -13,20 +13,26 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Obra Social</mat-label>
-            <mat-select (selectionChange)="cambioObraSocial($event)" [formControl]="obrasSocial">
-                <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
+            <input type="text" placeholder="Elija una" matInput [formControl]="obrasSocial" 
+                [matAutocomplete]="autoOS">
+            <mat-autocomplete #autoOS="matAutocomplete" [displayWith]="displayFn" 
+                (selectedValueChange)="cambioObraSocial($event)">
+                <mat-option *ngFor="let os of filteredObrasSociales$ | async" [value]="os">
                     {{os.nombre}}
                 </mat-option>
-            </mat-select>
+            </mat-autocomplete>
             <mat-error *ngIf="obrasSocial.invalid">Ingrese su Obra Social</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Plan</mat-label>
-            <mat-select (selectionChange)="cambioPlan($event)" [formControl]="plan">
-                <mat-option *ngFor="let p of planes$ | async" [value]="p">
+            <input type="text" placeholder="Elija una" matInput [formControl]="plan" 
+                [matAutocomplete]="autoPlan">
+            <mat-autocomplete #autoPlan="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let p of filteredPlanes$ | async" [value]="p" 
+                    (selectionChange)="cambioPlan($event)">
                     {{p.nombre}}
                 </mat-option>
-            </mat-select>
+            </mat-autocomplete>
             <mat-error *ngIf="plan.invalid">Ingrese su Plan</mat-error>
         </mat-form-field>
     </div>
@@ -34,11 +40,14 @@
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
             <mat-label>Especialidad</mat-label>
-            <mat-select (selectionChange)="cambioEspecialidad($event)" [formControl]="especialidad">
-                <mat-option *ngFor="let e of especialidades$ | async" [value]="e">
+            <input type="text" placeholder="Elija una" matInput [formControl]="especialidad" 
+                [matAutocomplete]="autoEsp">
+            <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
+                    (selectionChange)="cambioEspecialidad($event)">
                     {{e.nombre}}
                 </mat-option>
-            </mat-select>
+            </mat-autocomplete>
             <mat-error *ngIf="especialidad.invalid">Ingrese su Especialidad</mat-error>
         </mat-form-field>
     </div>

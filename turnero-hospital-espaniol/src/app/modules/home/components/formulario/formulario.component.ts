@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map, startWith, switchMap } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import { CentroAtencion, Especialidad, Formulario, Login, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import { CentroAtencion, Especialidad, Formulario, Login, ObraSocial, Plan, CodigoNombre } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
 
 @Component({
@@ -21,8 +21,11 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 export class FormularioComponent implements OnInit {
 
   obrasSociales$: Observable<ObraSocial[]>;
+  filteredObrasSociales$: Observable<ObraSocial[]>;
   planes$: Observable<Plan[]>;
+  filteredPlanes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
+  filteredEspecialidades$: Observable<Especialidad[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
 
   fechaNacimiento = new FormControl('', [Validators.required]);
@@ -50,20 +53,19 @@ export class FormularioComponent implements OnInit {
     login.password = environment.password;
 
     this.store.select(ContextSelectors.getToken).pipe(
-      filter(token => token == undefined)
+      filter(token => token === undefined)
     ).subscribe( () => {
-     this.store.dispatch(ContextoActions.getToken( { login } ));
-     this.store.select(ContextSelectors.getToken).pipe(
-      filter(token => (token != undefined))
-    ).subscribe(
-      () => {
-        this.store.dispatch(FormActions.getObraSociales());
-        this.store.dispatch(FormActions.getEspecialidades());
-        this.store.dispatch(FormActions.getCentrosDeAtencion());
+      this.store.dispatch(ContextoActions.getToken( { login } ));
+      this.store.select(ContextSelectors.getToken).pipe(
+        filter(token => (token !== undefined))
+      ).subscribe(
+        () => {
+          this.store.dispatch(FormActions.getObraSociales());
+          this.store.dispatch(FormActions.getEspecialidades());
+          this.store.dispatch(FormActions.getCentrosDeAtencion());
         }
       );
-    }
-    );
+    });
 
     this.store.select(FormSelectors.selectDatosFormulario).subscribe(
       (datosFormulario) => {
@@ -76,6 +78,54 @@ export class FormularioComponent implements OnInit {
         }
       }
     ).unsubscribe();
+
+    this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(
+      startWith<string | ObraSocial>(''),
+      map(value => typeof value === 'string' ? value : value.nombre),
+      switchMap(x => this.filterOs(x))
+    );
+
+    this.filteredPlanes$ = this.plan.valueChanges.pipe(
+      startWith<string | Plan>(''),
+      map(value => typeof value === 'string' ? value : value.nombre),
+      switchMap(x => this.filterPlan(x))
+    );
+
+    this.filteredEspecialidades$ = this.especialidad.valueChanges.pipe(
+      startWith<string | Especialidad>(''),
+      map(value => typeof value === 'string' ? value : value.nombre),
+      switchMap(x => this.filterEsp(x))
+    );
+
+    this.obrasSocial.valueChanges.subscribe( value => this.cambioObraSocial(value));
+    this.plan.valueChanges.subscribe( value => this.cambioPlan(value));
+    this.especialidad.valueChanges.subscribe( value => this.cambioEspecialidad(value));
+  }
+
+  filterOs(value: String): Observable<ObraSocial[]> {
+    const filterValue = value.toLowerCase();
+    return this.obrasSociales$.pipe(
+      map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
+    );
+  }
+
+  filterPlan(value: String): Observable<Plan[]> {
+    const filterValue = value.toLowerCase();
+    return this.planes$.pipe(
+      map(p => !p || p.length === 0 ? [] : p),
+      map(p => p.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
+    );
+  }
+
+  filterEsp(value: String): Observable<Especialidad[]> {
+    const filterValue = value.toLowerCase();
+    return this.especialidades$.pipe(
+      map(e => e.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
+    );
+  }
+
+  displayFn(option?: CodigoNombre): string | undefined {
+    return option ? option.nombre : undefined;
   }
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
@@ -83,20 +133,21 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 
-  cambioObraSocial(event) {
+  cambioObraSocial(value) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined })); // FIXME
+    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: value }));
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined }));
+    this.plan.setValue('');
   }
 
-  cambioPlan(event) {
+  cambioPlan(value) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: value }));
   }
 
-  cambioEspecialidad(event) {
+  cambioEspecialidad(value) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: event.value }));
+    this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
   }
 
   cambioCentroDeAtencion(event) {
