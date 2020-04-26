@@ -46,3 +46,12 @@ table {
 .mat-column-created {
     max-width: 124px;
 }
+
+.material-icons{
+    color: #1061a7 !important;
+}
+
+.texto {
+    line-height:26px;
+}
+

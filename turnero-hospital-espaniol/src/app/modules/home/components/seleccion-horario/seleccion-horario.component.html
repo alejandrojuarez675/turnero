@@ -27,10 +27,12 @@
         </ng-container>
 
         <ng-container matColumnDef="observaciones">
-          <th mat-header-cell *matHeaderCellDef>Obs</th>
-          <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
-            title="Seleccionar turno - Profesional {{row.profesional.nombreApellido}}">
-            {{row.observaciones}} 
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+              <span *ngIf="row.observaciones">
+                <mat-icon  #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltip="{{ row.observaciones }}" 
+                  matTooltipPosition="left">notification_important </mat-icon>
+              </span>
           </td>
         </ng-container>
 
