@@ -14,7 +14,8 @@ body {
 }
 
 .body {
-    min-height: calc(100% - 202px);
+    /* se le resta alto de header y footer */
+    min-height: calc(100% - 152px); 
 }
 
 .content {
@@ -56,7 +57,7 @@ body {
     position: relative;
     left: 0;
     bottom: 0;
-    height: 100px;
+    height: 50px;
     width: 100%;
     align-content: center;
     text-align: center;
