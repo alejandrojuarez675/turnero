@@ -7,20 +7,34 @@
     </div>
     <div class="row clearfix">
         <p>
-          Ingrese los siguientes datos para finalizar la reserva del turno
+          Turno seleccionado:
         </p>
     </div>
+
     <div class="row clearfix">
-        <div style="width: 30%;">Profesional: </div>
-        <div>{{ turnoSelected?.profesional?.nombreApellido }} </div>
+        <div class="col-md-6 texto">
+            <span class="material-icons icon-image-preview">calendar_today</span>
+            Fecha y hora: {{turnoSelected?.fecha | date: 'dd/MM/yyyy'}} {{turnoSelected?.hora}}
+        </div>
+        <div class="col-md-6 texto">
+            <span class="material-icons icon-image-preview">local_hospital</span>
+            Centro Médico: {{ turnoSelected?.centroAtencion.nombre }} 
+        </div>
+        <div class="col-md-6 texto">
+            <span class="material-icons icon-image-preview">person</span>
+            Profesional: {{ turnoSelected?.profesional?.nombreApellido }}
+        </div>
+        <div class="col-md-6 texto">
+            <span class="material-icons icon-image-preview">work</span>
+            Especialidad: {{ turnoSelected?.profesional?.especialidad?.nombre }} 
+        </div>
     </div>
+
+    <div class="row clearfix"></div>
     <div class="row clearfix">
-        <div style="width: 30%;">Especialidad: </div>
-        <div>{{ turnoSelected?.profesional?.especialidad?.nombre }} </div>
-    </div>
-    <div class="row clearfix">
-        <div style="width: 30%;">Turno: </div>
-        <div>{{turnoSelected?.fecha | date: 'dd/MM/yyyy'}} {{turnoSelected?.hora}} </div>
+        <p>
+            Ingrese los siguientes datos para finalizar la reserva del turno
+        </p>
     </div>
 
     <div class="row clearfix">
@@ -77,10 +91,10 @@
 
     <div class="row clearfix">
         <button style="width: 50%;" class="button-default" mat-flat-button (click)="volverASeleccionDeTurno()">
-            VOLVER ATRAS
+            VOLVER
         </button>
         <button style="width: 50%;" class="button" mat-flat-button [disabled]="!isValid()" (click)="reservar()">
-            RESERVAR TURNO
+            RESERVAR
         </button>
     </div>
     <app-reserva-email></app-reserva-email>

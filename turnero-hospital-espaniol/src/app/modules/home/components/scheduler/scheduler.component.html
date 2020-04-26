@@ -1,27 +1,34 @@
 <div class="cuadro-formulario" *ngIf="(((eventsLength$ | async) > 0) && ((estado$ | async) >= 3))">
-  <p>
-    Turnos disponibles para 
-    <span *ngIf="(profesionalSelected$ | async) != undefined">
-      Dr/a. {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
-    </span>
-    <span *ngIf="(profesionalSelected$ | async) == undefined">
-      {{especialidad.nombre || 'N/A'}}
-    </span>
-  </p>
+  <div class="row clearfix">
+    <p>Turnos disponibles para 
+      <span *ngIf="(profesionalSelected$ | async) != undefined">
+        Dr/a. {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
+      </span>
+      <span *ngIf="(profesionalSelected$ | async) == undefined">
+        {{especialidad.nombre || 'N/A'}}
+      </span>
+    </p>
+  </div>
   <div>
-    <div class="row clearfix">
-      <div mwlCalendarPreviousView class="cambio-mes"
-        [view]="view" 
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        << 
+    <div class="row clearfix text-center">
+      <div class="col-md-4">
+        <div class="cambio-mes text-right" mwlCalendarPreviousView 
+            [view]="view" 
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            << 
+        </div>
       </div>
-      <h3>{{ _toMonthString(viewDate.getMonth()) }}</h3>
-      <div mwlCalendarNextView  class="cambio-mes"
-        [view]="view" 
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        >>
+      <div class="col-md-4">
+        <h3>{{ _toMonthString(viewDate.getMonth()) }}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="cambio-mes text-left" mwlCalendarNextView  
+          [view]="view" 
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          >>
+        </div>
       </div>
     </div>
   </div>
