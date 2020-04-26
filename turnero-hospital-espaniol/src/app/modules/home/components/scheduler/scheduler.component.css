@@ -31,7 +31,7 @@ h3 {
 }
 
 .lightskyblue {
-    background-color: #1061a760 !important;
+    background-color: #1061a7 !important;
 }
 
 .lightskyblue:hover {
@@ -60,4 +60,29 @@ h3 {
 
 .cal-day-number {
     color: black;
+    font-size: 24px !important;
+}
+
+.lightskyblue .cal-day-number {
+    color: white;
+    opacity: 1;
+}
+
+.lightskyblue .cal-weekend .cal-day-number {
+    color: white;
+    opacity: 1;
+}
+
+.lightskyblue:hover .cal-day-number {
+    color: black;
+    opacity: 0.5;
+}
+
+.lightskyblue:hover .cal-weekend .cal-day-number {
+    color: black;
+    opacity: 0.5;
+}
+
+.cal-month-view .cal-header {
+    font-weight: normal;
 }
