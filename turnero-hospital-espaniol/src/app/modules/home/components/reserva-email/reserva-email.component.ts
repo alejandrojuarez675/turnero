@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
@@ -21,7 +21,7 @@ export class ReservaEmailComponent implements OnInit {
 
   datosReserva: DatosReserva;
   reserva$: Observable<ReservaFormulario>;
-
+  subscription: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -33,7 +33,7 @@ export class ReservaEmailComponent implements OnInit {
   ngOnInit() {
 
     this.datosReserva = new DatosReserva();
-    this.store.select(ReservacionSelectors.getReserva).pipe(
+    this.subscription = this.store.select(ReservacionSelectors.getReserva).pipe(
       filter(x => x != undefined && x.codigo != undefined)
     ).subscribe(x => {
       this.reserva$ = this.store.select(ReservaSelectors.getReserva);
@@ -44,6 +44,9 @@ export class ReservaEmailComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   openDialog(datosReserva: DatosReserva): void {
     this.dialog.open(ReservaEmailDialogComponent, { data: { datosReserva: datosReserva }})

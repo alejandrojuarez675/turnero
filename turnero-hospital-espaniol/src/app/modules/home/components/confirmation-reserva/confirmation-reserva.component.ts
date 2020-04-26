@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import { Turno, ReservaFormulario } from '../../../../shared/models/datos.models';
@@ -18,6 +18,7 @@ export class ConfirmationReservaComponent implements OnInit {
   turnoSelected$: Observable<Turno>;
   turno: Turno;
   loading = false;
+  subscription: Subscription;
 
   constructor(
     private store: Store<{ reserva: ReservaFormulario }>,
@@ -26,11 +27,9 @@ export class ConfirmationReservaComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
     this.loading = true;
-    this.route.queryParams
-    .subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe(params => {
       this.codigoReserva = params['reserva'];
     });
 
@@ -40,6 +39,10 @@ export class ConfirmationReservaComponent implements OnInit {
     this.turnoSelected$ = this.store.select(ReservaSelector.getTurnoSelected);
     this.turnoSelected$.subscribe(turno => this.turno = turno);
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   ngDoCheck(){
