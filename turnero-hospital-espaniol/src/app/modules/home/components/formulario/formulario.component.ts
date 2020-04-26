@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
@@ -32,7 +32,8 @@ export class FormularioComponent implements OnInit {
   centroAtencion = new FormControl('', [Validators.required]);
 
   maxDate: Date;
-
+  subscription: Subscription;
+  
   constructor(
     private store: Store<{ formulario: Formulario }>
   ) {
@@ -60,6 +61,8 @@ export class FormularioComponent implements OnInit {
       }
     );
   }
+
+  
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
     this.cleanResultadoDisponibilidad();

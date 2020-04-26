@@ -50,8 +50,8 @@ public class CommonService {
 
 	public LoginRespuesta login(LoginDTO loginRequest) {
 		LoginRespuesta resp = new LoginRespuesta();
+		System.out.println("resp " + resp.token);
 		return resp;
-		
 	}
 	
 	public ObraSocialRespuesta getObraSocial() {
