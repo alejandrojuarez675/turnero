@@ -118,7 +118,10 @@ const disponibilidad2: Disponibilidad = {
 };
 
 export const profesionalesMocks: Disponibilidad[] = [
-    disponibilidad, disponibilidad2
+    disponibilidad, disponibilidad2,
+    disponibilidad, disponibilidad2,
+    disponibilidad, disponibilidad2,
+    disponibilidad, disponibilidad2,
 ];
 
 
