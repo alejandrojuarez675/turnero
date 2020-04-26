@@ -33,7 +33,7 @@ export class FormularioComponent implements OnInit {
 
   maxDate: Date;
   subscription: Subscription;
-  
+
   constructor(
     private store: Store<{ formulario: Formulario }>
   ) {
@@ -60,9 +60,20 @@ export class FormularioComponent implements OnInit {
         this.store.dispatch(FormActions.getCentrosDeAtencion());
       }
     );
+
+    this.store.select(FormSelectors.selectDatosFormulario).subscribe(
+      (datosFormulario) => {
+        if (datosFormulario) {
+          this.fechaNacimiento.setValue(datosFormulario.fechaNacimiento);
+          this.obrasSocial.setValue(datosFormulario.obraSocial);
+          this.plan.setValue(datosFormulario.plan);
+          this.especialidad.setValue(datosFormulario.especialidad);
+          this.centroAtencion.setValue(datosFormulario.centroAtencion);
+        }
+      }
+    ).unsubscribe();
   }
 
-  
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
     this.cleanResultadoDisponibilidad();

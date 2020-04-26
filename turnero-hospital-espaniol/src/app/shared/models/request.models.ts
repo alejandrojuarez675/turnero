@@ -1,4 +1,12 @@
-import { Paciente } from "./datos.models";
+import { Paciente, ObraSocial, Plan, Especialidad, CentroAtencion } from "./datos.models";
+
+export class DatosFormulario {
+    fechaNacimiento: Date;
+    obraSocial: ObraSocial;
+    plan: Plan;
+    especialidad: Especialidad;
+    centroAtencion: CentroAtencion;
+}
 
 export class BusquedaProfesionalesRequest {
     fechaNacimiento: Date;
