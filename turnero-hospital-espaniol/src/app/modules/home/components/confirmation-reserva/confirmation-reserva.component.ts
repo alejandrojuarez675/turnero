@@ -5,8 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
-import { Turno, ReservaFormulario } from '../../../../shared/models/datos.models';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
+import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
+import { Turno, ReservaFormulario, Login } from '../../../../shared/models/datos.models';
 import { ConfirmacionTurnoRequest } from '../../../../shared/models/request.models';
+import { filter } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-confirmation-reserva',
@@ -41,10 +45,25 @@ export class ConfirmationReservaComponent implements OnInit {
 
     const reserva = new ConfirmacionTurnoRequest;
     reserva.codigoReserva = this.codigoReserva;
-    this.store.dispatch(ReservaAction.retrieveTurno( { reserva}));
-    this.turnoSelected$ = this.store.select(ReservaSelector.getTurnoSelected);
-    this.turnoSelected$.subscribe(turno => this.turno = turno);
 
+    const login = new Login();
+    login.username = environment.username;
+    login.password = environment.password;
+
+    this.store.select(ContextSelectors.getToken).pipe(
+      filter(token => token === undefined)
+    ).subscribe( () => {
+      this.store.dispatch(ContextoActions.getToken( { login } ));
+      this.store.select(ContextSelectors.getToken).pipe(
+        filter(token => (token !== undefined))
+      ).subscribe(
+        () => {
+          this.store.dispatch(ReservaAction.retrieveTurno( { reserva}));
+          this.turnoSelected$ = this.store.select(ReservaSelector.getTurnoSelected);
+          this.turnoSelected$.subscribe(turno => this.turno = turno);
+        }
+      );
+    });
   }
 
   ngOnDestroy() {
