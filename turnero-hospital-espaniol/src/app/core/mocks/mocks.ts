@@ -69,7 +69,7 @@ const profesional1: Profesional = {
 const profesional2: Profesional = {
     codigo: 2,
     nombreApellido: 'Riquelme, Roman',
-    observaciones: '',
+    observaciones: 'Solo particular',
     especialidad: especialidadesMocks[0]
 };
 
@@ -86,7 +86,7 @@ const turno2: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/30'),
     hora: '20:15',
-    observaciones: ''
+    observaciones: 'Solo particular'
 };
 
 const turno3: TurnoLight = {
@@ -94,7 +94,7 @@ const turno3: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/29'),
     hora: '10:00',
-    observaciones: ''
+    observaciones: 'Solo particular'
 };
 
 const turno4: TurnoLight = {
