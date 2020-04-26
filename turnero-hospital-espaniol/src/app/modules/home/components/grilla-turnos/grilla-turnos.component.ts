@@ -72,6 +72,8 @@ export class GrillaTurnosComponent implements OnInit {
       hora: turnoLigthSelected.hora,
       observaciones: turnoLigthSelected.observaciones
     };
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
   }
 
