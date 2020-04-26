@@ -32,7 +32,6 @@ export class FormularioComponent implements OnInit {
   centroAtencion = new FormControl('', [Validators.required]);
 
   maxDate: Date;
-  subscription: Subscription;
 
   constructor(
     private store: Store<{ formulario: Formulario }>
@@ -49,16 +48,21 @@ export class FormularioComponent implements OnInit {
     const login = new Login();
     login.username = environment.username;
     login.password = environment.password;
-    this.store.dispatch(ContextoActions.getToken( { login } ));
 
     this.store.select(ContextSelectors.getToken).pipe(
-      filter(token => token !== undefined)
+      filter(token => token == undefined)
+    ).subscribe( () => {
+     this.store.dispatch(ContextoActions.getToken( { login } ));
+     this.store.select(ContextSelectors.getToken).pipe(
+      filter(token => (token != undefined))
     ).subscribe(
       () => {
         this.store.dispatch(FormActions.getObraSociales());
         this.store.dispatch(FormActions.getEspecialidades());
         this.store.dispatch(FormActions.getCentrosDeAtencion());
-      }
+        }
+      );
+    }
     );
 
     this.store.select(FormSelectors.selectDatosFormulario).subscribe(
@@ -73,7 +77,6 @@ export class FormularioComponent implements OnInit {
       }
     ).unsubscribe();
   }
-
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
     this.cleanResultadoDisponibilidad();
@@ -130,4 +133,5 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }));
     this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
   }
+
 }
