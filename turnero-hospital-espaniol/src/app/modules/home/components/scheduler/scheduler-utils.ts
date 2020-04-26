@@ -2,12 +2,12 @@ import { DisponibilidadDiasStore } from '../../../../shared/models/datos.models'
 
 const colors: any = {
     blue: {
-        primary: '#87cefa', // lo hacemos coincidir con el fondo del recuadro
-        secondary: '#87cefa' 
+        primary: '#00000000', // lo hacemos coincidir con el fondo del recuadro
+        secondary: '#00000000'
     },
     yellow: {
-        primary: '#cbe620',
-        secondary: '#e32296'
+        primary: '#00000000',
+        secondary: '#00000000'
     },
 };
 

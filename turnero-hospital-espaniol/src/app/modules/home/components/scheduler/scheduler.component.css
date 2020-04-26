@@ -1,9 +1,17 @@
 .lightskyblue {
-    background-color: lightskyblue !important;
+    background-color: #1061a760 !important;
+}
+
+.lightskyblue:hover {
+    background-color: #1061a780 !important;
 }
 
 .lightslategray {
-    background-color: lightslategray !important;
+    background-color: #e2e2e2 !important;
+}
+
+.lightslategray:hover {
+    background-color: #e7e7e7 !important;
 }
 
 .cambio-mes{
@@ -17,3 +25,6 @@
     cursor: pointer;
 }
 
+.cal-day-number {
+    color: black;
+}

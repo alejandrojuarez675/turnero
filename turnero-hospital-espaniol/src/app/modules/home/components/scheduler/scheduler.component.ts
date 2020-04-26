@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
+// tslint:disable-next-line: max-line-length
 import { CalendarEvent, CalendarView, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,7 +39,7 @@ export class SchedulerComponent {
   activeDayIsOpen: boolean;
   view: CalendarView = CalendarView.Month;
   refresh: Subject<any> = new Subject();
-  locale: string = 'es-AR';
+  locale = 'es-AR';
 
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
     renderEvent.body.forEach((day) => {
@@ -48,13 +49,13 @@ export class SchedulerComponent {
     });
 
     this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
-    this.dias$.subscribe(x => 
+    this.dias$.subscribe(x =>
       x.forEach(d => {
         renderEvent.body.forEach(day => {
-          var a = true;
-          if (a && day.date.getDate() == d.fecha.getDate() && 
-            day.date.getMonth() == d.fecha.getMonth() && 
-            day.date.getFullYear() == d.fecha.getFullYear()) {
+          let a = true;
+          if (a && day.date.getDate() === d.fecha.getDate() &&
+            day.date.getMonth() === d.fecha.getMonth() &&
+            day.date.getFullYear() === d.fecha.getFullYear()) {
             a = false;
             if (d.conDisponibilidad) {
               day.cssClass =  'lightskyblue';
@@ -73,7 +74,7 @@ export class SchedulerComponent {
 
     this.estado$ = store.select(ContextoSelectors.getEstado);
 
-    // crea los eventos (puntitos) 
+    // crea los eventos (puntitos)
     this.events$ = store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );
@@ -86,9 +87,9 @@ export class SchedulerComponent {
     this.profesionalesDisponibles$.subscribe(disponibilidad => {
       disponibilidad.filter(x => {
         this.especialidad = x.profesional.especialidad;
-      })
-    })
-  };
+      });
+    });
+  }
 
   dayClicked({ date }: { date: Date }): void {
     if (this.isPartOfEvents(this.events, date)) {
