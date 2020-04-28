@@ -32,18 +32,22 @@ h3 {
 
 .lightskyblue {
     background-color: #1061a7 !important;
+    min-height: 50px;
 }
 
 .lightskyblue:hover {
     background-color: #1061a780 !important;
+    min-height: 50px;
 }
 
 .lightslategray {
     background-color: #e2e2e2 !important;
+    min-height: 50px;
 }
 
 .lightslategray:hover {
     background-color: #e7e7e7 !important;
+    min-height: 50px;
 }
 
 .cambio-mes{
@@ -85,4 +89,8 @@ h3 {
 
 .cal-month-view .cal-header {
     font-weight: normal;
+}
+
+.cal-month-view .cal-day-cell .cal-cell-top {
+    min-height: 40px !important;
 }

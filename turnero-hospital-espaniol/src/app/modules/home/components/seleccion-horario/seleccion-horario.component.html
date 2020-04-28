@@ -10,19 +10,19 @@
     <div class="example-table-container">
       <table mat-table [dataSource]="horarios$ | async">
 
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+        <ng-container matColumnDef="profesional">
+          <th mat-header-cell *matHeaderCellDef>Profesional</th>
           <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
-            title="Seleccionar turno - Profesional {{row.profesional.nombreApellido}}">
-            {{row.fecha | date: 'dd/MM/yyyy'}}
+            title="Seleccionar turno">
+            {{row.profesional.nombreApellido}}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="hora">
+        <ng-container matColumnDef="fecha">
           <th mat-header-cell *matHeaderCellDef>Horario</th>
           <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
-            title="Seleccionar turno - Profesional {{row.profesional.nombreApellido}}">
-            {{row.hora}} 
+            title="Seleccionar turno">
+            {{row.fecha | date: 'dd/MM/yyyy'}} {{row.hora}} 
           </td>
         </ng-container>
 

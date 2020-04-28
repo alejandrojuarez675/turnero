@@ -19,7 +19,7 @@ export class SeleccionHorarioComponent implements OnInit {
   horarios$: Observable<Turno[]>;
   horariosLength$: Observable<number>;
 
-  displayedColumns = ['fecha', 'hora', 'observaciones'];
+  displayedColumns = ['profesional', 'fecha', 'observaciones'];
 
   constructor(
     private store: Store<{ calendario: Calendario }>,

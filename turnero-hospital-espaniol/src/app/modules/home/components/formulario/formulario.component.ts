@@ -21,9 +21,7 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 export class FormularioComponent implements OnInit {
 
   obrasSociales$: Observable<ObraSocial[]>;
-  filteredObrasSociales$: Observable<ObraSocial[]>;
   planes$: Observable<Plan[]>;
-  filteredPlanes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
   filteredEspecialidades$: Observable<Especialidad[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
@@ -79,42 +77,13 @@ export class FormularioComponent implements OnInit {
       }
     ).unsubscribe();
 
-    this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(
-      startWith<string | ObraSocial>(''),
-      map(value => typeof value === 'string' ? value : value.nombre),
-      switchMap(x => this.filterOs(x))
-    );
-
-    this.filteredPlanes$ = this.plan.valueChanges.pipe(
-      startWith<string | Plan>(''),
-      map(value => typeof value === 'string' ? value : value.nombre),
-      switchMap(x => this.filterPlan(x))
-    );
-
     this.filteredEspecialidades$ = this.especialidad.valueChanges.pipe(
       startWith<string | Especialidad>(''),
       map(value => typeof value === 'string' ? value : value.nombre),
       switchMap(x => this.filterEsp(x))
     );
 
-    this.obrasSocial.valueChanges.subscribe( value => this.cambioObraSocial(value));
-    this.plan.valueChanges.subscribe( value => this.cambioPlan(value));
     this.especialidad.valueChanges.subscribe( value => this.cambioEspecialidad(value));
-  }
-
-  filterOs(value: String): Observable<ObraSocial[]> {
-    const filterValue = value.toLowerCase();
-    return this.obrasSociales$.pipe(
-      map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
-    );
-  }
-
-  filterPlan(value: String): Observable<Plan[]> {
-    const filterValue = value.toLowerCase();
-    return this.planes$.pipe(
-      map(p => !p || p.length === 0 ? [] : p),
-      map(p => p.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
-    );
   }
 
   filterEsp(value: String): Observable<Especialidad[]> {
@@ -133,16 +102,15 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 
-  cambioObraSocial(value) {
+  cambioObraSocial(event) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: value }));
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined }));
-    this.plan.setValue('');
+    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: '' })); // FIXME
   }
 
-  cambioPlan(value) {
+  cambioPlan(event) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: value }));
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
   }
 
   cambioEspecialidad(value) {

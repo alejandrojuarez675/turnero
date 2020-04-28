@@ -13,26 +13,20 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Obra Social</mat-label>
-            <input type="text" placeholder="Elija una" matInput [formControl]="obrasSocial" 
-                [matAutocomplete]="autoOS">
-            <mat-autocomplete #autoOS="matAutocomplete" [displayWith]="displayFn" 
-                (selectedValueChange)="cambioObraSocial($event)">
-                <mat-option *ngFor="let os of filteredObrasSociales$ | async" [value]="os">
+            <mat-select (selectionChange)="cambioObraSocial($event)" [formControl]="obrasSocial">
+                <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
                     {{os.nombre}}
                 </mat-option>
-            </mat-autocomplete>
+            </mat-select>
             <mat-error *ngIf="obrasSocial.invalid">Ingrese su Obra Social</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Plan</mat-label>
-            <input type="text" placeholder="Elija una" matInput [formControl]="plan" 
-                [matAutocomplete]="autoPlan">
-            <mat-autocomplete #autoPlan="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let p of filteredPlanes$ | async" [value]="p" 
-                    (selectionChange)="cambioPlan($event)">
+            <mat-select (selectionChange)="cambioPlan($event)" [formControl]="plan">
+                <mat-option *ngFor="let p of planes$ | async" [value]="p">
                     {{p.nombre}}
                 </mat-option>
-            </mat-autocomplete>
+            </mat-select>
             <mat-error *ngIf="plan.invalid">Ingrese su Plan</mat-error>
         </mat-form-field>
     </div>
