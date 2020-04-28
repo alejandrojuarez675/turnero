@@ -11,7 +11,8 @@ import * as CalendarSelectors from '../../../../core/store/selectors/caledar.sel
 import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
-
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 
 @Component({
   selector: 'app-scheduler',
@@ -19,7 +20,12 @@ import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-ut
   encapsulation: ViewEncapsulation.None,
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.css'],
-
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter,
+    },
+  ],
 })
 export class SchedulerComponent {
 

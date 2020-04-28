@@ -30,24 +30,41 @@ h3 {
    text-align: center !important;
 }
 
+.cal-month-view .cal-events {
+    margin: 0px;
+    max-height: 0px;
+}
+
+.cal-month-view .cal-cell-top {
+    min-height: 80px !important;
+}
+.cal-month-view .cal-day-cell {
+    min-height: 80px !important;
+}
+
+.cal-month-view {
+    min-height: 80px !important;
+    font-weight: bold;
+}
+
 .lightskyblue {
+    min-height: 80px !important;
     background-color: #1061a7 !important;
-    min-height: 50px;
 }
 
 .lightskyblue:hover {
+    min-height: 80px !important;
     background-color: #1061a780 !important;
-    min-height: 50px;
 }
 
 .lightslategray {
+    min-height: 80px !important;
     background-color: #e2e2e2 !important;
-    min-height: 50px;
 }
 
 .lightslategray:hover {
+    min-height: 80px !important;
     background-color: #e7e7e7 !important;
-    min-height: 50px;
 }
 
 .cambio-mes{
@@ -64,7 +81,17 @@ h3 {
 
 .cal-day-number {
     color: black;
-    font-size: 24px !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+}
+
+.cal-month-view .cal-day-number {
+    opacity: 0.8;
+}
+
+.cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+    color:  #ff0000; 
+    font-weight: bold;
 }
 
 .lightskyblue .cal-day-number {
@@ -79,18 +106,13 @@ h3 {
 
 .lightskyblue:hover .cal-day-number {
     color: black;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .lightskyblue:hover .cal-weekend .cal-day-number {
     color: black;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
-.cal-month-view .cal-header {
-    font-weight: normal;
-}
 
-.cal-month-view .cal-day-cell .cal-cell-top {
-    min-height: 40px !important;
-}
+
