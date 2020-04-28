@@ -105,7 +105,7 @@ export class FormularioComponent implements OnInit {
   cambioObraSocial(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: '' })); // FIXME
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined })); // FIXME
   }
 
   cambioPlan(event) {
