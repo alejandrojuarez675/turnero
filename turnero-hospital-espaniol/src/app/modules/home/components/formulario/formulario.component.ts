@@ -105,7 +105,8 @@ export class FormularioComponent implements OnInit {
   cambioObraSocial(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
-    this.store.dispatch(FormActions.setPlanSelected({ planSelected: '' })); // FIXME
+    this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined }));
+    this.plan.setValue(undefined);
   }
 
   cambioPlan(event) {
@@ -126,7 +127,7 @@ export class FormularioComponent implements OnInit {
   isValid() {
     let result = false;
     if (
-      this.fechaNacimiento.valid && this.obrasSocial.valid && this.plan.valid
+      this.fechaNacimiento.valid && this.obrasSocial.valid && this.plan.valid && this.plan.value != undefined
       && this.especialidad.valid && this.centroAtencion.valid
       ) {
       result = true;
