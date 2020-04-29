@@ -55,3 +55,6 @@ table {
     line-height:26px;
 }
 
+.mat-row.ng-star-inserted:hover {
+    background-color: #e2e2e2 !important;
+}
