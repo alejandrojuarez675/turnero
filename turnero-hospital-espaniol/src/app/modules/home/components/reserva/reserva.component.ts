@@ -9,7 +9,7 @@ import * as FormularioSelectors from '../../../../core/store/selectors/form.sele
 import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
 import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
 import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
-import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno } from '../../../../shared/models/datos.models';
+import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno, Telefono } from '../../../../shared/models/datos.models';
 import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import { filter } from 'rxjs/operators';
@@ -28,9 +28,12 @@ export class ReservaComponent implements OnInit {
     Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
   nombreApellido = new FormControl('', [Validators.required]);
-  telefono = new FormControl('', [Validators.required,
-    Validators.minLength(5),
+  telefonoArea = new FormControl('', [Validators.required,
+    Validators.minLength(2),
     Validators.pattern(/^\d+$/)]);
+  telefonoNumero = new FormControl('', [Validators.required,
+      Validators.minLength(6),
+      Validators.pattern(/^\d+$/)]);    
   mail = new FormControl('', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
 
@@ -83,7 +86,10 @@ export class ReservaComponent implements OnInit {
     paciente.dni = this.dni.value;
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
     paciente.nombreApellido = this.nombreApellido.value;
-    paciente.telefono = this.telefono.value;
+    const telefono = new Telefono();
+    telefono.area = this.telefonoArea.value;
+    telefono.numero = this.telefonoNumero.value;
+    paciente.telefono = telefono;
     paciente.email = this.mail.value;
 
     paciente.codigoObraSocial = this.obraSocialSelected.codigo;
@@ -124,7 +130,7 @@ export class ReservaComponent implements OnInit {
     let result = false;
     if (
       this.dni.valid && this.sexo.valid && this.nombreApellido.valid &&
-      this.telefono.valid && this.mail.valid
+      this.telefonoArea.valid && this.telefonoNumero.valid && this.mail.valid
     ) {
       result = true;
     }

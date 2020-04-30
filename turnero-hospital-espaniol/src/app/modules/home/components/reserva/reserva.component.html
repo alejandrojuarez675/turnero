@@ -69,13 +69,19 @@
     </div>
 
     <div class="row clearfix">
-        <mat-form-field style="width: 100%;">
-            <mat-label>Teléfono</mat-label>
-            <input matInput [formControl]="telefono" 
-                   placeholder="Ingrese su Teléfono">
-            <mat-error *ngIf="telefono.invalid">
-                Ingrese su Teléfono
+        <mat-form-field style="width: 55%; padding-right: 10%;">
+            <mat-label>Nro de Área</mat-label>
+            <input matInput [formControl]="telefonoArea" placeholder="Ingrese el Nro de Área">
+            <mat-error *ngIf="telefonoArea.invalid">
+                Ingrese el Nro de Área
             </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 45%;">
+            <mat-label>Nro de Teléfono</mat-label>
+            <input matInput [formControl]="telefonoNumero" placeholder="Ingrese su Teléfono">
+            <mat-error *ngIf="telefonoNumero.invalid">
+                Ingrese su Teléfono
+            </mat-error>            
         </mat-form-field>
     </div>
     <div class="row clearfix">

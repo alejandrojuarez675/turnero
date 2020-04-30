@@ -136,13 +136,18 @@ export class Paciente {
     dni: number;
     sexo: string;
     nombreApellido: string;
-    telefono: string;
+    telefono: Telefono;
     email: string;
     fechaNacimiento: Date;
     codigoObraSocial: number;
     codigoPlan: number;
     codigoProfesional: number;
     codigoEspecialidad: number;
+}
+
+export class Telefono {
+    area: string;
+    numero: string;
 }
 
 export class DatosReserva {
