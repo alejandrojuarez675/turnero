@@ -35,10 +35,11 @@
         <mat-form-field style="width: 100%;">
             <mat-label>Especialidad</mat-label>
             <input type="text" placeholder="Elija una" matInput [formControl]="especialidad" 
-                [matAutocomplete]="autoEsp">
+                [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event)">
             <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
-                    (selectionChange)="cambioEspecialidad($event)">
+                    (selectionChange)="cambioEspecialidad($event); onEnterE($event)" 
+                    (click)="onEnterE()">
                     {{e.nombre}}
                 </mat-option>
             </mat-autocomplete>
@@ -49,7 +50,7 @@
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
             <mat-label>Centro de Atencion</mat-label>
-            <mat-select (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
+            <mat-select name="caSel" (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
                 <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
                     {{ca.nombre}}
                 </mat-option>

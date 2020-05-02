@@ -9,6 +9,7 @@ import * as CalendarActions from '../../../../core/store/actions/calendar.action
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
+import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, Especialidad, Formulario, Login, ObraSocial, Plan, CodigoNombre } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
@@ -84,6 +85,7 @@ export class FormularioComponent implements OnInit {
     );
 
     this.especialidad.valueChanges.subscribe( value => this.cambioEspecialidad(value));
+
   }
 
   filterEsp(value: String): Observable<Especialidad[]> {
@@ -119,6 +121,11 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
   }
 
+  onEnterE(evt: any){
+    document.getElementsByName("caSel")[0].focus();
+  }
+  
+
   cambioCentroDeAtencion(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
@@ -142,7 +149,7 @@ export class FormularioComponent implements OnInit {
         // tslint:disable-next-line: no-shadowed-variable
         (filter: BusquedaProfesionalesRequest) => {
           this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
-          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
         }
       )
       .unsubscribe();
