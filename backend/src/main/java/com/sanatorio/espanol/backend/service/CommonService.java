@@ -162,7 +162,7 @@ public class CommonService {
 	public ConfirmacionRespuesta confirmacionTurno(ConfirmacionRequest confRequest) {
 		ConfirmacionRespuesta cResp = new ConfirmacionRespuesta();
 		
-		if (confRequest.codigoReserva == null) {
+		if (confRequest.codigoReserva == null || confRequest.codigoTurno == null) {
 			cResp.respuesta = getRespuesta500();
 		} else {
 			cResp.respuesta = getRespuestaOK();

@@ -19,7 +19,8 @@ import { environment } from '../../../../../environments/environment';
 })
 export class ConfirmationReservaComponent implements OnInit {
 
-  codigoReserva: number;
+  codigoReserva: string;
+  codigoTurno: string;
   turnoSelected$: Observable<Turno>;
   turno: Turno;
   loading = false;
@@ -37,6 +38,7 @@ export class ConfirmationReservaComponent implements OnInit {
     this.loading = true;
     this.subscription = this.route.queryParams.subscribe(params => {
       this.codigoReserva = params['reserva'];
+      this.codigoTurno = params['turno'];
     });
 
     this.errorBackend$.subscribe(() => {
@@ -44,7 +46,8 @@ export class ConfirmationReservaComponent implements OnInit {
     });
 
     const reserva = new ConfirmacionTurnoRequest;
-    reserva.codigoReserva = this.codigoReserva;
+    reserva.codigoReserva = Number(this.codigoReserva);
+    reserva.codigoTurno = Number(this.codigoTurno);
 
     const login = new Login();
     login.username = environment.username;
