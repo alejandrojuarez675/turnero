@@ -71,17 +71,17 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Nro de Área</mat-label>
-            <input matInput [formControl]="telefonoArea" placeholder="Ingrese el Nro de Área">
+            <input matInput [formControl]="telefonoArea" placeholder="Ingrese el Nro de Área sin el 0">
             <mat-error *ngIf="telefonoArea.invalid">
-                Ingrese el Nro de Área
+                Ingrese el Nro de Área sin el 0
             </mat-error>
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Nro de Teléfono</mat-label>
-            <input matInput [formControl]="telefonoNumero" placeholder="Ingrese su Teléfono">
+            <input matInput [formControl]="telefonoNumero" placeholder="Ingrese su Teléfono sin el 15">
             <mat-error *ngIf="telefonoNumero.invalid">
-                Ingrese su Teléfono
-            </mat-error>            
+                Ingrese su Teléfono sin el 15
+            </mat-error>
         </mat-form-field>
     </div>
     <div class="row clearfix">
