@@ -33,5 +33,6 @@ export class ReservaTurnoRequest {
 
 export class ConfirmacionTurnoRequest {
     codigoReserva: number;
+    codigoTurno: number;
 }
 
