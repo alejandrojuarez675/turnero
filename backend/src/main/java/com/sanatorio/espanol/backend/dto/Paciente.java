@@ -7,7 +7,7 @@ public class Paciente {
 	public String dni;
 	public String sexo;
 	public String nombreApellido;
-	public String telefono;
+	public Telefono telefono;
 	public String email;
 	public Date fechaNacimiento; 
 	public Integer codigoObraSocial;
@@ -35,10 +35,10 @@ public class Paciente {
 	public void setNombreApellido(String nombreApellido) {
 		this.nombreApellido = nombreApellido;
 	}
-	public String getTelefono() {
+	public Telefono getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(String telefono) {
+	public void setTelefono(Telefono telefono) {
 		this.telefono = telefono;
 	}
 	public String getEmail() {

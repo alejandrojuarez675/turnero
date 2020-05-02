@@ -142,7 +142,7 @@ public class CommonService {
 				(!"F".equals(reservaRequest.getPaciente().getSexo()) && 
 					!"M".equals(reservaRequest.getPaciente().getSexo())) ||
 				reservaRequest.getPaciente().getNombreApellido() == null || reservaRequest.getPaciente().getNombreApellido().trim().isEmpty() ||
-				reservaRequest.getPaciente().getTelefono() == null || reservaRequest.getPaciente().getTelefono().trim().isEmpty() ||
+				reservaRequest.getPaciente().getTelefono() == null || reservaRequest.getPaciente().getTelefono().getNumero().isEmpty() ||
 				reservaRequest.getPaciente().getEmail() == null || reservaRequest.getPaciente().getEmail().trim().isEmpty() ||
 				reservaRequest.getPaciente().getFechaNacimiento() == null ||
 				reservaRequest.getPaciente().getCodigoObraSocial() == null ||
