@@ -121,11 +121,15 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
   }
 
+  onEnterE2(evt: any, field: string){
+    if (evt && evt.key === "Enter") {
+      this.onEnterE(evt, field);
+    }
+  }
+
   onEnterE(evt: any, field: string){
     document.getElementsByName(field)[0].focus();
   }
-
-  
 
   cambioCentroDeAtencion(event) {
     this.cleanResultadoDisponibilidad();

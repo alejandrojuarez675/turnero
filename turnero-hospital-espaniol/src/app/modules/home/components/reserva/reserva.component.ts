@@ -30,12 +30,10 @@ export class ReservaComponent implements OnInit {
   nombreApellido = new FormControl('', [Validators.required]);
   telefonoArea = new FormControl('', [Validators.required,
     Validators.minLength(2),
-    Validators.maxLength(4),
-    Validators.pattern('^[1-9][0-9]*')]);
+    Validators.pattern(/^\d+$/)]);
   telefonoNumero = new FormControl('', [Validators.required,
       Validators.minLength(6),
-      Validators.maxLength(8),
-      Validators.pattern('^(15){0}[0-9]*')]);    
+      Validators.pattern(/^\d+$/)]);    
   mail = new FormControl('', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
 
@@ -145,8 +143,13 @@ export class ReservaComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  onEnterE2(evt: any, field: string){
+    if (evt && evt.key === "Enter") {
+      this.onEnterE(evt, field);
+    }
+  }
+
   onEnterE(evt: any, field: string){
     document.getElementsByName(field)[0].focus();
   }
- 
 }

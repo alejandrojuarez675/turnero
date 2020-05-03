@@ -41,7 +41,8 @@
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>DNI</mat-label>
             <input matInput [formControl]="dni" 
-                   placeholder="Ingrese su DNI" (keyup.enter)="onEnterE($event, 'sexoSel')">
+                   placeholder="Ingrese su DNI" (keyup.enter)="onEnterE($event, 'sexoSel')"
+                   (keyup)="onEnterE2($event, 'sexoSel')">
             <mat-error *ngIf="dni.invalid">
                 Ingrese su DNI
             </mat-error>
@@ -61,7 +62,8 @@
         <mat-form-field style="width: 100%;">
             <mat-label>Nombre y Apellido</mat-label>
             <input matInput [formControl]="nombreApellido" name="nombreField"
-                   placeholder="Ingrese su nombre y apellido" (keyup.enter)="onEnterE($event, 'areaCodeField')">
+                   placeholder="Ingrese su nombre y apellido" (keyup.enter)="onEnterE($event, 'areaCodeField')"
+                   (keyup)="onEnterE2($event, 'areaCodeField')">
             <mat-error *ngIf="nombreApellido.invalid">
                 Ingrese su nombre y apellido
             </mat-error>
@@ -71,14 +73,16 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Nro de Área sin 0</mat-label>
-            <input matInput [formControl]="telefonoArea" name="areaCodeField" (keyup.enter)="onEnterE($event, 'nroTelField')" placeholder="Ingrese el Nro de Área sin el 0">
+            <input matInput [formControl]="telefonoArea" name="areaCodeField" (keyup.enter)="onEnterE($event, 'nroTelField')" 
+                (keyup)="onEnterE2($event, 'nroTelField')" placeholder="Ingrese el Nro de Área sin el 0">
             <mat-error *ngIf="telefonoArea.invalid">
                 Ingrese el Nro de Área sin el 0
             </mat-error>
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Nro de Teléfono sin 15</mat-label>
-            <input matInput [formControl]="telefonoNumero" name="nroTelField" (keyup.enter)="onEnterE($event, 'mailField')" placeholder="Ingrese su Teléfono sin el 15">
+            <input matInput [formControl]="telefonoNumero" name="nroTelField" (keyup.enter)="onEnterE($event, 'mailField')" 
+                (keyup)="onEnterE2($event, 'mailField')" placeholder="Ingrese su Teléfono sin el 15">
             <mat-error *ngIf="telefonoNumero.invalid">
                 Ingrese su Teléfono sin el 15
             </mat-error>
