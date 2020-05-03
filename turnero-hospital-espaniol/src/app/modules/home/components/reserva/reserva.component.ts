@@ -145,4 +145,8 @@ export class ReservaComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  onEnterE(evt: any, field: string){
+    document.getElementsByName(field)[0].focus();
+  }
+ 
 }

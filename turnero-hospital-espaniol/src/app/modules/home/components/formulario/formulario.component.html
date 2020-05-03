@@ -13,7 +13,7 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Obra Social</mat-label>
-            <mat-select (selectionChange)="cambioObraSocial($event)" [formControl]="obrasSocial">
+            <mat-select (selectionChange)="cambioObraSocial($event); onEnterE($event, 'planField')" [formControl]="obrasSocial">
                 <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
                     {{os.nombre}}
                 </mat-option>
@@ -22,7 +22,7 @@
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Plan</mat-label>
-            <mat-select (selectionChange)="cambioPlan($event)" [formControl]="plan">
+            <mat-select (selectionChange)="cambioPlan($event); onEnterE($event, 'especialidadField')" name="planField" [formControl]="plan">
                 <mat-option *ngFor="let p of planes$ | async" [value]="p">
                     {{p.nombre}}
                 </mat-option>
@@ -34,11 +34,11 @@
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
             <mat-label>Especialidad</mat-label>
-            <input type="text" placeholder="Elija una" matInput [formControl]="especialidad" 
-                [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event)">
+            <input type="text" name="especialidadField" placeholder="Elija una" matInput [formControl]="especialidad" 
+                [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event, 'centroField')">
             <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
-                    (selectionChange)="cambioEspecialidad($event); onEnterE($event)" 
+                    (selectionChange)="cambioEspecialidad($event); onEnterE($event, 'centroField')" 
                     (click)="onEnterE()">
                     {{e.nombre}}
                 </mat-option>
@@ -50,7 +50,7 @@
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
             <mat-label>Centro de Atencion</mat-label>
-            <mat-select name="caSel" (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
+            <mat-select name="centroField" (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
                 <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
                     {{ca.nombre}}
                 </mat-option>

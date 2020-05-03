@@ -121,9 +121,10 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
   }
 
-  onEnterE(evt: any){
-    document.getElementsByName("caSel")[0].focus();
+  onEnterE(evt: any, field: string){
+    document.getElementsByName(field)[0].focus();
   }
+
   
 
   cambioCentroDeAtencion(event) {
@@ -149,7 +150,7 @@ export class FormularioComponent implements OnInit {
         // tslint:disable-next-line: no-shadowed-variable
         (filter: BusquedaProfesionalesRequest) => {
           this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
-          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}))
+          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
         }
       )
       .unsubscribe();
