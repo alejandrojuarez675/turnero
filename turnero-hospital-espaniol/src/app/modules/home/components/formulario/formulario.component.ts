@@ -19,6 +19,7 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css']
 })
+
 export class FormularioComponent implements OnInit {
 
   obrasSociales$: Observable<ObraSocial[]>;
@@ -33,6 +34,7 @@ export class FormularioComponent implements OnInit {
   especialidad = new FormControl('', [Validators.required]);
   centroAtencion = new FormControl('', [Validators.required]);
 
+  startDate: Date;
   maxDate: Date;
 
   constructor(
@@ -43,6 +45,7 @@ export class FormularioComponent implements OnInit {
     this.especialidades$ = store.select(FormSelectors.selectAllEspecialidades);
     this.centrosDeAtencion$ = store.select(FormSelectors.selectAllCentrosDeAtencion);
     this.maxDate = new Date();
+    this.startDate = new Date(1980, 0, 1);
   }
 
   ngOnInit() {

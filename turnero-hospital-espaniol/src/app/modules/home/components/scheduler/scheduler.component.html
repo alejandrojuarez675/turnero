@@ -7,8 +7,20 @@
       <span *ngIf="(profesionalSelected$ | async) == undefined">
         {{especialidad.nombre || 'N/A'}}
       </span>
+      Haga click sobre los días para ver los horarios disponibles.
     </p>
   </div>
+  <div class="row clearfix">
+    <div class="col-md-6 texto">
+        <span class="material-icons icon-image-preview conturnos">label</span>
+        <span>Día con turnos disponibles.</span>
+    </div>
+    <div class="col-md-6 texto">
+        <span class="material-icons icon-image-preview sinturnos">label</span>
+        <span>Día con atención, sin turnos disponibles.</span>
+    </div>
+  </div>
+
   <div>
     <div class="row clearfix text-center">
       <div class="col-md-4">
@@ -16,7 +28,7 @@
             [view]="view" 
             [(viewDate)]="viewDate"
             (viewDateChange)="closeOpenMonthViewDay()">
-            << 
+            <span class="material-icons icon-image-preview">arrow_back</span> 
         </div>
       </div>
       <div class="col-md-4">
@@ -27,11 +39,12 @@
           [view]="view" 
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()">
-          >>
+          <span class="material-icons icon-image-preview">arrow_forward</span> 
         </div>
       </div>
     </div>
   </div>
+
   <div class="">
     <mwl-calendar-month-view
       [viewDate]="viewDate"

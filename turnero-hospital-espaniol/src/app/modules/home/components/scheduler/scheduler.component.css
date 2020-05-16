@@ -1,3 +1,28 @@
+.texto {
+    line-height:26px;
+}
+
+.col-md-6 {
+    flex: 0 0 50.0%;
+    max-width: 50.0%;
+}
+
+.conturnos {
+    display: inline-flex;
+    vertical-align: top;
+    color: #1061a7 !important;
+    font-size: 27px;
+    padding-right: 5px;
+}
+
+.sinturnos {
+    display: inline-flex;
+    vertical-align: top;
+    color: #e2e2e2 !important;
+    font-size: 27px;
+    padding-right: 5px;
+}
+
 h3 {
     margin: 0 0 10px;
     font-size: 1.75rem;
