@@ -1,21 +1,21 @@
 <div class="cuadro-formulario" *ngIf="(((eventsLength$ | async) > 0) && ((estado$ | async) >= 3))">
   <div class="row clearfix">
-    <p>Turnos disponibles para 
-      <span *ngIf="(profesionalSelected$ | async) != undefined">
-        Dr/a. {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}
-      </span>
-      <span *ngIf="(profesionalSelected$ | async) == undefined">
-        {{especialidad.nombre || 'N/A'}}
-      </span>
-      Haga click sobre los días para ver los horarios disponibles.
-    </p>
+      <div class="texto" *ngIf="(profesionalSelected$ | async) != undefined">
+        <span class="material-icons icon-image-preview info">person</span>
+        <span>Profesional: Dr/a. {{(profesionalSelected$ | async)?.nombreApellido || 'N/A'}}</span>
+      </div>
+      <div class="texto" *ngIf="(profesionalSelected$ | async) == undefined">
+        <span class="material-icons icon-image-preview info">work</span>
+        <span>Especialidad: {{especialidad.nombre || 'N/A'}}</span>
+      </div>
   </div>
-  <div class="row clearfix">
-    <div class="col-md-6 texto">
+
+  <div class="rowRef clearfix">
+    <div class="col-md-12 texto">
         <span class="material-icons icon-image-preview conturnos">label</span>
-        <span>Día con turnos disponibles.</span>
+        <span>Día con turnos disponibles. Haga click para ver los horarios disponibles.</span>
     </div>
-    <div class="col-md-6 texto">
+    <div class="col-md-12 texto">
         <span class="material-icons icon-image-preview sinturnos">label</span>
         <span>Día con atención, sin turnos disponibles.</span>
     </div>

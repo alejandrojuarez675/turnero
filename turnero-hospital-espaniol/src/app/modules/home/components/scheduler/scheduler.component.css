@@ -2,9 +2,34 @@
     line-height:26px;
 }
 
+.rowRef {
+    margin: 0% !important;
+}
+
+.col-md-12 {
+    flex: 0 0 100.0%;
+    max-width: 100.0%;
+}
+
 .col-md-6 {
     flex: 0 0 50.0%;
     max-width: 50.0%;
+}
+
+.info {
+    display: inline-flex;
+    vertical-align: top;
+    color: #1061a7 !important;
+    font-size: 27px;
+    padding-right: 5px;
+}
+
+.conturnos {
+    display: inline-flex;
+    vertical-align: top;
+    color: #1061a7 !important;
+    font-size: 27px;
+    padding-right: 5px;
 }
 
 .conturnos {
