@@ -28,11 +28,11 @@ public class DisponibilidadService {
 				new TurnoManiana(
 						400, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-						new Date(), "10:10", ""), 
+						new Date(20,6,30), "10:10", ""), 
 				new TurnoTarde(
 						401, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-						new Date(), "18:10", "")
+						new Date(20,6,28), "18:10", "")
 			),
 			new Disponibilidad(
 				new Profesional(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")), 
@@ -44,10 +44,7 @@ public class DisponibilidadService {
 			),
 			new Disponibilidad(
 				new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-				new TurnoManiana(
-						400, 
-						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-						new Date(), "11:45", ""), 
+				null,
 				new TurnoTarde(
 						401, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 

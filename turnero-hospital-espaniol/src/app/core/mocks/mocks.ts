@@ -84,7 +84,7 @@ const turno1: TurnoLight = {
 const turno2: TurnoLight = {
     codigo: 348,
     centroAtencion: centroAtencionMock,
-    fecha: new Date('2020/03/30'),
+    fecha: new Date('2020/03/26'),
     hora: '20:15',
     observaciones: 'Solo particular'
 };
@@ -108,13 +108,15 @@ const turno4: TurnoLight = {
 const disponibilidad: Disponibilidad = {
     profesional: profesional1,
     turnoManiana: turno1,
-    turnoTarde: turno2
+    turnoTarde: turno2,
+    turno: turno1
 };
 
 const disponibilidad2: Disponibilidad = {
     profesional: profesional2,
     turnoManiana: turno3,
-    turnoTarde: turno4
+    turnoTarde: turno4,
+    turno: turno3
 };
 
 export const profesionalesMocks: Disponibilidad[] = [

@@ -52,6 +52,7 @@ export class Disponibilidad {
     profesional: Profesional;
     turnoManiana: TurnoLight;
     turnoTarde: TurnoLight;
+    turno: TurnoLight;
 }
 
 export class TurnoLight {

@@ -121,6 +121,16 @@ export class ServiceService {
             throwErrorIfBadCode(res);
             if (res.disponibilidad == undefined || res.disponibilidad.length == 0) {
               throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
+            } else {
+              res.disponibilidad.forEach(element => {
+                if (element.turnoManiana == undefined || element.turnoManiana.fecha == undefined) {
+                  element.turno = element.turnoTarde;  
+                } else if (element.turnoTarde == undefined || element.turnoTarde.fecha == undefined) {
+                  element.turno = element.turnoManiana;  
+                } else {
+                  element.turno = element.turnoManiana.fecha <= element.turnoTarde.fecha ? element.turnoManiana : element.turnoTarde;
+                }
+              });
             }
             return res.disponibilidad;
           }
