@@ -40,7 +40,11 @@ export class CustomDateAdapter extends NativeDateAdapter {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
   }
+
+  private _to2digit(n: number) {
+    return ('00' + n).slice(-2);
+}
 
 }
