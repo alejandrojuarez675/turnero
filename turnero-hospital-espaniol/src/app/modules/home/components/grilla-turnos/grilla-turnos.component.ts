@@ -24,24 +24,24 @@ export class GrillaTurnosComponent {
     'nombreApellido', 'turnoP', 'profesional.observaciones'
   ];
 
-  cambiarColumna(colToShow: String) {
-    
+  cambiarColumna(event) {
+    console.log(event);
+    /*
     const classSel = "botFilSel mat-mini-fab";
     const classUnsel = "botFil mat-mini-fab";
-
     document.getElementById("botFilTodos").className = classUnsel;
     document.getElementById("botFilAM").className = classUnsel;
     document.getElementById("botFilPM").className = classUnsel;
-
-    if (colToShow === "AM") {
+    */
+    if (event.value === "AM") {
       this.displayedColumns = ['nombreApellido', 'turnoM', 'profesional.observaciones'];
-      document.getElementById("botFilAM").className = classSel;
-    } else if (colToShow === "PM") {
+      //document.getElementById("botFilAM").className = classSel;
+    } else if (event.value === "PM") {
       this.displayedColumns = ['nombreApellido', 'turnoT', 'profesional.observaciones'];
-      document.getElementById("botFilPM").className = classSel;
+      //document.getElementById("botFilPM").className = classSel;
     } else {
       this.displayedColumns = ['nombreApellido', 'turnoP', 'profesional.observaciones'];
-      document.getElementById("botFilTodos").className = classSel;
+      //document.getElementById("botFilTodos").className = classSel;
     }
   }
 
