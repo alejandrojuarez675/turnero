@@ -3,32 +3,25 @@
 
   <div class="row clearfix">
     <p>
-      Haga click sobre el profesional para ver todos los turnos disponibles o sobre el turno que desee reservar.
+      Haga click sobre el profesional para ver todos los turnos disponibles o directamente sobre el turno que desee reservar.
     </p>
   </div>
-<!--
-  <div class="button-row">
-    <button mat-mini-fab color id="botFilTodos" class="botFilSel" (click)="cambiarColumna('Todos')">TODOS</button>
-    <button mat-mini-fab color id="botFilAM" class="botFil" (click)="cambiarColumna('AM')">AM</button>
-    <button mat-mini-fab color id="botFilPM" class="botFil" (click)="cambiarColumna('PM')">PM</button>
+  <div class="row clearfix">
+      <mat-form-field style="width: 55%; padding-right: 10%;">
+          <mat-label>Visualizar</mat-label>
+          <mat-select (selectionChange)="cambiarColumna($event);" [formControl]="turnoFilter"> 
+              <mat-option value="Todos">
+                  Próximo turno libre
+              </mat-option>
+              <mat-option value="AM">
+                  Próximo turno libre por la mañana
+              </mat-option>
+              <mat-option value="PM">
+                  Próximo turno libre por la tarde
+              </mat-option>                    
+          </mat-select>
+      </mat-form-field>    
   </div>
--->
-
-<div class="button-row">
-  <mat-form-field>
-      <mat-select (selectionChange)="cambiarColumna($event);" [formControl]="turnoFilter"> 
-          <mat-option value="Todos">
-              Próximo turno libre
-          </mat-option>
-          <mat-option value="AM">
-              Próximo turno libre por la mañana
-          </mat-option>
-          <mat-option value="PM">
-              Próximo turno libre por la tarde
-          </mat-option>                    
-      </mat-select>
-  </mat-form-field>
-</div>
 
   <div class="example-container">
     <div class="example-table-container">

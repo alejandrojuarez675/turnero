@@ -3,23 +3,6 @@ section {
     margin: 8px;
   }
 
-.button-row {
-    flex: 0 0 90.0%;
-    max-width: 90.0%;
-    text-align: right;
-}
-
-.botFil {
-    background-color: #e2e2e2 !important;
-    font-size: 10px !important;
-}
-
-.botFilSel {
-    background-color: #1061a7 !important;
-    color: white;
-    font-size: 10px !important;
-}
-
 table {
     width: 100%;
 }
