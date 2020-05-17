@@ -8,6 +8,7 @@ import * as CalendarSelectors from '../../../../core/store/selectors/caledar.sel
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import { Calendario, Disponibilidad, Profesional, Turno } from '../../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-grilla-turnos',
@@ -19,6 +20,7 @@ export class GrillaTurnosComponent {
   estado$: Observable<number>;
   profesionalesDisponibles$: Observable<Disponibilidad[]>;
   profesionalesDisponiblesLenght$: Observable<number>;
+  turnoFilter = new FormControl('Todos');
 
   displayedColumns = [
     'nombreApellido', 'turnoP', 'profesional.observaciones'

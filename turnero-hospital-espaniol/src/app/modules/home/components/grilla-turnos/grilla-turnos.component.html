@@ -16,7 +16,7 @@
 
 <div class="button-row">
   <mat-form-field>
-      <mat-select (selectionChange)="cambiarColumna($event);" ng-selected="Todos"> 
+      <mat-select (selectionChange)="cambiarColumna($event);" [formControl]="turnoFilter"> 
           <mat-option value="Todos">
               Próximo turno libre
           </mat-option>
