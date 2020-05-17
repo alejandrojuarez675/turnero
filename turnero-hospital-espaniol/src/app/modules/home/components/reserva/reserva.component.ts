@@ -3,17 +3,20 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
-import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
-import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
-import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
-import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
-import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Turno, Telefono } from '../../../../shared/models/datos.models';
-import { ReservaTurnoRequest } from '../../../../shared/models/request.models';
-import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import { filter } from 'rxjs/operators';
-import { Errors } from '../../../../core/store/reducers/error.reducers';
+import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
+import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
+import * as FormActions from '../../../../core/store/actions/form.actions';
+import * as ReservaAction from '../../../../core/store/actions/reserva.actions';
+import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
+import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
+import * as ErrorSelector from '../../../../core/store/selectors/error.selectors';
+import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
+import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
+import * as ReservaSelector from '../../../../core/store/selectors/reserva.selectors';
+import * as ReservacionSelectors from '../../../../core/store/selectors/reservacion.selectors';
+import { ObraSocial, Paciente, Plan, ReservaFormulario, ReservaRespuesta, Telefono, Turno } from '../../../../shared/models/datos.models';
+import { BusquedaProfesionalesRequest, ReservaTurnoRequest, BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 
 @Component({
   selector: 'app-reserva',
@@ -50,6 +53,8 @@ export class ReservaComponent implements OnInit {
   reservaSelected$: Observable<ReservaRespuesta>;
   errorBackend$: Observable<number>;
   loading = false;
+  horariosLength$: Observable<number>;
+  horariosLength: Number;
 
   constructor(
     private store: Store<{ reservaTurno: ReservaFormulario }>,
@@ -140,6 +145,30 @@ export class ReservaComponent implements OnInit {
   volverASeleccionDeTurno() {
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected: undefined }));
     this.store.dispatch(ReservaAction.setTurnoSelected({ turnoSelected: undefined }));
+
+    this.horariosLength$ = this.store.select(CalendarSelectors.getHorariosDisponiblesLength);
+    this.horariosLength$.subscribe(horariosLength => this.horariosLength = horariosLength).unsubscribe();
+
+    console.log(this.horariosLength);
+    if (this.horariosLength === 0){
+      this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }))
+      this.store.select(FormSelectors.selectBusquedaProfesionales)
+      .subscribe(
+        (filter: BusquedaProfesionalesRequest) => {
+          this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
+          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+        }
+      )
+      .unsubscribe();
+    } else {
+
+      this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+      this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
+        (filtro: BusquedaHorariosRequest) =>
+          this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
+      ).unsubscribe();
+    }
+
     this.router.navigate(['/home']);
   }
 

@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter, map, startWith, switchMap } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
-import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import { CentroAtencion, Especialidad, Formulario, Login, ObraSocial, Plan, CodigoNombre } from '../../../../shared/models/datos.models';
+import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
 
 @Component({
