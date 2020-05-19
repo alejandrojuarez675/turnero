@@ -113,6 +113,10 @@ export class FormularioComponent implements OnInit {
     this.plan.setValue(undefined);
   }
 
+  clear() {
+    this.especialidad.setValue('');
+  }
+
   cambioPlan(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));

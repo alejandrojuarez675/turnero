@@ -44,6 +44,9 @@
                     {{e.nombre}}
                 </mat-option>
             </mat-autocomplete>
+          
+            <button mat-icon-button matSuffix (click)="clear()" 
+                *ngIf="especialidad.value != undefined && especialidad?.value !== ''"><mat-icon>clear</mat-icon></button>
             <mat-error *ngIf="especialidad.invalid">Ingrese su Especialidad</mat-error>
         </mat-form-field>
     </div>
