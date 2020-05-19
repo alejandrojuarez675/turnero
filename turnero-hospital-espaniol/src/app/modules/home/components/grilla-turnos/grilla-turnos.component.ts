@@ -27,23 +27,12 @@ export class GrillaTurnosComponent {
   ];
 
   cambiarColumna(event) {
-    console.log(event);
-    /*
-    const classSel = "botFilSel mat-mini-fab";
-    const classUnsel = "botFil mat-mini-fab";
-    document.getElementById("botFilTodos").className = classUnsel;
-    document.getElementById("botFilAM").className = classUnsel;
-    document.getElementById("botFilPM").className = classUnsel;
-    */
     if (event.value === "AM") {
       this.displayedColumns = ['nombreApellido', 'turnoM', 'profesional.observaciones'];
-      //document.getElementById("botFilAM").className = classSel;
     } else if (event.value === "PM") {
       this.displayedColumns = ['nombreApellido', 'turnoT', 'profesional.observaciones'];
-      //document.getElementById("botFilPM").className = classSel;
     } else {
       this.displayedColumns = ['nombreApellido', 'turnoP', 'profesional.observaciones'];
-      //document.getElementById("botFilTodos").className = classSel;
     }
   }
 

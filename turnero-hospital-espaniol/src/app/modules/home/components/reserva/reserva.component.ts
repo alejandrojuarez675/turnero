@@ -149,7 +149,6 @@ export class ReservaComponent implements OnInit {
     this.horariosLength$ = this.store.select(CalendarSelectors.getHorariosDisponiblesLength);
     this.horariosLength$.subscribe(horariosLength => this.horariosLength = horariosLength).unsubscribe();
 
-    console.log(this.horariosLength);
     if (this.horariosLength === 0){
       this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }))
       this.store.select(FormSelectors.selectBusquedaProfesionales)
