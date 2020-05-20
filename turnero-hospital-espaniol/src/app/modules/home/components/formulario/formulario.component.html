@@ -48,13 +48,13 @@
           
             <button mat-icon-button matSuffix (click)="clear('especialidad')" 
                 *ngIf="especialidad.value != undefined && especialidad?.value !== ''"><mat-icon>clear</mat-icon></button>
-            <mat-error *ngIf="especialidad.invalid">Ingrese su Especialidad</mat-error>
+            <mat-error *ngIf="especialidad.invalid">Ingrese una Especialidad</mat-error>
         </mat-form-field>
     </div>
 
     <div class="row clearfix">
         <mat-form-field style="width: 100%;">
-            <mat-label>Centro de Atencion</mat-label>
+            <mat-label>Centro de Atención</mat-label>
             <mat-select name="centroField" (selectionChange)="cambioCentroDeAtencion($event)" [formControl]="centroAtencion">
                 <mat-option *ngFor="let ca of centrosDeAtencion$ | async" [value]="ca">
                     {{ca.nombre}}
