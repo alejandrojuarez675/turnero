@@ -32,12 +32,12 @@
     </div>
 
     <div class="row clearfix" >
-        <mat-form-field style="width: 100%;" name="pato">
+        <mat-form-field style="width: 100%;">
             <mat-label name="labelEspecialidad">Especialidad</mat-label>
             <input matInput name="especialidadField" type="text"  placeholder="Elija una" 
                 [formControl]="especialidad"    #autoEspecComplete="matAutocompleteTrigger"
                 [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event, 'centroField')" 
-                (keyup)="onEnterE2($event, 'centroField')"  (click)="pato()">
+                (keyup)="onEnterE2($event, 'centroField')" >
             <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn" >
                 <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
                     (selectionChange)="cambioEspecialidad($event); onEnterE($event, 'centroField')" 

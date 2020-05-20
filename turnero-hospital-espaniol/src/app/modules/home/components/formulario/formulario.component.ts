@@ -115,10 +115,6 @@ export class FormularioComponent implements OnInit {
     this.plan.setValue(undefined);
   }
 
-pato() {
-  console.log("asd");
-}
-
   clear() {
     this.especialidad.setValue('');
     setTimeout(()=> {this.autoEspecComplete.openPanel() })
