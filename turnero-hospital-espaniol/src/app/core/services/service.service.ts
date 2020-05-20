@@ -51,10 +51,8 @@ export class ServiceService {
 
   getObraSociales(): Observable<ObraSocial[]> {
     if (this.useMockups) {
-      console.log('Run mock for: getObraSociales()');
       return getWsFromMock(Mock.obrasSocialesMocks);
     } else {
-      console.log('Run to server ' + this.endpoint_obraSocial);
       return this.http.get<ObraSocialRespuesta>(this.endpoint_obraSocial)
         .pipe(map(
           (res: ObraSocialRespuesta) => {
@@ -78,10 +76,8 @@ export class ServiceService {
 
   getEspecialidades(): Observable<Especialidad[]> {
     if (this.useMockups) {
-      console.log('Run mock for: getEspecialidades()');
       return getWsFromMock(Mock.especialidadesMocks);
     } else {
-      console.log('Run to server ' + this.endpoint_especialidad);
       return this.http.get<EspecialidadRespuesta>(this.endpoint_especialidad)
         .pipe(map(
           (res: EspecialidadRespuesta) => {
@@ -103,10 +99,8 @@ export class ServiceService {
 
   getCentrosDeAtencion(): Observable<CentroAtencion[]> {
    if (this.useMockups) {
-      console.log('Run mock for: getCentrosDeAtencion()');
       return getWsFromMock(Mock.centroAtencionesMocks);
     } else {
-      console.log('Run to server ' + this.endpoint_centroAtencion);
       return this.http.get<CentroAtencionRespuesta>(this.endpoint_centroAtencion)
         .pipe(map(
           (res: CentroAtencionRespuesta) => {
@@ -123,10 +117,8 @@ export class ServiceService {
 
   busquedaProfesionales(filter: BusquedaProfesionalesRequest): Observable<any> {
     if (this.useMockups) {
-      console.log('Run mock for: busquedaProfesionales() - filter', filter);
       return getWsFromMock(Mock.profesionalesMocks);
     } else {
-      console.log('Run to server ' + this.endpoint_busquedaProfesionales);
       return this.http.post<DisponibilidadRespuesta>(this.endpoint_busquedaProfesionales, filter)
         .pipe(map(
           (res: DisponibilidadRespuesta) => {
@@ -153,7 +145,6 @@ export class ServiceService {
 
   busquedaDiasDisponibles(filter: BusquedaDiasDisponiblesRequest): Observable<DisponibilidadDias[]> {
     if (this.useMockups) {
-      console.log('Run mock for: busquedaDiasDisponibles() - filter', filter);
 
       // MOCK SIN ERROR
       return getWsFromMock(Mock.diasDisponiblesMock);
@@ -175,7 +166,6 @@ export class ServiceService {
       //   ));
 
       } else {
-        console.log('Run to server ' + this.endpoint_busquedaDiasDisponibles);
         return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
           .pipe(map(
             (res: DisponibilidadDiasRespuesta) => {
@@ -188,10 +178,8 @@ export class ServiceService {
 
   busquedaHorarios(filter: BusquedaHorariosRequest): Observable<Turno[]> {
     if (this.useMockups) {
-      console.log('Run mock for: busquedaHorarios() - filter', filter);
       return getWsFromMock(Mock.horariosMock);
     } else {
-      console.log('Run to server ' + this.endpoint_busquedaHorarios);
       return this.http.post<HorariosRespuesta>(this.endpoint_busquedaHorarios, filter)
         .pipe(map(
           (res: HorariosRespuesta) => {
@@ -207,10 +195,8 @@ export class ServiceService {
 
   reservaTurno(filter: ReservaTurnoRequest): Observable<any> {
     if (this.useMockups) {
-      console.log('Run mock for: reservaTurno() - filter', filter);
       return getWsFromMock(Mock.reservaTurnoMock);
     } else {
-      console.log('Run to server ' + this.endpoint_reservaTurno);
       return this.http.post<ReservaRespuesta>(this.endpoint_reservaTurno, filter)
         .pipe(map(
           (res: ReservaRespuesta) => {
@@ -223,10 +209,8 @@ export class ServiceService {
 
   retrieveTurno(reserva: ConfirmacionTurnoRequest): Observable<any> {
     if (this.useMockups) {
-      console.log('Run mock for: retrieveTurno() - reserva', reserva);
       return getWsFromMock(Mock.turnoMock);
     } else {
-      console.log('Run to server ' + this.endpoint_confirmacionTurno);
       return this.http.post<TurnoRespuesta>(this.endpoint_confirmacionTurno, reserva)
         .pipe(map(
           (res: TurnoRespuesta) => {
