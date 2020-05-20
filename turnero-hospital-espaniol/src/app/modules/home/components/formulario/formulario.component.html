@@ -13,13 +13,20 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Obra Social</mat-label>
-            <mat-select (selectionChange)="cambioObraSocial($event); onEnterE($event, 'planField')" [formControl]="obrasSocial">
-                <mat-option *ngFor="let os of obrasSociales$ | async" [value]="os">
+            <input type="text" placeholder="Elija una" matInput [formControl]="obrasSocial" [matAutocomplete]="autoOS"
+                #autoObraComplete="matAutocompleteTrigger"
+                (keyup.enter)="onEnterE($event, 'planField')" (keyup)="onEnterE2($event, 'planField')">
+            <mat-autocomplete #autoOS="matAutocomplete" [displayWith]="displayFn" 
+                (selectedValueChange)="cambioObraSocial($event); onEnterE($event, 'planField')">
+                <mat-option *ngFor="let os of filteredObrasSociales$ | async" [value]="os">
                     {{os.nombre}}
                 </mat-option>
-            </mat-select>
+            </mat-autocomplete>
+            <button mat-icon-button matSuffix (click)="clearOS()" 
+                *ngIf="obrasSocial.value != undefined && obrasSocial?.value !== ''"><mat-icon>clear</mat-icon></button>
             <mat-error *ngIf="obrasSocial.invalid">Ingrese su Obra Social</mat-error>
         </mat-form-field>
+        
         <mat-form-field style="width: 45%;">
             <mat-label>Plan</mat-label>
             <mat-select (selectionChange)="cambioPlan($event); onEnterE($event, 'especialidadField')" name="planField" [formControl]="plan">
@@ -45,8 +52,7 @@
                     {{e.nombre}}
                 </mat-option>
             </mat-autocomplete>
-          
-            <button mat-icon-button matSuffix (click)="clear('especialidad')" 
+            <button mat-icon-button matSuffix (click)="clear()" 
                 *ngIf="especialidad.value != undefined && especialidad?.value !== ''"><mat-icon>clear</mat-icon></button>
             <mat-error *ngIf="especialidad.invalid">Ingrese una Especialidad</mat-error>
         </mat-form-field>

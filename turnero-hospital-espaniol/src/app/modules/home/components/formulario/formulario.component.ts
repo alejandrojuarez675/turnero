@@ -22,13 +22,15 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 export class FormularioComponent implements OnInit {
 
   @ViewChild('autoEspecComplete') autoEspecComplete;
+  @ViewChild('autoObraComplete') autoObraComplete;
   
+  filteredObrasSociales$: Observable<ObraSocial[]>;
   obrasSociales$: Observable<ObraSocial[]>;
   planes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
   filteredEspecialidades$: Observable<Especialidad[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
-
+  
   fechaNacimiento = new FormControl('', [Validators.required]);
   obrasSocial = new FormControl('', [Validators.required]);
   plan = new FormControl('', [Validators.required]);
@@ -82,16 +84,30 @@ export class FormularioComponent implements OnInit {
       }
     ).unsubscribe();
 
+    this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(
+      startWith<string | ObraSocial>(''),
+      map(value => typeof value === 'string' ? value : value.nombre),
+      switchMap(x => this.filterOs(x))
+    );
+
     this.filteredEspecialidades$ = this.especialidad.valueChanges.pipe(
       startWith<string | Especialidad>(''),
       map(value => typeof value === 'string' ? value : value.nombre),
       switchMap(x => this.filterEsp(x))
     );
 
+    this.obrasSocial.valueChanges.subscribe( value => this.cambioObraSocial(value));
     this.especialidad.valueChanges.subscribe( value => this.cambioEspecialidad(value));
 
   }
 
+  filterOs(value: String): Observable<ObraSocial[]> {
+    const filterValue = value.toLowerCase();
+    return this.obrasSociales$.pipe(
+      map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
+    );
+  }
+  
   filterEsp(value: String): Observable<Especialidad[]> {
     const filterValue = value.toLowerCase();
     return this.especialidades$.pipe(
@@ -108,9 +124,9 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 
-  cambioObraSocial(event) {
+  cambioObraSocial(value) {
     this.cleanResultadoDisponibilidad();
-    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: event.value }));
+    this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: value }));
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined }));
     this.plan.setValue(undefined);
   }
@@ -118,6 +134,10 @@ export class FormularioComponent implements OnInit {
   clear() {
     this.especialidad.setValue('');
     setTimeout(()=> {this.autoEspecComplete.openPanel() })
+  }
+  clearOS() {
+    this.obrasSocial.setValue('');
+    setTimeout(()=> {this.autoObraComplete.openPanel() })
   }
 
   cambioPlan(event) {
@@ -144,6 +164,7 @@ export class FormularioComponent implements OnInit {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
   }
+  
 
   isValid() {
     let result = false;
