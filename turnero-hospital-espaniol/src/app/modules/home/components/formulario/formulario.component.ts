@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
@@ -21,6 +21,8 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 
 export class FormularioComponent implements OnInit {
 
+  @ViewChild('autoEspecComplete') autoEspecComplete;
+  
   obrasSociales$: Observable<ObraSocial[]>;
   planes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
@@ -113,8 +115,13 @@ export class FormularioComponent implements OnInit {
     this.plan.setValue(undefined);
   }
 
+pato() {
+  console.log("asd");
+}
+
   clear() {
     this.especialidad.setValue('');
+    setTimeout(()=> {this.autoEspecComplete.openPanel() })
   }
 
   cambioPlan(event) {

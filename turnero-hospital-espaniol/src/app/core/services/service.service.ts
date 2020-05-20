@@ -58,6 +58,13 @@ export class ServiceService {
       return this.http.get<ObraSocialRespuesta>(this.endpoint_obraSocial)
         .pipe(map(
           (res: ObraSocialRespuesta) => {
+            res.obraSocial.forEach(element => {
+              element.nombre = element.nombre.trim();
+              element.plan.forEach(elementp => {
+                elementp.nombre = elementp.nombre.trim();
+              });
+            });
+
             throwErrorIfBadCode(res);
             return res.obraSocial.sort((a, b) => {
               if (a.nombre > b.nombre) return 1;
@@ -79,6 +86,11 @@ export class ServiceService {
         .pipe(map(
           (res: EspecialidadRespuesta) => {
             throwErrorIfBadCode(res);
+
+            res.especialidad.forEach(element => {
+              element.nombre = element.nombre.trim();
+            })
+
             return res.especialidad.sort((a, b) => {
               if (a.nombre > b.nombre) return 1;
               if (a.nombre < b.nombre) return -1;

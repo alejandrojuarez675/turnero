@@ -31,13 +31,14 @@
         </mat-form-field>
     </div>
 
-    <div class="row clearfix">
-        <mat-form-field style="width: 100%;">
-            <mat-label>Especialidad</mat-label>
-            <input type="text" name="especialidadField" placeholder="Elija una" matInput [formControl]="especialidad" 
+    <div class="row clearfix" >
+        <mat-form-field style="width: 100%;" name="pato">
+            <mat-label name="labelEspecialidad">Especialidad</mat-label>
+            <input matInput name="especialidadField" type="text"  placeholder="Elija una" 
+                [formControl]="especialidad"    #autoEspecComplete="matAutocompleteTrigger"
                 [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event, 'centroField')" 
-                (keyup)="onEnterE2($event, 'centroField')">
-            <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn">
+                (keyup)="onEnterE2($event, 'centroField')"  (click)="pato()">
+            <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn" >
                 <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
                     (selectionChange)="cambioEspecialidad($event); onEnterE($event, 'centroField')" 
                     (click)="onEnterE($event, 'centroField')">
@@ -45,7 +46,7 @@
                 </mat-option>
             </mat-autocomplete>
           
-            <button mat-icon-button matSuffix (click)="clear()" 
+            <button mat-icon-button matSuffix (click)="clear('especialidad')" 
                 *ngIf="especialidad.value != undefined && especialidad?.value !== ''"><mat-icon>clear</mat-icon></button>
             <mat-error *ngIf="especialidad.invalid">Ingrese su Especialidad</mat-error>
         </mat-form-field>

@@ -23,9 +23,11 @@ public class EspecialidadService {
 	
 	public static List<Especialidad> listaEspecialidad = 
 		new ArrayList<Especialidad>(Arrays.asList(
-				new Especialidad(1, "KINESIOLOGÍA"),
-				new Especialidad(2, "ENDOCRINOLOGÍA"),
-				new Especialidad(3, "CARGIOLOGÍA"),
+				new Especialidad(1, "KINESIOLOGÍA              "),
+				new Especialidad(1, "KINESIOLOGÍA OTRA"),
+				new Especialidad(1, "KINESIOLOGÍA TRES     "),
+				new Especialidad(2, "ENDOCRINOLOGÍA        "),
+				new Especialidad(3, "CARGIOLOGÍA        "),
 				new Especialidad(4, "CLÍNICA MÉDICA")
 		));
 	
