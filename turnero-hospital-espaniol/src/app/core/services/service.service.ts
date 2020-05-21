@@ -146,24 +146,7 @@ export class ServiceService {
   busquedaDiasDisponibles(filter: BusquedaDiasDisponiblesRequest): Observable<DisponibilidadDias[]> {
     if (this.useMockups) {
 
-      // MOCK SIN ERROR
       return getWsFromMock(Mock.diasDisponiblesMock);
-
-      // PARA PROBAR ERRORES CON MOCK
-      // const mock: DisponibilidadDiasRespuesta = {
-      //   dia: Mock.diasDisponiblesMock,
-      //   respuesta: {
-      //     codigo: 300,
-      //     mensaje: 'prueba error'
-      //   }
-      // };
-      // return getWsFromMock(mock)
-      //   .pipe(map(
-      //       (res: DisponibilidadDiasRespuesta) => {
-      //         throwErrorIfBadCode(res);
-      //         return res.dia;
-      //       }
-      //   ));
 
       } else {
         return this.http.post<DisponibilidadDiasRespuesta>(this.endpoint_busquedaDiasDisponibles, filter)
