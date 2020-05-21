@@ -6,7 +6,7 @@
       </div>
       <div class="texto" *ngIf="(profesionalSelected$ | async) == undefined">
         <span class="material-icons icon-image-preview info">work</span>
-        <span>Especialidad: {{especialidad.nombre || 'N/A'}}</span>
+        <span>Especialidad: {{especialidad?.nombre || 'N/A'}}</span>
       </div>
   </div>
 

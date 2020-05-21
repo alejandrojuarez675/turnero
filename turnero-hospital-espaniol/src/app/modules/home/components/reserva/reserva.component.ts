@@ -146,20 +146,26 @@ export class ReservaComponent implements OnInit {
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected: undefined }));
     this.store.dispatch(ReservaAction.setTurnoSelected({ turnoSelected: undefined }));
 
-    this.horariosLength$ = this.store.select(CalendarSelectors.getHorariosDisponiblesLength);
-    this.horariosLength$.subscribe(horariosLength => this.horariosLength = horariosLength).unsubscribe();
+    this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }))
+    this.store.select(FormSelectors.selectBusquedaProfesionales)
+    .subscribe(
+      (filter: BusquedaProfesionalesRequest) => {
+        this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+      }
+    ).unsubscribe();
 
-    if (this.horariosLength === 0){
-      this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }))
-      this.store.select(FormSelectors.selectBusquedaProfesionales)
-      .subscribe(
-        (filter: BusquedaProfesionalesRequest) => {
-          this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
-          this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
-        }
-      )
-      .unsubscribe();
-    } else {
+    this.horariosLength$ = this.store.select(CalendarSelectors.getHorariosDisponiblesLength);
+    this.horariosLength$.subscribe(hl => this.horariosLength = hl).unsubscribe();
+
+    console.log(this.horariosLength);
+
+    if (this.horariosLength > 0){
+    
+      this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+      this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
+        (filtro2: BusquedaHorariosRequest) =>
+          this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: filtro2 }))
+      ).unsubscribe();
 
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
       this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
