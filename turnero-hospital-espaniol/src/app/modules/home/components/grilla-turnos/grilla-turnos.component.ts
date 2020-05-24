@@ -21,6 +21,7 @@ export class GrillaTurnosComponent {
   profesionalesDisponibles$: Observable<Disponibilidad[]>;
   profesionalesDisponiblesLenght$: Observable<number>;
   turnoFilter = new FormControl('Todos');
+  disponibilidades: Disponibilidad[];
 
   displayedColumns = [
     'nombreApellido', 'turnoP', 'profesional.observaciones'
@@ -28,11 +29,38 @@ export class GrillaTurnosComponent {
 
   cambiarColumna(event) {
     if (event.value === "AM") {
-      this.displayedColumns = ['nombreApellido', 'turnoM', 'profesional.observaciones'];
+      this.displayedColumns = ['nombreApellido', 'turnoM', 'profesional.observaciones']; 
+      const list = this.disponibilidades.filter(x => x.turnoManiana != null).map( x => ({
+        ...x,
+        nombreApellido: x.profesional.nombreApellido,
+        turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
+        turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
+        turnoP: x.turno != null ? x.turno.fecha : "",
+      }));
+      this.datasource = new MatTableDataSource<any>(list);
+      this.datasource.sort = this.sort;
     } else if (event.value === "PM") {
       this.displayedColumns = ['nombreApellido', 'turnoT', 'profesional.observaciones'];
+      const list = this.disponibilidades.filter(x => x.turnoTarde != null).map( x => ({
+        ...x,
+        nombreApellido: x.profesional.nombreApellido,
+        turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
+        turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
+        turnoP: x.turno != null ? x.turno.fecha : "",
+      }));
+      this.datasource = new MatTableDataSource<any>(list);
+      this.datasource.sort = this.sort;
     } else {
       this.displayedColumns = ['nombreApellido', 'turnoP', 'profesional.observaciones'];
+      const list = this.disponibilidades.map( x => ({
+        ...x,
+        nombreApellido: x.profesional.nombreApellido,
+        turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
+        turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
+        turnoP: x.turno != null ? x.turno.fecha : "",
+      }));
+      this.datasource = new MatTableDataSource<any>(list);
+      this.datasource.sort = this.sort;
     }
   }
 
@@ -54,8 +82,10 @@ export class GrillaTurnosComponent {
             turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
             turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
             turnoP: x.turno != null ? x.turno.fecha : "",
+            
           }))
         );
+        this.disponibilidades = disponibilidades;
         this.datasource.sort = this.sort;
       }
     );
