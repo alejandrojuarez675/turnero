@@ -157,8 +157,6 @@ export class ReservaComponent implements OnInit {
     this.horariosLength$ = this.store.select(CalendarSelectors.getHorariosDisponiblesLength);
     this.horariosLength$.subscribe(hl => this.horariosLength = hl).unsubscribe();
 
-    console.log(this.horariosLength);
-
     if (this.horariosLength > 0){
     
       this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
