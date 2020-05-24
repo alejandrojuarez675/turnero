@@ -28,7 +28,7 @@ public class DisponibilidadService {
 				new TurnoManiana(
 						400, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-						new Date(20,6,30), "10:10", ""), 
+						new Date(2020,6,30), "10:10", ""), 
 				new TurnoTarde(
 						401, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
@@ -51,7 +51,7 @@ public class DisponibilidadService {
 						new Date(), "16:10", "")
 			),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new Profesional(3, "Mario Gomez Mañana y tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -62,7 +62,23 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new Profesional(3, "Mario Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					null, 
+					new TurnoTarde(
+							401, 
+							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
+							new Date(), "16:10", "")
+				),
+			new Disponibilidad(
+					new Profesional(3, "Mario Gomez Mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new TurnoManiana(
+							400, 
+							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
+							new Date(), "11:45", ""), 
+					null
+				),
+			new Disponibilidad(
+					new Profesional(3, "Juan perez Gomez ambos", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -73,114 +89,20 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
+					new Profesional(3, "Juan perez Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					null, 
 					new TurnoTarde(
 							401, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new Profesional(3, "Juan perez Gomez mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
-				),
-			new Disponibilidad(
-					new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
-					new TurnoManiana(
-							400, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-							new Date(), "11:45", ""), 
-					new TurnoTarde(
-							401, 
-							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
-							new Date(), "16:10", "")
+					null
 				)
 		));
 }
