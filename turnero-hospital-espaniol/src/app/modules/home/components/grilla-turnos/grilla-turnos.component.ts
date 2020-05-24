@@ -64,8 +64,6 @@ export class GrillaTurnosComponent {
     store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
       (disponibilidades) => {
         this.disponibilidades = disponibilidades;
-//      this.datasource.sort = this.sort;
-
         this.turnoFilter = new FormControl('Todos');
         this.cambiarColumna(null);
       }
