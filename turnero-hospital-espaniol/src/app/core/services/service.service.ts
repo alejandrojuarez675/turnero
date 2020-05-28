@@ -9,6 +9,7 @@ import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfes
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
+import { isDate } from '@angular/common/src/i18n/format_date';
 
 @Injectable()
 export class ServiceService {
@@ -127,6 +128,19 @@ export class ServiceService {
               throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
             } else {
               res.disponibilidad.forEach(element => {
+                if (element.turnoManiana != undefined && element.turnoManiana.fecha != undefined) {
+                  const t = element.turnoManiana.fecha.toString().split(/[- :]/);
+                  const fd = new Date(Number(t[0]), Number(t[1])-1, Number(t[2]), 
+                    Number(element.turnoManiana.hora.substring(0,2)), Number(element.turnoManiana.hora.substring(3,5)));
+                  element.turnoManiana.fecha = fd; 
+                }
+                if (element.turnoTarde != undefined && element.turnoTarde.fecha != undefined) {
+                  const t = element.turnoTarde.fecha.toString().split(/[- :]/);
+                  const fd = new Date(Number(t[0]), Number(t[1])-1, Number(t[2]), 
+                    Number(element.turnoTarde.hora.substring(0,2)), Number(element.turnoTarde.hora.substring(3,5)));
+                  element.turnoTarde.fecha = fd; 
+                }
+
                 if (element.turnoManiana == undefined || element.turnoManiana.fecha == undefined) {
                   element.turno = element.turnoTarde;  
                 } else if (element.turnoTarde == undefined || element.turnoTarde.fecha == undefined) {
