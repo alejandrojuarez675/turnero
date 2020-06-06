@@ -13,7 +13,7 @@
     <div class="row clearfix">
         <mat-form-field style="width: 55%; padding-right: 10%;">
             <mat-label>Obra Social</mat-label>
-            <input type="text" placeholder="Elija una" matInput [formControl]="obrasSocial" [matAutocomplete]="autoOS"
+            <input type="text" placeholder="Seleccione una" matInput [formControl]="obrasSocial" [matAutocomplete]="autoOS"
                 #autoObraComplete="matAutocompleteTrigger"
                 (keyup.enter)="onEnterE($event, 'planField')" (keyup)="onEnterE2($event, 'planField')">
             <mat-autocomplete #autoOS="matAutocomplete" [displayWith]="displayFn" 
@@ -24,7 +24,7 @@
             </mat-autocomplete>
             <button mat-icon-button matSuffix (click)="clearOS()" 
                 *ngIf="obrasSocial.value != undefined && obrasSocial?.value !== ''"><mat-icon>clear</mat-icon></button>
-            <mat-error *ngIf="obrasSocial.invalid">Ingrese su Obra Social</mat-error>
+            <mat-error *ngIf="obrasSocial.invalid">Seleccione su Obra Social</mat-error>
         </mat-form-field>
         
         <mat-form-field style="width: 45%;">
@@ -34,27 +34,47 @@
                     {{p.nombre}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="plan.invalid">Ingrese su Plan</mat-error>
+            <mat-error *ngIf="plan.invalid">Seleccione su Plan</mat-error>
         </mat-form-field>
     </div>
 
     <div class="row clearfix" >
         <mat-form-field style="width: 100%;">
             <mat-label name="labelEspecialidad">Especialidad</mat-label>
-            <input matInput name="especialidadField" type="text"  placeholder="Elija una" 
+            <input matInput name="especialidadField" type="text"  placeholder="Todas" 
                 [formControl]="especialidad"    #autoEspecComplete="matAutocompleteTrigger"
-                [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event, 'centroField')" 
-                (keyup)="onEnterE2($event, 'centroField')" >
+                [matAutocomplete]="autoEsp" (keyup.enter)="onEnterE($event, 'profesionalField')" 
+                (keyup)="onEnterE2($event, 'profesionalField')" >
             <mat-autocomplete #autoEsp="matAutocomplete" [displayWith]="displayFn" >
                 <mat-option *ngFor="let e of filteredEspecialidades$ | async" [value]="e"
-                    (selectionChange)="cambioEspecialidad($event); onEnterE($event, 'centroField')" 
-                    (click)="onEnterE($event, 'centroField')">
+                    (selectionChange)="cambioEspecialidad($event); onEnterE($event, 'profesionalField')" 
+                    (click)="onEnterE($event, 'profesionalField')">
                     {{e.nombre}}
                 </mat-option>
             </mat-autocomplete>
             <button mat-icon-button matSuffix (click)="clear()" 
                 *ngIf="especialidad.value != undefined && especialidad?.value !== ''"><mat-icon>clear</mat-icon></button>
-            <mat-error *ngIf="especialidad.invalid">Ingrese una Especialidad</mat-error>
+            <mat-error *ngIf="especialidad.invalid">Seleccione una Especialidad</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="row clearfix" >
+        <mat-form-field style="width: 100%;">
+            <mat-label name="labelProfesional">Profesional</mat-label>
+            <input matInput name="profesionalField" type="text"  placeholder="Todos" 
+                [formControl]="profesional"    #autoProfComplete="matAutocompleteTrigger"
+                [matAutocomplete]="autoProf" (keyup.enter)="onEnterE($event, 'centroField')" 
+                (keyup)="onEnterE2($event, 'centroField')" >
+            <mat-autocomplete #autoProf="matAutocomplete" [displayWith]="displayFn2" >
+                <mat-option *ngFor="let e of filteredProfesionales$ | async" [value]="e"
+                    (selectionChange)="cambioProfesional($event); onEnterE($event, 'centroField')" 
+                    (click)="onEnterE($event, 'centroField')">
+                    {{e.nombreApellido}}
+                </mat-option>
+            </mat-autocomplete>
+            <button mat-icon-button matSuffix (click)="clearP()" 
+                *ngIf="profesional.value != undefined && profesional?.value !== ''"><mat-icon>clear</mat-icon></button>
+            <mat-error *ngIf="profesional.invalid">Seleccione un Profesional</mat-error>
         </mat-form-field>
     </div>
 
@@ -66,7 +86,7 @@
                     {{ca.nombre}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="centroAtencion.invalid">Ingrese el Centro de Atención</mat-error>
+            <mat-error *ngIf="centroAtencion.invalid">Seleccione el Centro de Atención</mat-error>
         </mat-form-field>
     </div>
 

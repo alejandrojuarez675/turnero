@@ -28,5 +28,24 @@ public class ProfesionalService {
 				new Profesional(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new Profesional(3, "Mario Gomez", "", new Especialidad(1, "KINESIOLOGÍA"))
 		));
+
+	public static List<Profesional> listaProfesional2 = 
+			new ArrayList<Profesional>(Arrays.asList(
+					new Profesional("Juan Perez", "123", 1),
+					new Profesional("María Gonzalez", "456", 2),
+					new Profesional("Mario Gomez", "789", 1)
+			));	
 	
+	
+	
+	public List<Profesional> getListaProfesionalCombo() {
+		return listaProfesional2;
+	}
+	
+	public Profesional findProfesionalByNombre(String c) {
+		return listaProfesional2.stream()
+				.filter(p -> p.getNombreApellido().trim().equals(c.trim()))
+				.findFirst().orElse(null);
+	}
+
 }

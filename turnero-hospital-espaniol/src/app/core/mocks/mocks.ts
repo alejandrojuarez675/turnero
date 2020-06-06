@@ -63,14 +63,18 @@ const profesional1: Profesional = {
     codigo: 1,
     nombreApellido: 'Perez, Juan',
     observaciones: '',
-    especialidad: especialidadesMocks[0]
+    especialidad: especialidadesMocks[0],
+    codigoProfesion: 1,
+    matriculaProfesional: "123"
 };
 
 const profesional2: Profesional = {
     codigo: 2,
     nombreApellido: 'Riquelme, Roman',
     observaciones: 'Solo particular',
-    especialidad: especialidadesMocks[0]
+    especialidad: especialidadesMocks[0],
+    codigoProfesion: 1,
+    matriculaProfesional: "456",
 };
 
 const turno1: TurnoLight = {

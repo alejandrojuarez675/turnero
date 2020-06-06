@@ -2,8 +2,12 @@ package com.sanatorio.espanol.backend.dto;
 
 public class Especialidad {
 
-	Integer codigo;
-	String nombre;
+	public Integer codigo;
+	public String nombre;
+	
+	public Especialidad() {
+		super();
+	}
 	
 	public Especialidad(Integer codigo, String nombre) {
 		super();

@@ -4,15 +4,18 @@ import { BusquedaProfesionalesRequest } from '../../../shared/models/request.mod
 
 export const GET_OBRA_SOCIALES = '[Form] - getObraSociales';
 export const GET_ESPECIALIDADES = '[Form] - getEspecialidades';
+export const GET_PROFESIONALES = '[Form] - getProfesionales';
 export const GET_CENTROS_DE_ATENCION = '[Form] - getCentrosDeAtencion';
 
 export const SET_OBRA_SOCIALES = '[API] - setObraSociales ';
 export const SET_ESPECIALIDADES = '[API] - setEspecialidades';
+export const SET_PROFESIONALES = '[API] - setProfesionales';
 export const SET_CENTROS_DE_ATENCION = '[API] - setCentrosDeAtencion';
 
 export const SET_FECHA_NACIMIENTO = '[Form] - setFechaNacimiento ';
 export const SET_OBRA_SOCIAL_SELECTED = '[Form] - setObraSocialSelected ';
 export const SET_PLAN_SELECTED = '[Form] - setPlanSelected ';
+export const SET_PROFESIONAL_SELECTED = '[Form] - setProfesionalSelected ';
 export const SET_ESPECIALIDAD_SELECTED = '[Form] - setEspecialidadSelected ';
 export const SET_CENTRO_DE_ATENCION_SELECTED = '[Form] - setCentroDeAtencionSelected ';
 
@@ -21,6 +24,7 @@ export const GET_BUSQUEDA_PROFESIONALES = '[Form] - getBusquedaProfesionales ';
 
 
 export const getObraSociales = createAction(GET_OBRA_SOCIALES);
+export const getProfesionales = createAction(GET_PROFESIONALES);
 export const getEspecialidades = createAction(GET_ESPECIALIDADES);
 export const getCentrosDeAtencion = createAction(GET_CENTROS_DE_ATENCION);
 
@@ -33,6 +37,12 @@ export const setEspecialidades = createAction(
     SET_ESPECIALIDADES,
     props<{ especialidades: Especialidad[] }>()
 );
+
+export const setProfesionales = createAction(
+    SET_PROFESIONALES,
+    props<{ profesionales: Profesional[] }>()
+);
+
 
 export const setCentrosDeAtencion = createAction(
     SET_CENTROS_DE_ATENCION,
@@ -52,6 +62,11 @@ export const setObraSocialSelected = createAction(
 export const setPlanSelected = createAction(
     SET_PLAN_SELECTED,
     props<{planSelected: Plan}>()
+);
+
+export const setProfesionalSelected = createAction(
+    SET_PROFESIONAL_SELECTED,
+    props<{profesionalSelected: Profesional}>()
 );
 
 export const setEspecialidadSelected = createAction(

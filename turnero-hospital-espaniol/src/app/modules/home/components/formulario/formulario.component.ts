@@ -10,7 +10,7 @@ import * as ContextoActions from '../../../../core/store/actions/contexto.action
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan } from '../../../../shared/models/datos.models';
+import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan, Profesional } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
 
 @Component({
@@ -22,6 +22,7 @@ import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.
 export class FormularioComponent implements OnInit {
 
   @ViewChild('autoEspecComplete') autoEspecComplete;
+  @ViewChild('autoProfComplete') autoProfComplete;
   @ViewChild('autoObraComplete') autoObraComplete;
   
   filteredObrasSociales$: Observable<ObraSocial[]>;
@@ -29,12 +30,15 @@ export class FormularioComponent implements OnInit {
   planes$: Observable<Plan[]>;
   especialidades$: Observable<Especialidad[]>;
   filteredEspecialidades$: Observable<Especialidad[]>;
+  profesionales$: Observable<Profesional[]>;
+  filteredProfesionales$: Observable<Profesional[]>;
   centrosDeAtencion$: Observable<CentroAtencion[]>;
   
   fechaNacimiento = new FormControl('', [Validators.required]);
   obrasSocial = new FormControl('', [Validators.required]);
   plan = new FormControl('', [Validators.required]);
-  especialidad = new FormControl('', [Validators.required]);
+  especialidad = new FormControl('');
+  profesional = new FormControl('');
   centroAtencion = new FormControl('', [Validators.required]);
 
   startDate: Date;
@@ -46,6 +50,7 @@ export class FormularioComponent implements OnInit {
     this.obrasSociales$ = store.select(FormSelectors.selectAllObrasSociales);
     this.planes$ = store.select(FormSelectors.selectPlanes);
     this.especialidades$ = store.select(FormSelectors.selectAllEspecialidades);
+    this.profesionales$ = store.select(FormSelectors.selectAllProfesionales);
     this.centrosDeAtencion$ = store.select(FormSelectors.selectAllCentrosDeAtencion);
     this.maxDate = new Date();
     this.startDate = new Date(1980, 0, 1);
@@ -67,6 +72,7 @@ export class FormularioComponent implements OnInit {
         () => {
           this.store.dispatch(FormActions.getObraSociales());
           this.store.dispatch(FormActions.getEspecialidades());
+          this.store.dispatch(FormActions.getProfesionales());
           this.store.dispatch(FormActions.getCentrosDeAtencion());
         }
       );
@@ -78,6 +84,7 @@ export class FormularioComponent implements OnInit {
           this.fechaNacimiento.setValue(datosFormulario.fechaNacimiento);
           this.obrasSocial.setValue(datosFormulario.obraSocial);
           this.plan.setValue(datosFormulario.plan);
+          this.profesional.setValue(datosFormulario.profesional);
           this.especialidad.setValue(datosFormulario.especialidad);
           this.centroAtencion.setValue(datosFormulario.centroAtencion);
         }
@@ -96,8 +103,15 @@ export class FormularioComponent implements OnInit {
       switchMap(x => this.filterEsp(x))
     );
 
+    this.filteredProfesionales$ = this.profesional.valueChanges.pipe(
+      startWith<string | Profesional>(''),
+      map(value => typeof value === 'string' ? value : value.nombreApellido),
+      switchMap(x => this.filterProf(x))
+    );
+
     this.obrasSocial.valueChanges.subscribe( value => this.cambioObraSocial(value));
     this.especialidad.valueChanges.subscribe( value => this.cambioEspecialidad(value));
+    this.profesional.valueChanges.subscribe( value => this.cambioProfesional(value));
 
   }
 
@@ -107,7 +121,14 @@ export class FormularioComponent implements OnInit {
       map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
     );
   }
-  
+
+  filterProf(value: String): Observable<Profesional[]> {
+    const filterValue = value.toLowerCase();
+    return this.profesionales$.pipe(
+      map(e => e.filter(el => el.nombreApellido.toLowerCase().indexOf(filterValue) !== -1))
+    );
+  }
+
   filterEsp(value: String): Observable<Especialidad[]> {
     const filterValue = value.toLowerCase();
     return this.especialidades$.pipe(
@@ -117,6 +138,10 @@ export class FormularioComponent implements OnInit {
 
   displayFn(option?: CodigoNombre): string | undefined {
     return option ? option.nombre : undefined;
+  }
+
+  displayFn2(option?: Profesional): string | undefined {
+    return option ? option.nombreApellido : undefined;
   }
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
@@ -139,10 +164,18 @@ export class FormularioComponent implements OnInit {
     this.obrasSocial.setValue('');
     setTimeout(()=> {this.autoObraComplete.openPanel() })
   }
-
+  clearP() {
+    this.profesional.setValue('');
+    setTimeout(()=> {this.autoProfComplete.openPanel() })
+  }
   cambioPlan(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
+  }
+
+  cambioProfesional(value) {
+    this.cleanResultadoDisponibilidad();
+    this.store.dispatch(FormActions.setProfesionalSelected({ profesionalSelected: value }));
   }
 
   cambioEspecialidad(value) {
@@ -169,8 +202,10 @@ export class FormularioComponent implements OnInit {
   isValid() {
     let result = false;
     if (
-      this.fechaNacimiento.valid && this.obrasSocial.valid && this.plan.valid && this.plan.value != undefined
-      && this.especialidad.valid && this.centroAtencion.valid
+      this.fechaNacimiento.valid 
+      && this.obrasSocial.valid && this.plan.valid && this.plan.value != undefined
+      && (this.especialidad.value != undefined || this.profesional.value != undefined )
+      && this.centroAtencion.valid
       ) {
       result = true;
     }

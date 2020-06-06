@@ -32,6 +32,10 @@ export class EspecialidadRespuesta extends Respuesta {
     especialidad: Especialidad[];
 }
 
+export class ProfesionalRespuesta extends Respuesta {
+    profesionales: Profesional[];
+}
+
 export class CentroAtencion {
     codigo: number;
     nombre: string;
@@ -41,9 +45,14 @@ export class CentroAtencionRespuesta extends Respuesta {
     centroAtencion: CentroAtencion[];
 }
 
+
 export class Profesional {
-    codigo: number;
+    codigoProfesion: number;
+    matriculaProfesional: string;
+
     nombreApellido: string;
+
+    codigo: number;
     observaciones: string;
     especialidad: Especialidad;
 }
@@ -111,10 +120,12 @@ export class Contexto {
 export class Formulario {
     obrasSociales: ObraSocial[];
     especialidades: Especialidad[];
+    profesionales: Profesional[];
     centrosDeAtencion: CentroAtencion[];
     fechaNacimiento: Date;
     obraSocialSelected: ObraSocial;
     planSelected: Plan;
+    profesionalSelected: Profesional;
     especialidadSelected: Especialidad;
     centroDeAtencionSelected: CentroAtencion;
 }

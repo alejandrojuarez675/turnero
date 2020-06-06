@@ -23,6 +23,7 @@ import com.sanatorio.espanol.backend.dto.HorarioRespuesta;
 import com.sanatorio.espanol.backend.dto.LoginDTO;
 import com.sanatorio.espanol.backend.dto.LoginRespuesta;
 import com.sanatorio.espanol.backend.dto.ObraSocialRespuesta;
+import com.sanatorio.espanol.backend.dto.ProfesionalRespuesta;
 import com.sanatorio.espanol.backend.dto.Reserva;
 import com.sanatorio.espanol.backend.dto.ReservaRequest;
 import com.sanatorio.espanol.backend.dto.ReservaRespuesta;
@@ -36,6 +37,7 @@ public class CommonService {
 
 	@Autowired private ObraSocialService obraSocialService;
 	@Autowired private EspecialidadService especialidadService;
+	@Autowired private ProfesionalService profesionalService;
 	@Autowired private CentroAtencionService centroAtencionService;
 	@Autowired private DisponibilidadService disponibilidadService;
 	@Autowired private DiaService diaService;
@@ -68,6 +70,13 @@ public class CommonService {
 		return espeResp;
 	}
 	
+	public ProfesionalRespuesta getProfesional() {
+		ProfesionalRespuesta espeResp = new ProfesionalRespuesta();
+		espeResp.respuesta = getRespuestaOK();
+		espeResp.profesionales = profesionalService.getListaProfesionalCombo();
+		return espeResp;
+	}
+	
 	public CentroAtencionRespuesta getCentro() {
 		CentroAtencionRespuesta centroResp = new CentroAtencionRespuesta();
 		centroResp.respuesta = getRespuestaOK();
@@ -82,7 +91,9 @@ public class CommonService {
 				disponibilidadRequest.codigoObraSocial == null || 
 				disponibilidadRequest.codigoPlan == null || 
 				disponibilidadRequest.codigoCentroAtencion == null || 
-				disponibilidadRequest.codigoEspecialidad == null) {
+				(disponibilidadRequest.codigoEspecialidad == null && 
+					(disponibilidadRequest.getProfesional() == null || 
+					disponibilidadRequest.getProfesional().getNombreApellido() == null))) {
 			espeResp.respuesta = getRespuesta500();
 			
 		} else {
@@ -171,5 +182,6 @@ public class CommonService {
 		
     	return cResp;
 	}
+
 
 }

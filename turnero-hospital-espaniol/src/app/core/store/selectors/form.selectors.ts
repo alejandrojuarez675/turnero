@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Formulario, ObraSocial } from '../../../shared/models/datos.models';
+import { Formulario, ObraSocial, Profesional } from '../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest, DatosFormulario } from '../../../shared/models/request.models';
 import { DateUtils } from '../../utils/date.utils';
 
@@ -8,6 +8,11 @@ export const selectFormulario = createFeatureSelector<Formulario>('formulario');
 export const selectAllObrasSociales = createSelector(
     selectFormulario,
     (formulario: Formulario) => formulario.obrasSociales
+);
+
+export const selectAllProfesionales = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.profesionales
 );
 
 export const selectAllEspecialidades = createSelector(
@@ -53,6 +58,11 @@ export const selectBusquedaProfesionales = createSelector(
         request.codigoPlan = formulario.planSelected.codigo;
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
+        request.profesional = formulario.profesionalSelected;
+        if (request.profesional === undefined || 
+            request.profesional.nombreApellido === undefined) {
+            request.profesional = new Profesional();
+        }
         return request;
     }
 );
@@ -66,6 +76,7 @@ export const selectDatosFormulario = createSelector(
         datos.plan = formulario.planSelected;
         datos.especialidad = formulario.especialidadSelected;
         datos.centroAtencion = formulario.centroDeAtencionSelected;
+        datos.profesional = new Profesional();
         return datos;
     }
 );

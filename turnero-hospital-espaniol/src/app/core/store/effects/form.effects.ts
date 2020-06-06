@@ -6,6 +6,7 @@ import * as CalendarActions from '../actions/calendar.actions';
 import * as ErrorActions from '../actions/error.actions';
 import * as FormActions from '../actions/form.actions';
 import { ServiceService } from './../../services/service.service';
+import { Profesional } from '../../../shared/models/datos.models';
 
 
 @Injectable()
@@ -23,6 +24,18 @@ export class FormEffects {
             ))
         )
     );
+
+    getProfesionales$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(FormActions.GET_PROFESIONALES),
+        mergeMap(() => this.formService.getProfesionales().pipe(
+            map(profesionales => ({ type: FormActions.SET_PROFESIONALES, profesionales })),
+            catchError((error: Error) =>
+                of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+            )
+        ))
+    )
+);
 
     getEspecialidades$ = createEffect(() =>
         this.actions$.pipe(

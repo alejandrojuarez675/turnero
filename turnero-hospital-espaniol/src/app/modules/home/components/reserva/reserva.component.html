@@ -72,7 +72,8 @@
 
     <div class="row clearfix">
         <mat-form-field style="width: 35%; padding-right: 10%;">
-            <mat-label>Nro Área sin 0</mat-label>
+            <mat-label>Nro Área</mat-label>
+            <span matPrefix>0 &nbsp;</span>
             <input matInput [formControl]="telefonoArea" name="areaCodeField" (keyup.enter)="onEnterE($event, 'nroTelField')" 
                 (keyup)="onEnterE2($event, 'nroTelField')" placeholder="Ingrese Nro de Área sin el 0">
             <mat-error *ngIf="telefonoArea.invalid">
@@ -80,7 +81,8 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field style="width: 65%;">
-            <mat-label>Nro de Teléfono sin 15</mat-label>
+            <mat-label>Nro de Teléfono</mat-label>
+            <span matPrefix>15 &nbsp;</span>
             <input matInput [formControl]="telefonoNumero" name="nroTelField" (keyup.enter)="onEnterE($event, 'mailField')" 
                 (keyup)="onEnterE2($event, 'mailField')" placeholder="Ingrese su Teléfono sin el 15">
             <mat-error *ngIf="telefonoNumero.invalid">

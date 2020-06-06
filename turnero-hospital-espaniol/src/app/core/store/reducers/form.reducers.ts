@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan } from '../../../shared/models/datos.models';
+import { CentroAtencion, Especialidad, Formulario, ObraSocial, Plan, Profesional } from '../../../shared/models/datos.models';
 import * as FormActions from '../actions/form.actions';
 
 
@@ -7,11 +7,13 @@ export const initialState:
 Formulario = {
     obrasSociales: [],
     especialidades: [],
+    profesionales: [],
     centrosDeAtencion: [],
     fechaNacimiento: undefined,
     obraSocialSelected: undefined,
     planSelected: undefined,
     especialidadSelected: undefined,
+    profesionalSelected: undefined,
     centroDeAtencionSelected: undefined,
 };
 
@@ -40,6 +42,12 @@ const _setFechaNacimiento = (state: Formulario, fechaNacimiento: Date) => {
     return stateNew;
 };
 
+const _setProfesionales = (state: Formulario, profesionales: Profesional[]) => {
+    const stateNew = { ...state };
+    stateNew.profesionales = profesionales;
+    return stateNew;
+};
+
 const _setEspecialidades = (state: Formulario, especialidades: Especialidad[]) => {
     const stateNew = { ...state };
     stateNew.especialidades = especialidades;
@@ -58,6 +66,12 @@ const _setEspecialidadSelected = (state: Formulario, especialidadSelected: Espec
     return stateNew;
 };
 
+const _setProfesionalSelected = (state: Formulario, profesionalSelected: Profesional) => {
+    const stateNew = { ...state };
+    stateNew.profesionalSelected = profesionalSelected;
+    return stateNew;
+};
+
 const _setCentroDeAtencionSelected = (state: Formulario, centroDeAtencionSelected: CentroAtencion) => {
     const stateNew = { ...state };
     stateNew.centroDeAtencionSelected = centroDeAtencionSelected;
@@ -71,6 +85,9 @@ const _formReducer = createReducer(initialState,
 
     on(FormActions.setEspecialidades, (state, { especialidades }) =>
         _setEspecialidades(state, especialidades)),
+
+    on(FormActions.setProfesionales, (state, { profesionales }) =>
+    _setProfesionales(state, profesionales)),
 
     on(FormActions.setCentrosDeAtencion, (state, { centrosDeAtencion }) =>
         _setCentrosDeAtencion(state, centrosDeAtencion)),
@@ -86,6 +103,9 @@ const _formReducer = createReducer(initialState,
 
     on(FormActions.setEspecialidadSelected, (state, { especialidadSelected }) =>
         _setEspecialidadSelected(state, especialidadSelected)),
+
+    on(FormActions.setProfesionalSelected, (state, { profesionalSelected }) =>
+    _setProfesionalSelected(state, profesionalSelected)),
 
     on(FormActions.setCentroDeAtencionSelected, (state, { centroDeAtencionSelected }) =>
         _setCentroDeAtencionSelected(state, centroDeAtencionSelected)),

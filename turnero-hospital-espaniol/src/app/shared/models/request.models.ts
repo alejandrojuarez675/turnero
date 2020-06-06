@@ -1,10 +1,11 @@
-import { Paciente, ObraSocial, Plan, Especialidad, CentroAtencion } from "./datos.models";
+import { Paciente, ObraSocial, Plan, Especialidad, CentroAtencion, Profesional } from "./datos.models";
 
 export class DatosFormulario {
     fechaNacimiento: Date;
     obraSocial: ObraSocial;
     plan: Plan;
     especialidad: Especialidad;
+    profesional: Profesional;
     centroAtencion: CentroAtencion;
 }
 
@@ -14,6 +15,7 @@ export class BusquedaProfesionalesRequest {
     codigoPlan: number;
     codigoEspecialidad: number;
     codigoCentroAtencion: number;
+    profesional: Profesional;
 }
 
 export class BusquedaDiasDisponiblesRequest

@@ -20,6 +20,7 @@ import com.sanatorio.espanol.backend.dto.HorarioRespuesta;
 import com.sanatorio.espanol.backend.dto.LoginDTO;
 import com.sanatorio.espanol.backend.dto.LoginRespuesta;
 import com.sanatorio.espanol.backend.dto.ObraSocialRespuesta;
+import com.sanatorio.espanol.backend.dto.ProfesionalRespuesta;
 import com.sanatorio.espanol.backend.dto.ReservaRequest;
 import com.sanatorio.espanol.backend.dto.ReservaRespuesta;
 import com.sanatorio.espanol.backend.service.CommonService;
@@ -42,6 +43,12 @@ public class TurnoController {
     public ObraSocialRespuesta getObraSocial() {
 		ObraSocialRespuesta oBS = commonService.getObraSocial();
 		return oBS;
+    }
+
+	@RequestMapping("/Consext/getProfesionales")
+    public ProfesionalRespuesta getProfesionales() {
+		ProfesionalRespuesta espeResp = commonService.getProfesional();
+    	return espeResp;
     }
 	
 	@RequestMapping("/Consext/getEspecialidad")
