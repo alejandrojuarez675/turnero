@@ -98,7 +98,9 @@ public class CommonService {
 			
 		} else {
 			if (disponibilidadRequest.codigoEspecialidad == null) {
-				espeResp.disponibilidad = disponibilidadService.getListaDisponibilidad();
+				espeResp.disponibilidad = disponibilidadService.getListaDisponibilidad().stream()
+						.filter(d -> d.profesional.nombreApellido.equals(disponibilidadRequest.getProfesional().getNombreApellido()))
+						.collect(Collectors.toList());;
 				espeResp.respuesta = getRespuestaOK();
 				return espeResp;
 			}
