@@ -90,6 +90,7 @@ export class GrillaTurnosComponent {
     this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
+        request.codigoEspecialidad = profesional.especialidad.codigo;
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
       }
     ).unsubscribe();
