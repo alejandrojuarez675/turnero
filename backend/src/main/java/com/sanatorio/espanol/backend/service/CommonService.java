@@ -98,6 +98,8 @@ public class CommonService {
 			
 		} else {
 			if (disponibilidadRequest.codigoEspecialidad == null) {
+				espeResp.disponibilidad = disponibilidadService.getListaDisponibilidad();
+				espeResp.respuesta = getRespuestaOK();
 				return espeResp;
 			}
 			List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()

@@ -9,7 +9,7 @@ public class DisponibilidadRequest {
 	public Integer codigoPlan;
 	public Integer codigoEspecialidad;
 	public Integer codigoCentroAtencion;	
-	public ProfesionalEspecialidad profesional;
+	public Profesional profesional;
 	
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
@@ -26,7 +26,7 @@ public class DisponibilidadRequest {
 	public Integer getCodigoCentroAtencion() {
 		return codigoCentroAtencion;
 	}
-	public ProfesionalEspecialidad getProfesional() {
+	public Profesional getProfesional() {
 		return profesional;
 	}
 	public void setFechaNacimiento(Date fechaNacimiento) {
@@ -44,7 +44,7 @@ public class DisponibilidadRequest {
 	public void setCodigoCentroAtencion(Integer codigoCentroAtencion) {
 		this.codigoCentroAtencion = codigoCentroAtencion;
 	}
-	public void setProfesional(ProfesionalEspecialidad profesional) {
+	public void setProfesional(Profesional profesional) {
 		this.profesional = profesional;
 	}
 	
