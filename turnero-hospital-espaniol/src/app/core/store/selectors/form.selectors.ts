@@ -52,9 +52,9 @@ export const selectPlanSelected = createSelector(
     (formulario: Formulario) => formulario.planSelected
 );
 
-export const selectEspecialidad = createSelector(
+export const selectProfComboSelected = createSelector(
     selectFormulario,
-    (formulario: Formulario) => formulario.especialidadSelected
+    (formulario: Formulario) => formulario.profesionalSelected
 );
 
 export const selectFechaNacimiento = createSelector(

@@ -91,9 +91,10 @@
     </div>
   </div>
 
-  <div class="row clearfix"  *ngIf="(especialidadSelected$ | async) != undefined" >
+  <div class="row clearfix"  *ngIf="((profComboSelected$ | async) == undefined ||
+    (profComboSelected$ | async).nombreApellido == undefined)" >
     <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
-        VER DIAS DE TODOS LOS PROFESIONALES
+        VER DIAS DISPONIBLES DE TODOS LOS PROFESIONALES
     </button>
   </div>
   

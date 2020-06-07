@@ -23,7 +23,7 @@ export class GrillaTurnosComponent {
   profesionalesDisponiblesLenght$: Observable<number>;
   turnoFilter = new FormControl('Todos');
   disponibilidades: Disponibilidad[];
-  especialidadSelected$: Observable<Especialidad>;
+  profComboSelected$: Observable<Profesional>;
 
   displayedColumns = [
     'nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'
@@ -63,7 +63,7 @@ export class GrillaTurnosComponent {
   ) {
 
     this.estado$ = store.select(ContextoSelectors.getEstado);
-    this.especialidadSelected$ = store.select(FormularioSelectors.selectEspecialidad);
+    this.profComboSelected$ = store.select(FormularioSelectors.selectProfComboSelected);
 
     store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
       (disponibilidades) => {

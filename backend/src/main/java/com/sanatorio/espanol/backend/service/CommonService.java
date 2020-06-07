@@ -98,18 +98,19 @@ public class CommonService {
 			
 		} else {
 			if (disponibilidadRequest.codigoEspecialidad == null) {
-				espeResp.disponibilidad = disponibilidadService.getListaDisponibilidad().stream()
+				List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad().stream()
 						.filter(d -> d.profesional.nombreApellido.equals(disponibilidadRequest.getProfesional().getNombreApellido()))
 						.collect(Collectors.toList());;
 				espeResp.respuesta = getRespuestaOK();
-				return espeResp;
+				espeResp.disponibilidad = disponibilidades;
+			} else {
+				List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()
+						.stream()
+						.filter(d -> d.profesional.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
+						.collect(Collectors.toList()); 
+					espeResp.respuesta = getRespuestaOK();
+			    	espeResp.disponibilidad = disponibilidades;
 			}
-			List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()
-					.stream()
-					.filter(d -> d.profesional.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
-					.collect(Collectors.toList()); 
-				espeResp.respuesta = getRespuestaOK();
-		    	espeResp.disponibilidad = disponibilidades;	
 		}
 		
     	return espeResp;
