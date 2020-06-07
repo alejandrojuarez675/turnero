@@ -13,7 +13,14 @@ export const selectAllObrasSociales = createSelector(
 
 export const selectAllProfesionales = createSelector(
     selectFormulario,
-    (formulario: Formulario) => formulario.profesionales
+    (formulario: Formulario) => {
+        if (formulario.especialidadSelected != undefined && formulario.especialidadSelected.codigo != undefined) {
+            return formulario.profesionales.filter(x => 
+                x.especialidad.filter(esp => esp.codigo === formulario.especialidadSelected.codigo).length>0
+            );
+        }
+        return formulario.profesionales;
+    }
 );
 
 export const selectAllEspecialidades = createSelector(

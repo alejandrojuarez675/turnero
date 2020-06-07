@@ -120,21 +120,6 @@ export class FormularioComponent implements OnInit {
 
   }
 
-  filterProfPorEsp(x: number): Observable<Profesional[]> {
-    console.log(x);
-    if (x == undefined) {
-      console.log("und");
-      return this.profesionales$
-    } 
-    return this.profesionales$.pipe(
-      map(p => 
-        p.filter(pr => 
-          pr.especialidad.filter(e => e.codigo === x).length > 0
-        )
-      ));
-  }
-
-
   filterProf(value: String): Observable<Profesional[]> {
     const filterValue = value.toLowerCase();
     return this.profesionales$.pipe(
@@ -203,12 +188,6 @@ export class FormularioComponent implements OnInit {
   cambioEspecialidad(value) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
-
-    this.filteredProfesionales$ = this.filteredProfesionales$.pipe(
-      map(value => typeof value === 'number' ? value : this.especialidad.value.codigo),
-      switchMap(x => this.filterProfPorEsp(x))
-    );
-
   }
 
   onEnterE2(evt: any, field: string){
@@ -218,7 +197,9 @@ export class FormularioComponent implements OnInit {
   }
 
   onEnterE(evt: any, field: string){
-    document.getElementsByName(field)[0].focus();
+    setTimeout(()=> {
+      document.getElementsByName(field)[0].focus();
+    })
   }
 
   cambioCentroDeAtencion(event) {
