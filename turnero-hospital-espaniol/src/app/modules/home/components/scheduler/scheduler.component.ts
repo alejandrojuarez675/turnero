@@ -8,7 +8,7 @@ import * as ContextoActions from '../../../../core/store/actions/contexto.action
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad } from '../../../../shared/models/datos.models';
+import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
@@ -34,7 +34,7 @@ export class SchedulerComponent {
   dias$: Observable<DisponibilidadDiasStore[]>;
   events$: Observable<CalendarEvent[]>;
   eventsLength$: Observable<number>;
-  profesionalSelected$: Observable<Profesional>;
+  profesionalSelected$: Observable<ProfesionalEspecialidad>;
   profesionalesDisponibles$: Observable<Disponibilidad[]>;
   especialidad: Especialidad;
 

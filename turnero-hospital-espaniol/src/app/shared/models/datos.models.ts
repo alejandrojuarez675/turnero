@@ -45,20 +45,22 @@ export class CentroAtencionRespuesta extends Respuesta {
     centroAtencion: CentroAtencion[];
 }
 
-
 export class Profesional {
     codigoProfesion: number;
     matriculaProfesional: string;
-
     nombreApellido: string;
+    especialidad: Especialidad[];
+}
 
+export class ProfesionalEspecialidad {
+    nombreApellido: string;
+    especialidad: Especialidad;
     codigo: number;
     observaciones: string;
-    especialidad: Especialidad;
 }
 
 export class Disponibilidad {
-    profesional: Profesional;
+    profesional: ProfesionalEspecialidad;
     turnoManiana: TurnoLight;
     turnoTarde: TurnoLight;
     turno: TurnoLight;
@@ -78,7 +80,7 @@ export class DisponibilidadRespuesta extends Respuesta {
 }
 
 export class Turno extends TurnoLight {
-    profesional: Profesional;
+    profesional: ProfesionalEspecialidad;
 }
 
 export class DisponibilidadDias {
@@ -132,7 +134,7 @@ export class Formulario {
 
 export class Calendario {
     profesionalesDisponibles: Disponibilidad[];
-    profesionalSelected: Profesional;
+    profesionalSelected: ProfesionalEspecialidad;
     turnoSelected: Turno;
     diasDisponibles: DisponibilidadDiasStore[];
     fechaSelected: Date;

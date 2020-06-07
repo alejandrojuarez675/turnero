@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Disponibilidad, DisponibilidadDias, Turno, Profesional } from '../../../shared/models/datos.models';
+import { Disponibilidad, DisponibilidadDias, Turno, ProfesionalEspecialidad } from '../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest } from '../../../shared/models/request.models';
 
 export const CLEAN_STORE = '[Calendar] - cleanStore';
@@ -36,7 +36,7 @@ export const setTurnoSelected = createAction(
 
 export const setProfesionalSelected = createAction(
     SET_PROFESIONAL_SELECTED,
-    props<{ profesional: Profesional }>()
+    props<{ profesional: ProfesionalEspecialidad }>()
 );
 
 export const setFechaSelected = createAction(

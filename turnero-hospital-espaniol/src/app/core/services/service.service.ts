@@ -142,7 +142,7 @@ export class ServiceService {
 
   busquedaProfesionales(filter: BusquedaProfesionalesRequest): Observable<any> {
     if (this.useMockups) {
-      return getWsFromMock(Mock.profesionalesMocks);
+      return getWsFromMock(Mock.profesionalesDisponibilidadMocks);
     } else {
       return this.http.post<DisponibilidadRespuesta>(this.endpoint_busquedaProfesionales, filter)
         .pipe(map(

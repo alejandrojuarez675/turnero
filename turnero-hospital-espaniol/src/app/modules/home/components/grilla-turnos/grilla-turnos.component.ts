@@ -6,7 +6,7 @@ import * as CalendarActions from '../../../../core/store/actions/calendar.action
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { Calendario, Disponibilidad, Profesional, Turno } from '../../../../shared/models/datos.models';
+import { Calendario, Disponibilidad, Profesional, Turno, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
 import { FormControl } from '@angular/forms';
 
@@ -85,7 +85,7 @@ export class GrillaTurnosComponent {
     ).unsubscribe();
   }
 
-  onClickProf(profesional: Profesional) {
+  onClickProf(profesional: ProfesionalEspecialidad) {
     this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
     this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(

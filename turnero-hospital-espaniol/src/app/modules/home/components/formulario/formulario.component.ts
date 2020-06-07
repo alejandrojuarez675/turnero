@@ -102,7 +102,12 @@ export class FormularioComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.nombre),
       switchMap(x => this.filterEsp(x))
     );
-
+/*
+    this.filteredProfesionales$ = this.especialidad.valueChanges.pipe(
+      map(value => typeof value === 'number' ? value : value.codigo),
+      switchMap(x => this.filterProfPorEsp(x))
+    );
+*/
     this.filteredProfesionales$ = this.profesional.valueChanges.pipe(
       startWith<string | Profesional>(''),
       map(value => typeof value === 'string' ? value : value.nombreApellido),
@@ -115,17 +120,34 @@ export class FormularioComponent implements OnInit {
 
   }
 
-  filterOs(value: String): Observable<ObraSocial[]> {
-    const filterValue = value.toLowerCase();
-    return this.obrasSociales$.pipe(
-      map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
-    );
+  filterProfPorEsp(x: number): Observable<Profesional[]> {
+    console.log(x);
+    if (x == undefined) {
+      console.log("und");
+      return this.profesionales$
+    } 
+    return this.profesionales$.pipe(
+      map(p => 
+        p.filter(pr => 
+          pr.especialidad.filter(e => e.codigo === x).length > 0
+        )
+      ));
   }
+
 
   filterProf(value: String): Observable<Profesional[]> {
     const filterValue = value.toLowerCase();
     return this.profesionales$.pipe(
-      map(e => e.filter(el => el.nombreApellido.toLowerCase().indexOf(filterValue) !== -1))
+      map(e => 
+          e.filter(el => 
+            el.nombreApellido.toLowerCase().indexOf(filterValue) !== -1)
+      ));
+  }
+
+  filterOs(value: String): Observable<ObraSocial[]> {
+    const filterValue = value.toLowerCase();
+    return this.obrasSociales$.pipe(
+      map(os => os.filter(el => el.nombre.toLowerCase().indexOf(filterValue) !== -1))
     );
   }
 
@@ -181,6 +203,12 @@ export class FormularioComponent implements OnInit {
   cambioEspecialidad(value) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
+
+    this.filteredProfesionales$ = this.filteredProfesionales$.pipe(
+      map(value => typeof value === 'number' ? value : this.especialidad.value.codigo),
+      switchMap(x => this.filterProfPorEsp(x))
+    );
+
   }
 
   onEnterE2(evt: any, field: string){

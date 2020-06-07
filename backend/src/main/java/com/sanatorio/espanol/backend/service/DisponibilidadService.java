@@ -11,6 +11,7 @@ import com.sanatorio.espanol.backend.dto.CentroAtencion;
 import com.sanatorio.espanol.backend.dto.Disponibilidad;
 import com.sanatorio.espanol.backend.dto.Especialidad;
 import com.sanatorio.espanol.backend.dto.Profesional;
+import com.sanatorio.espanol.backend.dto.ProfesionalEspecialidad;
 import com.sanatorio.espanol.backend.dto.TurnoManiana;
 import com.sanatorio.espanol.backend.dto.TurnoTarde;
 
@@ -24,7 +25,7 @@ public class DisponibilidadService {
 	public static List<Disponibilidad> listaDisponibilidad = 
 		new ArrayList<Disponibilidad>(Arrays.asList(
 			new Disponibilidad(
-				new Profesional(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")), 
+				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						400, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -35,7 +36,7 @@ public class DisponibilidadService {
 						new Date(20,5,31), "18:10", "")
 			),
 			new Disponibilidad(
-					new Profesional(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -46,7 +47,7 @@ public class DisponibilidadService {
 							new Date(20,6,2), "18:10", "")
 				),
 			new Disponibilidad(
-				new Profesional(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")), 
+				new ProfesionalEspecialidad(2, "María Gonzalez", "", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						402, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -54,7 +55,7 @@ public class DisponibilidadService {
 				null
 			),
 			new Disponibilidad(
-				new Profesional(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+				new ProfesionalEspecialidad(3, "Mario Gomez", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 				null,
 				new TurnoTarde(
 						401, 
@@ -62,7 +63,7 @@ public class DisponibilidadService {
 						new Date(), "16:10", "")
 			),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez Mañana y tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Mario Gomez Mañana y tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -73,7 +74,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Mario Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					null, 
 					new TurnoTarde(
 							401, 
@@ -81,7 +82,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Mario Gomez Mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Mario Gomez Mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -89,7 +90,7 @@ public class DisponibilidadService {
 					null
 				),
 			new Disponibilidad(
-					new Profesional(3, "Juan perez Gomez ambos", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Juan perez Gomez ambos", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
@@ -100,7 +101,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Juan perez Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Juan perez Gomez Tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					null, 
 					new TurnoTarde(
 							401, 
@@ -108,7 +109,7 @@ public class DisponibilidadService {
 							new Date(), "16:10", "")
 				),
 			new Disponibilidad(
-					new Profesional(3, "Juan perez Gomez mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Juan perez Gomez mañana", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 
 					new TurnoManiana(
 							400, 
 							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),

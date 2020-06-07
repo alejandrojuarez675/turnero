@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva, ProfesionalEspecialidad } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -60,21 +60,31 @@ export const centroAtencionMock: CentroAtencion = {
 export const centroAtencionesMocks: CentroAtencion[] = [centroAtencionMock];
 
 const profesional1: Profesional = {
-    codigo: 1,
     nombreApellido: 'Perez, Juan',
-    observaciones: '',
-    especialidad: especialidadesMocks[0],
+    especialidad: especialidadesMocks,
     codigoProfesion: 1,
     matriculaProfesional: "123"
 };
 
 const profesional2: Profesional = {
+    nombreApellido: 'Riquelme, Roman',
+    especialidad: especialidadesMocks,
+    codigoProfesion: 1,
+    matriculaProfesional: "456",
+};
+
+const profesionalE1: ProfesionalEspecialidad = {
+    codigo: 1,
+    nombreApellido: 'Perez, Juan',
+    observaciones: '',
+    especialidad: especialidadesMocks[0],
+};
+
+const profesionalE2: ProfesionalEspecialidad = {
     codigo: 2,
     nombreApellido: 'Riquelme, Roman',
     observaciones: 'Solo particular',
     especialidad: especialidadesMocks[0],
-    codigoProfesion: 1,
-    matriculaProfesional: "456",
 };
 
 const turno1: TurnoLight = {
@@ -110,24 +120,28 @@ const turno4: TurnoLight = {
 };
 
 const disponibilidad: Disponibilidad = {
-    profesional: profesional1,
+    profesional: profesionalE1,
     turnoManiana: turno1,
     turnoTarde: turno2,
     turno: turno1
 };
 
 const disponibilidad2: Disponibilidad = {
-    profesional: profesional2,
+    profesional: profesionalE2,
     turnoManiana: turno3,
     turnoTarde: turno4,
     turno: turno3
 };
 
-export const profesionalesMocks: Disponibilidad[] = [
+export const profesionalesDisponibilidadMocks: Disponibilidad[] = [
     disponibilidad, disponibilidad2,
     disponibilidad, disponibilidad2,
     disponibilidad, disponibilidad2,
     disponibilidad, disponibilidad2,
+];
+
+export const profesionalesMocks: Profesional[] = [
+    profesional1, profesional2,
 ];
 
 
@@ -149,10 +163,10 @@ export const diasDisponiblesMock = diasDisponibles();
 export const horariosMock: Turno[] = [
     {
         ...turno1,
-        profesional: profesional1,
+        profesional: profesionalE1,
     }, {
         ...turno2,
-        profesional: profesional1,
+        profesional: profesionalE1,
     }
 ];
 
@@ -163,7 +177,7 @@ export const reservaTurnoMock: Reserva = {
 
 export const turnoMock: Turno = {
     ...turno1,
-    profesional: profesional1,
+    profesional: profesionalE1,
 };
 
 // tslint:disable-next-line: max-line-length

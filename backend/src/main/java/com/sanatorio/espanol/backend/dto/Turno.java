@@ -5,14 +5,14 @@ import java.util.Date;
 public class Turno {
 
 	Integer codigo;
-	Profesional profesional;
+	ProfesionalEspecialidad profesional;
 	CentroAtencion centroAtencion;
 	Date fecha;
 	String hora;
 	String observaciones;
 
 	public Turno(Integer codigo, 
-			Profesional profesional, CentroAtencion centroAtencion,
+			ProfesionalEspecialidad profesional, CentroAtencion centroAtencion,
 			Date fecha, String hora, String observaciones) {
 		super();
 		this.codigo = codigo;
@@ -38,11 +38,11 @@ public class Turno {
 		this.observaciones = observaciones;
 	}
 
-	public Profesional getProfesional() {
+	public ProfesionalEspecialidad getProfesional() {
 		return profesional;
 	}
 
-	public void setProfesional(Profesional profesional) {
+	public void setProfesional(ProfesionalEspecialidad profesional) {
 		this.profesional = profesional;
 	}
 

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Calendario, Formulario, Profesional } from '../../../shared/models/datos.models';
+import { Calendario, Formulario, Profesional, ProfesionalEspecialidad } from '../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest } from '../../../shared/models/request.models';
 import { DateUtils } from '../../utils/date.utils';
 
@@ -24,25 +24,25 @@ export const getProfesionalSelected = createSelector(
 
 export const getDiasTurnosDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
-    (_profesionalSelected: Profesional, calendario: Calendario) =>
+    (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
         calendario.diasDisponibles.filter(x => x.conDisponibilidad)
 );
 
 export const getDiasDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
-    (_profesionalSelected: Profesional, calendario: Calendario) =>
+    (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
         calendario.diasDisponibles
 );
 
 export const getDiasDisponiblesLength = createSelector(
     [getProfesionalSelected, selectCalendario],
-    (_profesionalSelected: Profesional, calendario: Calendario) =>
+    (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
         calendario.diasDisponibles.length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(
     [getProfesionalSelected, selectFormulario],
-    (profesionalSelected: Profesional, formulario: Formulario) => {
+    (profesionalSelected: ProfesionalEspecialidad, formulario: Formulario) => {
         const request = new BusquedaDiasDisponiblesRequest();
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
@@ -68,7 +68,7 @@ export const getFechaSelected = createSelector(
 
 export const getBusquedaHorariosRequest = createSelector(
     [getProfesionalSelected, getFechaSelected, selectFormulario],
-    (profesionalSelected: Profesional, fechaSelected: Date, formulario: Formulario) => {
+    (profesionalSelected: ProfesionalEspecialidad, fechaSelected: Date, formulario: Formulario) => {
         const request = new BusquedaHorariosRequest();
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;

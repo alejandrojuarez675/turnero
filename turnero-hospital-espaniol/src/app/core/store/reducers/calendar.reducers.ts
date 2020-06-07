@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Calendario, DisponibilidadDias, Profesional, Turno } from '../../../shared/models/datos.models';
+import { Calendario, DisponibilidadDias, Profesional, Turno, ProfesionalEspecialidad } from '../../../shared/models/datos.models';
 import * as CalendarActions from '../actions/calendar.actions';
 
 const initialState: Calendario = {
@@ -36,7 +36,7 @@ const _setTurnoSelected = (state: Calendario, turnoSelected: Turno) => {
     return stateNew;
 };
 
-const _setProfesionalSelected = (state: Calendario, profesional: Profesional) => {
+const _setProfesionalSelected = (state: Calendario, profesional: ProfesionalEspecialidad) => {
     const stateNew = {...state};
     stateNew.profesionalSelected = profesional;
     return stateNew;

@@ -1,44 +1,30 @@
 package com.sanatorio.espanol.backend.dto;
 
+import java.util.List;
+
 public class Profesional {
 
-	public Integer codigo;
 	public String nombreApellido;
-	public String observaciones;
 	public String matriculaProfesional;
 	public Integer codigoProfesion;
 	
-	public Especialidad especialidad;
+	public List<Especialidad> especialidad;
 
 	public Profesional() {
 		super();
 	}
 	
-	public Profesional(Integer codigo, String nombreApellido, String observaciones, Especialidad especialidad) {
-		super();
-		this.codigo = codigo;
-		this.nombreApellido = nombreApellido;
-		this.observaciones = observaciones;
-		this.especialidad = especialidad;
-	}
-	
-	public Profesional(String nombreApellido, String matriculaProfesional, Integer codigoProfesion) {
+	public Profesional(String nombreApellido, String matriculaProfesional, Integer codigoProfesion, 
+			List<Especialidad> especialidad) {
 		super();
 		this.nombreApellido = nombreApellido;
 		this.matriculaProfesional = matriculaProfesional;
 		this.codigoProfesion = codigoProfesion;
-	}
-
-	public Integer getCodigo() {
-		return codigo;
+		this.especialidad = especialidad;
 	}
 
 	public String getNombreApellido() {
 		return nombreApellido;
-	}
-
-	public String getObservaciones() {
-		return observaciones;
 	}
 
 	public String getMatriculaProfesional() {
@@ -49,20 +35,12 @@ public class Profesional {
 		return codigoProfesion;
 	}
 
-	public Especialidad getEspecialidad() {
+	public List<Especialidad> getEspecialidad() {
 		return especialidad;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
 	}
 
 	public void setNombreApellido(String nombreApellido) {
 		this.nombreApellido = nombreApellido;
-	}
-
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
 	}
 
 	public void setMatriculaProfesional(String matriculaProfesional) {
@@ -73,7 +51,7 @@ public class Profesional {
 		this.codigoProfesion = codigoProfesion;
 	}
 
-	public void setEspecialidad(Especialidad especialidad) {
+	public void setEspecialidad(List<Especialidad> especialidad) {
 		this.especialidad = especialidad;
 	}
 	

@@ -2,6 +2,7 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Formulario, ObraSocial, Profesional } from '../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest, DatosFormulario } from '../../../shared/models/request.models';
 import { DateUtils } from '../../utils/date.utils';
+import { setEspecialidadSelected, getEspecialidades } from '../actions/form.actions';
 
 export const selectFormulario = createFeatureSelector<Formulario>('formulario');
 
