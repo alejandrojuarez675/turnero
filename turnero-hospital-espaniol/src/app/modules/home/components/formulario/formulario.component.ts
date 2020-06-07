@@ -102,12 +102,7 @@ export class FormularioComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.nombre),
       switchMap(x => this.filterEsp(x))
     );
-/*
-    this.filteredProfesionales$ = this.especialidad.valueChanges.pipe(
-      map(value => typeof value === 'number' ? value : value.codigo),
-      switchMap(x => this.filterProfPorEsp(x))
-    );
-*/
+
     this.filteredProfesionales$ = this.profesional.valueChanges.pipe(
       startWith<string | Profesional>(''),
       map(value => typeof value === 'string' ? value : value.nombreApellido),
@@ -188,6 +183,14 @@ export class FormularioComponent implements OnInit {
   cambioEspecialidad(value) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setEspecialidadSelected({ especialidadSelected: value }));
+    
+    if (this.profesional != undefined && this.profesional.value != undefined &&
+        this.profesional.value.especialidad != undefined) {
+      if (value != undefined && value.codigo != undefined && 
+          this.profesional.value.especialidad.filter(e => e.codigo === value.codigo).length <= 0) {
+        this.profesional.setValue('');
+      }
+    }
   }
 
   onEnterE2(evt: any, field: string){
