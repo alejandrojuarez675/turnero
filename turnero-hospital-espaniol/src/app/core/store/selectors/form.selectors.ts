@@ -52,6 +52,11 @@ export const selectPlanSelected = createSelector(
     (formulario: Formulario) => formulario.planSelected
 );
 
+export const selectEspecialidad = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => formulario.especialidadSelected
+);
+
 export const selectFechaNacimiento = createSelector(
     selectFormulario,
     (formulario: Formulario) => formulario.fechaNacimiento
@@ -64,7 +69,9 @@ export const selectBusquedaProfesionales = createSelector(
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
-        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        if (formulario.especialidadSelected != undefined) {
+            request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        }
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
         request.profesional = formulario.profesionalSelected;
         if (request.profesional === undefined || 
