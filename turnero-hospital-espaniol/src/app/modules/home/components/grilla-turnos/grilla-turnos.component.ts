@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
+import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { Calendario, Disponibilidad, Profesional, Turno, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
+import { Calendario, Disponibilidad, Profesional, Turno, ProfesionalEspecialidad, Especialidad } from '../../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
 import { FormControl } from '@angular/forms';
 
@@ -22,30 +23,32 @@ export class GrillaTurnosComponent {
   profesionalesDisponiblesLenght$: Observable<number>;
   turnoFilter = new FormControl('Todos');
   disponibilidades: Disponibilidad[];
+  especialidadSelected$: Observable<Especialidad>;
 
   displayedColumns = [
-    'nombreApellido', 'turnoP', 'profesional.observaciones'
+    'nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'
   ];
 
   cambiarColumna(event) {
     var list = this.disponibilidades.map( x => ({
       ...x,
       nombreApellido: x.profesional.nombreApellido,
+      especialidad: x.profesional.especialidad.nombre,
       turnoM: x.turnoManiana != null ? x.turnoManiana.fecha : "",
       turnoT: x.turnoTarde != null ? x.turnoTarde.fecha : "",
       turnoP: x.turno != null ? x.turno.fecha : "",
     }));
     
     if (event != undefined && event.value === "AM") {
-      this.displayedColumns = ['nombreApellido', 'turnoM', 'profesional.observaciones']; 
+      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoM', 'profesional.observaciones']; 
       list = list.filter(x => x.turnoManiana != null);
 
     } else if (event != undefined && event.value === "PM") {
-      this.displayedColumns = ['nombreApellido', 'turnoT', 'profesional.observaciones'];
+      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoT', 'profesional.observaciones'];
       list = list.filter(x => x.turnoTarde != null);
 
     } else {
-      this.displayedColumns = ['nombreApellido', 'turnoP', 'profesional.observaciones'];
+      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'];
     }
 
     this.datasource = new MatTableDataSource<any>(list);
@@ -60,6 +63,7 @@ export class GrillaTurnosComponent {
   ) {
 
     this.estado$ = store.select(ContextoSelectors.getEstado);
+    this.especialidadSelected$ = store.select(FormularioSelectors.selectEspecialidad);
 
     store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
       (disponibilidades) => {

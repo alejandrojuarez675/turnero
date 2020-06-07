@@ -97,6 +97,9 @@ public class CommonService {
 			espeResp.respuesta = getRespuesta500();
 			
 		} else {
+			if (disponibilidadRequest.codigoEspecialidad == null) {
+				return espeResp;
+			}
 			List<Disponibilidad> disponibilidades = disponibilidadService.getListaDisponibilidad()
 					.stream()
 					.filter(d -> d.profesional.especialidad.getCodigo().equals(disponibilidadRequest.codigoEspecialidad))
