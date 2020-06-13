@@ -24,11 +24,12 @@ export class GrillaTurnosComponent {
   turnoFilter = new FormControl('Todos');
   disponibilidades: Disponibilidad[];
   profComboSelected$: Observable<Profesional>;
+  especComboSelected$: Observable<Especialidad>;
 
   filtro: string = 'Todos';
 
   displayedColumns = [
-    'nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'
+    'nombreApellido', 'turnoP', 'profesional.observaciones'
   ];
 
   cambiarColumna(event) {
@@ -41,16 +42,23 @@ export class GrillaTurnosComponent {
       turnoP: x.turno != null ? x.turno.fecha : "",
     }));
     
+    var firstCol = 'nombreApellido';
+    this.especComboSelected$.subscribe(esp => {
+      if (esp == undefined || esp.codigo == undefined ) {
+        firstCol = 'especialidad';
+      }
+    });
+    
     if (event != undefined && event.value === "AM") {
-      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoM', 'profesional.observaciones']; 
+      this.displayedColumns = [firstCol, 'turnoM', 'profesional.observaciones']; 
       list = list.filter(x => x.turnoManiana != null);
 
     } else if (event != undefined && event.value === "PM") {
-      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoT', 'profesional.observaciones'];
+      this.displayedColumns = [firstCol, 'turnoT', 'profesional.observaciones'];
       list = list.filter(x => x.turnoTarde != null);
 
     } else {
-      this.displayedColumns = ['nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'];
+      this.displayedColumns = [firstCol, 'turnoP', 'profesional.observaciones'];
     }
 
     this.datasource = new MatTableDataSource<any>(list);
@@ -66,6 +74,7 @@ export class GrillaTurnosComponent {
 
     this.estado$ = store.select(ContextoSelectors.getEstado);
     this.profComboSelected$ = store.select(FormularioSelectors.selectProfComboSelected);
+    this.especComboSelected$ = store.select(FormularioSelectors.selectEspecialidadComboSelected);
 
     store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
       (disponibilidades) => {
