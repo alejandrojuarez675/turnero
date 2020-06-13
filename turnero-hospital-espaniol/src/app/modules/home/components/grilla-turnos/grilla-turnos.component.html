@@ -8,16 +8,16 @@
   </div>
   <div class="row clearfix">
     
-          <mat-label>Visualizar</mat-label>
+          <mat-label>Visualizar Próximo Turno</mat-label>
           <mat-radio-group name="filtro" (change)="cambiarColumna($event);" > 
-              <mat-radio-button value="Todos">
-                  Próximo turno libre 
+              <mat-radio-button value="Todos" checked="true">
+                  Mañana o tarde
               </mat-radio-button>
               <mat-radio-button value="AM">
-                  Próximo turno libre por la mañana
+                  Mañana
               </mat-radio-button>
               <mat-radio-button value="PM">
-                  Próximo turno libre por la tarde
+                  Tarde
               </mat-radio-button>                
           </mat-radio-group>
     
@@ -94,7 +94,7 @@
   <div class="row clearfix"  *ngIf="((profComboSelected$ | async) == undefined ||
     (profComboSelected$ | async).nombreApellido == undefined)" >
     <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
-        VER DIAS DISPONIBLES DE TODOS LOS PROFESIONALES
+        VER DIAS DE TODOS LOS PROFESIONALES
     </button>
   </div>
   

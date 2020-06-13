@@ -63,3 +63,20 @@ table {
 .mat-row.ng-star-inserted:hover {
     background-color: #e2e2e2 !important;
 }
+
+.mat-radio-button {
+    margin-left: 10px;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    opacity: 0.0 !important;     /*click effect color change*/
+    background-color: #1061a7 !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #1061a7 !important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #1061a7 !important; /*outer ring color change*/
+}
