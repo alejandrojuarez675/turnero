@@ -25,6 +25,8 @@ export class GrillaTurnosComponent {
   disponibilidades: Disponibilidad[];
   profComboSelected$: Observable<Profesional>;
 
+  filtro: string = 'Todos';
+
   displayedColumns = [
     'nombreApellido', 'especialidad', 'turnoP', 'profesional.observaciones'
   ];

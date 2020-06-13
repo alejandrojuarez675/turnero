@@ -21,7 +21,7 @@ import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
 import { reservacionReducer } from './core/store/reducers/reservacion.reducers';
 import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
-import { MatProgressSpinnerModule, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MatProgressSpinnerModule, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatRadioModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule, MatButtonToggleModule } from '@angular/material';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
@@ -29,6 +29,7 @@ import { ContextEffects } from './core/store/effects/context.effects';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR'
 import { CustomDateAdapter, MY_DATE_FORMATS } from './shared/adapters/common';
+import { FormsModule } from '@angular/forms';
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -38,7 +39,16 @@ registerLocaleData(localeEs);
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatButtonToggleModule,
     AppRoutingModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatFormFieldModule,
     SharedModule,
     StoreModule.forRoot({
       // router: routerReducer,
@@ -62,12 +72,13 @@ registerLocaleData(localeEs);
       ContextEffects,
     ]),
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CoreModule,
     SharedModule,
     MatProgressSpinnerModule,
+    MatRadioModule
   ],
   providers: [
     {
@@ -80,7 +91,7 @@ registerLocaleData(localeEs);
       useClass: HttpErrorInterceptor,
       multi: true
     },
-    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
     { provide: DateAdapter, useClass: CustomDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ],

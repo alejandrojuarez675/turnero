@@ -7,20 +7,20 @@
     </p>
   </div>
   <div class="row clearfix">
-      <mat-form-field style="width: 285px;">
+    
           <mat-label>Visualizar</mat-label>
-          <mat-select (selectionChange)="cambiarColumna($event);" [formControl]="turnoFilter"> 
-              <mat-option value="Todos">
-                  Próximo turno libre
-              </mat-option>
-              <mat-option value="AM">
+          <mat-radio-group name="filtro" (change)="cambiarColumna($event);" > 
+              <mat-radio-button value="Todos">
+                  Próximo turno libre 
+              </mat-radio-button>
+              <mat-radio-button value="AM">
                   Próximo turno libre por la mañana
-              </mat-option>
-              <mat-option value="PM">
+              </mat-radio-button>
+              <mat-radio-button value="PM">
                   Próximo turno libre por la tarde
-              </mat-option>                    
-          </mat-select>
-      </mat-form-field>    
+              </mat-radio-button>                
+          </mat-radio-group>
+    
   </div>
 
   <div class="example-container">
