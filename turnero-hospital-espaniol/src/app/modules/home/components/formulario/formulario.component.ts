@@ -216,7 +216,8 @@ export class FormularioComponent implements OnInit {
     if (
       this.fechaNacimiento.valid 
       && this.obrasSocial.valid && this.plan.valid && this.plan.value != undefined
-      && (this.especialidad.value != undefined || this.profesional.value != undefined )
+      && ((this.especialidad.value != undefined && this.especialidad.value != '') || 
+      (this.profesional.value != undefined && this.profesional.value != ''))
       && this.centroAtencion.valid
       ) {
       result = true;

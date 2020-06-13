@@ -31,16 +31,16 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
         <ng-container matColumnDef="nombreApellido">
-          <th mat-header-cell *matHeaderCellDef style="width: 40%;" mat-sort-header>Profesional</th>
-          <td mat-cell *matCellDef="let row" style="width: 40%; cursor: pointer;" 
+          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>Profesional</th>
+          <td mat-cell *matCellDef="let row" style="width: 60%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para este Profesional">
             {{row.nombreApellido}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="especialidad">
-          <th mat-header-cell *matHeaderCellDef style="width: 40%;" mat-sort-header>Especialidad</th>
-          <td mat-cell *matCellDef="let row" style="width: 40%; cursor: pointer;" 
+          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>Especialidad</th>
+          <td mat-cell *matCellDef="let row" style="width: 60%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para esta especialidad">
             {{row.especialidad}}
           </td>
@@ -94,7 +94,7 @@
   <div class="row clearfix"  *ngIf="((profComboSelected$ | async) == undefined ||
     (profComboSelected$ | async).nombreApellido == undefined)" >
     <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
-        VER DIAS DE TODOS LOS PROFESIONALES
+        VER TURNOS DE TODOS LOS PROFESIONALES
     </button>
   </div>
   

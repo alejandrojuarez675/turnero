@@ -53,6 +53,7 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
         if (profesionalSelected != undefined) {
             request.codigoProfesional = profesionalSelected.codigo;
+            request.codigoEspecialidad = profesionalSelected.especialidad.codigo;
         }
         return request;
     }
@@ -75,10 +76,13 @@ export const getBusquedaHorariosRequest = createSelector(
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
         request.codigoPlan = formulario.planSelected.codigo;
-        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        if (formulario.especialidadSelected != undefined) {
+            request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+        } 
         request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
         if (profesionalSelected != undefined) {
             request.codigoProfesional = profesionalSelected.codigo;
+            request.codigoEspecialidad = profesionalSelected.especialidad.codigo;
         }
         request.fecha = fechaSelected;
         return request;

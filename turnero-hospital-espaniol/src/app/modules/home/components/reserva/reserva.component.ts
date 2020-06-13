@@ -26,7 +26,7 @@ import { BusquedaProfesionalesRequest, ReservaTurnoRequest, BusquedaHorariosRequ
 export class ReservaComponent implements OnInit {
 
   dni = new FormControl('', [Validators.required,
-    Validators.minLength(6),
+    Validators.minLength(7),
     Validators.maxLength(10),
     Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
