@@ -18,6 +18,8 @@ export class SeleccionHorarioComponent implements OnInit {
   horarios$: Observable<Turno[]>;
   horariosLength$: Observable<number>;
 
+  proxTurno: Turno;
+
   displayedColumns = ['profesional', 'fecha', 'observaciones'];
 
   constructor(
@@ -35,6 +37,26 @@ export class SeleccionHorarioComponent implements OnInit {
 
   onClickTurno(turnoSelected: Turno) {
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
+  }
+
+  onClickProfesional(turnoSelected: Turno) {
+    this.proxTurno = turnoSelected;
+    this.horarios$.subscribe(hs => {
+      hs.forEach(h => {
+        if (h.profesional.codigo === turnoSelected.profesional.codigo) {
+          console.log(h.hora.split(" ")[1]);
+          console.log(this.proxTurno.hora.split(" ")[1]);
+          console.log(h.hora.split(" ")[1] <= this.proxTurno.hora.split(" ")[1]);
+          if (h.hora.split(" ")[1] <= this.proxTurno.hora.split(" ")[1]) { // am pm
+            if (h.hora.split(" ")[1] < this.proxTurno.hora.split(" ")[1]) {
+              this.proxTurno = h;
+            } else if (h.hora < this.proxTurno.hora) {
+              this.proxTurno = h;
+            }
+          }
+        }
+      }) 
+    }).unsubscribe();
   }
 
 }
