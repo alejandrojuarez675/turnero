@@ -11,7 +11,7 @@
     </div>
 
     <div class="row clearfix">
-        <mat-form-field style="width: 55%; padding-right: 10%;">
+        <mat-form-field style="width: 100%;">
             <mat-label>Obra Social</mat-label>
             <input type="text" placeholder="Seleccione una" matInput [formControl]="obrasSocial" [matAutocomplete]="autoOS"
                 #autoObraComplete="matAutocompleteTrigger"
@@ -26,11 +26,15 @@
                 *ngIf="obrasSocial.value != undefined && obrasSocial?.value !== ''"><mat-icon>clear</mat-icon></button>
             <mat-error *ngIf="obrasSocial.invalid">Seleccione su Obra Social</mat-error>
         </mat-form-field>
-        
-        <mat-form-field style="width: 45%;">
+     </div>   
+     <div class="row clearfix">
+        <mat-form-field style="width: 100%;">     
             <mat-label>Plan</mat-label>
-            <mat-select (selectionChange)="cambioPlan($event); onEnterE($event, 'especialidadField')" name="planField" [formControl]="plan">
-                <mat-option *ngFor="let p of planes$ | async" [value]="p">
+            <mat-select (selectionChange)="cambioPlan($event); onEnterE($event, 'especialidadField')" 
+                name="planField" [formControl]="plan" panelClass="my-select-panel-class">
+                <mat-option *ngFor="let p of planes$ | async" [value]="p"
+                    style="margin: 1rem 0 !important; overflow: visible !important;
+                        line-height: initial !important; word-wrap: break-word !important; white-space: pre-wrap !important; height: unset !important;">
                     {{p.nombre}}
                 </mat-option>
             </mat-select>

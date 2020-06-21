@@ -31,10 +31,10 @@ public class ObraSocialService {
 						new PlanDTO(8,"Superior"),
 						new PlanDTO(9,"Universal")
 				)),
-				new ObraSocialDTO(3, "OMINT", Arrays.asList(
-						new PlanDTO(10,"Clásico Línea F"),
+				new ObraSocialDTO(3, "OMINT OMINT OMINT OMINT OMINT", Arrays.asList(
+						new PlanDTO(10,"Clásico Línea F Clásico Línea F Clásico Línea F"),
 						new PlanDTO(11,"Global Cartilla 4500"),
-						new PlanDTO(12,"Premium Linea 0")
+						new PlanDTO(12,"Premium Linea 0 Premium Linea 0 Premium Linea 0 Premium Linea 0")
 				)),
 				new ObraSocialDTO(4, "AMR SALUD", Arrays.asList(
 						new PlanDTO(13,"1000"),

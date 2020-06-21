@@ -124,8 +124,6 @@ export class SchedulerComponent {
     this.events$.subscribe((e) => this.events = e);
 
     this.eventsLength$ = this.store.select(CalendarSelectors.getDiasDisponiblesLength);
-    
-    this.eventsLength$.subscribe((e) => console.log(e));
   }
 
   dayClicked({ date }: { date: Date }): void {

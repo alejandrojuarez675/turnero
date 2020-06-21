@@ -199,7 +199,7 @@ export class ServiceService {
 
   busquedaHorarios(filter: BusquedaHorariosRequest): Observable<Turno[]> {
     if (this.useMockups) {
-      return getWsFromMock(Mock.horariosMock);
+      return getWsFromMock(Mock.horariosMock2);
     } else {
       return this.http.post<HorariosRespuesta>(this.endpoint_busquedaHorarios, filter)
         .pipe(map(

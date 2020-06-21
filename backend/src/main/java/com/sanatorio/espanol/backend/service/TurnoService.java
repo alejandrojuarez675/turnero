@@ -29,12 +29,12 @@ public class TurnoService {
 	public static List<Turno> listaTurnoReducida = 
 			new ArrayList<Turno>(Arrays.asList(
 				new Turno(
-					400, 
+					408, 
 					new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 					new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 					new Date(), "10:10", ""),
 				new Turno(
-					401, 
+					409, 
 					new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 					new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 					new Date(), "18:10", "")
@@ -48,37 +48,37 @@ public class TurnoService {
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "10:10 a.m.", "solo particular"),
 		new Turno(
-				400, 
+				401, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "10:20 a.m.", ""),
 		new Turno(
-				400, 
+				402, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "10:30 a.m.", ""),
 		new Turno(
-				400, 
+				403, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "12:00 a.m.", ""),
 			new Turno(
-				400, 
+				404, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "14:45 p.m.", ""),
 			new Turno(
-				400, 
+				405, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "16:45 p.m.", "solo particular"),
 			new Turno(
-				400, 
+				406, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "17:00 p.m.", "Solo particular"),
 			new Turno(
-				401, 
+				407, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 				new Date(), "18:10 p.m.", "")

@@ -103,6 +103,22 @@ const turno2: TurnoLight = {
     observaciones: 'Solo particular'
 };
 
+const turno5: TurnoLight = {
+    codigo: 148,
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/03/28'),
+    hora: '10:00 a.m.',
+    observaciones: ''
+};
+
+const turno6: TurnoLight = {
+    codigo: 348,
+    centroAtencion: centroAtencionMock,
+    fecha: new Date('2020/03/26'),
+    hora: '08:15 p.m.',
+    observaciones: 'Solo particular'
+};
+
 const turno3: TurnoLight = {
     codigo: 548,
     centroAtencion: centroAtencionMock,
@@ -167,6 +183,16 @@ export const horariosMock: Turno[] = [
         profesional: profesionalE1,
     }, {
         ...turno2,
+        profesional: profesionalE1,
+    }
+];
+
+export const horariosMock2: Turno[] = [
+    {
+        ...turno5,
+        profesional: profesionalE1,
+    }, {
+        ...turno6,
         profesional: profesionalE1,
     }
 ];
