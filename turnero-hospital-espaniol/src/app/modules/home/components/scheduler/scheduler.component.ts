@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 // tslint:disable-next-line: max-line-length
 import { CalendarEvent, CalendarView, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
@@ -13,6 +13,7 @@ import { BusquedaHorariosRequest } from '../../../../shared/models/request.model
 import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-scheduler',
@@ -29,7 +30,8 @@ import { CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 })
 export class SchedulerComponent {
 
-  estado$: Observable<number>;
+  filtroHora$: Observable<string>;
+  turnoFilter2: string;
 
   dias$: Observable<DisponibilidadDiasStore[]>;
   events$: Observable<CalendarEvent[]>;
@@ -63,7 +65,8 @@ export class SchedulerComponent {
             day.date.getMonth() === d.fecha.getMonth() &&
             day.date.getFullYear() === d.fecha.getFullYear()) {
             a = false;
-            if (d.conDisponibilidad) {
+
+            if (d.conDisponibilidadTM || d.conDisponibilidadTT) { // TODO:
               day.cssClass =  'lightskyblue';
             } else {
               day.cssClass = 'lightslategray';
@@ -74,11 +77,18 @@ export class SchedulerComponent {
     );
   }
 
+  cambiarFiltro2(event) {
+    if (event != undefined) {
+      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: event.value}));
+    } else {
+      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: 'Todos'}));
+    }
+  }
+
+
   constructor(
     private store: Store<{ calendario: Calendario }>,
   ) {
-
-    this.estado$ = store.select(ContextoSelectors.getEstado);
 
     // crea los eventos (puntitos)
     this.events$ = store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
@@ -95,11 +105,31 @@ export class SchedulerComponent {
         this.especialidad = x.profesional.especialidad;
       });
     });
+
+    this.filtroHora$ = store.select(CalendarSelectors.getFiltroHora);
+    
+    this.store.select(CalendarSelectors.getFiltroHora).subscribe(
+      (filtro) => {
+        this.cambiarColumna2(filtro);
+      }
+    );
+  }
+
+  cambiarColumna2(filtro: string) {
+    this.turnoFilter2 = filtro;
+
+    this.events$ = this.store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
+      map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
+    );
+    this.events$.subscribe((e) => this.events = e);
+
+    this.eventsLength$ = this.store.select(CalendarSelectors.getDiasDisponiblesLength);
+    
+    this.eventsLength$.subscribe((e) => console.log(e));
   }
 
   dayClicked({ date }: { date: Date }): void {
     if (this.isPartOfEvents(this.events, date)) {
-      this.store.dispatch(ContextoActions.setEstado({ newEstado: 4 }));
       this.store.dispatch(CalendarActions.setFechaSelected({ fecha: date }));
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
       this.store.select(CalendarSelectors.getBusquedaHorariosRequest).subscribe(
@@ -107,7 +137,6 @@ export class SchedulerComponent {
           this.store.dispatch(CalendarActions.getHorariosDisponibles({ filter: filtro }))
       ).unsubscribe();
     } else {
-      this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     }
   }

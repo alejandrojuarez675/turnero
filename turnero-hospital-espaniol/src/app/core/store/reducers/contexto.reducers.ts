@@ -5,14 +5,7 @@ import * as ContextoActions from '../actions/contexto.actions';
 
 export const initialState: 
 Contexto = {
-    estado: 1,
     token: undefined,
-};
-
-const _setEstado = (state: Contexto, newEstado: number): Contexto => {
-    const stateNew = { ...state };
-    stateNew.estado = newEstado;
-    return stateNew;
 };
 
 const _setToken = (state: Contexto, newToken: string): Contexto => {
@@ -23,9 +16,6 @@ const _setToken = (state: Contexto, newToken: string): Contexto => {
 
 const _contextoReducer = createReducer(initialState,
 
-    on(ContextoActions.setEstado, (state, { newEstado }) =>
-     _setEstado(state, newEstado)),
-    
     on(ContextoActions.setToken, (state, { token} ) =>
      _setToken(state, token)),
 

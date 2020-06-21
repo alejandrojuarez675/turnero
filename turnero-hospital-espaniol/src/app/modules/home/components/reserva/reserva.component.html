@@ -1,5 +1,4 @@
-<div class="cuadro-formulario" *ngIf="
-    (((turnoSelected$ | async) != undefined) && ((estado$ | async) == 5))">
+<div class="cuadro-formulario" *ngIf="(turnoSelected$ | async)">
     <div class="overlay" *ngIf="loading">
         <div class="center" style="top: 40%">
             <mat-spinner ></mat-spinner>

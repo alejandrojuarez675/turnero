@@ -3,6 +3,7 @@ import { Calendario, DisponibilidadDias, Profesional, Turno, ProfesionalEspecial
 import * as CalendarActions from '../actions/calendar.actions';
 
 const initialState: Calendario = {
+    filtroHora: undefined,
     profesionalesDisponibles: [],
     profesionalSelected: undefined,
     turnoSelected: undefined,
@@ -28,7 +29,8 @@ const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadD
                 Number(x.fecha.split(/[- T :]/)[1])-1,
                 Number(x.fecha.split(/[- T :]/)[2]),
                 0,0,0),
-            conDisponibilidad: x.conDisponibilidad
+            conDisponibilidadTM: x.conDisponibilidadTM,
+            conDisponibilidadTT: x.conDisponibilidadTT
         };
     })];
     return stateNew;
@@ -37,6 +39,12 @@ const _setDiasDisponibles = (state: Calendario, diasDisponibles: DisponibilidadD
 const _setTurnoSelected = (state: Calendario, turnoSelected: Turno) => {
     const stateNew = {...state};
     stateNew.turnoSelected = turnoSelected;
+    return stateNew;
+};
+
+const _setFiltroHora = (state: Calendario, filtroHora: string) => {
+    const stateNew = {...state};
+    stateNew.filtroHora = filtroHora;
     return stateNew;
 };
 
@@ -71,6 +79,9 @@ const _calendarReducer = createReducer(
 
     on(CalendarActions.setTurnoSelected, (state, { turnoSelected }) =>
         _setTurnoSelected(state, turnoSelected)),
+
+    on(CalendarActions.setFiltroHora, (state, { filtroHora }) =>
+        _setFiltroHora(state, filtroHora)),
 
     on(CalendarActions.setProfesionalSelected, (state, { profesional }) =>
         _setProfesionalSelected(state, profesional)),

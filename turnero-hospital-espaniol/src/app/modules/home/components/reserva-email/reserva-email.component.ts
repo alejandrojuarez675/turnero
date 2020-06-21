@@ -51,7 +51,6 @@ export class ReservaEmailComponent implements OnInit {
   openDialog(datosReserva: DatosReserva): void {
     this.dialog.open(ReservaEmailDialogComponent, { data: { datosReserva: datosReserva }})
       .afterClosed().subscribe( () => {
-        this.store.dispatch(ContextoActions.setEstado({ newEstado: 1}));
         this.store.dispatch(ContextoActions.cleanStore());
         this.store.dispatch(CalendarActions.cleanStore());
         this.store.dispatch(ReservaActions.cleanStore());

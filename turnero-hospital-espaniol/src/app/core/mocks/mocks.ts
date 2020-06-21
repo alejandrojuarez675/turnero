@@ -150,8 +150,9 @@ const diasDisponibles = () => {
     DateUtils.getDaysArray(new Date(), 9).forEach(
         (day: Date, index: number) => {
             response.push({
-                fecha: '2020-05-0' + index,
-                conDisponibilidad: index % 2 === 0
+                fecha: '2020-07-0' + index,
+                conDisponibilidadTM: index % 2 === 0,
+                conDisponibilidadTT: index % 3 === 0
             });
         }
     );

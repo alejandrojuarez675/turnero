@@ -231,7 +231,6 @@ export class FormularioComponent implements OnInit {
       .subscribe(
         // tslint:disable-next-line: no-shadowed-variable
         (filter: BusquedaProfesionalesRequest) => {
-          this.store.dispatch(ContextoActions.setEstado({ newEstado: 2 })); // TODO: deberia cambiar con la vuelta
           this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
         }
       )
@@ -241,7 +240,8 @@ export class FormularioComponent implements OnInit {
 
   cleanResultadoDisponibilidad() {
     this.store.dispatch(CalendarActions.setProfesionalesDisponibles({ profesionalesDisponibles: [] }));
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 1 }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
   }
 
 }

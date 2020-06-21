@@ -6,6 +6,7 @@ export const CLEAN_STORE = '[Calendar] - cleanStore';
 export const SET_PROFESIONALES_DISPONIBLES = '[Calendar] - setProfesionalesDisponibles';
 export const GET_DIAS_DISPONIBLES = '[Calendar] - getDiasDisponibles';
 export const SET_DIAS_DISPONIBLES = '[Calendar] - setDiasDisponibles';
+export const SET_FILTROHORA_SELECTED = '[Calendar] - setFiltroHora';
 export const SET_TURNO_SELECTED = '[Calendar] - setTurnoSelected';
 export const SET_PROFESIONAL_SELECTED = '[Calendar] - setProfesionalSelected';
 export const SET_FECHA_SELECTED = '[Calendar] - setFechaSelected';
@@ -32,6 +33,11 @@ export const setDiasDisponibles = createAction(
 export const setTurnoSelected = createAction(
     SET_TURNO_SELECTED,
     props<{ turnoSelected: Turno }>()
+);
+
+export const setFiltroHora = createAction(
+    SET_FILTROHORA_SELECTED,
+    props<{ filtroHora: string }>()
 );
 
 export const setProfesionalSelected = createAction(

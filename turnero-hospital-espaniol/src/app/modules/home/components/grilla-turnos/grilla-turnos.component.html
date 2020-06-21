@@ -1,5 +1,5 @@
 <div class="cuadro-formulario" 
-  [hidden]="!(((profesionalesDisponiblesLenght$ | async) > 0)  && ((estado$ | async) >= 2))">
+  [hidden]="!((profesionalesDisponiblesLenght$ | async) > 0)">
 
   <div class="row clearfix">
     <p>
@@ -7,20 +7,18 @@
     </p>
   </div>
   <div class="row clearfix">
-    
-          <mat-label>Visualizar Próximo Turno</mat-label>
-          <mat-radio-group name="filtro" (change)="cambiarColumna($event);" > 
-              <mat-radio-button value="Todos" checked="true">
-                  Mañana o tarde
-              </mat-radio-button>
-              <mat-radio-button value="AM">
-                  Mañana
-              </mat-radio-button>
-              <mat-radio-button value="PM">
-                  Tarde
-              </mat-radio-button>                
-          </mat-radio-group>
-    
+    <mat-label>Visualizar Próximo Turno</mat-label>
+    <mat-radio-group (change)="cambiarFiltro1($event);"  [(ngModel)]="turnoFilter"> 
+        <mat-radio-button value="Todos" checked="true">
+            Mañana o tarde
+        </mat-radio-button>
+        <mat-radio-button value="AM">
+            Mañana
+        </mat-radio-button>
+        <mat-radio-button value="PM">
+            Tarde
+        </mat-radio-button>                
+    </mat-radio-group>
   </div>
 
   <div class="example-container">

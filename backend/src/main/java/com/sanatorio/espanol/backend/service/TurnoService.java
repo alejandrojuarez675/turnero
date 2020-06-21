@@ -46,42 +46,42 @@ public class TurnoService {
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:10", "solo particular"),
+				new Date(), "10:10 a.m.", "solo particular"),
 		new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:20", ""),
+				new Date(), "10:20 a.m.", ""),
 		new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:30", ""),
+				new Date(), "10:30 a.m.", ""),
 		new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "12:00", ""),
+				new Date(), "12:00 a.m.", ""),
 			new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "14:45", ""),
+				new Date(), "14:45 p.m.", ""),
 			new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "16:45", "solo particular"),
+				new Date(), "16:45 p.m.", "solo particular"),
 			new Turno(
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "17:00", "Solo particular"),
+				new Date(), "17:00 p.m.", "Solo particular"),
 			new Turno(
 				401, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "18:10", "")
+				new Date(), "18:10 p.m.", "")
 		));
 
 	public List<Turno> getListaTurno(HorarioRequest horaRequest) {

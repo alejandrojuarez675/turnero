@@ -1,4 +1,4 @@
-<div class="cuadro-formulario" *ngIf="(((eventsLength$ | async) > 0) && ((estado$ | async) >= 3))">
+<div class="cuadro-formulario" *ngIf="((eventsLength$ | async) > 0)">
   <div class="row clearfix">
       <div *ngIf="(profesionalSelected$ | async) != undefined">
         <div class="texto"> 
@@ -16,6 +16,8 @@
       </div>
   </div>
 
+  <div class="row clearfix"></div>
+  
   <div class="rowRef clearfix">
     <div class="col-md-12 texto">
         <span class="material-icons icon-image-preview conturnos">label</span>
@@ -25,6 +27,23 @@
         <span class="material-icons icon-image-preview sinturnos">label</span>
         <span>Día con atención, sin turnos disponibles.</span>
     </div>
+  </div>
+
+  <div class="row clearfix"></div>
+
+  <div class="row clearfix">
+    <mat-label>Visualizar Próximo Turno</mat-label>
+    <mat-radio-group (change)="cambiarFiltro2($event);"  [(ngModel)]="turnoFilter2"> 
+        <mat-radio-button value="Todos">
+            Mañana o tarde
+        </mat-radio-button>
+        <mat-radio-button value="AM">
+            Mañana
+        </mat-radio-button>
+        <mat-radio-button value="PM">
+            Tarde
+        </mat-radio-button>                
+    </mat-radio-group>
   </div>
 
   <div>

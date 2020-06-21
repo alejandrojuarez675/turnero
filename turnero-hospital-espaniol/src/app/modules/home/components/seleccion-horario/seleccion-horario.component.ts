@@ -13,8 +13,6 @@ import { Calendario, Turno } from '../../../../shared/models/datos.models';
 })
 export class SeleccionHorarioComponent implements OnInit {
 
-  estado$: Observable<number>;
-
   horarios$: Observable<Turno[]>;
   horariosLength$: Observable<number>;
 
@@ -25,9 +23,6 @@ export class SeleccionHorarioComponent implements OnInit {
   constructor(
     private store: Store<{ calendario: Calendario }>,
   ) {
-
-    this.estado$ = store.select(ContextoSelectors.getEstado);
-
     this.horarios$ = store.select(CalendarSelectors.getHorariosDisponibles);
     this.horariosLength$ = store.select(CalendarSelectors.getHorariosDisponiblesLength);
   }
@@ -44,14 +39,11 @@ export class SeleccionHorarioComponent implements OnInit {
     this.horarios$.subscribe(hs => {
       hs.forEach(h => {
         if (h.profesional.codigo === turnoSelected.profesional.codigo) {
-          console.log(h.hora.split(" ")[1]);
-          console.log(this.proxTurno.hora.split(" ")[1]);
-          console.log(h.hora.split(" ")[1] <= this.proxTurno.hora.split(" ")[1]);
           if (h.hora.split(" ")[1] <= this.proxTurno.hora.split(" ")[1]) { // am pm
             if (h.hora.split(" ")[1] < this.proxTurno.hora.split(" ")[1]) {
-              this.proxTurno = h;
+              this.proxTurno = h; // am < pm
             } else if (h.hora < this.proxTurno.hora) {
-              this.proxTurno = h;
+              this.proxTurno = h; // misma franja horaria, compara horario
             }
           }
         }

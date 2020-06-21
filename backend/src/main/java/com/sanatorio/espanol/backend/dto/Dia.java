@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 public class Dia {
 
 	String fecha;
-	Boolean conDisponibilidad;
+	Boolean conDisponibilidadTM;
+	Boolean conDisponibilidadTT;
 	
-	public Dia(String fecha, Boolean conDisponibilidad) {
+	public Dia(String fecha, Boolean conDisponibilidadTM, Boolean conDisponibilidadTT) {
 		super();
 		this.fecha = fecha;
-		this.conDisponibilidad = conDisponibilidad;
+		this.conDisponibilidadTM = conDisponibilidadTM;
+		this.conDisponibilidadTT = conDisponibilidadTT;
 	}
 	
 	public String getFecha() {
@@ -19,10 +21,16 @@ public class Dia {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public Boolean getConDisponibilidad() {
-		return conDisponibilidad;
+	public Boolean getConDisponibilidadTT() {
+		return conDisponibilidadTT;
 	}
-	public void setConDisponibilidad(Boolean conDisponibilidad) {
-		this.conDisponibilidad = conDisponibilidad;
+	public void setConDisponibilidadTT(Boolean conDisponibilidadTT) {
+		this.conDisponibilidadTT = conDisponibilidadTT;
+	}
+	public Boolean getConDisponibilidadTM() {
+		return conDisponibilidadTM;
+	}
+	public void setConDisponibilidadTM(Boolean conDisponibilidadTM) {
+		this.conDisponibilidadTM = conDisponibilidadTM;
 	}
 }

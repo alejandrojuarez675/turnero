@@ -85,7 +85,8 @@ export class Turno extends TurnoLight {
 
 export class DisponibilidadDias {
     fecha: String;
-    conDisponibilidad: boolean;
+    conDisponibilidadTM: boolean;
+    conDisponibilidadTT: boolean;
 }
 
 export class DisponibilidadDiasRespuesta extends Respuesta {
@@ -98,7 +99,8 @@ export class HorariosRespuesta extends Respuesta {
 
 export class DisponibilidadDiasStore {
     fecha: Date;
-    conDisponibilidad: boolean;
+    conDisponibilidadTM: boolean;
+    conDisponibilidadTT: boolean;
 }
 
 export class Reserva {
@@ -115,7 +117,6 @@ export class TurnoRespuesta extends Respuesta {
 }
 
 export class Contexto {
-    estado: number;
     token: string;
 }
 
@@ -133,6 +134,7 @@ export class Formulario {
 }
 
 export class Calendario {
+    filtroHora: string;
     profesionalesDisponibles: Disponibilidad[];
     profesionalSelected: ProfesionalEspecialidad;
     turnoSelected: Turno;

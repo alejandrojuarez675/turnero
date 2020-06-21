@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatSort, MatTableDataSource, MatRadioGroup } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
@@ -16,23 +16,36 @@ import { FormControl } from '@angular/forms';
   templateUrl: './grilla-turnos.component.html',
   styleUrls: ['./grilla-turnos.component.css']
 })
-export class GrillaTurnosComponent {
+export class GrillaTurnosComponent implements OnInit {
 
-  estado$: Observable<number>;
+  filtroHora$: Observable<string>;
+  turnoFilter: string;
+
   profesionalesDisponibles$: Observable<Disponibilidad[]>;
   profesionalesDisponiblesLenght$: Observable<number>;
-  turnoFilter = new FormControl('Todos');
   disponibilidades: Disponibilidad[];
   profComboSelected$: Observable<Profesional>;
   especComboSelected$: Observable<Especialidad>;
-
-  filtro: string = 'Todos';
 
   displayedColumns = [
     'nombreApellido', 'turnoP', 'profesional.observaciones'
   ];
 
-  cambiarColumna(event) {
+  ngOnInit() {
+    this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: 'Todos'}));
+  }
+
+  cambiarFiltro1(event) {
+    if (event != undefined) {
+      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: event.value}));
+    } else {
+      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: 'Todos'}));
+    }
+  }
+
+  cambiarColumna(filtro: string) {
+    this.turnoFilter = filtro;
+
     var list = this.disponibilidades.map( x => ({
       ...x,
       nombreApellido: x.profesional.nombreApellido,
@@ -43,24 +56,25 @@ export class GrillaTurnosComponent {
     }));
     
     var firstCol = 'nombreApellido';
+    /*
     this.especComboSelected$.subscribe(esp => {
       if (esp == undefined || esp.codigo == undefined ) {
         firstCol = 'especialidad';
       }
     });
-    
-    if (event != undefined && event.value === "AM") {
+    */
+   
+    if (filtro === "AM") {
       this.displayedColumns = [firstCol, 'turnoM', 'profesional.observaciones']; 
       list = list.filter(x => x.turnoManiana != null);
 
-    } else if (event != undefined && event.value === "PM") {
+    } else if (filtro === "PM") {
       this.displayedColumns = [firstCol, 'turnoT', 'profesional.observaciones'];
       list = list.filter(x => x.turnoTarde != null);
 
     } else {
       this.displayedColumns = [firstCol, 'turnoP', 'profesional.observaciones'];
     }
-
     this.datasource = new MatTableDataSource<any>(list);
     this.datasource.sort = this.sort;
   }
@@ -72,15 +86,15 @@ export class GrillaTurnosComponent {
     private store: Store<{ calendario: Calendario }>,
   ) {
 
-    this.estado$ = store.select(ContextoSelectors.getEstado);
+    this.filtroHora$ = store.select(CalendarSelectors.getFiltroHora);
     this.profComboSelected$ = store.select(FormularioSelectors.selectProfComboSelected);
     this.especComboSelected$ = store.select(FormularioSelectors.selectEspecialidadComboSelected);
 
     store.select(CalendarSelectors.getProfesionalesDisponibles).subscribe(
       (disponibilidades) => {
         this.disponibilidades = disponibilidades;
-        this.turnoFilter = new FormControl('Todos');
-        this.cambiarColumna(null);
+        this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: 'Todos'}));
+        this.cambiarColumna('Todos');
       }
     );
 
@@ -88,11 +102,16 @@ export class GrillaTurnosComponent {
       CalendarSelectors.getProfesionalesDisponiblesLength
     );
 
+    this.store.select(CalendarSelectors.getFiltroHora).subscribe(
+      (filtro) => {
+        this.cambiarColumna(filtro);
+      }
+    );
+
   }
 
   onClickTodos() {
     this.store.dispatch(CalendarActions.setProfesionalSelected(undefined));
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
@@ -102,7 +121,6 @@ export class GrillaTurnosComponent {
 
   onClickProf(profesional: ProfesionalEspecialidad) {
     this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
-    this.store.dispatch(ContextoActions.setEstado({ newEstado: 3 }));
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
         request.codigoEspecialidad = profesional.especialidad.codigo;

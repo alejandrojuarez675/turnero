@@ -40,7 +40,6 @@ export class ReservaComponent implements OnInit {
   mail = new FormControl('', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
 
-  estado$: Observable<number>;
   sexo$: string[] = ['Femenino', 'Masculino'];
   turnoSelected$: Observable<Turno>;
   turnoSelected: Turno;
@@ -60,7 +59,6 @@ export class ReservaComponent implements OnInit {
     private store: Store<{ reservaTurno: ReservaFormulario }>,
     private router: Router
   ) {
-    this.estado$ = store.select(ContextoSelectors.getEstado);
     this.turnoSelected$ = store.select(ReservaSelector.getTurnoSelected);
     this.obraSocialSelected$ = store.select(FormularioSelectors.selectObraSocialSelected);
     this.planSelected$ = store.select(FormularioSelectors.selectPlanSelected);

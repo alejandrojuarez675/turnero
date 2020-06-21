@@ -22,22 +22,49 @@ export const getProfesionalSelected = createSelector(
     (calendario: Calendario) => calendario.profesionalSelected
 );
 
+export const getFiltroHora =  createSelector(
+    selectCalendario,
+    (calendario: Calendario) => calendario.filtroHora
+);
+
 export const getDiasTurnosDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
+    
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
-        calendario.diasDisponibles.filter(x => x.conDisponibilidad)
+        calendario.diasDisponibles.filter(x => (
+            (calendario.filtroHora == undefined || 
+                    (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+                ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
+            ) ||
+            (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
+            (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
+        )
 );
 
 export const getDiasDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
-        calendario.diasDisponibles
+    calendario.diasDisponibles.filter(x => (
+        (calendario.filtroHora == undefined || 
+                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
+        ) ||
+        (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
+        (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
+    )
 );
 
 export const getDiasDisponiblesLength = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
-        calendario.diasDisponibles.length
+        calendario.diasDisponibles.filter(x => (
+            (calendario.filtroHora == undefined || 
+                    (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+                ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
+            ) ||
+            (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
+            (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
+        ).length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(
@@ -91,10 +118,30 @@ export const getBusquedaHorariosRequest = createSelector(
 
 export const getHorariosDisponibles = createSelector(
     [getFechaSelected, selectCalendario],
-    (_fechaSelected: Date, calendario: Calendario) => calendario.horariosDisponibles
+    (_fechaSelected: Date, calendario: Calendario) => {
+        return calendario.horariosDisponibles.filter(x => (
+            (calendario.filtroHora == undefined || 
+                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            )
+            ||
+            (calendario.filtroHora === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            ||
+            (calendario.filtroHora === 'PM' && x.hora.indexOf('p.m.') >= 0)
+        ))
+    }
 );
 
 export const getHorariosDisponiblesLength = createSelector(
     [getFechaSelected, selectCalendario],
-    (_fechaSelected: Date, calendario: Calendario) => calendario.horariosDisponibles.length
+    (_fechaSelected: Date, calendario: Calendario) => {
+        return calendario.horariosDisponibles.filter(x => (
+            (calendario.filtroHora == undefined || 
+                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            )
+            ||
+            (calendario.filtroHora === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            ||
+            (calendario.filtroHora === 'PM' && x.hora.indexOf('p.m.') >= 0)
+        )).length
+    }
 );
