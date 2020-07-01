@@ -135,6 +135,7 @@ export class Formulario {
 
 export class Calendario {
     filtroHora: string;
+    filtroHora2: string;
     profesionalesDisponibles: Disponibilidad[];
     profesionalSelected: ProfesionalEspecialidad;
     turnoSelected: Turno;

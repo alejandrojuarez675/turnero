@@ -191,7 +191,12 @@ export class ServiceService {
           .pipe(map(
             (res: DisponibilidadDiasRespuesta) => {
               throwErrorIfBadCode(res);
-              return res.dia;
+              throwErrorIfBadCode(res);
+              if (res.dia == undefined || res.dia.length == 0) {
+                throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
+              } else {
+                return res.dia;
+              }
             }
         ));
     }

@@ -27,17 +27,22 @@ export const getFiltroHora =  createSelector(
     (calendario: Calendario) => calendario.filtroHora
 );
 
+export const getFiltroHora2 =  createSelector(
+    selectCalendario,
+    (calendario: Calendario) => calendario.filtroHora2
+);
+
 export const getDiasTurnosDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
         calendario.diasDisponibles.filter(x => (
-            (calendario.filtroHora == undefined || 
-                    (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            (calendario.filtroHora2 == undefined || 
+                    (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
                 ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
             ) ||
-            (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
-            (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
+            (calendario.filtroHora2 === 'AM' && x.conDisponibilidadTM) ||
+            (calendario.filtroHora2 === 'PM' && x.conDisponibilidadTT)
         )
 );
 
@@ -45,26 +50,19 @@ export const getDiasDisponibles = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
     calendario.diasDisponibles.filter(x => (
-        (calendario.filtroHora == undefined || 
-                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+        (calendario.filtroHora2 == undefined || 
+                (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
             ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
         ) ||
-        (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
-        (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
+        (calendario.filtroHora2 === 'AM' && x.conDisponibilidadTM) ||
+        (calendario.filtroHora2 === 'PM' && x.conDisponibilidadTT)
     )
 );
 
 export const getDiasDisponiblesLength = createSelector(
     [getProfesionalSelected, selectCalendario],
     (_profesionalSelected: ProfesionalEspecialidad, calendario: Calendario) =>
-        calendario.diasDisponibles.filter(x => (
-            (calendario.filtroHora == undefined || 
-                    (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
-                ) && (x.conDisponibilidadTM || x.conDisponibilidadTT)
-            ) ||
-            (calendario.filtroHora === 'AM' && x.conDisponibilidadTM) ||
-            (calendario.filtroHora === 'PM' && x.conDisponibilidadTT)
-        ).length
+        calendario.diasDisponibles.length
 );
 
 export const getBusquedaDiasDisponiblesRequest = createSelector(
@@ -119,29 +117,35 @@ export const getBusquedaHorariosRequest = createSelector(
 export const getHorariosDisponibles = createSelector(
     [getFechaSelected, selectCalendario],
     (_fechaSelected: Date, calendario: Calendario) => {
+        return calendario.horariosDisponibles
+        /*
         return calendario.horariosDisponibles.filter(x => (
-            (calendario.filtroHora == undefined || 
-                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            (calendario.filtroHora2 == undefined || 
+                (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
             )
             ||
-            (calendario.filtroHora === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            (calendario.filtroHora2 === 'AM' && x.hora.indexOf('a.m.') >= 0) 
             ||
-            (calendario.filtroHora === 'PM' && x.hora.indexOf('p.m.') >= 0)
+            (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
         ))
+        */
     }
 );
 
 export const getHorariosDisponiblesLength = createSelector(
     [getFechaSelected, selectCalendario],
     (_fechaSelected: Date, calendario: Calendario) => {
+        return calendario.horariosDisponibles.length
+        /*
         return calendario.horariosDisponibles.filter(x => (
-            (calendario.filtroHora == undefined || 
-                (calendario.filtroHora != 'AM' && calendario.filtroHora != 'PM')
+            (calendario.filtroHora2 == undefined || 
+                (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
             )
             ||
-            (calendario.filtroHora === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            (calendario.filtroHora2 === 'AM' && x.hora.indexOf('a.m.') >= 0) 
             ||
-            (calendario.filtroHora === 'PM' && x.hora.indexOf('p.m.') >= 0)
+            (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
         )).length
+        */
     }
 );

@@ -112,21 +112,32 @@ export class GrillaTurnosComponent implements OnInit {
 
   onClickTodos() {
     this.store.dispatch(CalendarActions.setProfesionalSelected(undefined));
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
       }
     ).unsubscribe();
+
+    this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
   }
 
   onClickProf(profesional: ProfesionalEspecialidad) {
+
     this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
-    this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
-      (request: BusquedaDiasDisponiblesRequest) => {
-        request.codigoEspecialidad = profesional.especialidad.codigo;
-        this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
-      }
-    ).unsubscribe();
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+    
+    setTimeout(()=> {
+      this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
+        (request: BusquedaDiasDisponiblesRequest) => {
+          this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
+        }
+      ).unsubscribe();
+    })
+    this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
   }
 
   onClickTurno(row: Disponibilidad, horario: string) {

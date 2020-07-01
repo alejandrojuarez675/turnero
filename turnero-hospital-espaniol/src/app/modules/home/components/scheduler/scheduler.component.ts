@@ -31,6 +31,7 @@ import { FormControl } from '@angular/forms';
 export class SchedulerComponent {
 
   filtroHora$: Observable<string>;
+  filtroHora2$: Observable<string>;
   turnoFilter2: string;
 
   dias$: Observable<DisponibilidadDiasStore[]>;
@@ -79,9 +80,9 @@ export class SchedulerComponent {
 
   cambiarFiltro2(event) {
     if (event != undefined) {
-      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: event.value}));
+      this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: event.value}));
     } else {
-      this.store.dispatch(CalendarActions.setFiltroHora({filtroHora: 'Todos'}));
+      this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: 'Todos'}));
     }
   }
 
@@ -106,9 +107,9 @@ export class SchedulerComponent {
       });
     });
 
-    this.filtroHora$ = store.select(CalendarSelectors.getFiltroHora);
+    this.filtroHora2$ = store.select(CalendarSelectors.getFiltroHora);
     
-    this.store.select(CalendarSelectors.getFiltroHora).subscribe(
+    this.store.select(CalendarSelectors.getFiltroHora2).subscribe(
       (filtro) => {
         this.cambiarColumna2(filtro);
       }

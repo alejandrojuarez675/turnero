@@ -4,6 +4,7 @@ import * as CalendarActions from '../actions/calendar.actions';
 
 const initialState: Calendario = {
     filtroHora: undefined,
+    filtroHora2: undefined,
     profesionalesDisponibles: [],
     profesionalSelected: undefined,
     turnoSelected: undefined,
@@ -48,6 +49,12 @@ const _setFiltroHora = (state: Calendario, filtroHora: string) => {
     return stateNew;
 };
 
+const _setFiltroHora2 = (state: Calendario, filtroHora2: string) => {
+    const stateNew = {...state};
+    stateNew.filtroHora2 = filtroHora2;
+    return stateNew;
+};
+
 const _setProfesionalSelected = (state: Calendario, profesional: ProfesionalEspecialidad) => {
     const stateNew = {...state};
     stateNew.profesionalSelected = profesional;
@@ -83,6 +90,9 @@ const _calendarReducer = createReducer(
     on(CalendarActions.setFiltroHora, (state, { filtroHora }) =>
         _setFiltroHora(state, filtroHora)),
 
+    on(CalendarActions.setFiltroHora2, (state, { filtroHora2 }) =>
+        _setFiltroHora2(state, filtroHora2)),
+
     on(CalendarActions.setProfesionalSelected, (state, { profesional }) =>
         _setProfesionalSelected(state, profesional)),
 
@@ -96,3 +106,4 @@ const _calendarReducer = createReducer(
 export function calendarReducer(state, action) {
     return _calendarReducer(state, action);
 }
+
