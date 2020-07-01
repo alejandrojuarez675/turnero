@@ -5,9 +5,10 @@
     Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}} con un enlace para completar el proceso de solicitud de turno.
   </p>
   <p *ngIf="data?.datosReserva?.reserva?.vencimiento">
-    Tiene tiempo hasta el día 
+    <!--Tiene tiempo hasta el día 
     {{ data.datosReserva.reserva.vencimiento | date:'dd/MM/yyyy'}}
-    para confirmarlo.
+    para confirmarlo.-->
+    Tiene el transcurso del día para confirmarlo.
   </p>
 </mat-dialog-content>
 
