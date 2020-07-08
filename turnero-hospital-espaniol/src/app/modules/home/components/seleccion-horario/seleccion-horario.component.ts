@@ -42,7 +42,11 @@ export class SeleccionHorarioComponent implements OnInit {
           if (h.hora.split(" ")[1] <= this.proxTurno.hora.split(" ")[1]) { // am pm
             if (h.hora.split(" ")[1] < this.proxTurno.hora.split(" ")[1]) {
               this.proxTurno = h; // am < pm
-            } else if (h.hora < this.proxTurno.hora) {
+            } else if (h.hora.split(":")[0] == "12" && this.proxTurno.hora.split(":")[0] != "12") {
+              this.proxTurno = h; // caso especial 12 pm
+            } else if (h.hora < this.proxTurno.hora && 
+                (h.hora.split(":")[0] == this.proxTurno.hora.split(":")[0]
+                  || this.proxTurno.hora.split(":")[0] != "12")) {
               this.proxTurno = h; // misma franja horaria, compara horario
             }
           }

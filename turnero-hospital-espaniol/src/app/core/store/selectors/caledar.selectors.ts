@@ -117,8 +117,7 @@ export const getBusquedaHorariosRequest = createSelector(
 export const getHorariosDisponibles = createSelector(
     [getFechaSelected, selectCalendario],
     (_fechaSelected: Date, calendario: Calendario) => {
-        return calendario.horariosDisponibles
-        /*
+//        return calendario.horariosDisponibles
         return calendario.horariosDisponibles.filter(x => (
             (calendario.filtroHora2 == undefined || 
                 (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
@@ -128,15 +127,13 @@ export const getHorariosDisponibles = createSelector(
             ||
             (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
         ))
-        */
     }
 );
 
 export const getHorariosDisponiblesLength = createSelector(
     [getFechaSelected, selectCalendario],
     (_fechaSelected: Date, calendario: Calendario) => {
-        return calendario.horariosDisponibles.length
-        /*
+//        return calendario.horariosDisponibles.length
         return calendario.horariosDisponibles.filter(x => (
             (calendario.filtroHora2 == undefined || 
                 (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
@@ -146,6 +143,5 @@ export const getHorariosDisponiblesLength = createSelector(
             ||
             (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
         )).length
-        */
     }
 );
