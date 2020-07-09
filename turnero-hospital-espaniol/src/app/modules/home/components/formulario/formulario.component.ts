@@ -36,7 +36,7 @@ export class FormularioComponent implements OnInit {
   
   fechaNacimiento = new FormControl('', [Validators.required]);
   obrasSocial = new FormControl('', [Validators.required]);
-  plan = new FormControl('', [Validators.required]);
+  plan = new FormControl('', []);
   especialidad = new FormControl('');
   profesional = new FormControl('');
   centroAtencion = new FormControl('', [Validators.required]);
@@ -215,7 +215,7 @@ export class FormularioComponent implements OnInit {
     let result = false;
     if (
       this.fechaNacimiento.valid 
-      && this.obrasSocial.valid && this.plan.valid && this.plan.value != undefined
+      && this.obrasSocial.valid
       && ((this.especialidad.value != undefined && this.especialidad.value != '') || 
       (this.profesional.value != undefined && this.profesional.value != ''))
       && this.centroAtencion.valid

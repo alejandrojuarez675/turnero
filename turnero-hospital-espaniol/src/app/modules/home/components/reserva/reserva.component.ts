@@ -96,7 +96,7 @@ export class ReservaComponent implements OnInit {
     paciente.email = this.mail.value;
 
     paciente.codigoObraSocial = this.obraSocialSelected.codigo;
-    paciente.codigoPlan = this.planSelected.codigo;
+    paciente.codigoPlan = this.planSelected ? this.planSelected.codigo : null;
     paciente.fechaNacimiento = this.fechaNacimientoSelected;
 
     paciente.codigoProfesional = this.turnoSelected.profesional.codigo;

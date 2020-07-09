@@ -73,7 +73,7 @@ export const selectBusquedaProfesionales = createSelector(
         const request = new BusquedaProfesionalesRequest();
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
-        request.codigoPlan = formulario.planSelected.codigo;
+        request.codigoPlan = formulario.planSelected ? formulario.planSelected.codigo : null;
         if (formulario.especialidadSelected != undefined) {
             request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         }
