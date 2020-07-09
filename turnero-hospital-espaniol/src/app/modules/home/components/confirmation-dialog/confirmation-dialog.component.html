@@ -8,6 +8,10 @@
     {{ data.turno.centroAtencion.nombre }}.
   </p>
 
+  <p *ngIf="data.turno.observaciones">
+    Observaciones: {{ data.turno.observaciones }}
+  </p>
+
   <p>¿Está seguro que desea reservar este turno?</p>
 </mat-dialog-content>
 

@@ -29,6 +29,12 @@
         </div>
     </div>
 
+    <div class="row clearfix" *ngIf="turnoSelected?.observaciones">
+        <p>
+            Observaciones: {{ turnoSelected?.observaciones }}
+        </p>
+    </div>
+
     <div class="row clearfix"></div>
     <div class="row clearfix">
         <p>
