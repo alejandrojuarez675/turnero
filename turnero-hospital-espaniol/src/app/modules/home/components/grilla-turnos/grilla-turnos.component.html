@@ -29,7 +29,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
         <ng-container matColumnDef="nombreApellido">
-          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>Profesional</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>
+            Profesional (Ir a Agenda)
+          </th>
           <td mat-cell *matCellDef="let row" style="width: 60%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para este Profesional">
             {{row.nombreApellido}}
@@ -65,7 +67,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoP">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno Libre</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno Libre (Reservar)</th>
             <td mat-cell *matCellDef="let row">
               <span *ngIf="row.turno != undefined && row.turno.fecha != undefined"
                 (click)="onClickTurno(row, 'P')" style="cursor: pointer;" title="Seleccionar turno">
