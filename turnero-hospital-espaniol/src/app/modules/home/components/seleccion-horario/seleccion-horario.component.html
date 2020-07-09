@@ -12,7 +12,7 @@
 
         <ng-container matColumnDef="profesional">
           <th mat-header-cell *matHeaderCellDef style="width: 70%;">Profesional</th>
-          <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickProfesional(row)"
+          <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
             title="Destacar primer turno disponible del profesional para este día">
             {{row.profesional.nombreApellido}}
           </td>
