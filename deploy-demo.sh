@@ -14,6 +14,7 @@ mv * ../../../../turnero-demo/
 cd ../../../../turnero-demo/
 sed -i 's+../../../assets+./assets+g' main.js
 echo publicando demo en github
+git pull
 git add .
 git commit -m "commit automatico - ${now}"
 git push
