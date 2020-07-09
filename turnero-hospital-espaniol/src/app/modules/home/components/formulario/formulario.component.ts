@@ -105,6 +105,7 @@ export class FormularioComponent implements OnInit {
 
     this.filteredProfesionales$ = this.profesional.valueChanges.pipe(
       startWith<string | Profesional>(''),
+      filter(value => value !== undefined),
       map(value => typeof value === 'string' ? value : value.nombreApellido),
       switchMap(x => this.filterProf(x))
     );

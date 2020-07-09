@@ -69,6 +69,7 @@
                 [matAutocomplete]="autoProf" (keyup.enter)="onEnterE($event, 'centroField')" 
                 (keyup)="onEnterE2($event, 'centroField')" >
             <mat-autocomplete #autoProf="matAutocomplete" [displayWith]="displayFn2" >
+                <mat-option [value]="undefined" (click)="onEnterE($event, 'centroField')">Todos</mat-option>
                 <mat-option *ngFor="let e of filteredProfesionales$ | async" [value]="e"
                     (selectionChange)="cambioProfesional($event); onEnterE($event, 'centroField')" 
                     (click)="onEnterE($event, 'centroField')">
