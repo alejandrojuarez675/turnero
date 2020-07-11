@@ -8,7 +8,11 @@
     {{ data.turno.centroAtencion.nombre }}.
   </p>
 
-  <p *ngIf="data.turno.observaciones">
+  <p *ngIf="data.turno.profesional.observaciones">
+    Observaciones: {{ data.turno.profesional.observaciones }}
+  </p>
+  <p *ngIf="data.turno.observaciones && 
+    (data.turno.profesional.observaciones == undefined || data.turno.profesional.observaciones == '')">
     Observaciones: {{ data.turno.observaciones }}
   </p>
 

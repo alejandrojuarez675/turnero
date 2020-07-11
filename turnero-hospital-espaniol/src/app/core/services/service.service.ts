@@ -152,6 +152,10 @@ export class ServiceService {
               throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
             } else {
               res.disponibilidad.forEach(element => {
+                if (element.profesional.observaciones != undefined) {
+                  element.profesional.observacionesResumido = element.profesional.observaciones.split('-')[0];
+                }
+
                 if (element.turnoManiana != undefined && element.turnoManiana.fecha != undefined) {
                   const t = element.turnoManiana.fecha.toString().split(/[- T :]/);
                   const fd = new Date(Number(t[0]), Number(t[1])-1, Number(t[2]), 
@@ -212,7 +216,13 @@ export class ServiceService {
             throwErrorIfBadCode(res);
             if (res.turno == undefined || res.turno.length == 0) {
               throwErrorToUser(`No hay turnos disponibles para el día seleccionado`);
-            }  
+            } else {
+              res.turno.forEach(element => {
+                if (element.observaciones != undefined) {
+                  element.observacionesResumido = element.observaciones.split('-')[0];
+                }
+              });
+            }
             return res.turno;
           }
         ));

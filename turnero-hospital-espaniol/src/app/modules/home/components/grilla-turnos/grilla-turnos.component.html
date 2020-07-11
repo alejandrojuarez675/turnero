@@ -47,7 +47,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoM">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Mañana</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Mañana (Reservar)</th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.turnoManiana != undefined && row.turnoManiana.fecha != undefined"
               (click)="onClickTurno(row, 'M')" style="cursor: pointer;" title="Seleccionar turno">
@@ -57,7 +57,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoT">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Tarde</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Tarde (Reservar)</th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.turnoTarde != undefined && row.turnoTarde.fecha != undefined"
               (click)="onClickTurno(row, 'T')" style="cursor: pointer;" title="Seleccionar turno">
@@ -81,7 +81,8 @@
           </th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.profesional.observaciones">
-              <mat-icon  #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltip="{{ row.profesional.observaciones }}" 
+              <mat-icon  #tooltip="matTooltip" (click)="tooltip.toggle()" 
+                  matTooltip="{{ row.profesional.observacionesResumido }}" 
                 matTooltipPosition="left">notification_important </mat-icon>
             </span>
           </td>
@@ -99,5 +100,12 @@
     </button>
   </div>
   
+  <div class="row clearfix"  *ngIf="((profComboSelected$ | async) != undefined &&
+    (profComboSelected$ | async).nombreApellido != undefined)" >
+    <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
+        VER EN AGENDA
+    </button>
+  </div>
+
 </div>
 <app-confirmation></app-confirmation>

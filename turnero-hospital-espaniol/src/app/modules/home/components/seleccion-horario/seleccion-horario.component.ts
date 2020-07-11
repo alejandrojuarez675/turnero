@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { Calendario, Turno } from '../../../../shared/models/datos.models';
+import { Calendario, Turno, Profesional, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
 
 @Component({
   selector: 'app-seleccion-horario',
@@ -15,7 +15,7 @@ export class SeleccionHorarioComponent implements OnInit {
 
   horarios$: Observable<Turno[]>;
   horariosLength$: Observable<number>;
-
+  
   proxTurno: Turno;
 
   displayedColumns = ['profesional', 'fecha', 'observaciones'];
@@ -34,6 +34,7 @@ export class SeleccionHorarioComponent implements OnInit {
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
   }
 
+  /*
   onClickProfesional(turnoSelected: Turno) {
     this.proxTurno = turnoSelected;
     this.horarios$.subscribe(hs => {
@@ -54,5 +55,5 @@ export class SeleccionHorarioComponent implements OnInit {
       }) 
     }).unsubscribe();
   }
-
+  */
 }

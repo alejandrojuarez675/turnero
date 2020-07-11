@@ -217,6 +217,8 @@ export class FormularioComponent implements OnInit {
     if (
       this.fechaNacimiento.valid 
       && this.obrasSocial.valid
+      && ((this.plan.value != undefined && this.plan.value != '' ) || 
+        (this.obrasSocial.value.plan == undefined || this.obrasSocial.value.plan.length == 0))
       && ((this.especialidad.value != undefined && this.especialidad.value != '') || 
       (this.profesional.value != undefined && this.profesional.value != ''))
       && this.centroAtencion.valid

@@ -71,7 +71,9 @@ export const getBusquedaDiasDisponiblesRequest = createSelector(
         const request = new BusquedaDiasDisponiblesRequest();
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
-        request.codigoPlan = formulario.planSelected ? formulario.planSelected.codigo : null;
+        if (formulario.planSelected  != undefined) {
+            request.codigoPlan = formulario.planSelected.codigo;
+        }
         if (formulario.especialidadSelected != undefined) {
             request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         }
@@ -100,7 +102,9 @@ export const getBusquedaHorariosRequest = createSelector(
         const request = new BusquedaHorariosRequest();
         request.fechaNacimiento = formulario.fechaNacimiento;
         request.codigoObraSocial = formulario.obraSocialSelected.codigo;
-        request.codigoPlan = formulario.planSelected ? formulario.planSelected.codigo : null;
+        if (formulario.planSelected  != undefined) {
+            request.codigoPlan = formulario.planSelected.codigo;
+        }
         if (formulario.especialidadSelected != undefined) {
             request.codigoEspecialidad = formulario.especialidadSelected.codigo;
         } 

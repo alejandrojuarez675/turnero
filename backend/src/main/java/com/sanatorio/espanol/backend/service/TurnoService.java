@@ -46,7 +46,7 @@ public class TurnoService {
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:10 a.m.", "solo particular"),
+				new Date(), "10:10 a.m.", "solo particular - valor primer consulta $20"),
 		new Turno(
 				401, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),

@@ -149,7 +149,9 @@ export class GrillaTurnosComponent implements OnInit {
       centroAtencion: turnoLigthSelected.centroAtencion,
       fecha: turnoLigthSelected.fecha,
       hora: turnoLigthSelected.hora,
-      observaciones: turnoLigthSelected.observaciones
+      observaciones: turnoLigthSelected.observaciones,
+      observacionesResumido: turnoLigthSelected.observaciones != undefined ? 
+        turnoLigthSelected.observaciones.split('-')[0] : undefined
     };
     this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));

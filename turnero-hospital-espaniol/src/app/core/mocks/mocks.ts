@@ -77,13 +77,15 @@ const profesionalE1: ProfesionalEspecialidad = {
     codigo: 1,
     nombreApellido: 'Perez, Juan',
     observaciones: '',
+    observacionesResumido: '',
     especialidad: especialidadesMocks[0],
 };
 
 const profesionalE2: ProfesionalEspecialidad = {
     codigo: 2,
     nombreApellido: 'Riquelme, Roman',
-    observaciones: 'Solo particular',
+    observaciones: 'Solo particular - $10',
+    observacionesResumido: 'Solo particular',
     especialidad: especialidadesMocks[0],
 };
 
@@ -92,7 +94,8 @@ const turno1: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/28'),
     hora: '10:00',
-    observaciones: ''
+    observaciones: '',
+    observacionesResumido: ''
 };
 
 const turno2: TurnoLight = {
@@ -100,7 +103,8 @@ const turno2: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/26'),
     hora: '20:15',
-    observaciones: 'Solo particular'
+    observaciones: 'Solo particular - $10',
+    observacionesResumido: 'Solo particular',
 };
 
 const turno5: TurnoLight = {
@@ -108,7 +112,8 @@ const turno5: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/28'),
     hora: '10:00 a.m.',
-    observaciones: ''
+    observaciones: '',
+    observacionesResumido: ''
 };
 
 const turno6: TurnoLight = {
@@ -116,7 +121,8 @@ const turno6: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/26'),
     hora: '08:15 p.m.',
-    observaciones: 'Solo particular'
+    observaciones: 'Solo particular - $10',
+    observacionesResumido: 'Solo particular',
 };
 
 const turno3: TurnoLight = {
@@ -124,7 +130,8 @@ const turno3: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/29'),
     hora: '10:00',
-    observaciones: 'Solo particular'
+    observaciones: 'Solo particular - $10',
+    observacionesResumido: 'Solo particular',
 };
 
 const turno4: TurnoLight = {
@@ -132,7 +139,8 @@ const turno4: TurnoLight = {
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/04/4'),
     hora: '20:15',
-    observaciones: ''
+    observaciones: '',
+    observacionesResumido: ''
 };
 
 const disponibilidad: Disponibilidad = {
