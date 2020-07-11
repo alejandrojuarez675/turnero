@@ -38,6 +38,7 @@
                     {{p.nombre}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="plan.invalid">Seleccione su Plan</mat-error>
         </mat-form-field>
     </div>
 

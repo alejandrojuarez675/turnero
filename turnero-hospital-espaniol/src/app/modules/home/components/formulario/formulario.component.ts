@@ -36,7 +36,7 @@ export class FormularioComponent implements OnInit {
   
   fechaNacimiento = new FormControl('', [Validators.required]);
   obrasSocial = new FormControl('', [Validators.required]);
-  plan = new FormControl('', []);
+  plan = new FormControl('');
   especialidad = new FormControl('');
   profesional = new FormControl('');
   centroAtencion = new FormControl('', [Validators.required]);
@@ -157,6 +157,16 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setObraSocialSelected({ obraSocialSelected: value }));
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: undefined }));
     this.plan.setValue(undefined);
+
+    setTimeout(()=> {
+      if (this.obrasSocial.value != undefined && 
+          this.obrasSocial.value.plan != undefined && 
+          this.obrasSocial.value.plan.length > 0) {
+        this.plan = new FormControl('', Validators.required);
+      } else {
+        this.plan = new FormControl('');
+      }
+    })
   }
 
   clear() {
@@ -211,7 +221,6 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(FormActions.setCentroDeAtencionSelected({ centroDeAtencionSelected: event.value }));
   }
   
-
   isValid() {
     let result = false;
     if (
