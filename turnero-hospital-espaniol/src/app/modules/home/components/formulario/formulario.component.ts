@@ -11,7 +11,7 @@ import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan, Profesional } from '../../../../shared/models/datos.models';
-import { BusquedaProfesionalesRequest } from '../../../../shared/models/request.models';
+import { BusquedaProfesionalesRequest, BusquedaRequest } from '../../../../shared/models/request.models';
 
 @Component({
   selector: 'app-formulario',
@@ -71,9 +71,19 @@ export class FormularioComponent implements OnInit {
       ).subscribe(
         () => {
           this.store.dispatch(FormActions.getObraSociales());
-          this.store.dispatch(FormActions.getEspecialidades());
-          this.store.dispatch(FormActions.getProfesionales());
           this.store.dispatch(FormActions.getCentrosDeAtencion());
+
+          this.fechaNacimiento.valueChanges.subscribe( value => {
+            setTimeout(()=> {
+              this.store.select(FormSelectors.selectBusqueda)
+              .subscribe(
+                (filterFecha: BusquedaRequest) => {
+                  this.store.dispatch(FormActions.postEspecialidades({filterFecha}));
+                  this.store.dispatch(FormActions.postProfesionales({filterFecha}));
+                }
+              ).unsubscribe();
+            }
+          )})
         }
       );
     });
@@ -149,6 +159,8 @@ export class FormularioComponent implements OnInit {
 
   cambioFechaNacimiento(event: MatDatepickerInputEvent<Date>) {
     this.cleanResultadoDisponibilidad();
+    this.especialidad.setValue('');
+    this.profesional.setValue('');
     this.store.dispatch(FormActions.setFechaNacimiento({ fechaNacimiento: event.value }));
   }
 

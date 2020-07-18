@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 
 import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta, Login, loginRespuesta, Profesional, ProfesionalRespuesta } from '../../shared/models/datos.models';
-import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest } from '../../shared/models/request.models';
+import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, BusquedaRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
 import { environment } from './../../../environments/environment';
@@ -27,7 +27,9 @@ export class ServiceService {
   endpoint_login = this.endpointA + '/Login';
   endpoint_obraSocial = this.endpointC + '/getObraSocial';
   endpoint_especialidad = this.endpointC + '/getEspecialidad';
+  endpoint_postespecialidad = this.endpointC + '/postEspecialidad';
   endpoint_profesional = this.endpointC + '/getProfesionales';
+  endpoint_postprofesional = this.endpointC + '/postProfesionales';
   endpoint_centroAtencion = this.endpointG + '/getCentroAtencion';
   endpoint_busquedaProfesionales = this.endpointC + '/busquedaProfesionales';
   endpoint_busquedaDiasDisponibles = this.endpointC + '/busquedaDiasDisponibles';
@@ -76,10 +78,35 @@ export class ServiceService {
     }
   }
 
+  postEspecialidades(filter: BusquedaRequest): Observable<Especialidad[]> {
+    if (this.useMockups) {
+      return getWsFromMock(Mock.especialidadesMocks);
+    } else {
+
+      return this.http.post<EspecialidadRespuesta>(this.endpoint_postespecialidad, filter)
+      .pipe(map(
+        (res: EspecialidadRespuesta) => {
+          throwErrorIfBadCode(res);
+
+          res.especialidad.forEach(element => {
+            element.nombre = element.nombre.trim();
+          })
+
+          return res.especialidad.sort((a, b) => {
+            if (a.nombre > b.nombre) return 1;
+            if (a.nombre < b.nombre) return -1;
+            return 0;
+          });
+        }
+      ));
+    }
+  }
+
   getEspecialidades(): Observable<Especialidad[]> {
     if (this.useMockups) {
       return getWsFromMock(Mock.especialidadesMocks);
     } else {
+
       return this.http.get<EspecialidadRespuesta>(this.endpoint_especialidad)
         .pipe(map(
           (res: EspecialidadRespuesta) => {
@@ -95,6 +122,30 @@ export class ServiceService {
               return 0;
             });
           }
+      ));
+    }
+  }
+
+  postProfesionales(filter: BusquedaRequest): Observable<Profesional[]> {
+    if (this.useMockups) {
+      return getWsFromMock(Mock.profesionalesMocks);
+    } else {
+
+      return this.http.post<ProfesionalRespuesta>(this.endpoint_postprofesional, filter)
+      .pipe(map(
+        (res: ProfesionalRespuesta) => {
+          throwErrorIfBadCode(res);
+
+          res.profesionales.forEach(element => {
+            element.nombreApellido = element.nombreApellido.trim();
+          })
+
+          return res.profesionales.sort((a, b) => {
+            if (a.nombreApellido > b.nombreApellido) return 1;
+            if (a.nombreApellido < b.nombreApellido) return -1;
+            return 0;
+          });
+        }
       ));
     }
   }
@@ -152,6 +203,7 @@ export class ServiceService {
               throwErrorToUser(`No se encontraron coincidencias para los criterios ingresados.`);
             } else {
               res.disponibilidad.forEach(element => {
+
                 if (element.profesional.observaciones != undefined) {
                   element.profesional.observacionesResumido = element.profesional.observaciones.split('-')[0];
                 }
@@ -218,6 +270,7 @@ export class ServiceService {
               throwErrorToUser(`No hay turnos disponibles para el día seleccionado`);
             } else {
               res.turno.forEach(element => {
+
                 if (element.observaciones != undefined) {
                   element.observacionesResumido = element.observaciones.split('-')[0];
                 }

@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Formulario, ObraSocial, Profesional, Especialidad } from '../../../shared/models/datos.models';
-import { BusquedaProfesionalesRequest, DatosFormulario } from '../../../shared/models/request.models';
+import { BusquedaProfesionalesRequest, DatosFormulario, BusquedaRequest } from '../../../shared/models/request.models';
 import { DateUtils } from '../../utils/date.utils';
 import { setEspecialidadSelected, getEspecialidades } from '../actions/form.actions';
 
@@ -65,6 +65,15 @@ export const selectEspecialidadComboSelected = createSelector(
 export const selectFechaNacimiento = createSelector(
     selectFormulario,
     (formulario: Formulario) => formulario.fechaNacimiento
+);
+
+export const selectBusqueda = createSelector(
+    selectFormulario,
+    (formulario: Formulario) => {
+        const request = new BusquedaRequest();
+        request.fechaNacimiento = formulario.fechaNacimiento;
+        return request;
+    }
 );
 
 export const selectBusquedaProfesionales = createSelector(

@@ -9,6 +9,10 @@ export class DatosFormulario {
     centroAtencion: CentroAtencion;
 }
 
+export class BusquedaRequest {
+    fechaNacimiento: Date;
+}
+
 export class BusquedaProfesionalesRequest {
     fechaNacimiento: Date;
     codigoObraSocial: number;

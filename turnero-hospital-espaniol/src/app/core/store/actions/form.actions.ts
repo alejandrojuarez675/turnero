@@ -1,10 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { ObraSocial, Plan, Especialidad, CentroAtencion, Profesional } from '../../../shared/models/datos.models';
-import { BusquedaProfesionalesRequest } from '../../../shared/models/request.models';
+import { BusquedaProfesionalesRequest, BusquedaRequest } from '../../../shared/models/request.models';
 
 export const GET_OBRA_SOCIALES = '[Form] - getObraSociales';
 export const GET_ESPECIALIDADES = '[Form] - getEspecialidades';
+export const POST_ESPECIALIDADES = '[Form] - postEspecialidades';
 export const GET_PROFESIONALES = '[Form] - getProfesionales';
+export const POST_PROFESIONALES = '[Form] - postProfesionales';
 export const GET_CENTROS_DE_ATENCION = '[Form] - getCentrosDeAtencion';
 
 export const SET_OBRA_SOCIALES = '[API] - setObraSociales ';
@@ -27,6 +29,16 @@ export const getObraSociales = createAction(GET_OBRA_SOCIALES);
 export const getProfesionales = createAction(GET_PROFESIONALES);
 export const getEspecialidades = createAction(GET_ESPECIALIDADES);
 export const getCentrosDeAtencion = createAction(GET_CENTROS_DE_ATENCION);
+
+export const postProfesionales = createAction(
+    POST_PROFESIONALES,
+    props<{filterFecha: BusquedaRequest}>()
+);
+
+export const postEspecialidades = createAction(
+    POST_ESPECIALIDADES,
+    props<{filterFecha: BusquedaRequest}>()
+);
 
 export const setObraSociales = createAction(
     SET_OBRA_SOCIALES,
@@ -83,3 +95,5 @@ export const getBusquedaProfesionales = createAction(
     GET_BUSQUEDA_PROFESIONALES,
     props<{filter: BusquedaProfesionalesRequest}>()
 );
+
+

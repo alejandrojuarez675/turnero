@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as CalendarActions from '../actions/calendar.actions';
 import * as ErrorActions from '../actions/error.actions';
 import * as FormActions from '../actions/form.actions';
@@ -26,12 +26,25 @@ export class FormEffects {
     );
 
     getProfesionales$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FormActions.GET_PROFESIONALES),
+            mergeMap(() => this.formService.getProfesionales().pipe(
+                map(profesionales => ({ type: FormActions.SET_PROFESIONALES, profesionales })),
+                catchError((error: Error) =>
+                    of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+                )
+            ))
+        )
+    );
+
+    postProfesionales$ = createEffect(() =>
     this.actions$.pipe(
-        ofType(FormActions.GET_PROFESIONALES),
-        mergeMap(() => this.formService.getProfesionales().pipe(
-            map(profesionales => ({ type: FormActions.SET_PROFESIONALES, profesionales })),
+        ofType(FormActions.POST_PROFESIONALES),
+        switchMap((req: any) => this.formService.postProfesionales(req.filterFecha).pipe(
+            map((profesionales) =>
+                    ({ type: FormActions.SET_PROFESIONALES, profesionales })),
             catchError((error: Error) =>
-                of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+                    of({ type: ErrorActions.SHOW_ERROR, error: error.message })
             )
         ))
     )
@@ -44,6 +57,19 @@ export class FormEffects {
                 map(especialidades => ({ type: FormActions.SET_ESPECIALIDADES, especialidades })),
                 catchError((error: Error) =>
                     of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+                )
+            ))
+        )
+    );
+
+    postEspecialidades$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FormActions.POST_ESPECIALIDADES),
+            switchMap((req: any) => this.formService.postEspecialidades(req.filterFecha).pipe(
+                map((especialidades) =>
+                        ({ type: FormActions.SET_ESPECIALIDADES, especialidades })),
+                catchError((error: Error) =>
+                        of({ type: ErrorActions.SHOW_ERROR, error: error.message })
                 )
             ))
         )

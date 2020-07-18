@@ -124,6 +124,10 @@ export class GrillaTurnosComponent implements OnInit {
     this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
   }
 
+  onClickVerAgendaProfesional() {
+    this.onClickProf(this.disponibilidades[0].profesional);
+  }
+
   onClickProf(profesional: ProfesionalEspecialidad) {
 
     this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
