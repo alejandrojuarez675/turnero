@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sanatorio.espanol.backend.dto.BusquedaRequest;
 import com.sanatorio.espanol.backend.dto.CentroAtencionRespuesta;
 import com.sanatorio.espanol.backend.dto.ConfirmacionRequest;
 import com.sanatorio.espanol.backend.dto.ConfirmacionRespuesta;
@@ -51,12 +52,24 @@ public class TurnoController {
     	return espeResp;
     }
 	
+	@PostMapping("/Consext/postProfesionales")
+    public ProfesionalRespuesta postProfesionales(@RequestBody BusquedaRequest disponibilidadRequest) {
+		ProfesionalRespuesta espeResp = commonService.getProfesional();
+    	return espeResp;
+    }
+	
 	@RequestMapping("/Consext/getEspecialidad")
     public EspecialidadRespuesta getEspecialidades() {
 		EspecialidadRespuesta espeResp = commonService.getEspecialidad();
     	return espeResp;
     }
 
+	@PostMapping("/Consext/postEspecialidad")
+    public EspecialidadRespuesta postEspecialidad(@RequestBody BusquedaRequest disponibilidadRequest) {
+		EspecialidadRespuesta espeResp = commonService.getEspecialidad();
+    	return espeResp;
+    }
+	
 	@RequestMapping("/Gestion/getCentroAtencion")
     public CentroAtencionRespuesta getCentro() {
 		CentroAtencionRespuesta centroResp = commonService.getCentro();
