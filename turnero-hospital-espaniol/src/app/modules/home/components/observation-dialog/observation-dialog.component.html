@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>IMPORTANTE</h1>
+
+<mat-dialog-content class="mat-typography">
+  <p>
+    Observaciones de atención del profesional {{ data.profesional.nombreApellido}}:
+  </p>
+  <p>
+    {{ data.profesional.observaciones}}
+  </p>
+  <p>
+    ¿Desea visualizar la agenda?
+  </p>
+
+  </mat-dialog-content>
+
+<div mat-dialog-actions align="center">
+  <button mat-flat-button class="button-default" (click)="onNoClick()">NO</button>  
+  <button mat-flat-button class="button" [mat-dialog-close]="true" cdkFocusInitial>SI</button>
+</div>

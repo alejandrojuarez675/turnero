@@ -1,15 +1,13 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatSort, MatTableDataSource, MatRadioGroup } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
-import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { Calendario, Disponibilidad, Profesional, Turno, ProfesionalEspecialidad, Especialidad } from '../../../../shared/models/datos.models';
+import * as FormularioSelectors from '../../../../core/store/selectors/form.selectors';
+import { Calendario, Disponibilidad, Especialidad, Profesional, ProfesionalEspecialidad, Turno } from '../../../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
-import { FormControl } from '@angular/forms';
+import { ObservationDialogComponent } from '../observation-dialog/observation-dialog.component';
 
 @Component({
   selector: 'app-grilla-turnos',
@@ -84,7 +82,8 @@ export class GrillaTurnosComponent implements OnInit {
 
   constructor(
     private store: Store<{ calendario: Calendario }>,
-  ) {
+    public dialog: MatDialog,
+    ) {
 
     this.filtroHora$ = store.select(CalendarSelectors.getFiltroHora);
     this.profComboSelected$ = store.select(FormularioSelectors.selectProfComboSelected);
@@ -130,18 +129,11 @@ export class GrillaTurnosComponent implements OnInit {
 
   onClickProf(profesional: ProfesionalEspecialidad) {
 
-    this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
-    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
-    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
-    
-    setTimeout(()=> {
-      this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
-        (request: BusquedaDiasDisponiblesRequest) => {
-          this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
-        }
-      ).unsubscribe();
-    })
-    this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
+    if (profesional.observaciones) {
+      this.openDialog(profesional);
+    } else {
+      this.continuarReserva(profesional);
+    }
   }
 
   onClickTurno(row: Disponibilidad, horario: string) {
@@ -162,4 +154,31 @@ export class GrillaTurnosComponent implements OnInit {
     this.store.dispatch(CalendarActions.setTurnoSelected({ turnoSelected }));
   }
 
+  continuarReserva(profesional: ProfesionalEspecialidad){
+    this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+    
+    setTimeout(()=> {
+      this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
+        (request: BusquedaDiasDisponiblesRequest) => {
+          this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
+        }
+      ).unsubscribe();
+    })
+    this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
+  }
+
+  openDialog(profesional: ProfesionalEspecialidad): void {
+    this.store.dispatch(CalendarActions.setProfesionalSelected({ profesional }));
+    this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
+
+    this.dialog.open(ObservationDialogComponent, { data: { profesional }})
+      .afterClosed().subscribe( result => {
+        if (result) {
+          this.continuarReserva(profesional);
+        }
+      });
+    }
 }

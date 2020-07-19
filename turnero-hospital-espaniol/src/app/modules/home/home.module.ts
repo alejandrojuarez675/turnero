@@ -16,6 +16,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule } from './material.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ReservaPageComponent } from './pages/reserva-page/reserva-page.component';
+import { ObservationDialogComponent } from './components/observation-dialog/observation-dialog.component';
 
 
 registerLocaleData(localeAR);
@@ -33,6 +34,7 @@ registerLocaleData(localeAR);
     ReservaComponent,
     ReservaEmailComponent,
     ReservaEmailDialogComponent,
+    ObservationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ registerLocaleData(localeAR);
   entryComponents: [
     ConfirmationDialogComponent,
     ReservaEmailDialogComponent,
+    ObservationDialogComponent,
   ]
 })
 export class HomeModule { }
