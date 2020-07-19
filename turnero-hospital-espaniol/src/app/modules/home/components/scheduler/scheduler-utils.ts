@@ -12,7 +12,7 @@ const colors: any = {
 };
 
 export const disponibilidadDiasToCalendarEvent = (dia: DisponibilidadDiasStore) => {
-    if (dia.conDisponibilidadTM || dia.conDisponibilidadTT) { // TODO: pato
+    if (dia.conDisponibilidadTM || dia.conDisponibilidadTT) {
         return {
             start: dia.fecha,
             title: '',
