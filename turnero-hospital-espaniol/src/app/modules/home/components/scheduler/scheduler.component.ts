@@ -67,7 +67,7 @@ export class SchedulerComponent {
             day.date.getFullYear() === d.fecha.getFullYear()) {
             a = false;
 
-            if (d.conDisponibilidadTM || d.conDisponibilidadTT) { // TODO:
+            if (d.conDisponibilidadTM || d.conDisponibilidadTT) {
               day.cssClass =  'lightskyblue';
             } else {
               day.cssClass = 'lightslategray';
