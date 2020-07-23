@@ -206,6 +206,8 @@ export class ServiceService {
 
                 if (element.profesional.observaciones != undefined) {
                   element.profesional.observacionesResumido = element.profesional.observaciones.split('-')[0];
+                  element.profesional.observacionesIntermedio = element.profesional.observaciones.split('-')[0] + 
+                    ' - ' + element.profesional.observaciones.split('-')[1];
                 }
 
                 if (element.turnoManiana != undefined && element.turnoManiana.fecha != undefined) {
@@ -213,12 +215,20 @@ export class ServiceService {
                   const fd = new Date(Number(t[0]), Number(t[1])-1, Number(t[2]), 
                     Number(element.turnoManiana.hora.substring(0,2)), Number(element.turnoManiana.hora.substring(3,5)));
                   element.turnoManiana.fecha = fd; 
+
+                  element.turnoManiana.observaciones = element.profesional.observaciones;
+                  element.turnoManiana.observacionesIntermedio = element.profesional.observacionesIntermedio;
+                  element.turnoManiana.observacionesResumido = element.profesional.observacionesResumido;
                 }
                 if (element.turnoTarde != undefined && element.turnoTarde.fecha != undefined) {
                   const t = element.turnoTarde.fecha.toString().split(/[- T :]/);
                   const fd = new Date(Number(t[0]), Number(t[1])-1, Number(t[2]), 
                     Number(element.turnoTarde.hora.substring(0,2)), Number(element.turnoTarde.hora.substring(3,5)));
                   element.turnoTarde.fecha = fd; 
+
+                  element.turnoTarde.observaciones = element.profesional.observaciones;
+                  element.turnoTarde.observacionesIntermedio = element.profesional.observacionesIntermedio;
+                  element.turnoTarde.observacionesResumido = element.profesional.observacionesResumido;
                 }
 
                 if (element.turnoManiana == undefined || element.turnoManiana.fecha == undefined) {
@@ -273,6 +283,8 @@ export class ServiceService {
 
                 if (element.observaciones != undefined) {
                   element.observacionesResumido = element.observaciones.split('-')[0];
+                  element.observacionesIntermedio = element.observaciones.split('-')[0] + 
+                    ' - ' + element.observaciones.split('-')[1];
                 }
               });
             }

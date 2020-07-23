@@ -146,6 +146,9 @@ export class GrillaTurnosComponent implements OnInit {
       fecha: turnoLigthSelected.fecha,
       hora: turnoLigthSelected.hora,
       observaciones: turnoLigthSelected.observaciones,
+      observacionesIntermedio: turnoLigthSelected.observaciones != undefined ? 
+        turnoLigthSelected.observaciones.split('-')[0] + ' - ' + 
+        turnoLigthSelected.observaciones.split('-')[1] : undefined,
       observacionesResumido: turnoLigthSelected.observaciones != undefined ? 
         turnoLigthSelected.observaciones.split('-')[0] : undefined
     };
