@@ -72,18 +72,6 @@ export class FormularioComponent implements OnInit {
         () => {
           this.store.dispatch(FormActions.getObraSociales());
           this.store.dispatch(FormActions.getCentrosDeAtencion());
-
-          this.fechaNacimiento.valueChanges.subscribe( value => {
-            setTimeout(()=> {
-              this.store.select(FormSelectors.selectBusqueda)
-              .subscribe(
-                (filterFecha: BusquedaRequest) => {
-                  this.store.dispatch(FormActions.postEspecialidades({filterFecha}));
-                  this.store.dispatch(FormActions.postProfesionales({filterFecha}));
-                }
-              ).unsubscribe();
-            }
-          )})
         }
       );
     });
@@ -100,6 +88,18 @@ export class FormularioComponent implements OnInit {
         }
       }
     ).unsubscribe();
+
+    this.fechaNacimiento.valueChanges.subscribe( value => {
+      setTimeout(()=> {
+        this.store.select(FormSelectors.selectBusqueda)
+        .subscribe(
+          (filterFecha: BusquedaRequest) => {
+            this.store.dispatch(FormActions.postEspecialidades({filterFecha}));
+            this.store.dispatch(FormActions.postProfesionales({filterFecha}));
+          }
+        ).unsubscribe();
+      }
+    )})
 
     this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(
       startWith<string | ObraSocial>(''),

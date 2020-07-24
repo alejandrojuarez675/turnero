@@ -27,6 +27,9 @@
             <span class="material-icons icon-image-preview">work</span>
             Especialidad: {{ turnoSelected?.profesional?.especialidad?.nombre }} 
         </div>
+    </div>
+
+    <div class="row clearfix" *ngIf="turnoSelected?.observaciones">        
         <div class="col-md-12 texto" *ngIf="turnoSelected?.observaciones">
             <span class="material-icons icon-image-preview">warning</span>
             Observaciones: {{ turnoSelected?.observaciones }}
