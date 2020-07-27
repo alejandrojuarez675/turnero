@@ -77,17 +77,19 @@ const profesionalE1: ProfesionalEspecialidad = {
     codigo: 1,
     nombreApellido: 'Perez, Juan',
     observaciones: '',
-    observacionesResumido: '',
-    observacionesIntermedio: '',
+    observaciones1: '',
+    observaciones2: '',
+    observaciones3: '',
     especialidad: especialidadesMocks[0],
 };
 
 const profesionalE2: ProfesionalEspecialidad = {
     codigo: 2,
     nombreApellido: 'Riquelme, Roman',
-    observaciones: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
-    observacionesIntermedio: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
-    observacionesResumido: '1º CONSULTA PARTICULAR',
+    observaciones: ' -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
+    observaciones1: '1º CONSULTA PARTICULAR',
+    observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
+    observaciones3: 'valor $1000',
     especialidad: especialidadesMocks[0],
 };
 
@@ -97,8 +99,9 @@ const turno1: TurnoLight = {
     fecha: new Date('2020/03/28'),
     hora: '10:00',
     observaciones: '',
-    observacionesIntermedio: '',
-    observacionesResumido: ''
+    observaciones1: '',
+    observaciones2: '',
+    observaciones3: '',
 };
 
 const turno2: TurnoLight = {
@@ -107,8 +110,9 @@ const turno2: TurnoLight = {
     fecha: new Date('2020/03/26'),
     hora: '20:15',
     observaciones: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
-    observacionesIntermedio: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
-    observacionesResumido: '1º CONSULTA PARTICULAR',
+    observaciones1: '1º CONSULTA PARTICULAR',
+    observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
+    observaciones3: 'valor $1000',
 
 };
 
@@ -118,8 +122,9 @@ const turno5: TurnoLight = {
     fecha: new Date('2020/03/28'),
     hora: '10:00 a.m.',
     observaciones: '',
-    observacionesIntermedio: '',
-    observacionesResumido: ''
+    observaciones1: '',
+    observaciones2: '',
+    observaciones3: '',
 };
 
 const turno6: TurnoLight = {
@@ -128,8 +133,9 @@ const turno6: TurnoLight = {
     fecha: new Date('2020/03/26'),
     hora: '08:15 p.m.',
     observaciones: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
-    observacionesIntermedio: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
-    observacionesResumido: '1º CONSULTA PARTICULAR',
+    observaciones1: '1º CONSULTA PARTICULAR',
+    observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
+    observaciones3: 'valor $1000',
 
 };
 
@@ -139,8 +145,9 @@ const turno3: TurnoLight = {
     fecha: new Date('2020/03/29'),
     hora: '10:00',
     observaciones: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
-    observacionesIntermedio: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
-    observacionesResumido: '1º CONSULTA PARTICULAR',
+    observaciones1: '1º CONSULTA PARTICULAR',
+    observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
+    observaciones3: 'valor $1000',
 
 };
 
@@ -150,8 +157,9 @@ const turno4: TurnoLight = {
     fecha: new Date('2020/04/4'),
     hora: '20:15',
     observaciones: '',
-    observacionesIntermedio: '',
-    observacionesResumido: ''
+    observaciones1: '1º CONSULTA PARTICULAR',
+    observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
+    observaciones3: 'valor $1000',
 };
 
 const disponibilidad: Disponibilidad = {

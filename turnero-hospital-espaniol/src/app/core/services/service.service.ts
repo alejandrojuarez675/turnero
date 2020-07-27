@@ -205,9 +205,15 @@ export class ServiceService {
               res.disponibilidad.forEach(element => {
 
                 if (element.profesional.observaciones != undefined) {
-                  element.profesional.observacionesResumido = element.profesional.observaciones.split('-')[0];
-                  element.profesional.observacionesIntermedio = element.profesional.observaciones.split('-')[0] + 
-                    ' - ' + element.profesional.observaciones.split('-')[1];
+                  if (element.profesional.observaciones.split('-')[0] != undefined) {
+                    element.profesional.observaciones1 = element.profesional.observaciones.split('-')[0].trim();
+                  }
+                  if (element.profesional.observaciones.split('-')[1] != undefined) {
+                    element.profesional.observaciones2 = element.profesional.observaciones.split('-')[1].trim();
+                  }
+                  if (element.profesional.observaciones.split('-')[2] != undefined) {
+                    element.profesional.observaciones3 = element.profesional.observaciones.split('-')[2].trim();
+                  }
                 }
 
                 if (element.turnoManiana != undefined && element.turnoManiana.fecha != undefined) {
@@ -217,8 +223,9 @@ export class ServiceService {
                   element.turnoManiana.fecha = fd; 
 
                   element.turnoManiana.observaciones = element.profesional.observaciones;
-                  element.turnoManiana.observacionesIntermedio = element.profesional.observacionesIntermedio;
-                  element.turnoManiana.observacionesResumido = element.profesional.observacionesResumido;
+                  element.turnoManiana.observaciones1 = element.profesional.observaciones1;
+                  element.turnoManiana.observaciones2 = element.profesional.observaciones2;
+                  element.turnoManiana.observaciones3 = element.profesional.observaciones3;
                 }
                 if (element.turnoTarde != undefined && element.turnoTarde.fecha != undefined) {
                   const t = element.turnoTarde.fecha.toString().split(/[- T :]/);
@@ -227,8 +234,9 @@ export class ServiceService {
                   element.turnoTarde.fecha = fd; 
 
                   element.turnoTarde.observaciones = element.profesional.observaciones;
-                  element.turnoTarde.observacionesIntermedio = element.profesional.observacionesIntermedio;
-                  element.turnoTarde.observacionesResumido = element.profesional.observacionesResumido;
+                  element.turnoTarde.observaciones1 = element.profesional.observaciones1;
+                  element.turnoTarde.observaciones2 = element.profesional.observaciones2;
+                  element.turnoTarde.observaciones3 = element.profesional.observaciones3;
                 }
 
                 if (element.turnoManiana == undefined || element.turnoManiana.fecha == undefined) {
@@ -282,9 +290,15 @@ export class ServiceService {
               res.turno.forEach(element => {
 
                 if (element.observaciones != undefined) {
-                  element.observacionesResumido = element.observaciones.split('-')[0];
-                  element.observacionesIntermedio = element.observaciones.split('-')[0] + 
-                    ' - ' + element.observaciones.split('-')[1];
+                  if (element.observaciones.split('-')[0] != undefined) {
+                    element.observaciones1 = element.observaciones.split('-')[0].trim();
+                  }
+                  if (element.observaciones.split('-')[1] != undefined)  {
+                    element.observaciones2 = element.observaciones.split('-')[1].trim();
+                  }
+                  if (element.observaciones.split('-')[2] != undefined) {
+                    element.observaciones3 = element.observaciones.split('-')[2].trim();
+                  }
                 }
               });
             }

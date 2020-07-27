@@ -57,8 +57,9 @@ export class ProfesionalEspecialidad {
     especialidad: Especialidad;
     codigo: number;
     observaciones: string;
-    observacionesIntermedio: string
-    observacionesResumido: string;
+    observaciones1: string
+    observaciones2: string;
+    observaciones3: string
 }
 
 export class Disponibilidad {
@@ -74,8 +75,9 @@ export class TurnoLight {
     fecha: Date;
     hora: string;
     observaciones: string;
-    observacionesIntermedio: string
-    observacionesResumido: string;
+    observaciones1: string
+    observaciones2: string;
+    observaciones3: string
 }
 
 

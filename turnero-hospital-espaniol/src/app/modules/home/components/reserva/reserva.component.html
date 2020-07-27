@@ -32,7 +32,12 @@
     <div class="row clearfix" *ngIf="turnoSelected?.observaciones">        
         <div class="col-md-12 texto" *ngIf="turnoSelected?.observaciones">
             <span class="material-icons icon-image-preview">warning</span>
-            Observaciones: {{ turnoSelected?.observaciones }}
+            Observaciones: 
+                <span *ngIf="turnoSelected?.observaciones1">
+                    {{ turnoSelected?.observaciones1 }} - 
+                </span>
+                {{ turnoSelected?.observaciones3 }}
+
         </div>
     </div>
 

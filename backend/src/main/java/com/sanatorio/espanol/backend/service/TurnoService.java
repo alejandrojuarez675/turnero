@@ -46,12 +46,12 @@ public class TurnoService {
 				400, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:10 a.m.", "solo particular - valor primer consulta $20"),
+				new Date(), "10:10 a.m.", "- asdassad - valor primer consulta $20"),
 		new Turno(
 				401, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "10:20 a.m.", ""),
+				new Date(), "10:20 a.m.", " - asdassad - valor primer consulta $20"),
 		new Turno(
 				402, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
@@ -71,12 +71,12 @@ public class TurnoService {
 				405, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "16:45 p.m.", "solo particular"),
+				new Date(), "16:45 p.m.", "solo particular - 12312331- valor 500"),
 			new Turno(
 				406, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),
 				new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
-				new Date(), "17:00 p.m.", "Solo particular"),
+				new Date(), "17:00 p.m.", "Solo particular - asdasd - valor 100"),
 			new Turno(
 				407, 
 				new ProfesionalEspecialidad(1, "Juan Perez", "", new Especialidad(1, "KINESIOLOGÍA")),

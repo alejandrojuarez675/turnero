@@ -58,17 +58,30 @@ public class DisponibilidadService {
 						new Date(), "18:10", "")
 			),
 			new Disponibilidad(
-				new ProfesionalEspecialidad(3, "Mario Gomez", "Solo particular - valor consulta $10", new Especialidad(1, "KINESIOLOGÍA")), 
+					new ProfesionalEspecialidad(3, "Pepe Gomez", "- frase larga - valor consulta $10", new Especialidad(1, "KINESIOLOGÍA")), 
+					new TurnoManiana(
+							302, 
+							new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
+							new Date(), "08:00",
+							"- frase larga - valor consulta $10"),
+					new TurnoTarde(
+							301, 
+							new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
+							new Date(), "16:10", 
+							"- frase larga - valor consulta $10")
+				),
+			new Disponibilidad(
+				new ProfesionalEspecialidad(3, "Mario Gomez", " - frase - valor consulta $10", new Especialidad(1, "KINESIOLOGÍA")), 
 				new TurnoManiana(
 						402, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"),
 						new Date(), "08:00",
-						"Solo particular - valor consulta $10"),
+						" - frase - valor consulta $10"),
 				new TurnoTarde(
 						401, 
 						new CentroAtencion(1, "HOSPITAL ESPAÑOL"), 
 						new Date(), "16:10", 
-						"Solo particular - valor consulta $10")
+						" - frase - valor consulta $10")
 			),
 			new Disponibilidad(
 					new ProfesionalEspecialidad(3, "Mario Gomez Mañana y tarde", "Solo particular", new Especialidad(1, "KINESIOLOGÍA")), 

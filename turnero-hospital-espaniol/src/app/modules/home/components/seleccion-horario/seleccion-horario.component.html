@@ -34,8 +34,8 @@
         <ng-container matColumnDef="observaciones">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
-              <span *ngIf="row.observaciones">
-                <mat-icon  #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltip="{{ row.observacionesResumido }}" 
+              <span *ngIf="row.observaciones1">
+                <mat-icon  #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltip="{{ row.observaciones1 }}" 
                   matTooltipPosition="left">warning </mat-icon>
               </span>
           </td>

@@ -5,7 +5,10 @@
     Observaciones de atención del profesional {{ data.profesional.nombreApellido}}:
   </p>
   <p>
-    {{ data.profesional.observacionesIntermedio}}
+    <span *ngIf="data.profesional.observaciones1">
+      {{ data.profesional.observaciones1 }} - 
+    </span>
+    {{ data.profesional.observaciones2}}
   </p>
   <p>
     ¿Desea visualizar la agenda?
