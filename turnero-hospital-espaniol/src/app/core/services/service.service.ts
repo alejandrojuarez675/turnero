@@ -294,7 +294,7 @@ export class ServiceService {
                     element.observaciones1 = element.observaciones.split('-')[0].trim();
                   }
                   if (element.observaciones.split('-')[1] != undefined)  {
-                    element.observaciones2 = element.observaciones.split('-')[1].trim();
+                    //element.observaciones2 = element.observaciones.split('-')[1].trim();
                   }
                   if (element.observaciones.split('-')[2] != undefined) {
                     element.observaciones3 = element.observaciones.split('-')[2].trim();

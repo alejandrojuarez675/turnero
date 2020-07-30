@@ -33,9 +33,11 @@ export class ReservaComponent implements OnInit {
   nombreApellido = new FormControl('', [Validators.required]);
   telefonoArea = new FormControl('', [Validators.required,
     Validators.minLength(2),
+    Validators.maxLength(5),
     Validators.pattern(/^\d+$/)]);
   telefonoNumero = new FormControl('', [Validators.required,
       Validators.minLength(6),
+      Validators.maxLength(8),
       Validators.pattern(/^\d+$/)]);    
   mail = new FormControl('', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
@@ -95,11 +97,17 @@ export class ReservaComponent implements OnInit {
     paciente.telefono = telefono;
     paciente.email = this.mail.value;
 
-    paciente.codigoObraSocial = this.obraSocialSelected.codigo;
-    if (this.planSelected != undefined) {
-      paciente.codigoPlan = this.planSelected.codigo;
-    }
     paciente.fechaNacimiento = this.fechaNacimientoSelected;
+
+    if (this.turnoSelected.observaciones == undefined || 
+        this.turnoSelected.observaciones.trim().length == 0) {
+      paciente.codigoObraSocial = this.obraSocialSelected.codigo;
+      if (this.planSelected != undefined) {
+        paciente.codigoPlan = this.planSelected.codigo;
+      }
+    } else {
+      paciente.codigoObraSocial = 994;
+    }
 
     paciente.codigoProfesional = this.turnoSelected.profesional.codigo;
     paciente.codigoEspecialidad = this.turnoSelected.profesional.especialidad.codigo;
