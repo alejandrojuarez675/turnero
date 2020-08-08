@@ -27,6 +27,14 @@
             <span class="material-icons icon-image-preview">work</span>
             Especialidad: {{ turnoSelected?.profesional?.especialidad?.nombre }} 
         </div>
+        <div class="col-md-6 texto" *ngIf="turnoSelected?.observaciones == ''">
+            <span class="material-icons icon-image-preview">security</span>
+            Obra Social: {{ obraSocialSelected?.nombre }} {{ planSelected?.nombre }} 
+        </div>
+        <div class="col-md-6 texto" *ngIf="turnoSelected?.observaciones">
+            <span class="material-icons icon-image-preview">security</span>
+            Obra Social: PARTICULARES
+        </div>
     </div>
 
     <div class="row clearfix" *ngIf="turnoSelected?.observaciones">        

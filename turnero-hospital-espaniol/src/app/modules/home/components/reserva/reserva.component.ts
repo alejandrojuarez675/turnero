@@ -66,6 +66,8 @@ export class ReservaComponent implements OnInit {
     this.planSelected$ = store.select(FormularioSelectors.selectPlanSelected);
     this.fechaNacimientoSelected$ = store.select(FormularioSelectors.selectFechaNacimiento);
     this.errorBackend$ = store.select(ErrorSelector.getCountError);
+
+    
   }
 
 
@@ -76,6 +78,12 @@ export class ReservaComponent implements OnInit {
         if (!turno) { this.router.navigate(['/home']); }
       }
     );
+    this.obraSocialSelected$.subscribe(
+      obraSocial => this.obraSocialSelected = obraSocial
+    );
+    this.planSelected$.subscribe(
+      plan => this.planSelected = plan
+    );
 
     this.errorBackend$.subscribe(() => {
       this.loading = false;
@@ -83,8 +91,6 @@ export class ReservaComponent implements OnInit {
   }
 
   reservar() {
-    this.obraSocialSelected$.subscribe(obraSocial => this.obraSocialSelected = obraSocial);
-    this.planSelected$.subscribe(plan => this.planSelected = plan);
     this.fechaNacimientoSelected$.subscribe(fechaNacimiento => this.fechaNacimientoSelected = fechaNacimiento);
 
     const paciente = new Paciente();
