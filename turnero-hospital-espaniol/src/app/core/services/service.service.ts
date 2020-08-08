@@ -289,6 +289,19 @@ export class ServiceService {
             } else {
               res.turno.forEach(element => {
 
+                // cambio formato hora 06:15 p.m. por 18:00
+                if (element.hora != undefined && element.hora.indexOf('a.m.') >= 0) {
+                  element.hora = element.hora.split('a.m.')[0];
+                }
+                if (element.hora != undefined && element.hora.indexOf('p.m.') >= 0) {
+                  var hhmm = element.hora.split('p.m.')[0];
+                  if (Number(hhmm.split(':')[0]) == 12) {
+                    element.hora = hhmm;
+                  } else {
+                    element.hora = (Number(hhmm.split(':')[0]) + 12) + ":" + hhmm.split(':')[1];
+                  }
+                }
+
                 if (element.observaciones != undefined) {
                   if (element.observaciones.split('-')[0] != undefined) {
                     element.observaciones1 = element.observaciones.split('-')[0].trim();

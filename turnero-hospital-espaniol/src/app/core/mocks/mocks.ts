@@ -131,7 +131,7 @@ const turno6: TurnoLight = {
     codigo: 348,
     centroAtencion: centroAtencionMock,
     fecha: new Date('2020/03/26'),
-    hora: '08:15 p.m.',
+    hora: '18:15',
     observaciones: '1º CONSULTA PARTICULAR -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
     observaciones1: '1º CONSULTA PARTICULAR',
     observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',

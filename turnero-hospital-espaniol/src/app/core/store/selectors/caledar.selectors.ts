@@ -127,9 +127,9 @@ export const getHorariosDisponibles = createSelector(
                 (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
             )
             ||
-            (calendario.filtroHora2 === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            (calendario.filtroHora2 === 'AM' && Number(x.hora.split(':')[0]) < 12) 
             ||
-            (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
+            (calendario.filtroHora2 === 'PM' && Number(x.hora.split(':')[0]) >= 12)
         ))
     }
 );
@@ -143,9 +143,9 @@ export const getHorariosDisponiblesLength = createSelector(
                 (calendario.filtroHora2 != 'AM' && calendario.filtroHora2 != 'PM')
             )
             ||
-            (calendario.filtroHora2 === 'AM' && x.hora.indexOf('a.m.') >= 0) 
+            (calendario.filtroHora2 === 'AM' && Number(x.hora.split(':')[0]) < 12) 
             ||
-            (calendario.filtroHora2 === 'PM' && x.hora.indexOf('p.m.') >= 0)
+            (calendario.filtroHora2 === 'PM' && Number(x.hora.split(':')[0]) >= 12)
         )).length
     }
 );
