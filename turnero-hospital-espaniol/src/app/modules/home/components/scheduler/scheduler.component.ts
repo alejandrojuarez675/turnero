@@ -107,7 +107,7 @@ export class SchedulerComponent {
     );
 
     store.select(CalendarSelectors.getDiasTurnosDisponibles).subscribe(x => {
-      console.log("this.isScrolled " + this.isScrolled);
+      //console.log("this.isScrolled " + this.isScrolled);
       this.isScrolled = this.isScrolled2;
       this.isScrolled2 = false;
     })
@@ -174,7 +174,7 @@ export class SchedulerComponent {
   }
 
   private scrollToBottom(): void {
-    console.log("Scroll? " + this.isScrolled);
+    //console.log("Scroll? " + this.isScrolled);
     // if (this.target != undefined) {
     //   console.log(this.target.nativeElement.scrollHeight );
     //   window.scroll({
@@ -185,7 +185,7 @@ export class SchedulerComponent {
     // }
      if (!this.isScrolled) {
       window.scroll({
-        top: 1200,
+        top: 1010,
         left: 0,
         behavior: 'smooth'
       });
