@@ -48,6 +48,7 @@ export class SchedulerComponent {
 
   @ViewChild('scrollFrame') private scrollFrame: ElementRef;
   isScrolled: boolean = false;
+  isScrolled2: boolean = false;
   private target: ElementRef;
   @ViewChild('target') set content(content: ElementRef) {
     if(content) { // initially setter gets called with undefined
@@ -66,7 +67,7 @@ export class SchedulerComponent {
 
     this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
     this.dias$.subscribe(x =>
-    {this.scrollToBottom();
+    { this.scrollToBottom();
       x.forEach(d => {
         renderEvent.body.forEach(day => {
           let a = true;
@@ -87,6 +88,7 @@ export class SchedulerComponent {
   }
 
   cambiarFiltro2(event) {
+    this.isScrolled2 = true;
     if (event != undefined) {
       this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: event.value}));
     } else {
@@ -103,9 +105,17 @@ export class SchedulerComponent {
     this.events$ = store.select(CalendarSelectors.getDiasTurnosDisponibles).pipe(
       map((ev) => ev.map(x => disponibilidadDiasToCalendarEvent(x)))
     );
+
+    store.select(CalendarSelectors.getDiasTurnosDisponibles).subscribe(x => {
+      console.log("this.isScrolled " + this.isScrolled);
+      this.isScrolled = this.isScrolled2;
+      this.isScrolled2 = false;
+    })
+
     this.events$.subscribe((e) => this.events = e);
 
     this.eventsLength$ = store.select(CalendarSelectors.getDiasDisponiblesLength);
+    
 
     this.profesionalSelected$ = store.select(CalendarSelectors.getProfesionalSelected);
     this.profesionalesDisponibles$ = store.select(CalendarSelectors.getProfesionalesDisponibles);
@@ -164,7 +174,6 @@ export class SchedulerComponent {
   }
 
   private scrollToBottom(): void {
-    console.log("ENTRA con " + this.scrollFrame.nativeElement.scrollHeight);
     console.log("Scroll? " + this.isScrolled);
     // if (this.target != undefined) {
     //   console.log(this.target.nativeElement.scrollHeight );
@@ -174,14 +183,14 @@ export class SchedulerComponent {
     //     behavior: 'smooth'
     //   });
     // }
-    // if (!this.isScrolled) {
+     if (!this.isScrolled) {
       window.scroll({
-        top: 810,
+        top: 1200,
         left: 0,
         behavior: 'smooth'
       });
-    //   this.isScrolled = true;
-    // }
+       this.isScrolled = true;
+     }
   }
 
   // private isUserNearBottom(): boolean {
