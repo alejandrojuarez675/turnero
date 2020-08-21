@@ -1,4 +1,5 @@
-<div class="cuadro-formulario" *ngIf="((eventsLength$ | async) > 0)">
+<div #scrollFrame>&nbsp;</div>
+<div class="cuadro-formulario" *ngIf="((eventsLength$ | async) > 0)" #target>
   <div class="row clearfix">
       <div *ngIf="(profesionalSelected$ | async) != undefined">
         <div class="texto"> 
@@ -17,7 +18,6 @@
   </div>
 
   <div class="row clearfix"></div>
-  
   <div class="rowRef clearfix">
     <div class="col-md-12 texto">
         <span class="material-icons icon-image-preview conturnos">label</span>

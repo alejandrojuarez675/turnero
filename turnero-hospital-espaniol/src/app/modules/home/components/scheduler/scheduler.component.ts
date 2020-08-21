@@ -1,19 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation, HostListener, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 // tslint:disable-next-line: max-line-length
-import { CalendarEvent, CalendarView, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarEvent, CalendarMonthViewBeforeRenderEvent, CalendarView } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as CalendarActions from '../../../../core/store/actions/calendar.actions';
-import * as ContextoSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
-import { Calendario, Profesional, DisponibilidadDiasStore, Disponibilidad, Especialidad, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
+import { Calendario, Disponibilidad, DisponibilidadDiasStore, Especialidad, ProfesionalEspecialidad } from '../../../../shared/models/datos.models';
 import { BusquedaHorariosRequest } from '../../../../shared/models/request.models';
-import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
-import { FormControl } from '@angular/forms';
+import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-utils';
 
 @Component({
   selector: 'app-scheduler',
@@ -50,6 +46,15 @@ export class SchedulerComponent {
   refresh: Subject<any> = new Subject();
   locale = 'es-AR';
 
+  @ViewChild('scrollFrame') private scrollFrame: ElementRef;
+  isScrolled: boolean = false;
+  private target: ElementRef;
+  @ViewChild('target') set content(content: ElementRef) {
+    if(content) { // initially setter gets called with undefined
+        this.target = content;
+    }
+ }
+  
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
     renderEvent.body.forEach((day) => {
       day.badgeTotal = day.events.filter(
@@ -57,8 +62,11 @@ export class SchedulerComponent {
       ).length;
     });
 
+    
+
     this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
     this.dias$.subscribe(x =>
+    {this.scrollToBottom();
       x.forEach(d => {
         renderEvent.body.forEach(day => {
           let a = true;
@@ -74,7 +82,7 @@ export class SchedulerComponent {
             }
           }
         });
-      })
+      })}
     );
   }
 
@@ -154,4 +162,32 @@ export class SchedulerComponent {
   _toMonthString(month: number) {
     return toMonthString(month);
   }
+
+  private scrollToBottom(): void {
+    console.log("ENTRA con " + this.scrollFrame.nativeElement.scrollHeight);
+    console.log("Scroll? " + this.isScrolled);
+    // if (this.target != undefined) {
+    //   console.log(this.target.nativeElement.scrollHeight );
+    //   window.scroll({
+    //     top: this.target.nativeElement.scrollHeight,
+    //     left: 0,
+    //     behavior: 'smooth'
+    //   });
+    // }
+    // if (!this.isScrolled) {
+      window.scroll({
+        top: 810,
+        left: 0,
+        behavior: 'smooth'
+      });
+    //   this.isScrolled = true;
+    // }
+  }
+
+  // private isUserNearBottom(): boolean {
+  //   const threshold = 150;
+  //   const position = window.scrollY + window.innerHeight;
+  //   const height = document.body.scrollHeight;
+  //   return position > height - threshold;
+  // }
 }
