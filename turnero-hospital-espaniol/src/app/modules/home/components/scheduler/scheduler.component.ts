@@ -46,23 +46,12 @@ export class SchedulerComponent {
   refresh: Subject<any> = new Subject();
   locale = 'es-AR';
 
-  @ViewChild('scrollFrame') private scrollFrame: ElementRef;
-  isScrolled: boolean = false;
-  private target: ElementRef;
-  @ViewChild('target') set content(content: ElementRef) {
-    if(content) { // initially setter gets called with undefined
-        this.target = content;
-    }
- }
-  
   beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
     renderEvent.body.forEach((day) => {
       day.badgeTotal = day.events.filter(
         (event) => event.meta.incrementsBadgeTotal
       ).length;
     });
-
-    
 
     this.dias$ = this.store.select(CalendarSelectors.getDiasDisponibles);
     this.dias$.subscribe(x =>
@@ -94,7 +83,6 @@ export class SchedulerComponent {
     }
   }
 
-
   constructor(
     private store: Store<{ calendario: Calendario }>,
   ) {
@@ -107,8 +95,7 @@ export class SchedulerComponent {
     this.events$.subscribe((e) => this.events = e);
 
     this.eventsLength$ = store.select(CalendarSelectors.getDiasDisponiblesLength);
-    
-
+  
     this.profesionalSelected$ = store.select(CalendarSelectors.getProfesionalSelected);
     this.profesionalesDisponibles$ = store.select(CalendarSelectors.getProfesionalesDisponibles);
     this.profesionalesDisponibles$.subscribe(disponibilidad => {
@@ -147,6 +134,17 @@ export class SchedulerComponent {
       ).unsubscribe();
     } else {
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
+    }
+
+    console.log(window.innerWidth);
+    if (window.innerWidth <= 1000) {
+      setTimeout(()=> {
+        window.scroll({
+          top: 3010,
+          left: 0,
+          behavior: 'smooth'
+        });
+      });
     }
   }
 
