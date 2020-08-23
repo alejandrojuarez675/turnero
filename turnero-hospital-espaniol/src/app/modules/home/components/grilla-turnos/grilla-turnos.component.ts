@@ -117,6 +117,15 @@ export class GrillaTurnosComponent implements OnInit {
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
+
+        setTimeout(()=> {
+          window.scroll({
+            top: 3010,
+            left: 0,
+            behavior: 'smooth'
+          });
+        });
+
       }
     ).unsubscribe();
 
@@ -164,6 +173,13 @@ export class GrillaTurnosComponent implements OnInit {
       this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
         (request: BusquedaDiasDisponiblesRequest) => {
           this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
+          setTimeout(()=> {
+            window.scroll({
+              top: 3010,
+              left: 0,
+              behavior: 'smooth'
+            });
+          });
         }
       ).unsubscribe();
     })
