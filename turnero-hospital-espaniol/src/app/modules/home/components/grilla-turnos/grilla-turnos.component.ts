@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -9,12 +9,16 @@ import { Calendario, Disponibilidad, Especialidad, Profesional, ProfesionalEspec
 import { BusquedaDiasDisponiblesRequest } from '../../../../shared/models/request.models';
 import { ObservationDialogComponent } from '../observation-dialog/observation-dialog.component';
 
+
 @Component({
   selector: 'app-grilla-turnos',
   templateUrl: './grilla-turnos.component.html',
   styleUrls: ['./grilla-turnos.component.css']
 })
 export class GrillaTurnosComponent implements OnInit {
+
+  @ViewChild('footer') footerElement: ElementRef;
+  show: boolean = false;
 
   filtroHora$: Observable<string>;
   turnoFilter: string;
@@ -119,12 +123,13 @@ export class GrillaTurnosComponent implements OnInit {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
 
         setTimeout(()=> {
-          window.scroll({
-            top: 3010,
-            left: 0,
-            behavior: 'smooth'
-          });
-        });
+          this.show = false;  
+          this.show = true; 
+          setTimeout(()=> {
+            this.footerElement.nativeElement.scrollIntoView();
+            this.show = false;  
+          },1000);
+        },0);
 
       }
     ).unsubscribe();
@@ -174,12 +179,13 @@ export class GrillaTurnosComponent implements OnInit {
         (request: BusquedaDiasDisponiblesRequest) => {
           this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
           setTimeout(()=> {
-            window.scroll({
-              top: 3010,
-              left: 0,
-              behavior: 'smooth'
-            });
-          });
+            this.show = false;  
+            this.show = true; 
+            setTimeout(()=> {
+              this.footerElement.nativeElement.scrollIntoView();
+              this.show = false;  
+            },1000);
+          },0);
         }
       ).unsubscribe();
     })

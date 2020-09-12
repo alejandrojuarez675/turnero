@@ -26,6 +26,8 @@ import { disponibilidadDiasToCalendarEvent, toMonthString } from './scheduler-ut
 })
 export class SchedulerComponent {
 
+  @ViewChild('footer') footerElement: ElementRef;
+  show: boolean = false;
   filtroHora$: Observable<string>;
   filtroHora2$: Observable<string>;
   turnoFilter2: string;
@@ -136,15 +138,17 @@ export class SchedulerComponent {
       this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
     }
 
-    console.log(window.innerWidth);
     if (window.innerWidth <= 1000) {
-      setTimeout(()=> {
-        window.scroll({
-          top: 3010,
-          left: 0,
-          behavior: 'smooth'
-        });
-      });
+      if (window.innerWidth <= 1000) {
+        setTimeout(()=> {
+          this.show = false;  
+          this.show = true; 
+          setTimeout(()=> {
+            this.footerElement.nativeElement.scrollIntoView();
+            this.show = false;  
+          },1000);
+        },0);
+      }
     }
   }
 

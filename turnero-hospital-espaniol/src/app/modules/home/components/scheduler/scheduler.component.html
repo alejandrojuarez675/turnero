@@ -1,5 +1,5 @@
 <div class="cuadro-formulario" *ngIf="((eventsLength$ | async) > 0)" #target>
-  <div class="row clearfix">
+  <div class="row clearfix"> 
       <div *ngIf="(profesionalSelected$ | async) != undefined">
         <div class="texto"> 
           <span class="material-icons icon-image-preview info">person</span>
@@ -80,3 +80,4 @@
     </mwl-calendar-month-view>
   </div>
 </div>
+<span  style="border: 2px solid transparent;" #footer autofocus></span>

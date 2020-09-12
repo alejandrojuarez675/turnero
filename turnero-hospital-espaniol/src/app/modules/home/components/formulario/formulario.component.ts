@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import * as CalendarActions from '../../../../core/store/actions/calendar.action
 import * as ContextoActions from '../../../../core/store/actions/contexto.actions';
 import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
+import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
 import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan, Profesional } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest, BusquedaRequest } from '../../../../shared/models/request.models';
@@ -24,6 +25,9 @@ export class FormularioComponent implements OnInit {
   @ViewChild('autoEspecComplete') autoEspecComplete;
   @ViewChild('autoProfComplete') autoProfComplete;
   @ViewChild('autoObraComplete') autoObraComplete;
+  
+  @ViewChild('footer') footerElement: ElementRef;
+  show: boolean = false;
   
   filteredObrasSociales$: Observable<ObraSocial[]>;
   obrasSociales$: Observable<ObraSocial[]>;
@@ -256,6 +260,24 @@ export class FormularioComponent implements OnInit {
         // tslint:disable-next-line: no-shadowed-variable
         (filter: BusquedaProfesionalesRequest) => {
           this.store.dispatch(FormActions.getBusquedaProfesionales({filter}));
+          
+          if (window.innerWidth <= 1000) {
+            var wh = window.innerHeight;
+            setTimeout(()=> {
+              this.show = false;  
+              this.show = true; 
+              setTimeout(()=> {
+                this.store.select(CalendarSelectors.getProfesionalesDisponiblesLength).subscribe(
+                  (len) => {
+                    if (len > 0) {
+                      this.footerElement.nativeElement.scrollIntoView();
+                      this.show = false; 
+                    }
+                  }
+                ).unsubscribe(); 
+              },1000);
+            },0);
+          }
         }
       )
       .unsubscribe();
