@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Turno } from '../../../../shared/models/datos.models';
-import { DateUtils } from '../../../../core/utils/date.utils';
 
 export interface DialogData {
   turno: Turno;
