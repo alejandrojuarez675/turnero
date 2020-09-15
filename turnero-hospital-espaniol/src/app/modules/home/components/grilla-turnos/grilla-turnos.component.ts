@@ -111,6 +111,16 @@ export class GrillaTurnosComponent implements OnInit {
       }
     );
 
+    this.store.select(CalendarSelectors.getDiasDisponiblesLength).subscribe((el) => {
+      if (el > 0) {
+        this.show = false;  
+        this.show = true; 
+        this.footerElement.nativeElement.scrollIntoView();
+        this.show = false;  
+      } 
+    });
+
+
   }
 
   onClickTodos() {
@@ -121,16 +131,6 @@ export class GrillaTurnosComponent implements OnInit {
     this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
       (request: BusquedaDiasDisponiblesRequest) => {
         this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
-
-        setTimeout(()=> {
-          this.show = false;  
-          this.show = true; 
-          setTimeout(()=> {
-            this.footerElement.nativeElement.scrollIntoView();
-            this.show = false;  
-          },1000);
-        },0);
-
       }
     ).unsubscribe();
 
@@ -178,15 +178,7 @@ export class GrillaTurnosComponent implements OnInit {
       this.store.select(CalendarSelectors.getBusquedaDiasDisponiblesRequest).subscribe(
         (request: BusquedaDiasDisponiblesRequest) => {
           this.store.dispatch(CalendarActions.getDiasDisponibles({ filter: request }));
-          setTimeout(()=> {
-            this.show = false;  
-            this.show = true; 
-            setTimeout(()=> {
-              this.footerElement.nativeElement.scrollIntoView();
-              this.show = false;  
-            },1000);
-          },0);
-        }
+       }
       ).unsubscribe();
     })
     this.store.dispatch(CalendarActions.setFiltroHora2({filtroHora2: this.turnoFilter}));
