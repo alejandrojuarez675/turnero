@@ -113,14 +113,14 @@ export class GrillaTurnosComponent implements OnInit {
 
     this.store.select(CalendarSelectors.getDiasDisponiblesLength).subscribe((el) => {
       if (el > 0) {
-        this.show = false;  
-        this.show = true; 
-        this.footerElement.nativeElement.scrollIntoView();
-        this.show = false;  
-      } 
+        setTimeout(()=> {
+          this.show = false;  
+          this.show = true; 
+          this.footerElement.nativeElement.scrollIntoView();
+          this.show = false;  
+        },500)
+      }
     });
-
-
   }
 
   onClickTodos() {
