@@ -166,12 +166,4 @@ export class SchedulerComponent {
   _toMonthString(month: number) {
     return toMonthString(month);
   }
-
-  
-  // private isUserNearBottom(): boolean {
-  //   const threshold = 150;
-  //   const position = window.scrollY + window.innerHeight;
-  //   const height = document.body.scrollHeight;
-  //   return position > height - threshold;
-  // }
 }
