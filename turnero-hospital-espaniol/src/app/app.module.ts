@@ -32,7 +32,7 @@ import { CustomDateAdapter, MY_DATE_FORMATS } from './shared/adapters/common';
 import { FormsModule } from '@angular/forms';
 registerLocaleData(localeEs);
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     ConfirmationReservaComponent,

@@ -5,7 +5,7 @@ import { ReservaPageComponent } from './pages/reserva-page/reserva-page.componen
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
-  {path: 'reserva', component: ReservaPageComponent},
+  {path: 'reserva', component: ReservaPageComponent}, 
   {path: '**', redirectTo: ''},
 ];
 

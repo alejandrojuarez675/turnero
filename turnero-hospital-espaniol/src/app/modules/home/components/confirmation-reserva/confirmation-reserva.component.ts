@@ -35,6 +35,13 @@ export class ConfirmationReservaComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Data:  { title: 'Company' } 
+    this.route.data.subscribe(data => {
+      if (data['logo'] != undefined) {
+        document.getElementsByName('logoHeader')[0].setAttribute('src', data['logo'])
+      }
+    });
+    
     this.loading = true;
     this.subscription = this.route.queryParams.subscribe(params => {
       this.codigoReserva = params['reserva'];
