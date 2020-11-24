@@ -61,7 +61,6 @@ export class FormularioComponent implements OnInit {
   }
 
   ngOnInit() {
-
     const login = new Login();
     login.username = environment.username;
     login.password = environment.password;
@@ -197,12 +196,20 @@ export class FormularioComponent implements OnInit {
     this.profesional.setValue('');
     setTimeout(()=> {this.autoProfComplete.openPanel() })
   }
+
   cambioPlan(event) {
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setPlanSelected({ planSelected: event.value }));
   }
 
   cambioProfesional(value) {
+    
+    if (value == undefined) {
+      setTimeout(()=> { })
+      this.profesional.setValue('');
+      setTimeout(()=> { })
+    }
+    
     this.cleanResultadoDisponibilidad();
     this.store.dispatch(FormActions.setProfesionalSelected({ profesionalSelected: value }));
   }
