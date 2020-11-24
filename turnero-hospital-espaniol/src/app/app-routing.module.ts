@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'confirmacionReserva', 
     component: ConfirmationReservaComponent,
-    data: {logo: 'assets/img/Confirmacion-de-turno.svg'}
+    data: {logo: 'assets/img/Confirmacion-de-turno.png'}
   }, 
   
   {
