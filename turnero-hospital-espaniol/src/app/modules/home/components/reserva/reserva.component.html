@@ -68,7 +68,7 @@
         </mat-form-field>
         <mat-form-field style="width: 45%;">
             <mat-label>Sexo</mat-label>
-            <mat-select [formControl]="sexo" name="sexoSel" (selectionChange)="onEnterE($event, 'nombreField')">
+            <mat-select [formControl]="sexo" name="sexoSel" (selectionChange)="onEnterE($event, 'apellidoField')">
                 <mat-option *ngFor="let sexo of sexo$" [value]="sexo">
                     {{sexo}}
                 </mat-option>
@@ -78,15 +78,24 @@
     </div>
 
     <div class="row clearfix">
-        <mat-form-field style="width: 100%;">
-            <mat-label>Nombre y Apellido</mat-label>
-            <input matInput [formControl]="nombreApellido" name="nombreField"
-                   placeholder="Ingrese su nombre y apellido" (keyup.enter)="onEnterE($event, 'areaCodeField')"
-                   (keyup)="onEnterE2($event, 'areaCodeField')">
-            <mat-error *ngIf="nombreApellido.invalid">
-                Ingrese su nombre y apellido
+        <mat-form-field style="width: 55%; padding-right: 10%;">
+            <mat-label>Apellido</mat-label>
+            <input matInput [formControl]="apellido" name="apellidoField"
+                   placeholder="Ingrese su apellido" (keyup.enter)="onEnterE($event, 'nombreField')"
+                   (keyup)="onEnterE2($event, 'nombreField')">
+            <mat-error *ngIf="apellido.invalid">
+                Ingrese su apellido
             </mat-error>
-        </mat-form-field>
+        </mat-form-field>         
+        <mat-form-field style="width: 45%;">
+            <mat-label>Nombre</mat-label>
+            <input matInput [formControl]="nombre" name="nombreField"
+                   placeholder="Ingrese su nombre" (keyup.enter)="onEnterE($event, 'areaCodeField')"
+                   (keyup)="onEnterE2($event, 'areaCodeField')">
+            <mat-error *ngIf="nombre.invalid">
+                Ingrese su nombre
+            </mat-error>
+        </mat-form-field>       
     </div>
 
     <div class="row clearfix">

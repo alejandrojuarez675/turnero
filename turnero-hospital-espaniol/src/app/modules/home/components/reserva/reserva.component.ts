@@ -30,7 +30,8 @@ export class ReservaComponent implements OnInit {
     Validators.maxLength(10),
     Validators.pattern(/^\d+$/)]);
   sexo = new FormControl('', [Validators.required]);
-  nombreApellido = new FormControl('', [Validators.required]);
+  nombre = new FormControl('', [Validators.required]);
+  apellido = new FormControl('', [Validators.required]);
   telefonoArea = new FormControl('', [Validators.required,
     Validators.minLength(2),
     Validators.maxLength(5),
@@ -96,7 +97,7 @@ export class ReservaComponent implements OnInit {
     const paciente = new Paciente();
     paciente.dni = this.dni.value;
     paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
-    paciente.nombreApellido = this.nombreApellido.value;
+    paciente.nombreApellido = this.apellido.value.trim() + ' ' + this.nombre.value.trim();
     const telefono = new Telefono();
     telefono.area = this.telefonoArea.value;
     telefono.numero = this.telefonoNumero.value;
@@ -148,7 +149,7 @@ export class ReservaComponent implements OnInit {
   isValid() {
     let result = false;
     if (
-      this.dni.valid && this.sexo.valid && this.nombreApellido.valid &&
+      this.dni.valid && this.sexo.valid && this.nombre.valid && this.apellido.valid &&
       this.telefonoArea.valid && this.telefonoNumero.valid && this.mail.valid
     ) {
       result = true;
