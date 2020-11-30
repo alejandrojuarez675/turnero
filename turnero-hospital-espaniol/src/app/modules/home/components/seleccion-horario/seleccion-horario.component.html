@@ -2,7 +2,7 @@
 
   <div class="row clearfix">
     <p>
-      Haga click sobre el turno que desee para seleccionarlo.
+      Haga clic sobre el turno que desee para seleccionarlo.
     </p>
   </div>
 
@@ -11,7 +11,7 @@
       <table mat-table [dataSource]="horarios$ | async">
 
         <ng-container matColumnDef="profesional">
-          <th mat-header-cell *matHeaderCellDef style="width: 70%;">Profesional</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 70%;">PROFESIONAL</th>
           <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
             title="Destacar primer turno disponible del profesional para este día">
             {{row.profesional.nombreApellido}}
@@ -19,7 +19,7 @@
         </ng-container>
 
         <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef style="width: 30%;">Horario</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 30%;">HORARIO</th>
           <td mat-cell *matCellDef="let row" style="cursor: pointer;" (click)="onClickTurno(row)"
             title="Seleccionar turno">
             <span *ngIf="proxTurno?.codigo === row.codigo" style="color:#1061a7; font-weight: bold;">

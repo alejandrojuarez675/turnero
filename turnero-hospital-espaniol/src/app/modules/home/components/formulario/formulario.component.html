@@ -1,5 +1,8 @@
 <div class="cuadro-formulario">
     <div class="row clearfix">
+        <p>
+            DATOS DEL PACIENTE
+        </p>
         <mat-form-field style="width: 100%;">
             <mat-label>Fecha de Nacimiento</mat-label>
             <input matInput [matDatepicker]="picker" [max]="maxDate" (dateInput)="cambioFechaNacimiento($event)"

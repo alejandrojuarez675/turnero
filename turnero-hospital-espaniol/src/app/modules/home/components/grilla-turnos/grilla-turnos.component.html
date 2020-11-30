@@ -3,14 +3,14 @@
 
   <div class="row clearfix">
     <p>
-      Haga click sobre el profesional para ver todos los turnos disponibles o directamente sobre el turno que desee reservar.
+      Haga clic sobre el profesional para visualizar todos sus turnos disponibles, o sobre el turno deseado para reservarlo.
     </p>
   </div>
   <div class="row clearfix">
-    <mat-label>Visualizar Próximo Turno</mat-label>
+    <mat-label></mat-label>
     <mat-radio-group (change)="cambiarFiltro1($event);"  [(ngModel)]="turnoFilter"> 
         <mat-radio-button value="Todos" checked="true">
-            Mañana o tarde
+            Mañana y tarde
         </mat-radio-button>
         <mat-radio-button value="AM">
             Mañana
@@ -30,7 +30,7 @@
   
         <ng-container matColumnDef="nombreApellido">
           <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>
-            Profesional (click para ver agenda)
+            <b>PROFESIONAL</b> (clic para ver agenda)
           </th>
           <td mat-cell *matCellDef="let row" style="width: 60%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para este Profesional">
@@ -39,7 +39,7 @@
         </ng-container>
 
         <ng-container matColumnDef="especialidad">
-          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header>Especialidad</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 60%;" mat-sort-header><b>ESPECIALIDAD</b></th>
           <td mat-cell *matCellDef="let row" style="width: 60%; cursor: pointer;" 
             (click)="onClickProf(row.profesional)" title="Buscar turnos para esta especialidad">
             {{row.especialidad}}
@@ -47,7 +47,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoM">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Mañana (click para reservar)</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><b>PROX. TURNO POR LA MAÑANA</b> (clic para reservar)</th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.turnoManiana != undefined && row.turnoManiana.fecha != undefined"
               (click)="onClickTurno(row, 'M')" style="cursor: pointer;" title="Seleccionar turno">
@@ -57,7 +57,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoT">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno por la Tarde (click para reservar)</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><b>PROX. TURNO POR LA TARDE</b> (clic para reservar)</th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.turnoTarde != undefined && row.turnoTarde.fecha != undefined"
               (click)="onClickTurno(row, 'T')" style="cursor: pointer;" title="Seleccionar turno">
@@ -67,7 +67,7 @@
         </ng-container>
 
         <ng-container matColumnDef="turnoP">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Próx. Turno Libre (click para reservar)</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>PROX. TURNO LIBRE</b> (clic para reservar)</th>
             <td mat-cell *matCellDef="let row">
               <span *ngIf="row.turno != undefined && row.turno.fecha != undefined"
                 (click)="onClickTurno(row, 'P')" style="cursor: pointer;" title="Seleccionar turno">
@@ -96,7 +96,7 @@
     (profComboSelected$ | async).nombreApellido == undefined)" >
     <button style="width: 100%;" class="button" mat-flat-button (click)="onClickTodos()">
         <!--VER TURNOS DE TODOS LOS PROFESIONALES-->
-        VER EN AGENDA TODOS LOS PROFESIONALES
+        VER AGENDA DE TODOS LOS PROFESIONALES
     </button>
   </div>
   
