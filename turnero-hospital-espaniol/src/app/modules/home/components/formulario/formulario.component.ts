@@ -11,14 +11,16 @@ import * as FormActions from '../../../../core/store/actions/form.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
 import * as CalendarSelectors from '../../../../core/store/selectors/caledar.selectors';
 import * as FormSelectors from '../../../../core/store/selectors/form.selectors';
-import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Plan, Profesional } from '../../../../shared/models/datos.models';
+import { CentroAtencion, CodigoNombre, Especialidad, Formulario, Login, ObraSocial, Paciente, Plan, Profesional } from '../../../../shared/models/datos.models';
 import { BusquedaProfesionalesRequest, BusquedaRequest } from '../../../../shared/models/request.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css']
 })
+
 
 export class FormularioComponent implements OnInit {
 
@@ -29,6 +31,8 @@ export class FormularioComponent implements OnInit {
   @ViewChild('footer') footerElement: ElementRef;
   show: boolean = false;
   
+  pacienteSelected$: Observable<Paciente>;
+
   filteredObrasSociales$: Observable<ObraSocial[]>;
   obrasSociales$: Observable<ObraSocial[]>;
   planes$: Observable<Plan[]>;
@@ -49,8 +53,11 @@ export class FormularioComponent implements OnInit {
   maxDate: Date;
 
   constructor(
-    private store: Store<{ formulario: Formulario }>
+    private store: Store<{ formulario: Formulario }>,
+    private router: Router,
   ) {
+    this.pacienteSelected$ = store.select(ContextSelectors.getPacienteSelected);
+
     this.obrasSociales$ = store.select(FormSelectors.selectAllObrasSociales);
     this.planes$ = store.select(FormSelectors.selectPlanes);
     this.especialidades$ = store.select(FormSelectors.selectAllEspecialidades);
@@ -296,5 +303,5 @@ export class FormularioComponent implements OnInit {
     this.store.dispatch(CalendarActions.setDiasDisponibles({ diasDisponibles: [] }));
     this.store.dispatch(CalendarActions.setHorariosDisponibles({ horarios: [] }));
   }
-
 }
+

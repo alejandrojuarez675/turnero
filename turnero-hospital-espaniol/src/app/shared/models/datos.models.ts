@@ -122,8 +122,22 @@ export class TurnoRespuesta extends Respuesta {
     turno: Turno;
 }
 
+export class Credencial {
+    idUsuario: undefined;
+    passUsurio: undefined;
+}
 export class Contexto {
     token: string;
+    esAnonimo: boolean = true;
+    credencial: Credencial;
+    infoUsuario: Usuario;
+    pacienteSelected: Paciente
+}
+
+export class Usuario {
+    usuarioPaciente: string;
+    mailUsuario: string;
+    pacientes: Paciente[];
 }
 
 export class Formulario {

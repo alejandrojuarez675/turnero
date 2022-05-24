@@ -1,0 +1,110 @@
+<div class="row clearfix"  *ngIf="(esAnonimo$ | async)" >
+    <div class="my-col-30"></div>
+    <div class="my-col-40">
+        <div class="cuadro-formulario">
+
+            <div class="row clearfix">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput [formControl]="username" name="usernameField"
+                        placeholder="Ingrese su usuario" >
+                    <mat-error *ngIf="username.invalid">
+                        Usuario inválido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row clearfix">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [formControl]="password" name="passwordField"
+                        placeholder="Ingrese su password" type="password">
+                    <mat-error *ngIf="password.invalid">
+                        Contraseña inválida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row clearfix">
+                <button style="width: 100%;" class="button" mat-flat-button (click)="onSubmit()">
+                    Ingresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix"  *ngIf="!(esAnonimo$ | async)" >
+    <div class="my-col-30">Hola {{(nickname$ | async) }}</div>
+    <div class="my-col-40">
+        <button style="width: 50%;" class="button" mat-flat-button (click)="logoutAndRedirect()">
+        Cerrar Sesión
+        </button>
+    </div>
+</div>
+
+<div class="content" *ngIf="!(esAnonimo$ | async)">
+    <div class="my-col-40">
+        <div class="cuadro-formulario">
+            <div class="row clearfix">
+                <p>
+                    PACIENTES 
+                </p>
+                <table mat-table [dataSource]="pacientes$ | async">
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          <span>
+                            <button mat-icon-button matSuffix (click)="seleccionar(row)" ><mat-icon>check</mat-icon></button>                              
+                          </span>
+                          <span>
+                            <button mat-icon-button matSuffix (click)="redirectToTurnos()" ><mat-icon>calendar_month</mat-icon></button>                              
+                          </span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;">Nombre</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.nombreApellido}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="documento">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;">Documento</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.dni}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef style="width: 30%;">F. Nacimiento</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.fechaNacimiento | date: 'dd/MM/yyyy'}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="my-col-60">
+        <div class="cuadro-formulario">
+            <div class="row clearfix" *ngIf="!((pacienteSelected$ | async) == undefined ||
+                    (pacienteSelected$ | async).nombreApellido == undefined)">
+                <p>
+                    PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}
+
+                </p>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+
+<span  style="border: 2px solid transparent;" #footer autofocus></span>

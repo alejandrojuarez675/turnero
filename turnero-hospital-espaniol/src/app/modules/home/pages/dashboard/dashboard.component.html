@@ -1,3 +1,21 @@
+<div class="row clearfix"  *ngIf="(esAnonimo$ | async)" >
+    <div class="my-col-40">
+        <button style="width: 50%;" class="button" mat-flat-button (click)="toLogin()">
+        Identificarse
+        </button>
+    </div>
+</div>
+<div class="row clearfix"  *ngIf="!(esAnonimo$ | async)" >
+    <div class="my-col-40">
+        <button style="width: 50%;" class="button" mat-flat-button (click)="toSeleccionPaciente()">
+            Seleccionar paciente
+        </button>        
+        <button style="width: 50%;" class="button" mat-flat-button (click)="logout()">
+            Cerrar Sesión
+        </button>
+    </div>
+</div>
+
 <div class="content">
     <div class="my-col-40">
         <app-formulario></app-formulario>

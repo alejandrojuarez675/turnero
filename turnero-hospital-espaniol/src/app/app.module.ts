@@ -21,7 +21,7 @@ import { ReservaEffects } from './core/store/effects/reserva.effects';
 import { reservaReducer } from './core/store/reducers/reserva.reducers';
 import { reservacionReducer } from './core/store/reducers/reservacion.reducers';
 import { ConfirmationReservaComponent } from './modules/home/components/confirmation-reserva/confirmation-reserva.component';
-import { MatProgressSpinnerModule, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatRadioModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule, MatButtonToggleModule } from '@angular/material';
+import { MatProgressSpinnerModule, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatRadioModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatTooltipModule } from '@angular/material';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { HttpErrorInterceptor } from './core/interceptor/error.interceptor';
@@ -30,15 +30,20 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR'
 import { CustomDateAdapter, MY_DATE_FORMATS } from './shared/adapters/common';
 import { FormsModule } from '@angular/forms';
+import { LoginPageComponent } from './modules/home/pages/login-page/login-page.component';
+import { MaterialModule } from './modules/home/material.module';
 registerLocaleData(localeEs);
 
 @NgModule({ 
   declarations: [
     AppComponent,
     ConfirmationReservaComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
+    MatTooltipModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatButtonToggleModule,

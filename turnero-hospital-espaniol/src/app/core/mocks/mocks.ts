@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva, ProfesionalEspecialidad } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva, ProfesionalEspecialidad, Usuario, Paciente } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -236,3 +236,37 @@ export const turnoMock: Turno = {
 
 // tslint:disable-next-line: max-line-length
 export const tokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6IlNPUE9SVEVJVCIsIlNlc3Npb25JZCI6IjExYTEzYTljLTc3NmQtNGM3Ni05YjUwLThjZDM0YWIwZThiNCIsImV4cCI6MTU4NzkwMDMxOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIn0.n5SJmebQ5BzAwRrWt0JCDoD5qW7rVr7aXVGcGJSk7eY';
+
+export const pacientes: Paciente[] = [
+    {
+        dni: 11222333,
+        sexo: "F",
+        nombreApellido: 'María Perez',
+        telefono: undefined,
+        email: 'mail@mail.com',
+        fechaNacimiento: new Date('2020/03/30'),
+        codigoObraSocial: 2,
+        codigoPlan: 1,
+        codigoProfesional: 1,
+        codigoEspecialidad: 1
+    },
+    {
+        dni: 11222444,
+        sexo: "M",
+        nombreApellido: 'Juan Perez',
+        telefono: undefined,
+        email: 'otromail@mail.com',
+        fechaNacimiento: new Date('2000/01/15'),
+        codigoObraSocial: 2,
+        codigoPlan: 1,
+        codigoProfesional: 1,
+        codigoEspecialidad: 1
+    }
+];
+
+export const infoUsuario: Usuario = {
+    usuarioPaciente: "patoMock",
+    mailUsuario: "pato@mock.com",
+    pacientes: pacientes 
+};
+

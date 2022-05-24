@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 
-import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta, Login, loginRespuesta, Profesional, ProfesionalRespuesta } from '../../shared/models/datos.models';
+import { CentroAtencion, CentroAtencionRespuesta, DisponibilidadDiasRespuesta, DisponibilidadRespuesta, Especialidad, EspecialidadRespuesta, HorariosRespuesta, ObraSocial, ObraSocialRespuesta, Turno, DisponibilidadDias, ReservaRespuesta, TurnoRespuesta, Login, loginRespuesta, Profesional, ProfesionalRespuesta, Contexto, Usuario, Paciente, Credencial } from '../../shared/models/datos.models';
 import { BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaProfesionalesRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, BusquedaRequest } from '../../shared/models/request.models';
 import * as Mock from '../mocks/mocks';
 import { getWsFromMock, throwErrorIfBadCode, throwErrorToUser } from '../utils/service.utils';
@@ -348,4 +348,17 @@ export class ServiceService {
       ));
     }
   }  
+
+  /******************/
+
+  getInfoUsuario(credencialUsuario: Credencial): Observable<Usuario> {
+    console.log(credencialUsuario.idUsuario + " - " + credencialUsuario.passUsurio);
+    console.log(credencialUsuario.idUsuario + " - " + credencialUsuario.passUsurio);
+    console.log();
+    return getWsFromMock(Mock.infoUsuario);
+  }
+
+  getTurnosPaciente(usuario: Usuario, paciente: Paciente) {
+
+  }
 }
