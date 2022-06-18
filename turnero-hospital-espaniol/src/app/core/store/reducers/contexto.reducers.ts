@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { Contexto, Credencial, Paciente, Usuario } from '../../../shared/models/datos.models';
+import { Contexto, Credencial, Paciente, TurnoPaciente, Usuario } from '../../../shared/models/datos.models';
+import { turnosFuturos } from '../../mocks/mocks';
 import * as ContextoActions from '../actions/contexto.actions';
 
 
@@ -9,7 +10,8 @@ Contexto = {
     esAnonimo: true,
     credencial: undefined,
     infoUsuario: undefined,
-    pacienteSelected: undefined 
+    pacienteSelected: undefined,
+    turnosFuturos: undefined
 };
 
 const _setToken = (state: Contexto, newToken: string): Contexto => {
@@ -29,6 +31,12 @@ const _setUsuario = (state: Contexto, infoUsuario: Usuario) => {
     const stateNew = { ...state };
     stateNew.esAnonimo = false;    
     stateNew.infoUsuario = infoUsuario;
+    return stateNew;
+};
+
+const _setTurnosFuturos = (state: Contexto, turnosFuturos: TurnoPaciente[]) => {
+    const stateNew = { ...state };
+    stateNew.turnosFuturos = turnosFuturos;
     return stateNew;
 };
 
@@ -54,6 +62,8 @@ const _contextoReducer = createReducer(initialState,
     on(ContextoActions.setPacienteSelected, (state, { paciente } ) =>
      _setPacienteSelected(state, paciente)),
 
+     on(ContextoActions.setTurnosPaciente, (state, { turnosFuturos } ) =>
+     _setTurnosFuturos(state, turnosFuturos)),
 );
 
 export function contextoReducer(state, action) {

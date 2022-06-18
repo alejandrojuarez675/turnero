@@ -9,7 +9,7 @@ import * as CalendarActions from '../../../../core/store/actions/calendar.action
 import * as ReservaActions from '../../../../core/store/actions/reserva.actions';
 import * as ReservacionActions from '../../../../core/store/actions/reservacion.actions';
 import * as ContextSelectors from '../../../../core/store/selectors/contexto.selectors';
-import { Contexto, Credencial, Login, Paciente } from '../../../../shared/models/datos.models';
+import { Contexto, Credencial, Login, Paciente, Turno, TurnoPaciente } from '../../../../shared/models/datos.models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -31,6 +31,9 @@ export class LoginPageComponent implements OnInit {
   esAnonimo$: Observable<boolean>;
   pacientes$: Observable<Paciente[]>;
   displayedColumns = ['acciones','nombre','documento', 'fecha'];
+  
+  turnosFuturos$: Observable<TurnoPaciente[]>;
+  displayedColumnsT = ['acciones','fecha', 'especialidad', 'profesional'];
 
   constructor(
     private store: Store<{ contexto: Contexto }>,
@@ -39,6 +42,7 @@ export class LoginPageComponent implements OnInit {
     this.pacientes$ = store.select(ContextSelectors.getPacientes);
     this.nickname$ = store.select(ContextSelectors.getNickname);
     this.pacienteSelected$ = store.select(ContextSelectors.getPacienteSelected);
+    this.turnosFuturos$ = store.select(ContextSelectors.getTurnosFuturos);
   }
 
   ngOnInit() {
@@ -77,10 +81,8 @@ export class LoginPageComponent implements OnInit {
   seleccionar(paciente: Paciente) {
     this.store.dispatch(ContextoActions.setPacienteSelected( { paciente: paciente } ));
 
-    this.store.dispatch(FormActions.setFechaNacimiento( { fechaNacimiento: paciente.fechaNacimiento} ));
-    //this.store.dispatch(FormActions.setObraSocialSelected( { obraSocialSelected: paciente.codigoObraSocial} ));
-    //this.store.dispatch(FormActions.setPlanSelected( { planSelected: paciente.codigoPlan} ));
+    this.store.dispatch(ContextoActions.setPacienteSelected( { paciente: paciente } ));
 
-    
+    this.store.dispatch(FormActions.setFechaNacimiento( { fechaNacimiento: paciente.fechaNacimiento} ));
   }
 }

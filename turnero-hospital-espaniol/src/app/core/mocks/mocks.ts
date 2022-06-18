@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva, ProfesionalEspecialidad, Usuario, Paciente } from '../../shared/models/datos.models';
+import { CentroAtencion, Disponibilidad, DisponibilidadDias, Especialidad, ObraSocial, Plan, Profesional, TurnoLight, Turno, Reserva, ProfesionalEspecialidad, Usuario, Paciente, TurnosFuturosRespuesta, TurnoPaciente } from '../../shared/models/datos.models';
 import { DateUtils } from '../utils/date.utils';
 
 export const planMock1: Plan = {
@@ -67,7 +67,7 @@ const profesional1: Profesional = {
 };
 
 const profesional2: Profesional = {
-    nombreApellido: 'Riquelme, Roman',
+    nombreApellido: 'Nuñez, Roman',
     especialidad: especialidadesMocks,
     codigoProfesion: 1,
     matriculaProfesional: "456",
@@ -85,7 +85,7 @@ const profesionalE1: ProfesionalEspecialidad = {
 
 const profesionalE2: ProfesionalEspecialidad = {
     codigo: 2,
-    nombreApellido: 'Riquelme, Roman',
+    nombreApellido: 'Nuñez, Roman',
     observaciones: ' -Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa - valor $1000',
     observaciones1: '1º CONSULTA PARTICULAR',
     observaciones2: 'Si es la primera vez que es atendido por el profesional lo atenderá en modo Particular. La modalidad del turno queda pendiente de confirmación administrativa',
@@ -269,4 +269,22 @@ export const infoUsuario: Usuario = {
     mailUsuario: "pato@mock.com",
     pacientes: pacientes 
 };
+
+export const turnosFuturos: TurnoPaciente[] = [
+    {
+        codigo: 123,
+        fecha: new Date('2022/08/15'),
+        hora: "10:00",
+        centroAtencion: centroAtencionMock, 
+        obraSocial: obraSocialMock1,
+        profesionalEspecialidad: profesionalE1     
+    }, {
+        codigo: 456,
+        fecha: new Date('2022/09/15'),
+        hora: "13:00",
+        centroAtencion: centroAtencionMock, 
+        obraSocial: obraSocialMock1,
+        profesionalEspecialidad: profesionalE2   
+    }
+];
 

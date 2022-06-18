@@ -98,8 +98,44 @@
                     (pacienteSelected$ | async).nombreApellido == undefined)">
                 <p>
                     PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}
-
                 </p>
+                <table mat-table [dataSource]="turnosFuturos$ | async">
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          <span>
+                            <button mat-icon-button matSuffix (click)="cancelar(row)" ><mat-icon>delete</mat-icon></button>                              
+                          </span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;">Fecha</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.fecha | date: 'dd/MM/yyyy'}}
+                            {{row.hora}}
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="especialidad">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;">Especialidad</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.profesionalEspecialidad.especialidad.nombre}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="profesional">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;">Profesional</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.profesionalEspecialidad.nombreApellido}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsT"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsT;" ></tr>
+                </table>                
             </div>
         </div>
     </div>    

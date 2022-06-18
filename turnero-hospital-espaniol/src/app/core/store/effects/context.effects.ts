@@ -33,7 +33,18 @@ export class ContextEffects {
             ))
         )
     );
-    
+
+    getTurnosFuturos$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ContextActions.SET_PACIENTESELECTED),
+            mergeMap((payload: any) => this.service.getTurnosPaciente(payload.credencialUsuario, payload.codigoPaciente).pipe(
+                map(turnosFuturos => ({ type: ContextActions.SET_TURNOSPACIENTE, turnosFuturos })),
+                catchError((error: Error) =>
+                    of({ type: ErrorActions.SHOW_ERROR, error: error.message })
+                )
+            ))
+        )
+    );
 
     constructor(
         private actions$: Actions,

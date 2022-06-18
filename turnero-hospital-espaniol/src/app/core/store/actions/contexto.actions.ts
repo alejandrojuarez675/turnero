@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Credencial, Login, Paciente, Usuario } from '../../../shared/models/datos.models';
+import { Credencial, Login, Paciente, TurnoPaciente, Usuario } from '../../../shared/models/datos.models';
 
 export const CLEAN_STORE = '[Contexto] - cleanStore';
 export const GET_TOKEN = '[Contexto] - getToken';
@@ -10,6 +10,8 @@ export const GET_USUARIO = '[Contexto] - getUsuario';
 export const SET_USUARIO = '[Contexto] - setUsuario';
 export const GET_PACIENTESELECTED = '[Contexto] - getPacienteSelected';
 export const SET_PACIENTESELECTED = '[Contexto] - setPacienteSelected';
+export const GET_TURNOSPACIENTE = '[Contexto] - getTurnosPaciente';
+export const SET_TURNOSPACIENTE = '[Contexto] - setTurnosPacientes';
 
 
 export const cleanStore = createAction(CLEAN_STORE);
@@ -51,4 +53,14 @@ export const getPacienteSelected = createAction(
 export const setPacienteSelected = createAction(
     SET_PACIENTESELECTED,
     props<{ paciente: Paciente }>()
+);
+
+
+export const getTurnosPaciente = createAction(
+    GET_TURNOSPACIENTE,
+);
+
+export const setTurnosPaciente = createAction(
+    SET_TURNOSPACIENTE,
+    props<{ turnosFuturos: TurnoPaciente[]}>()
 );

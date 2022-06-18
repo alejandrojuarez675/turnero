@@ -131,7 +131,8 @@ export class Contexto {
     esAnonimo: boolean = true;
     credencial: Credencial;
     infoUsuario: Usuario;
-    pacienteSelected: Paciente
+    pacienteSelected: Paciente;
+    turnosFuturos: TurnoPaciente[] 
 }
 
 export class Usuario {
@@ -201,4 +202,16 @@ export class loginRespuesta {
     username: string;
     token: string;
     expires: Date;
+}
+export class TurnoPaciente {
+    codigo: number;
+    fecha: Date;
+    hora: string;
+    centroAtencion: CentroAtencion;
+    obraSocial: ObraSocial;
+    profesionalEspecialidad: ProfesionalEspecialidad;
+}
+
+export class TurnosFuturosRespuesta extends Respuesta {
+    turnosPaciente: TurnoPaciente[];
 }

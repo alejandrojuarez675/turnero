@@ -47,3 +47,10 @@ export const getPacienteSelected =  createSelector(
         return contexto.pacienteSelected;
     }
 );
+
+export const getTurnosFuturos =  createSelector(
+    selectContexto,
+    (contexto: Contexto) => {
+        return contexto.turnosFuturos;
+    }
+);
