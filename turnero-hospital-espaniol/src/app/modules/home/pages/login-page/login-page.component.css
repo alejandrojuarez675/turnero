@@ -90,3 +90,14 @@ table {
     border-color: #1061a7 !important; /*outer ring color change*/
 }
 
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    padding-left: 5px;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding-left: 15px;
+}
+
+.mat-icon-button {
+    width: 25px;
+}

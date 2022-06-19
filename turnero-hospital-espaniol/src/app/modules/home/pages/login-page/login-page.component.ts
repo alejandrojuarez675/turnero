@@ -33,7 +33,7 @@ export class LoginPageComponent implements OnInit {
   displayedColumns = ['acciones','nombre','documento', 'fecha'];
   
   turnosFuturos$: Observable<TurnoPaciente[]>;
-  displayedColumnsT = ['acciones','fecha', 'especialidad', 'profesional'];
+  displayedColumnsT = ['acciones','fecha', 'especialidad', 'lugar'];
 
   constructor(
     private store: Store<{ contexto: Contexto }>,
